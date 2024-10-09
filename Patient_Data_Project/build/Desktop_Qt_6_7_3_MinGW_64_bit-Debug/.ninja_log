@@ -1,9 +1,0 @@
-# ninja log v6
-15	1273	7501064653423798	Patient_Data_Project_autogen/timestamp	d22a87d6bb0a422c
-15	1273	7501064653423798	Patient_Data_Project_autogen/mocs_compilation.cpp	d22a87d6bb0a422c
-15	1273	7501064653423798	C:/Git_Repo/Informatik3/Patient_Data_Project/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/Patient_Data_Project_autogen/timestamp	d22a87d6bb0a422c
-15	1273	7501064653423798	C:/Git_Repo/Informatik3/Patient_Data_Project/build/Desktop_Qt_6_7_3_MinGW_64_bit-Debug/Patient_Data_Project_autogen/mocs_compilation.cpp	d22a87d6bb0a422c
-1280	4872	7501064654910116	CMakeFiles/Patient_Data_Project.dir/Patient_Data_Project_autogen/mocs_compilation.cpp.obj	323792ab17bb24b
-1293	4941	7501064655036110	CMakeFiles/Patient_Data_Project.dir/mainwindow.cpp.obj	a9962c4a16e7bb6e
-1287	4969	7501064654942753	CMakeFiles/Patient_Data_Project.dir/main.cpp.obj	c737a5fbfd70324c
-4969	5390	7501064691803631	Patient_Data_Project.exe	9324ad9462e71833
