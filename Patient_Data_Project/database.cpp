@@ -10,8 +10,7 @@ Database::Database() {
     db=QSqlDatabase::addDatabase("QSQLITE");
     std::string file=__FILE__;
     std::string directory {file.substr(0, file.rfind("/"))};
-    std::string filename="/PatientDataDatabase.db";
-
+    std::string filename="/PatientenDaten/PatientDataDatabase.db";
     db.setDatabaseName(QString::fromStdString(directory+filename));
     if(!db.open()){
         qDebug() << "Error: Could not open the database!" << db.lastError().text();
@@ -31,6 +30,8 @@ void Database::createTable(){
     "Aufnahmedatum CHAR NOT NULL,"
     "Diagnose CHAR NOT NULL,"
     "Behandlung CHAR NOT NULL)" ;
-    bool abc=query.exec(create);
-    int abs=0;
+    bool successful=query.exec(create);
+    if(!successful){
+        qDebug() << "Error: Could not create the database!" << db.lastError().text();
+    }
 }
