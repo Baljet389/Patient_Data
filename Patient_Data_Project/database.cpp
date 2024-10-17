@@ -18,7 +18,7 @@ Database::Database() {
 }
 void Database::createTable(){
     QSqlQuery query;
-    QString create="CREATE TABLE IF NOT EXISTS Patients("
+    QString create="CREATE TABLE IF NOT EXISTS Patienten("
     "PatientID INTEGER PRIMARY KEY,"
     "Vorname TEXT ,"
     "Nachname TEXT ,"
