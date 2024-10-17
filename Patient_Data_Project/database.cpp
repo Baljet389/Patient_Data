@@ -19,17 +19,17 @@ Database::Database() {
 void Database::createTable(){
     QSqlQuery query;
     QString create="CREATE TABLE IF NOT EXISTS Patients("
-    "id INTEGER PRIMARY KEY,"
-    "Vorname CHAR NOT NULL,"
-    "Nachname CHAR NOT NULL,"
-    "Geburtsdatum CHAR NOT NULL,"
-    "Geschlecht CHAR NOT NULL,"
-    "Adresse CHAR NOT NULL,"
-    "Telefonnummer CHAR NOT NULL,"
-    "Email CHAR NOT NULL,"
-    "Aufnahmedatum CHAR NOT NULL,"
-    "Diagnose CHAR NOT NULL,"
-    "Behandlung CHAR NOT NULL)" ;
+    "PatientID INTEGER PRIMARY KEY,"
+    "Vorname TEXT ,"
+    "Nachname TEXT ,"
+    "Geburtsdatum TEXT ,"
+    "Geschlecht TEXT ,"
+    "Adresse TEXT ,"
+    "Telefonnummer TEXT ,"
+    "Email TEXT ,"
+    "Aufnahmedatum TEXT ,"
+    "Diagnose TEXT ,"
+    "Behandlung TEXT )" ;
     bool successful=query.exec(create);
     if(!successful){
         qDebug() << "Error: Could not create the database!" << db.lastError().text();
