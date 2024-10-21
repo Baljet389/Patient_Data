@@ -7,7 +7,7 @@
 #include <vector>
 #include "io_data.h"
 
-
+#include "timefunctions.h"
 
 io_data::io_data(int ID,string vorname,string nachname,string geburt,string geschlecht,string adresse,string tel_nummer,string mail,string datum,string diagnose,string behandlung){
     this->ID=ID;
@@ -23,12 +23,20 @@ io_data::io_data(int ID,string vorname,string nachname,string geburt,string gesc
     this->behandlung=behandlung;
 }
 int io_data::returnAge(){
-    geburt = "02.09.1984"
-
-    return 0;
+    geburt = "02.09.1984";
+    gebdatum = zerlegeDatum(geburt);
+    return berechneAlter(gebdatum[0], gebdatum[1], gebdatum[2]);
 }
 
+int io_data::returnAge() {
+    std::string geburt = "02.09.1984";
+    int tag, monat, jahr;
 
+    timefunctions zeitfunktion;
+    zeitfunktion.zerlegeDatum(geburt, tag, monat, jahr);
+
+     return tf.berechneAlter(geburt);
+}
 
 void printData(){
     cout << "ID: " << ID << endl;
