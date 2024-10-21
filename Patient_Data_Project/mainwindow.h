@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -16,6 +17,14 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+
+private slots:
+
+    void on_suche_btn_clicked();
+
+    void on_suche_txt_edit_returnPressed();
+
+    void on_patient_data_scroll_customContextMenuRequested(const QPoint &pos);
 
 private:
     Ui::MainWindow *ui;
