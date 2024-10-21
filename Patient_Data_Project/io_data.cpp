@@ -11,19 +11,37 @@
 
 io_data::io_data(int ID,string vorname,string nachname,string geburt,string geschlecht,string adresse,string tel_nummer,string mail,string datum,string diagnose,string behandlung){
     this->ID=ID;
-    this->Vorname=vorname;
-    this->Nachname=nachname;
-    this->Geburtstag=geburt;
-    this->Geschlecht=geschlecht;
-    this->Adresse=adresse;
-    this->Telefonnummerstring=tel_nummer;
-    this->Email=mail;
-    this->Datum=datum;
-    this->Diagnose=diagnose;
-    this->Behandlung=behandlung
+    this->vorname=vorname;
+    this->nachname=nachname;
+    this->geburt=geburt;
+    this->geschlecht=geschlecht;
+    this->adresse=adresse;
+    this->tel_nummer=tel_nummer;
+    this->mail=mail;
+    this->datum=datum;
+    this->diagnose=diagnose;
+    this->behandlung=behandlung;
 }
 int io_data::returnAge(){
+    geburt = "02.09.1984"
+
     return 0;
+}
+
+
+
+void printData(){
+    cout << "ID: " << ID << endl;
+    cout << "Vorname: " << vorname << endl;
+    cout << "Nachname: " << nachname << endl;
+    cout << "Geburtstag: " << geburtstag << endl;
+    cout << "Geschlecht: " << geschlecht << endl;
+    cout << "Adresse: " << adresse << endl;
+    cout << "Telefonnummer: " << tel_nummer << endl;
+    cout << "Email: " << mail << endl;
+    cout << "Datum: " << datum << endl;
+    cout << "Diagnose: " << diagnose << endl;
+    cout << "Behandlung: " << behandlung << endl;
 }
 
 

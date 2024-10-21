@@ -1,0 +1,10 @@
+PatientID;Vorname;Nachname;Geburtsdatum;Geschlecht;Adresse;Telefonnummer;Email;Aufnahmedatum;Diagnose;Behandlung
+1;Vitali;Berger;02.09.1984;M;Tomasz-Grein Groth-Ring 56;+49(0)1030936686;wlangern@example.net;04.11.2023;S22.31;Ruhe und Physiotherapie
+2;Freddy;Graf;08.08.1953;M;Pärtzeltring 548;+49(0) 395681273;joanadrewes@example.net;24.04.2024;E10.-;Insulintherapie
+3;Meinrad;Nette;16.03.2013;M;Gröttnerring 875;(06353) 95002;dobesadalbert@example.net;19.12.2023;J45.00;Inhalator-Therapie
+4;Nico;Hamann;23.10.1989;M;Mechthild-Süßebier-Allee 9;+49(0)6454 048369;greta48@example.org;05.11.2023;M00.0-;Physiotherapie
+5;Rosalia;Gotthard;03.04.1973;W;Rosemannstr. 497;02674 37255;yanders@example.org;13.11.2023;M00.0-;Physiotherapie
+6;Eduard;Hecker;16.05.1929;M;Florian-Hahn-Straße 02;(00793) 241187;gundieckbauer@example.net;25.12.2023;R03.0;Blutdrucksenkende Medikamente
+7;Otmar;Bolander;01.08.1982;M;Ziegertgasse 3;108051351;cdoerr@example.net;17.09.2024;S22.31;Ruhe und Physiotherapie
+8;Alex;Jockel;10.01.2005;M;Ivo-Förster-Platz 9/3;06208 59198;aschleich@example.com;14.06.2024;J09;Medikamentöse Behandlung
+9;Isolde;Hiller;19.01.1945;W;Gnatzweg 7/9;+49 (0) 9705 432804;vritter@example.org;14.07.2024;T78.4;Antihistaminika
