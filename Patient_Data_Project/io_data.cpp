@@ -5,9 +5,14 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include "io_data.h"
 
-#include "timefunctions.h"
+// Includes für Funktoinen zum Einlesen und Ausgeben der Daten:
+#include "io_data.h"
+#include <iostream>
+#include <string>
+#include <sstream>
+
+using namespace std;
 
 io_data::io_data(int ID,string vorname,string nachname,string geburt,string geschlecht,string adresse,string tel_nummer,string mail,string datum,string diagnose,string behandlung){
     this->ID=ID;
@@ -22,37 +27,45 @@ io_data::io_data(int ID,string vorname,string nachname,string geburt,string gesc
     this->diagnose=diagnose;
     this->behandlung=behandlung;
 }
+
 int io_data::returnAge(){
-    geburt = "02.09.1984";
-    gebdatum = zerlegeDatum(geburt);
-    return berechneAlter(gebdatum[0], gebdatum[1], gebdatum[2]);
+    // Zerlege String aus TT.MM.JJJJ in Tag, Monat, Jahr
+    char trennzeichen = '.';
+    string teilstr;
+    istringstream stream(geburt);
+
+    // Tag bestimmen
+        getline(stream, teilstr, trennzeichen);
+        int tag = stoi(teilstr);
+
+        // Monat bestimmen
+        getline(stream, teilstr, trennzeichen);
+        int monat = stoi(teilstr);
+
+        // Jahr bestimmen
+        getline(stream, teilstr, trennzeichen);
+        int jahr = stoi(teilstr);
+
+    // Berechne Alter
+
+        // Aktuelles Datum erhalten
+        time_t jetzt = time(0);
+        tm* ltm = localtime(&jetzt);
+
+        int aktuellesJahr = 1900 + ltm->tm_year;
+        int aktuellerMonat = 1 + ltm->tm_mon;
+        int aktuellerTag = ltm->tm_mday;
+
+        // Alter berechnen
+        int alter = aktuellesJahr - jahr;
+
+        // Berücksichtigen, ob Geburtstag in diesem Jahr schon war
+        if (monat > aktuellerMonat || (monat == aktuellerMonat && tag > aktuellerTag)) {
+            alter--;  // Eins abziehen, wenn Geburtstag noch nicht war
+            }
+            return alter;
+
 }
-
-int io_data::returnAge() {
-    std::string geburt = "02.09.1984";
-    int tag, monat, jahr;
-
-    timefunctions zeitfunktion;
-    zeitfunktion.zerlegeDatum(geburt, tag, monat, jahr);
-
-     return tf.berechneAlter(geburt);
-}
-
-void printData(){
-    cout << "ID: " << ID << endl;
-    cout << "Vorname: " << vorname << endl;
-    cout << "Nachname: " << nachname << endl;
-    cout << "Geburtstag: " << geburtstag << endl;
-    cout << "Geschlecht: " << geschlecht << endl;
-    cout << "Adresse: " << adresse << endl;
-    cout << "Telefonnummer: " << tel_nummer << endl;
-    cout << "Email: " << mail << endl;
-    cout << "Datum: " << datum << endl;
-    cout << "Diagnose: " << diagnose << endl;
-    cout << "Behandlung: " << behandlung << endl;
-}
-
-
     // while(getline(datei,zeile))
     // {
     //     stringstream zeilenpuffer(zeile);
