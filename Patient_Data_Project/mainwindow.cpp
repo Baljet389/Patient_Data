@@ -27,4 +27,7 @@ void MainWindow::on_suche_txt_edit_returnPressed()
 {
 
 }
+void MainWindow::on_patient_data_scroll_customContextMenuRequested(const QPoint &pos){
+
+}
 
