@@ -54,16 +54,14 @@ vector<io_data> Database::getPatientbyColumn(QString column,QString input){
         throw "Column does not exist, or database connection is not available";
     }
     while(query.next()){
-    io_data data(query.value(0).toInt(),ToStdString(query.value(1)),ToStdString(query.value(2)),ToStdString(query.value(3)),
-                    ToStdString(query.value(4)),ToStdString(query.value(5)),ToStdString(query.value(6)),
-                    ToStdString(query.value(7)),ToStdString(query.value(8)),ToStdString(query.value(9)),
-                    ToStdString(query.value(10)));
+    io_data data(query.value(0).toInt(),query.value(1).toString(),query.value(2).toString(),query.value(3).toString(),
+                    query.value(4).toString(),query.value(5).toString(),query.value(6).toString(),
+                    query.value(7).toString(),query.value(8).toString(),query.value(9).toString(),
+                    query.value(10).toString());
     PatientList.push_back(data);
     }
     return PatientList;
 }
-string Database::ToStdString(const QVariant& value) {
-    return value.toString().toStdString();
-}
+
 
 

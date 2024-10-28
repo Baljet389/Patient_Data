@@ -2,19 +2,16 @@
 
 #include <QApplication>
 #include <fstream>
-#include <iostream>
-#include <string>
 #include <vector>
 
 // Includes für Funktoinen zum Einlesen und Ausgeben der Daten:
 #include "io_data.h"
-#include <iostream>
 #include <string>
 #include <sstream>
-
+#include <QString>
 using namespace std;
 
-io_data::io_data(int ID,string vorname,string nachname,string geburt,string geschlecht,string adresse,string tel_nummer,string mail,string datum,string diagnose,string behandlung){
+io_data::io_data(int ID,QString vorname,QString nachname,QString geburt,QString geschlecht,QString adresse,QString tel_nummer,QString mail,QString datum,QString diagnose,QString behandlung){
     this->ID=ID;
     this->vorname=vorname;
     this->nachname=nachname;
@@ -30,9 +27,10 @@ io_data::io_data(int ID,string vorname,string nachname,string geburt,string gesc
 
 int io_data::returnAge(){
     // Zerlege String aus TT.MM.JJJJ in Tag, Monat, Jahr
+
     char trennzeichen = '.';
     string teilstr;
-    istringstream stream(geburt);
+    istringstream stream(geburt.toStdString());
 
     // Tag bestimmen
         getline(stream, teilstr, trennzeichen);
@@ -63,7 +61,8 @@ int io_data::returnAge(){
         if (monat > aktuellerMonat || (monat == aktuellerMonat && tag > aktuellerTag)) {
             alter--;  // Eins abziehen, wenn Geburtstag noch nicht war
             }
-            return alter;
+        alterFinal=alter;
+        return alter;
 
 }
     // while(getline(datei,zeile))
