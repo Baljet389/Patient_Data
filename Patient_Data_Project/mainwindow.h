@@ -24,7 +24,8 @@ private slots:
 
     void on_suche_txt_edit_returnPressed();
 
-    void on_patient_data_scroll_customContextMenuRequested(const QPoint &pos);
+
+
 
 private:
     Ui::MainWindow *ui;

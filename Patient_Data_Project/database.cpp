@@ -39,7 +39,7 @@ void Database::createTable(){
         qDebug() << "Error: Could not create the database!" << db.lastError().text();
     }
 }
-vector<io_data> Database::getPatientbyColumn(QString column,QString input){
+vector<io_data> Database::getPatientbyColumn(const QString& column,const QString& input){
     vector<io_data> PatientList;
     QSqlQuery query;
     QString queryString = QString("SELECT PatientID, Vorname, Nachname, Geburtsdatum,"
@@ -51,16 +51,37 @@ vector<io_data> Database::getPatientbyColumn(QString column,QString input){
     bool successful=query.exec();
 
     if(!successful){
-        throw "Column does not exist, or database connection is not available";
+        throw std::runtime_error("Column does not exist, or database connection is not available");
     }
     while(query.next()){
     io_data data(query.value(0).toInt(),query.value(1).toString(),query.value(2).toString(),query.value(3).toString(),
                     query.value(4).toString(),query.value(5).toString(),query.value(6).toString(),
                     query.value(7).toString(),query.value(8).toString(),query.value(9).toString(),
                     query.value(10).toString());
-    PatientList.push_back(data);
+    PatientList.push_back(std::move(data));
     }
     return PatientList;
+}
+void Database::insertPatient(const io_data& patient){
+    QSqlQuery query;
+    query.prepare("INSERT INTO Patienten(PatientID,Vorname,Nachname,Geburtsdatum,Geschlecht"
+                  ",Adresse,Telefonnummer,Email,Aufnahmedatum,Diagnose,Behandlung)"
+                  "VALUES(?,?,?,?,?,?,?,?,?,?,?)");
+    query.addBindValue(patient.ID);
+    query.addBindValue(patient.vorname);
+    query.addBindValue(patient.nachname);
+    query.addBindValue(patient.geburt);
+    query.addBindValue(patient.geschlecht);
+    query.addBindValue(patient.adresse);
+    query.addBindValue(patient.tel_nummer);
+    query.addBindValue(patient.mail);
+    query.addBindValue(patient.datum);
+    query.addBindValue(patient.diagnose);
+    query.addBindValue(patient.behandlung);
+    bool success=query.exec();
+    if(!success){
+        throw std::runtime_error("Patient with this Id already exists");
+    }
 }
 
 

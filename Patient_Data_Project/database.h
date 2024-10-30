@@ -11,8 +11,8 @@ public:
     QSqlDatabase db;
     Database();
     void createTable();
-    std::vector<io_data> getPatientbyColumn(QString column,QString input);
-
+    std::vector<io_data> getPatientbyColumn(const QString& column,const QString& input);
+    void insertPatient(const io_data& patient);
 };
 
 #endif // DATABASE_H
