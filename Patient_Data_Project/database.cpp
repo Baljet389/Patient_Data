@@ -23,7 +23,7 @@ Database::Database() {
 void Database::createTable(){
     QSqlQuery query;
     QString create="CREATE TABLE IF NOT EXISTS Patienten("
-    "PatientID INTEGER PRIMARY KEY,"
+    "PatientID INTEGER PRIMARY KEY AUTOINCREMENT,"
     "Vorname TEXT ,"
     "Nachname TEXT ,"
     "Geburtsdatum TEXT ,"
@@ -64,10 +64,9 @@ vector<io_data> Database::getPatientbyColumn(const QString& column,const QString
 }
 void Database::insertPatient(const io_data& patient){
     QSqlQuery query;
-    query.prepare("INSERT INTO Patienten(PatientID,Vorname,Nachname,Geburtsdatum,Geschlecht"
+    query.prepare("INSERT INTO Patienten(Vorname,Nachname,Geburtsdatum,Geschlecht"
                   ",Adresse,Telefonnummer,Email,Aufnahmedatum,Diagnose,Behandlung)"
-                  "VALUES(?,?,?,?,?,?,?,?,?,?,?)");
-    query.addBindValue(patient.ID);
+                  "VALUES(?,?,?,?,?,?,?,?,?,?)");
     query.addBindValue(patient.vorname);
     query.addBindValue(patient.nachname);
     query.addBindValue(patient.geburt);
