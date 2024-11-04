@@ -27,18 +27,19 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_suche_btn_clicked()
 {
+    QString UserInputColumn="";
     QString UserInput=ui->suche_txt_line->text();
-    std::vector<io_data> PatientsFound=db.getPatientbyColumn("Nachname",UserInput);
+    std::vector<io_data> PatientsFound=db.getPatientbyColumn(UserInputColumn,UserInput);
     ui->data_table->setColumnCount(3);
     QStringList SpaltenNamen;
     SpaltenNamen << "ID" << "Name" << "Vorname";
     ui->data_table->setHorizontalHeaderLabels(SpaltenNamen);
-    for(const io_data i:PatientsFound){
+    for(const io_data &i:PatientsFound){
         int currentRow = ui->data_table->rowCount();
         ui->data_table->insertRow(currentRow);
         ui->data_table->setItem(currentRow, 0, new QTableWidgetItem(QString::number(i.ID)));
-        ui->data_table->setItem(currentRow, 1, new QTableWidgetItem(i.vorname));
-        ui->data_table->setItem(currentRow, 2, new QTableWidgetItem(i.nachname));
+        ui->data_table->setItem(currentRow, 1, new QTableWidgetItem(i.nachname));
+        ui->data_table->setItem(currentRow, 2, new QTableWidgetItem(i.vorname));
 
     }
 }
