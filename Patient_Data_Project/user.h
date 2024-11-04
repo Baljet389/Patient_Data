@@ -8,7 +8,7 @@ public:
     std::string name;
     std::string pw_hashed;
 
-
+    user();
     user(std::string name, std::string pw_hashed);
     bool checkPW();
     void encrpypt_hashing();
