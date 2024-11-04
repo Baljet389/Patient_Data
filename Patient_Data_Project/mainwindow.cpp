@@ -27,9 +27,16 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_suche_btn_clicked()
 {
-    QString UserInputColumn="";
+    ui->data_table->setRowCount(0);
+    QString UserInputColumn="Nachname";
     QString UserInput=ui->suche_txt_line->text();
-    std::vector<io_data> PatientsFound=db.getPatientbyColumn(UserInputColumn,UserInput);
+    std::vector<io_data> PatientsFound;
+    try{
+    PatientsFound=db.getPatientbyColumn(UserInputColumn,UserInput);
+    }
+    catch(std::runtime_error &e){
+     return;
+    }
     ui->data_table->setColumnCount(3);
     QStringList SpaltenNamen;
     SpaltenNamen << "ID" << "Name" << "Vorname";
