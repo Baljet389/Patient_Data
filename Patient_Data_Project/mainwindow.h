@@ -19,6 +19,9 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     Database db;
+    QStringList SpaltenNamen;
+    std::vector<io_data> PatientsFound;
+
 private slots:
 
     void on_suche_btn_clicked();

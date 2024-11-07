@@ -13,6 +13,7 @@ public:
     void createTable();
     std::vector<io_data> getPatientbyColumn(const QString& column,const QString& input);
     void insertPatient(const io_data& patient);
+    void editPatient(const io_data& patient);
 };
 
 #endif // DATABASE_H

@@ -18,11 +18,14 @@ MainWindow::MainWindow(QWidget *parent)
     ui->pushButton->setToolTip("Daten hinzufügen");
     ui->suche_btn->setToolTip("Suche eingegebenen Text");
     ui->suche_txt_line->setToolTip("Gebe hiere den Nachnamen ein");
-    ui->suche_txt_line->setFocus();
+    ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
+
 
     //verbindet Suchfeld mit der Funktion onsearchTextChanged
     connect(ui->suche_txt_line, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
-
+    ui->data_table->setColumnCount(10);
+    SpaltenNamen << "ID" << "Name" << "Vorname"<<"Geburtsdatum"<<"Geschlecht"<<"Adresse"<<"Telefonnummer"<<"Email"<<"Aufnahmedatum"<<"Diagnose"<<"Behandlung";
+    ui->data_table->setHorizontalHeaderLabels(SpaltenNamen);
 }
 
 MainWindow::~MainWindow()
@@ -34,21 +37,23 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_suche_btn_clicked()
 {
-    QString UserInput=ui->suche_txt_line->text();
-    std::vector<io_data> PatientsFound=db.getPatientbyColumn("Nachname",UserInput);
-
     ui->data_table->setRowCount(0);
-    ui->data_table->setColumnCount(10);
+    QString UserInputColumn="Nachname";
+    QString UserInput=ui->suche_txt_line->text();
 
-    QStringList SpaltenNamen;
-    SpaltenNamen << "ID" << "Name" << "Vorname"<<"Geburtsdatum"<<"Geschlecht"<<"Adresse"<<"Telefonnummer"<<"Email"<<"Aufnahmedatum"<<"Diagnose"<<"Behandlung";
-    ui->data_table->setHorizontalHeaderLabels(SpaltenNamen);
-    for(const io_data i:PatientsFound){
+    try{
+    PatientsFound=db.getPatientbyColumn(UserInputColumn,UserInput);
+    }
+    catch(std::runtime_error &e){
+        qDebug(e.what());
+    }
+
+    for(const io_data &i:PatientsFound){
         int currentRow = ui->data_table->rowCount();
         ui->data_table->insertRow(currentRow);
         ui->data_table->setItem(currentRow, 0, new QTableWidgetItem(QString::number(i.ID)));
-        ui->data_table->setItem(currentRow, 1, new QTableWidgetItem(i.vorname));
-        ui->data_table->setItem(currentRow, 2, new QTableWidgetItem(i.nachname));
+        ui->data_table->setItem(currentRow, 1, new QTableWidgetItem(i.nachname));
+        ui->data_table->setItem(currentRow, 2, new QTableWidgetItem(i.vorname));
         ui->data_table->setItem(currentRow, 3, new QTableWidgetItem(i.geburt));
         ui->data_table->setItem(currentRow, 4, new QTableWidgetItem(i.geschlecht));
         ui->data_table->setItem(currentRow, 5, new QTableWidgetItem(i.adresse));
@@ -57,6 +62,7 @@ void MainWindow::on_suche_btn_clicked()
         ui->data_table->setItem(currentRow, 8, new QTableWidgetItem(i.datum));
         ui->data_table->setItem(currentRow, 9, new QTableWidgetItem(i.diagnose));
         ui->data_table->setItem(currentRow, 10, new QTableWidgetItem(i.behandlung));
+
     }
     qDebug("Daten der gesuchten Person sind in der Tabelle zu sehen");
 }
@@ -66,7 +72,6 @@ void MainWindow::on_suche_btn_clicked()
 void MainWindow::on_suche_txt_line_returnPressed()
 {
     on_suche_btn_clicked();
-    qDebug("Daten sind in der Tabelle zu sehen");
 }
 
 void MainWindow::onSearchTextChanged(const QString &text) {
