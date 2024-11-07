@@ -23,10 +23,8 @@ private slots:
 
     void on_suche_btn_clicked();
 
-    void on_suche_txt_edit_returnPressed();
-
-
-
+    void on_suche_txt_line_returnPressed();
+    void onSearchTextChanged(const QString &text);
 
 private:
     Ui::MainWindow *ui;
