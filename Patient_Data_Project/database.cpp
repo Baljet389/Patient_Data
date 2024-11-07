@@ -79,8 +79,31 @@ void Database::insertPatient(const io_data& patient){
     query.addBindValue(patient.behandlung);
     bool success=query.exec();
     if(!success){
-        throw std::runtime_error("Patient with this Id already exists");
+        throw std::runtime_error("Database connection is not available");
     }
+}
+void Database::editPatient(const io_data &patient){
+    QSqlQuery query;
+    query.prepare("UPDATE Patienten"
+                  "SET Vorname=?,Nachname=?,Geburtsdatum=?,"
+                  "Geschlecht=?,Adresse=?,Telefonnummer=?,Email=?,"
+                  "Aufnahmedatum=?,Diagnose=?,Behandlung=?"
+                  "WHERE PatientID=?");
+    query.addBindValue(patient.vorname);
+    query.addBindValue(patient.nachname);
+    query.addBindValue(patient.geburt);
+    query.addBindValue(patient.geschlecht);
+    query.addBindValue(patient.adresse);
+    query.addBindValue(patient.tel_nummer);
+    query.addBindValue(patient.mail);
+    query.addBindValue(patient.datum);
+    query.addBindValue(patient.diagnose);
+    query.addBindValue(patient.behandlung);
+    query.addBindValue(patient.ID);
+    if(!query.exec()){
+        throw std::runtime_error("Database connection is not available");
+    }
+
 }
 
 
