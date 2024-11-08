@@ -83,10 +83,10 @@ void io_data::CSVeinlesen(QString pfad) {
         bool ersteZeile = true; // Flag, um die erste Zeile zu überspringen
 
         // Regex für Validierungen
-        regex zahlenRegex("^[0-9]+$");                          // Nur Zahlen
-        regex nameRegex("^[a-zA-ZäöüÄÖÜß\\-]+$");               // Nur Buchstaben
-        regex datumRegex("^\\d{2}\\.\\d{2}\\.\\d{4}$");         // Format DD.MM.YYYY
-        regex geschlechtRegex("^[mwMWdD]$");                    // Einzelbuchstabe (z. B. m/w/d)
+        regex zahlenRegex("^[0-9]+$");                                  // Nur Zahlen
+        regex nameRegex("^[a-zA-ZäöüÄÖÜß]+(-[a-zA-ZäöüÄÖÜß]+)*$");      // Nur Buchstaben und Trennstrich
+        regex datumRegex("^\\d{2}\\.\\d{2}\\.\\d{4}$");                 // Format DD.MM.YYYY
+        regex geschlechtRegex("^[mwMWdD]$");                            // Einzelbuchstabe (z. B. m/w/d)
 
         Database database; // Instanz der Datenbankklasse
 
@@ -117,10 +117,10 @@ void io_data::CSVeinlesen(QString pfad) {
                         throw invalid_argument("Ungültige ID: nur Zahlen erlaubt");
                     }
                     if (!regex_match(werte[1].toStdString(), nameRegex)) {
-                        throw invalid_argument("Ungültiger Vorname: nur Buchstaben erlaubt");
+                        throw invalid_argument("Ungültiger Vorname: nur Buchstaben und Trennstrich erlaubt");
                     }
                     if (!regex_match(werte[2].toStdString(), nameRegex)) {
-                        throw invalid_argument("Ungültiger Nachname: nur Buchstaben erlaubt");
+                        throw invalid_argument("Ungültiger Nachname: nur Buchstaben und Trennstrich erlaubt");
                     }
                     if (!regex_match(werte[3].toStdString(), datumRegex)) {
                         throw invalid_argument("Ungültiges Geburtsdatum: Format DD.MM.YYYY erwartet");
