@@ -97,7 +97,7 @@ void io_data::CSVeinlesen(QString pfad) {
                 continue; // Header-Zeile überspringen
             }
 
-            qDebug() << "Lese Zeile:" << QString::fromStdString(zeile);
+            // qDebug() << "Lese Zeile:" << QString::fromStdString(zeile);
 
             stringstream gelesene_zeile(zeile);
             string wert;
@@ -106,7 +106,7 @@ void io_data::CSVeinlesen(QString pfad) {
             // Zeile in einzelne Werte parsen, getrennt durch Kommas
             while (getline(gelesene_zeile, wert, ',')) {
                 werte.push_back(QString::fromStdString(wert));
-                qDebug() << "Parsed value:" << QString::fromStdString(wert);
+                // qDebug() << "Parsed value:" << QString::fromStdString(wert);
             }
 
             // Überprüfen, ob es mindestens 11 Werte gibt
