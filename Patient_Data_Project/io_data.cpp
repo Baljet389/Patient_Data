@@ -6,9 +6,12 @@
 
 // Includes für Funktoinen zum Einlesen und Ausgeben der Daten:
 #include "io_data.h"
+#include "database.h"
 #include <string>
 #include <sstream>
 #include <QString>
+#include <regex> // Musterabgleich zum CSV einlesen Daten verifizieren
+
 using namespace std;
 
 io_data::io_data(int ID,QString vorname,QString nachname,QString geburt,QString geschlecht,QString adresse,QString tel_nummer,QString mail,QString datum,QString diagnose,QString behandlung){
@@ -66,9 +69,7 @@ int io_data::returnAge(){
 
 }
 
-#include "database.h"
 
-using namespace std;
 
 void io_data::CSVeinlesen(QString pfad) {
     try {
@@ -82,6 +83,12 @@ void io_data::CSVeinlesen(QString pfad) {
 
         string zeile;
         bool ersteZeile = true; // Flag, um die erste Zeile zu überspringen
+
+        // Regex für Validierungen
+        regex zahlenRegex("^[0-9]+$");                          // Nur Zahlen
+        regex nameRegex("^[a-zA-ZäöüÄÖÜß\\-]+$");               // Nur Buchstaben
+        regex datumRegex("^\\d{2}\\.\\d{2}\\.\\d{4}$");         // Format DD.MM.YYYY
+        regex geschlechtRegex("^[mwMWdD]$");                    // Einzelbuchstabe (z. B. m/w/d)
 
         while (getline(datei, zeile)) { // Read each line
             if (ersteZeile) {
@@ -102,26 +109,51 @@ void io_data::CSVeinlesen(QString pfad) {
                 qDebug() << "Parsed value:" << QString::fromStdString(wert);
             }
 
-            // Check if there are enough values before creating a `patient` object
+            // Überprüfe, ob es mindestens 11 Werte gibt
             if (werte.size() >= 11) {
-                io_data patient(
-                    stoi(werte[0].toStdString()), // ID
-                    werte[1],                     // First name
-                    werte[2],                     // Last name
-                    werte[3],                     // Date of birth
-                    werte[4],                     // Gender
-                    werte[5],                     // Address
-                    werte[6],                     // Phone number
-                    werte[7],                     // Email
-                    werte[8],                     // Date
-                    werte[9],                     // Diagnosis
-                    werte[10]                     // Treatment
-                    );
+                try {
+                    // Validierung der einzelnen Felder
+                    if (!regex_match(werte[0].toStdString(), zahlenRegex)) {
+                        throw invalid_argument("Invalid ID: must contain only numbers");
+                    }
+                    if (!regex_match(werte[1].toStdString(), nameRegex)) {
+                        throw invalid_argument("Invalid first name: must contain only letters");
+                    }
+                    if (!regex_match(werte[2].toStdString(), nameRegex)) {
+                        throw invalid_argument("Invalid last name: must contain only letters");
+                    }
+                    if (!regex_match(werte[3].toStdString(), datumRegex)) {
+                        throw invalid_argument("Invalid birthdate: must follow DD.MM.YYYY format");
+                    }
+                    if (!regex_match(werte[4].toStdString(), geschlechtRegex)) {
+                        throw invalid_argument("Invalid gender: must be a single letter (m/w/d)");
+                    }
+                    if (!regex_match(werte[8].toStdString(), datumRegex)) {
+                        throw invalid_argument("Invalid admission date: must follow DD.MM.YYYY format");
+                    }
 
-                qDebug() << "Patient:" << patient.vorname << patient.nachname;
+                    // Wenn alle Tests bestanden sind, Patient erstellen
+                    io_data patient(
+                        stoi(werte[0].toStdString()), // ID
+                        werte[1],                     // First name
+                        werte[2],                     // Last name
+                        werte[3],                     // Date of birth
+                        werte[4],                     // Gender
+                        werte[5],                     // Address
+                        werte[6],                     // Phone number
+                        werte[7],                     // Email
+                        werte[8],                     // Date
+                        werte[9],                     // Diagnosis
+                        werte[10]                     // Treatment
+                        );
 
-                // Save the patient data to the database
-                //                Database.addPatient(patient); // Assuming Database has an addPatient function
+                    qDebug() << "Patient valid:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
+
+                    // Save the patient data to the database
+                    // Database.addPatient(patient); // Assuming Database has an addPatient function
+                } catch (const invalid_argument &e) {
+                    qDebug() << "Invalid data in line, skipping. Error:" << e.what();
+                }
             } else {
                 qDebug() << "Incomplete line, expected 11 values but got:" << werte.size();
             }
