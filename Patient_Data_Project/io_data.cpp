@@ -69,17 +69,15 @@ int io_data::returnAge(){
 
 }
 
-
-
 void io_data::CSVeinlesen(QString pfad) {
     try {
         qDebug() << "io_data::CSVeinlesen()";
 
-        ifstream datei(pfad.toStdString()); // Open file
+        ifstream datei(pfad.toStdString()); // Datei öffnen
         if (!datei.is_open()) {
-            throw runtime_error("Could not open file");
+            throw runtime_error("Datei konnte nicht geöffnet werden");
         }
-        qDebug() << "File opened:" << pfad;
+        qDebug() << "Datei geöffnet:" << pfad;
 
         string zeile;
         bool ersteZeile = true; // Flag, um die erste Zeile zu überspringen
@@ -90,76 +88,79 @@ void io_data::CSVeinlesen(QString pfad) {
         regex datumRegex("^\\d{2}\\.\\d{2}\\.\\d{4}$");         // Format DD.MM.YYYY
         regex geschlechtRegex("^[mwMWdD]$");                    // Einzelbuchstabe (z. B. m/w/d)
 
-        while (getline(datei, zeile)) { // Read each line
+        Database database; // Instanz der Datenbankklasse
+
+        while (getline(datei, zeile)) { // Jede Zeile lesen
             if (ersteZeile) {
-                qDebug() << "Skipping header:" << QString::fromStdString(zeile);
+                qDebug() << "Überspringe Header:" << QString::fromStdString(zeile);
                 ersteZeile = false;
-                continue; // Überspringe die Header-Zeile
+                continue; // Header-Zeile überspringen
             }
 
-            qDebug() << "Read line:" << QString::fromStdString(zeile);
+            qDebug() << "Lese Zeile:" << QString::fromStdString(zeile);
 
             stringstream gelesene_zeile(zeile);
             string wert;
             vector<QString> werte;
 
-            // Parse the line into individual values separated by commas
+            // Zeile in einzelne Werte parsen, getrennt durch Kommas
             while (getline(gelesene_zeile, wert, ',')) {
                 werte.push_back(QString::fromStdString(wert));
                 qDebug() << "Parsed value:" << QString::fromStdString(wert);
             }
 
-            // Überprüfe, ob es mindestens 11 Werte gibt
+            // Überprüfen, ob es mindestens 11 Werte gibt
             if (werte.size() >= 11) {
                 try {
                     // Validierung der einzelnen Felder
                     if (!regex_match(werte[0].toStdString(), zahlenRegex)) {
-                        throw invalid_argument("Invalid ID: must contain only numbers");
+                        throw invalid_argument("Ungültige ID: nur Zahlen erlaubt");
                     }
                     if (!regex_match(werte[1].toStdString(), nameRegex)) {
-                        throw invalid_argument("Invalid first name: must contain only letters");
+                        throw invalid_argument("Ungültiger Vorname: nur Buchstaben erlaubt");
                     }
                     if (!regex_match(werte[2].toStdString(), nameRegex)) {
-                        throw invalid_argument("Invalid last name: must contain only letters");
+                        throw invalid_argument("Ungültiger Nachname: nur Buchstaben erlaubt");
                     }
                     if (!regex_match(werte[3].toStdString(), datumRegex)) {
-                        throw invalid_argument("Invalid birthdate: must follow DD.MM.YYYY format");
+                        throw invalid_argument("Ungültiges Geburtsdatum: Format DD.MM.YYYY erwartet");
                     }
                     if (!regex_match(werte[4].toStdString(), geschlechtRegex)) {
-                        throw invalid_argument("Invalid gender: must be a single letter (m/w/d)");
+                        throw invalid_argument("Ungültiges Geschlecht: Ein Buchstabe m/w/d erwartet");
                     }
                     if (!regex_match(werte[8].toStdString(), datumRegex)) {
-                        throw invalid_argument("Invalid admission date: must follow DD.MM.YYYY format");
+                        throw invalid_argument("Ungültiges Eintrittsdatum: Format DD.MM.YYYY erwartet");
                     }
 
                     // Wenn alle Tests bestanden sind, Patient erstellen
                     io_data patient(
                         stoi(werte[0].toStdString()), // ID
-                        werte[1],                     // First name
-                        werte[2],                     // Last name
-                        werte[3],                     // Date of birth
-                        werte[4],                     // Gender
-                        werte[5],                     // Address
-                        werte[6],                     // Phone number
-                        werte[7],                     // Email
-                        werte[8],                     // Date
-                        werte[9],                     // Diagnosis
-                        werte[10]                     // Treatment
+                        werte[1],                     // Vorname
+                        werte[2],                     // Nachname
+                        werte[3],                     // Geburtsdatum
+                        werte[4],                     // Geschlecht
+                        werte[5],                     // Adresse
+                        werte[6],                     // Telefonnummer
+                        werte[7],                     // E-Mail
+                        werte[8],                     // Eintrittsdatum
+                        werte[9],                     // Diagnose
+                        werte[10]                     // Behandlung
                         );
 
-                    qDebug() << "Patient valid:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
+                    qDebug() << "Patient valide:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
 
-                    // Save the patient data to the database
-                    // Database.addPatient(patient); // Assuming Database has an addPatient function
+                    // Patient in Datenbank speichern
+                    database.insertPatient(patient);
+
                 } catch (const invalid_argument &e) {
-                    qDebug() << "Invalid data in line, skipping. Error:" << e.what();
+                    qDebug() << "Ungültige Daten in Zeile, überspringe. Fehler:" << e.what();
                 }
             } else {
-                qDebug() << "Incomplete line, expected 11 values but got:" << werte.size();
+                qDebug() << "Unvollständige Zeile, erwartet 11 Werte, erhalten:" << werte.size();
             }
         }
 
     } catch (const exception &e) {
-        qDebug() << "An error occurred:" << e.what();
+        qDebug() << "Ein Fehler ist aufgetreten:" << e.what();
     }
 }
