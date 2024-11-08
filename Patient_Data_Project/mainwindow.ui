@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>780</width>
-    <height>600</height>
+    <width>749</width>
+    <height>628</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -26,12 +26,18 @@
    <string>MainWindow</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: qlineargradient(
+   <string notr="true">/*background-color: qlineargradient(
     spread:pad, x1:0, y1:0, x2:1, y2:1,
     stop:0 #4a6fa5, /* Helleres, entsättigtes Dunkelblau */
-    stop:1 #a0c4ff  /* Sehr helles, entsättigtes Blau */
-);
+   /* stop:1 #a0c4ff  /* Sehr helles, entsättigtes Blau */
+/*); 
 </string>
+  </property>
+  <property name="iconSize">
+   <size>
+    <width>14</width>
+    <height>14</height>
+   </size>
   </property>
   <property name="tabShape">
    <enum>QTabWidget::TabShape::Rounded</enum>
@@ -40,6 +46,107 @@
    <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
+   <widget class="QFrame" name="speichern_frame">
+    <property name="geometry">
+     <rect>
+      <x>460</x>
+      <y>20</y>
+      <width>291</width>
+      <height>38</height>
+     </rect>
+    </property>
+    <widget class="QPushButton" name="pushButton">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>100</x>
+       <y>1</y>
+       <width>35</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="baseSize">
+      <size>
+       <width>0</width>
+       <height>1</height>
+      </size>
+     </property>
+     <property name="tabletTracking">
+      <bool>false</bool>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LayoutDirection::LeftToRight</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{
+}
+
+QPushButton:hover {
+    background-color: #a0c4ff; 
+}
+QPushButton:pressed {
+    background-color: darkgray;
+    border: 2px solid black;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::ListAdd"/>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="speicher_btn">
+     <property name="geometry">
+      <rect>
+       <x>152</x>
+       <y>1</y>
+       <width>35</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+
+}
+
+QPushButton:hover {
+    background-color: #a0c4ff; /* Farbe beim Hover */
+    color: black;
+}
+QPushButton:pressed {
+    background-color: darkgray;
+    border: 2px solid black;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>25</width>
+       <height>25</height>
+      </size>
+     </property>
+    </widget>
+   </widget>
    <widget class="QFrame" name="suche_frame">
     <property name="enabled">
      <bool>true</bool>
@@ -47,9 +154,9 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>20</y>
-      <width>271</width>
-      <height>51</height>
+      <y>17</y>
+      <width>421</width>
+      <height>71</height>
      </rect>
     </property>
     <property name="sizePolicy">
@@ -66,11 +173,14 @@
     </property>
     <property name="styleSheet">
      <string notr="true">QFrame {
-    border: 1px solid black;  
+	background-color: rgb(0, 167, 81);
+    border: 2px solid ;
+	 border-color: rgb(0, 0, 0);
+    border-radius: 10px;          /* Radius for rounded corners */
+    border-radius: 10px;          /* Radius für alle Ecken */
 }
-
-QLabel {
-    border: none;  
+QLabel{
+border: none;
 }
 </string>
     </property>
@@ -80,71 +190,216 @@ QLabel {
     <property name="frameShadow">
      <enum>QFrame::Shadow::Raised</enum>
     </property>
-    <layout class="QGridLayout" name="gridLayout_2">
+    <widget class="QPushButton" name="suche_btn">
+     <property name="geometry">
+      <rect>
+       <x>340</x>
+       <y>30</y>
+       <width>33</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid;
+	 border-color: rgb(201, 201, 201);
+    border-radius: 10px;
+    padding: 5px;          
+}
+QPushButton:hover {
+    background-color: #a0c4ff; 
+}
+QPushButton:pressed {
+    background-color: darkgray;
+    border: 2px solid black;
+}</string>
+     </property>
+     <property name="text">
+      <string/>
+     </property>
+     <property name="icon">
+      <iconset theme="edit-find"/>
+     </property>
+     <property name="iconSize">
+      <size>
+       <width>15</width>
+       <height>15</height>
+      </size>
+     </property>
+    </widget>
+    <widget class="QLineEdit" name="suche_txt_line">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>16</x>
+       <y>30</y>
+       <width>314</width>
+       <height>31</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="focusPolicy">
+      <enum>Qt::FocusPolicy::TabFocus</enum>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QLineEdit {
+    background-color: #ffffff; 
+    border: 2px solid;
+	 border-color: rgb(201, 201, 201);
+    border-radius: 10px;
+    padding: 4px;
+}</string>
+     </property>
+     <property name="frame">
+      <bool>true</bool>
+     </property>
+     <property name="dragEnabled">
+      <bool>true</bool>
+     </property>
+     <property name="cursorMoveStyle">
+      <enum>Qt::CursorMoveStyle::VisualMoveStyle</enum>
+     </property>
+     <property name="clearButtonEnabled">
+      <bool>true</bool>
+     </property>
+    </widget>
+    <widget class="QLabel" name="suche_label">
+     <property name="enabled">
+      <bool>true</bool>
+     </property>
+     <property name="geometry">
+      <rect>
+       <x>40</x>
+       <y>10</y>
+       <width>314</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="minimumSize">
+      <size>
+       <width>20</width>
+       <height>10</height>
+      </size>
+     </property>
+     <property name="sizeIncrement">
+      <size>
+       <width>0</width>
+       <height>0</height>
+      </size>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>14</pointsize>
+       <bold>true</bold>
+       <strikeout>false</strikeout>
+      </font>
+     </property>
+     <property name="text">
+      <string>Patientendaten suchen:</string>
+     </property>
+    </widget>
+   </widget>
+   <widget class="QWidget" name="">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>2</width>
+      <height>2</height>
+     </rect>
+    </property>
+    <layout class="QVBoxLayout" name="verticalLayout"/>
+   </widget>
+   <widget class="QFrame" name="detail_frame">
+    <property name="geometry">
+     <rect>
+      <x>480</x>
+      <y>300</y>
+      <width>268</width>
+      <height>234</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QFrame{
+    background-color: #ffffff; 
+    border: 2px solid #3498db;    
+    border-radius: 10px; 
+	 border: none;
+}</string>
+    </property>
+    <layout class="QGridLayout" name="gridLayout">
+     <property name="verticalSpacing">
+      <number>14</number>
+     </property>
      <item row="0" column="0" colspan="2">
-      <widget class="QLabel" name="suche_label">
-       <property name="enabled">
+      <widget class="QTextEdit" name="textEdit">
+       <property name="readOnly">
         <bool>true</bool>
-       </property>
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>20</width>
-         <height>10</height>
-        </size>
-       </property>
-       <property name="sizeIncrement">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-         <bold>true</bold>
-         <strikeout>false</strikeout>
-        </font>
-       </property>
-       <property name="text">
-        <string>Patientendaten suchen (Vorname, Nachname, Patienten ID):</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLineEdit" name="suche_txt_line">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);</string>
-       </property>
-       <property name="cursorMoveStyle">
-        <enum>Qt::CursorMoveStyle::VisualMoveStyle</enum>
        </property>
       </widget>
      </item>
      <item row="1" column="1">
-      <widget class="QPushButton" name="suche_btn">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
+      <widget class="QPushButton" name="details_btn">
        <property name="styleSheet">
-        <string notr="true">background-color: rgb(255, 255, 255);</string>
+        <string notr="true">QPushButton {
+	background-color: rgb(191, 191, 191);
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 5px;          
+}
+QPushButton:hover {
+    background-color: #a0c4ff; 
+}
+QPushButton:pressed {
+    background-color: darkgray;
+    border: 2px solid black;
+}
+</string>
        </property>
        <property name="text">
-        <string>Suche</string>
+        <string>Details</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QPushButton" name="bearbeiten_btn">
+       <property name="styleSheet">
+        <string notr="true">QPushButton {
+	background-color: rgb(191, 191, 191);
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 5px;          
+}
+QPushButton:hover {
+    background-color: #a0c4ff; 
+}
+QPushButton:pressed {
+    background-color: darkgray;
+    border: 2px solid black;
+}</string>
+       </property>
+       <property name="text">
+        <string>Bearbeiten</string>
        </property>
       </widget>
      </item>
@@ -154,149 +409,62 @@ QLabel {
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>70</y>
-      <width>461</width>
-      <height>291</height>
+      <y>111</y>
+      <width>471</width>
+      <height>451</height>
      </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">QTableWidget {
+    background-color: #f0f4f8;
+    border-radius: 10px;
+}
+
+QHeaderView::section {
+    background-color: #4a90e2;
+    color: #ffffff;
+    font-weight: bold; 
+    padding: 5px;
+    border: none;
+}
+
+QTableWidget::item {
+    color: #333333;
+}
+
+</string>
+    </property>
+    <property name="gridStyle">
+     <enum>Qt::PenStyle::SolidLine</enum>
     </property>
     <column>
      <property name="text">
       <string/>
      </property>
+     <property name="font">
+      <font>
+       <family>Yu Gothic UI</family>
+      </font>
+     </property>
     </column>
    </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>500</x>
-      <y>320</y>
-      <width>258</width>
-      <height>221</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <property name="verticalSpacing">
-      <number>14</number>
-     </property>
-     <item row="1" column="1">
-      <widget class="QPushButton" name="details_btn">
-       <property name="text">
-        <string>Details</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QPushButton" name="bearbeiten_btn">
-       <property name="text">
-        <string>Bearbeiten</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0" colspan="2">
-      <widget class="QTextEdit" name="textEdit"/>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="">
-    <property name="geometry">
-     <rect>
-      <x>550</x>
-      <y>50</y>
-      <width>107</width>
-      <height>44</height>
-     </rect>
-    </property>
-    <layout class="QGridLayout" name="gridLayout_3">
-     <property name="horizontalSpacing">
-      <number>13</number>
-     </property>
-     <item row="0" column="0">
-      <widget class="QPushButton" name="pushButton">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>0</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="baseSize">
-        <size>
-         <width>0</width>
-         <height>1</height>
-        </size>
-       </property>
-       <property name="tabletTracking">
-        <bool>false</bool>
-       </property>
-       <property name="layoutDirection">
-        <enum>Qt::LayoutDirection::LeftToRight</enum>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">QPushButton{
-}
-
-QPushButton:hover {
-    background-color: #a0c4ff; /* Farbe beim Ho
-    color: black;
-}</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset theme="QIcon::ThemeIcon::ListAdd"/>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>36</width>
-         <height>36</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QPushButton" name="speicher_btn">
-       <property name="styleSheet">
-        <string notr="true">QPushButton {
-
-}
-
-QPushButton:hover {
-    background-color: #a0c4ff; /* Farbe beim Hover */
-    color: black;
-}
-</string>
-       </property>
-       <property name="text">
-        <string/>
-       </property>
-       <property name="icon">
-        <iconset theme="QIcon::ThemeIcon::DocumentSave"/>
-       </property>
-       <property name="iconSize">
-        <size>
-         <width>36</width>
-         <height>36</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>780</width>
+     <width>749</width>
      <height>18</height>
     </rect>
    </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(210, 210, 210);</string>
+   </property>
    <widget class="QMenu" name="menuDatei">
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(208, 208, 208);</string>
+    </property>
     <property name="title">
      <string>Datei</string>
     </property>
@@ -328,6 +496,7 @@ QPushButton:hover {
    <addaction name="menuDatei"/>
    <addaction name="menuBearbeiten"/>
   </widget>
+  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionDaten_einlesen">
    <property name="text">
     <string>Daten einlesen</string>
