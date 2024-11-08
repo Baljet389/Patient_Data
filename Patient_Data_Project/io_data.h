@@ -21,5 +21,6 @@ public:
     io_data(int ID,QString vorname,QString nachname,QString geburt,QString geschlecht,QString adresse,QString tel_nummer,QString mail,QString datum,QString diagnose,QString behandlung);
     int returnAge();
     void printData();
+    void CSVeinlesen(QString pfad);
 };
 #endif // IO_DATA_H

@@ -65,20 +65,7 @@ int io_data::returnAge(){
         return alter;
 
 }
-    // while(getline(datei,zeile))
-    // {
-    //     stringstream zeilenpuffer(zeile);
-    //     zeilenpuffer >> nummer >> vorname >> nachname >> geburt >> geschlecht >> adresse >> telnummer >> mail >> datum >> diagnose >> behandlung;
-    //     cout << nummer << "\n" << vorname << "\n" << nachname << "\n" << geburt << "\n" << geschlecht << "\n" << adresse << "\n" << telnummer << "\n" << mail << "\n" << datum << "\n" << diagnose << "\n" << behandlung << "\n";
-    // }
 
-
-#include <QDebug>
-#include <fstream>
-#include <sstream>
-#include <vector>
-#include <QString>
-#include "io_data.h"
 #include "database.h"
 
 using namespace std;
@@ -94,7 +81,15 @@ void io_data::CSVeinlesen(QString pfad) {
         qDebug() << "File opened:" << pfad;
 
         string zeile;
+        bool ersteZeile = true; // Flag, um die erste Zeile zu überspringen
+
         while (getline(datei, zeile)) { // Read each line
+            if (ersteZeile) {
+                qDebug() << "Skipping header:" << QString::fromStdString(zeile);
+                ersteZeile = false;
+                continue; // Überspringe die Header-Zeile
+            }
+
             qDebug() << "Read line:" << QString::fromStdString(zeile);
 
             stringstream gelesene_zeile(zeile);
@@ -126,7 +121,7 @@ void io_data::CSVeinlesen(QString pfad) {
                 qDebug() << "Patient:" << patient.vorname << patient.nachname;
 
                 // Save the patient data to the database
-//                Database.addPatient(patient); // Assuming Database has an addPatient function
+                //                Database.addPatient(patient); // Assuming Database has an addPatient function
             } else {
                 qDebug() << "Incomplete line, expected 11 values but got:" << werte.size();
             }

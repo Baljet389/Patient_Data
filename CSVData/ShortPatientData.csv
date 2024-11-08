@@ -1,0 +1,100 @@
+PatientID,Vorname,Nachname,Geburtsdatum,Geschlecht,Adresse,Telefonnummer,Email,Aufnahmedatum,Diagnose,Behandlung
+1,Vitali,Berger,02.09.1984,M,Tomasz-Grein Groth-Ring 56,+49(0)1030936686,wlangern@example.net,04.11.2023,S22.31,Ruhe und Physiotherapie
+2,Freddy,Graf,08.08.1953,M,Pärtzeltring 548,+49(0) 395681273,joanadrewes@example.net,24.04.2024,E10.-,Insulintherapie
+3,Meinrad,Nette,16.03.2013,M,Gröttnerring 875,(06353) 95002,dobesadalbert@example.net,19.12.2023,J45.00,Inhalator-Therapie
+4,Nico,Hamann,23.10.1989,M,Mechthild-Süßebier-Allee 9,+49(0)6454 048369,greta48@example.org,05.11.2023,M00.0-,Physiotherapie
+5,Rosalia,Gotthard,03.04.1973,W,Rosemannstr. 497,02674 37255,yanders@example.org,13.11.2023,M00.0-,Physiotherapie
+6,Eduard,Hecker,16.05.1929,M,Florian-Hahn-Straße 02,(00793) 241187,gundieckbauer@example.net,25.12.2023,R03.0,Blutdrucksenkende Medikamente
+7,Otmar,Bolander,01.08.1982,M,Ziegertgasse 3,0108051351,cdoerr@example.net,17.09.2024,S22.31,Ruhe und Physiotherapie
+8,Alex,Jockel,10.01.2005,M,Ivo-Förster-Platz 9/3,06208 59198,aschleich@example.com,14.06.2024,J09,Medikamentöse Behandlung
+9,Isolde,Hiller,19.01.1945,W,Gnatzweg 7/9,+49 (0) 9705 432804,vritter@example.org,14.07.2024,T78.4,Antihistaminika
+10,Maria,Täsche,24.09.1949,W,Xaver-Nette-Weg 5,(00788) 71462,rosenowwolf-ruediger@example.org,01.02.2024,J20.-,Antibiotika
+11,Mesut,Atzler,21.02.1973,M,Dorothea-Johann-Gasse 5,05906 068240,vschaefer@example.net,20.09.2024,J45.00,Inhalator-Therapie
+12,Heribert,Naser,01.12.1945,M,Ruppertplatz 0,(00658) 08138,marcocarsten@example.net,20.05.2024,I12.00,Dialyse
+13,Sylvester,Schüler,15.09.2017,M,Michaela-Scholz-Platz 33,02716 808762,nohlmanshans-georg@example.net,09.05.2024,M00.0-,Physiotherapie
+14,Eugen,Jähn,11.07.1997,M,Fridolin-Dobes-Weg 341,0468173541,felicia35@example.com,29.12.2023,T78.4,Antihistaminika
+15,Gundula,Jacobi Jäckel,19.11.1986,W,Gunda-Bähr-Gasse 4,+49(0)1049680725,soelzerhedi@example.net,28.08.2024,I26.-,Antibiotika
+16,Leonhard,Ortmann,23.07.2019,M,Kabusallee 120,08585152501,trudel91@example.org,08.06.2024,I12.00,Dialyse
+17,Gabriele,Riehl,25.04.1935,W,Benderring 7,+49(0)4281230810,mnette@example.org,29.08.2024,R03.0,Blutdrucksenkende Medikamente
+18,Heinz-Wilhelm,Kallert,17.03.1931,M,Traugott-Buchholz-Allee 7/2,0510819243,spruschke@example.com,30.08.2024,J20.-,Antibiotika
+19,Cilly,Scholl,21.10.1949,W,Steven-Krein-Ring 2,0122897664,ebertaneta@example.org,20.07.2024,E11.-,Ernährungsumstellung
+20,Gerhild,Hiller,15.01.1958,W,Rosalie-Schleich-Ring 74,03410 79938,naserjanna@example.net,17.01.2024,I26.-,Antibiotika
+21,Ante,Vogt,13.07.1938,M,Liliana-Stolze-Gasse 08,05743 78205,willibald53@example.net,22.03.2024,S22.31,Ruhe und Physiotherapie
+22,Svenja,Hermann,23.04.1946,W,Bauerring 5/9,07962 106516,jacobi-jaeckellene@example.org,25.10.2023,T78.4,Antihistaminika
+23,Mareike,Hänel,05.02.1991,W,Jacqueline-Wagenknecht-Platz 0/9,+49(0)4593281841,brianklemt@example.com,29.12.2023,U07.1!,Isolierung und symptomatische Behandlung
+24,Elisabeth,Hentschel,24.03.1948,W,Hans-Dietrich-Holzapfel-Allee 205,(07721) 102253,sylvanaschinke@example.net,18.02.2024,I26.-,Antibiotika
+25,Hilmar,Wende,09.07.1956,M,Priska-Mohaupt-Weg 9/9,+49 (0) 9861 809715,leonore98@example.net,25.09.2024,E10.-,Insulintherapie
+26,Dominik,Köhler,26.09.1967,M,Hoffmannallee 2,01520 78066,ujaekel@example.net,05.10.2023,U07.1!,Isolierung und symptomatische Behandlung
+27,Claire,Hörle,02.07.2003,W,Cäcilie-Peukert-Weg 5,0688563479,jfoerster@example.com,04.11.2023,U07.1!,Isolierung und symptomatische Behandlung
+28,Anica,Cichorius,06.06.1996,W,Claudia-Trubin-Platz 307,05806466112,schuelerhans-christian@example.net,09.12.2023,M00.0-,Physiotherapie
+29,Janet,Holsten,29.03.1972,W,Albert-Matthäi-Platz 1/5,(02684) 157009,swetlana51@example.com,29.01.2024,M00.0-,Physiotherapie
+30,Helmar,Otto,30.03.1968,M,Ehlertring 7,+49 (0) 4106 511363,meisterpeggy@example.org,04.11.2023,R03.0,Blutdrucksenkende Medikamente
+31,Till,Seip,19.04.1934,M,Reinhart-Lorch-Straße 5,03044 451254,lucie51@example.net,02.03.2024,I12.00,Dialyse
+32,Victor,Mans,22.01.1943,M,Carmen-Adolph-Gasse 361,+49(0)0763 61608,rogerdobes@example.org,08.03.2024,E10.-,Insulintherapie
+33,Sigfried,Speer,03.09.1991,M,Marisa-Hornig-Straße 53,+49(0)5370 09260,xhenck@example.net,17.02.2024,I27.9,Kardiologische Betreuung
+34,Ehrenfried,Etzler,30.07.2015,M,Salvatore-Binner-Weg 5/8,+49(0)9436 71148,gtrommler@example.net,08.10.2023,M00.0-,Physiotherapie
+35,Helmuth,Hering,15.08.1984,M,Margrafring 8/6,(03283) 07520,christophdetlef@example.net,20.10.2023,I27.9,Kardiologische Betreuung
+36,Babett,Seifert,23.03.1937,W,Steuergasse 42,01595 22277,danrudolph@example.net,04.02.2024,G43.1,Schmerzmittel
+37,Hans-Erich,Rose,01.11.1981,M,Kerstin-Wende-Allee 9,0175033269,dusan93@example.com,21.07.2024,J09,Medikamentöse Behandlung
+38,Gesche,Beer,25.08.1924,W,Konrad-Schmiedecke-Platz 344,03896 65085,mirjanareinhardt@example.net,28.03.2024,I12.00,Dialyse
+39,Ullrich,Dehmel,16.08.1942,M,Hans-Eberhard-Neureuther-Ring 2,03284 119795,egierschner@example.net,06.07.2024,E11.-,Ernährungsumstellung
+40,Grete,Drub,03.01.1943,W,Jacobi Jäckelweg 7,02211 576396,anna-lena62@example.net,01.07.2024,M00.0-,Physiotherapie
+41,Clara,Conradi,09.11.2009,W,Schmidtkeplatz 596,+49(0) 183779921,jhethur@example.com,15.06.2024,S22.31,Ruhe und Physiotherapie
+42,Georgine,Kallert,13.11.1956,W,Gerta-Thies-Allee 6,09330 73170,odalehmann@example.com,05.07.2024,J20.-,Antibiotika
+43,Enno,Weimer,21.01.1958,M,Hans-Gerhard-Hölzenbecher-Weg 0/3,(05364) 250549,konstantinosriehl@example.com,22.01.2024,I12.00,Dialyse
+44,Sybille,Dobes,12.11.2012,W,Josefa-Dörr-Straße 6/7,05357 22871,ahaering@example.net,08.08.2024,T78.4,Antihistaminika
+45,Bernadette,Kreusel,17.12.1980,W,Gesche-Barkholz-Platz 5,+49 (0) 2465 512536,dloechel@example.com,07.01.2024,I12.00,Dialyse
+46,Laszlo,Hentschel,09.02.1990,M,Valentina-Gotthard-Ring 9/7,00775 685813,schwitalerik@example.com,06.05.2024,J45.00,Inhalator-Therapie
+47,Margitta,Zobel,20.06.1992,W,Samuel-Noack-Ring 9,0910454976,jluebs@example.net,23.05.2024,I12.00,Dialyse
+48,Marie-Louise,Beier,27.12.1980,W,Arif-Hellwig-Ring 3,0744624982,tvogt@example.org,12.05.2024,R03.0,Blutdrucksenkende Medikamente
+49,Rosemarie,Schinke,24.03.1947,W,Eileen-Herrmann-Straße 776,(05193) 96300,truppmilos@example.com,19.10.2023,T78.4,Antihistaminika
+50,Bozena,Schuster,16.09.1932,W,Mehmet-Rudolph-Platz 8/9,(05271) 598383,andy21@example.org,28.04.2024,I12.00,Dialyse
+51,Ricardo,Stiffel,14.12.1930,M,Bert-Lehmann-Allee 4,0128634009,milosbiggen@example.net,29.08.2024,J45.00,Inhalator-Therapie
+52,Hendrik,Söding,26.12.2021,M,Stiebitzallee 865,+49(0)4604 04335,ekkehard49@example.com,18.09.2024,J09,Medikamentöse Behandlung
+53,Lina,Mosemann,02.10.1954,W,Uschi-Röhrdanz-Ring 97,0335009038,cecilia37@example.com,26.03.2024,J45.00,Inhalator-Therapie
+54,Jeannette,Schmiedecke,15.08.2022,W,Klingelhöferallee 2/4,0577593118,hajo51@example.net,02.03.2024,J45.00,Inhalator-Therapie
+55,Georgios,Heß,29.10.1976,M,Löchelstraße 7,+49(0)3348 998266,gunnar64@example.com,16.05.2024,G43.1,Schmerzmittel
+56,Hermann,Säuberlich,12.06.1994,M,Kati-Eckbauer-Straße 679,06859 309748,gheinrich@example.net,04.04.2024,E10.-,Insulintherapie
+57,Serge,Speer,06.08.1938,M,Wesackstraße 3,(06954) 159503,sibyllehoefig@example.net,22.11.2023,S22.31,Ruhe und Physiotherapie
+58,Hansgeorg,Adolph,16.06.1998,M,Trommlerweg 1,08299 692589,frank-peter68@example.org,18.10.2023,U07.1!,Isolierung und symptomatische Behandlung
+59,Severin,Hartung,31.10.1981,M,Meisterstraße 238,0176891715,xtrueb@example.org,24.08.2024,J09,Medikamentöse Behandlung
+60,Bernd,Ritter,26.04.1961,M,Uwe-Löwer-Platz 81,+49(0)1041 74893,heimoschulz@example.net,29.10.2023,I27.9,Kardiologische Betreuung
+61,Oswin,Schacht,19.02.1993,M,Gehringerstraße 991,(01733) 701854,ewernecke@example.org,27.12.2023,I12.00,Dialyse
+62,Pasquale,Hering,08.08.1939,M,Ludger-Bauer-Weg 5,05400703412,gmohaupt@example.net,24.04.2024,E10.-,Insulintherapie
+63,Diether,Heintze,01.11.1967,M,Monika-Adolph-Weg 6/8,+49(0)4471131286,sauerbenita@example.org,22.04.2024,E10.-,Insulintherapie
+64,Danielle,Gröttner,17.03.2020,W,Hörleweg 7/5,+49(0)2650 98230,ella31@example.net,26.11.2023,E10.-,Insulintherapie
+65,Bertold,Kranz,07.02.2001,M,Blümelplatz 6/1,+49 (0) 9247 700452,antonino74@example.org,01.05.2024,I27.9,Kardiologische Betreuung
+66,Erna,Faust,01.03.2017,W,Ortmannstraße 474,+49(0)1241 57334,susanne14@example.net,12.10.2023,U07.1!,Isolierung und symptomatische Behandlung
+67,Gisa,Caspar,10.01.2007,W,Lorenzo-Reichmann-Platz 8,06017 020111,dinoloechel@example.net,04.02.2024,J20.-,Antibiotika
+68,Ilse,Müller,18.10.1974,W,Schmidtkegasse 63,+49 (0) 6803 665552,bettywerner@example.net,02.10.2023,I12.00,Dialyse
+69,Ignatz,Metz,08.11.1932,M,Stilla-Krause-Weg 4,+49(0)3792126335,xenia33@example.org,08.02.2024,J20.-,Antibiotika
+70,Hans-Rudolf,auch Schlauchin,10.11.1984,M,Neureutherweg 57,(00115) 281909,gregor80@example.net,17.11.2023,G43.1,Schmerzmittel
+71,Herma,Reuter,15.12.1923,W,Anneke-Jäntsch-Ring 3/6,08310248112,adelbert07@example.com,26.04.2024,E11.-,Ernährungsumstellung
+72,Daniela,Thanel,23.11.1985,W,Gunter-Hölzenbecher-Gasse 9,+49(0) 813204529,margot23@example.com,04.11.2023,J09,Medikamentöse Behandlung
+73,Theodoros,Dörschner,28.12.2016,M,Gutegasse 977,00233 81151,nadeschdahamann@example.org,27.08.2024,I26.-,Antibiotika
+74,Ingbert,Schuchhardt,19.06.1966,M,Ziegertweg 597,05260 730897,raphaelaheidrich@example.org,11.04.2024,G43.1,Schmerzmittel
+75,Roberto,Henschel,20.06.1976,M,Pergandeweg 434,01211 289270,timoadler@example.org,14.08.2024,S22.31,Ruhe und Physiotherapie
+76,Pierre,Hövel,25.08.2003,M,Gierschnerweg 176,+49(0)7666 739375,mmargraf@example.com,12.08.2024,M00.0-,Physiotherapie
+77,Orhan,Pärtzelt,12.07.1953,M,Nohlmansgasse 38,(09546) 91287,suessebiermeik@example.net,19.01.2024,E10.-,Insulintherapie
+78,Silja,Zobel,27.08.1969,W,Hethurplatz 204,(07577) 26398,jacobi-jaeckelholm@example.com,28.01.2024,E11.-,Ernährungsumstellung
+79,Julian,Schlosser,27.03.1947,M,Elvira-Mitschke-Straße 3/0,04791 81498,geislerannegret@example.org,23.02.2024,S22.31,Ruhe und Physiotherapie
+80,Ariane,Stiffel,29.01.2009,W,Weinholdgasse 61,04282138250,wenzeldoerr@example.net,02.08.2024,R03.0,Blutdrucksenkende Medikamente
+81,Gabriel,Stroh,23.06.2002,M,Elwira-Rosenow-Ring 504,(07606) 137954,langernwilhelm@example.org,13.04.2024,I26.-,Antibiotika
+82,Margarethe,Herrmann,14.12.1943,W,Tony-Mangold-Ring 989,08220207171,mosemannkatharine@example.org,12.02.2024,E11.-,Ernährungsumstellung
+83,Maya,Kramer,10.07.2023,W,Birnbaumplatz 2/6,0918556826,sonjaschmidt@example.com,09.08.2024,E10.-,Insulintherapie
+84,Ladislaus,Scheel,14.02.2007,M,Rudi-Keudel-Allee 055,0453463591,mohauptcorina@example.com,26.02.2024,J20.-,Antibiotika
+85,Serge,Mosemann,02.08.2013,M,Schombergasse 3/0,+49(0)1096202809,hans-bernd24@example.net,04.09.2024,E11.-,Ernährungsumstellung
+86,Jürgen,Ehlert,05.01.1945,M,Barkholzring 64,+49 (0) 3685 342670,hans-dieter33@example.com,16.08.2024,U07.1!,Isolierung und symptomatische Behandlung
+87,Eitel,Textor,16.06.1933,M,Girschnerstraße 9/7,07207770470,franziska26@example.com,09.07.2024,I12.00,Dialyse
+88,Anni,Wernecke,23.04.1937,W,Bolnbachallee 614,+49 (0) 3004 628744,marisaheydrich@example.org,15.01.2024,E10.-,Insulintherapie
+89,Aneta,Köhler,05.02.1931,W,Etzlerring 823,06315900365,rotraut20@example.org,29.04.2024,J45.00,Inhalator-Therapie
+90,Boris,Bolnbach,08.12.1988,M,Schmidtkeallee 2,(01705) 15463,karzadem@example.net,28.08.2024,R03.0,Blutdrucksenkende Medikamente
+91,Paulo,Kraus,30.11.1951,M,Filippo-Holt-Weg 815,(02759) 93172,hennyschleich@example.net,23.06.2024,I26.-,Antibiotika
+92,Annelore,Schulz,16.04.1995,W,Etzoldplatz 658,(06185) 165559,beerigor@example.net,27.12.2023,S22.31,Ruhe und Physiotherapie
+93,Roland,Lindau,19.03.1952,M,Bettina-Hein-Gasse 9,00039 773582,marijasalz@example.org,01.02.2024,S22.31,Ruhe und Physiotherapie
+94,René,Junken,20.03.1934,M,Anne-Rose-Lange-Gasse 7/5,(07015) 04216,edeltraut04@example.org,29.04.2024,E10.-,Insulintherapie
+95,Lene,Stiffel,07.05.1986,W,Adlergasse 4,+49(0)3411940944,johanna39@example.net,27.08.2024,M00.0-,Physiotherapie
+96,Susann,Benthin,17.05.1955,W,Jan-Stey-Ring 485,07902 42194,kai-uwefranke@example.org,16.07.2024,J09,Medikamentöse Behandlung
+97,Ljudmila,Rosenow,10.01.1947,W,Zeljko-Adolph-Gasse 146,+49(0)6055893494,flantzhans-georg@example.com,10.10.2023,I26.-,Antibiotika
+98,Anne-Kathrin,Jopich,28.06.1965,W,Schweitzerstr. 109,+49(0)3749 82154,kitzmannernst-august@example.org,31.12.2023,J09,Medikamentöse Behandlung
+99,Ilja,Biggen,14.07.2019,M,Zorbachallee 0,+49(0)2456 52339,xwagenknecht@example.org,26.04.2024,I26.-,Antibiotika
