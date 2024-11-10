@@ -27,7 +27,6 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         io_data.h io_data.cpp
 	user.h user.cpp
         logindialog.h logindialog.cpp logindialog.ui
-        loginwindow.cpp loginwindow.h loginwindow.ui
         datensatz_bearbeiten.h datensatz_bearbeiten.cpp datensatz_bearbeiten.ui
 
     )
