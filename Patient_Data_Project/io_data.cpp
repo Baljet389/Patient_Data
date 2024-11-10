@@ -84,9 +84,7 @@ void io_data::CSVeinlesen(QString pfad) {
 
         // Regex für Validierungen
         regex zahlenRegex("^[0-9]+$");                                  // Nur Zahlen
-        regex nameRegex("^[^0-9]*$");  // Erlaubt alles außer Zahlen
-//        regex nameRegex("^[\\p{L}]+(-[\\p{L}]+)*$");                    // Nur Buchstaben und optional Bindestrich
-//        regex nameRegex("^[a-zA-ZäöüÄÖÜß]+(-[a-zA-ZäöüÄÖÜß]+)*$");    // Nur Buchstaben und Trennstrich
+        regex nameRegex("^[^0-9]*$");                                   // Erlaubt alles außer Zahlen
         regex datumRegex("^\\d{2}\\.\\d{2}\\.\\d{4}$");                 // Format DD.MM.YYYY
         regex geschlechtRegex("^[mwMWdD]$");                            // Einzelbuchstabe (z. B. m/w/d)
 
@@ -101,7 +99,7 @@ void io_data::CSVeinlesen(QString pfad) {
 
             // Konvertiere die Zeile von std::string zu QString unter Verwendung von UTF-8
             QString zeileQString = QString::fromUtf8(zeile.c_str());
-            qDebug() << "QString: " << zeileQString;
+            //qDebug() << "QString: " << zeileQString;
 
             // Parsen der gelesenen Zeile am Komma mit QString
             QStringList werteListe = zeileQString.split(',');
@@ -144,7 +142,7 @@ void io_data::CSVeinlesen(QString pfad) {
                         werteListe[10]                     // Behandlung
                         );
 
-                    qDebug() << "Patient valide:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
+                    // qDebug() << "Patient valide:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
 
                     // Patient in Datenbank speichern
                     database.insertPatient(patient);
@@ -156,6 +154,12 @@ void io_data::CSVeinlesen(QString pfad) {
                 qDebug() << "Unvollständige Zeile, erwartet 11 Werte, erhalten:" << werteListe.size();
             }
         }
+
+        qDebug() << "Datei fertig eingelesen";
+
+        // Aufräumen und Datei schließen
+        datei.close();
+        qDebug() << "Datei wieder geschlossen";
 
     } catch (const exception &e) {
         qDebug() << "Ein Fehler ist aufgetreten:" << e.what();
