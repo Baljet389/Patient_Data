@@ -69,7 +69,7 @@ int io_data::returnAge(){
 
 }
 
-void io_data::CSVeinlesen(QString pfad) {
+void io_data::CSVeinlesen(QString pfad,Database &database) {
     try {
         qDebug() << "io_data::CSVeinlesen()";
 
@@ -87,8 +87,6 @@ void io_data::CSVeinlesen(QString pfad) {
         regex nameRegex("^[^0-9]*$");                                   // Erlaubt alles außer Zahlen
         regex datumRegex("^\\d{2}\\.\\d{2}\\.\\d{4}$");                 // Format DD.MM.YYYY
         regex geschlechtRegex("^[mwMWdD]$");                            // Einzelbuchstabe (z. B. m/w/d)
-
-        Database database; // Instanz der Datenbankklasse
 
         while (getline(datei, zeile)) { // Jede Zeile lesen
             if (skipUeberschrift) {

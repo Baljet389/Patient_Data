@@ -13,10 +13,6 @@ int main(int argc, char *argv[])
     w.showMaximized();
     w.show();
 
-    QString dateipfad = "E:/DHBW/InformatikProgrammentwurf/CSV_Einlesen/CSVData/ShortPatientData.csv";
-
-    io_data patient(50001, "Test", "Test", "", "", "", "", "", "", "", ""); // Leerer Patient
-    patient.CSVeinlesen(dateipfad);
 
     return a.exec();
     }
