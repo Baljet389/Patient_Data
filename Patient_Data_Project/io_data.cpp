@@ -97,6 +97,9 @@ void io_data::CSVeinlesen(QString pfad) {
                 continue; // Header-Zeile überspringen
             }
 
+            QString zeileQString = QString::fromUtf8(zeile.c_str());
+            qDebug() << "QString: " << zeileQString;
+
             stringstream gelesene_zeile(zeile);
             string wert;
             vector<QString> werte;
