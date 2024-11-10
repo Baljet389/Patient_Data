@@ -80,7 +80,7 @@ void io_data::CSVeinlesen(QString pfad) {
         qDebug() << "Datei geöffnet:" << pfad;
 
         string zeile;
-        bool ersteZeile = true; // Flag, um die erste Zeile zu überspringen
+        bool skipUeberschrift = true; // Überschrift beim einlesen überspringen
 
         // Regex für Validierungen
         regex zahlenRegex("^[0-9]+$");                                  // Nur Zahlen
@@ -91,25 +91,22 @@ void io_data::CSVeinlesen(QString pfad) {
         Database database; // Instanz der Datenbankklasse
 
         while (getline(datei, zeile)) { // Jede Zeile lesen
-            if (ersteZeile) {
-                qDebug() << "Überspringe Header:" << QString::fromStdString(zeile);
-                ersteZeile = false;
+            if (skipUeberschrift) {
+                qDebug() << "Überspringe Überschrift:" << QString::fromStdString(zeile);
+                skipUeberschrift = false;
                 continue; // Header-Zeile überspringen
             }
-
-            // qDebug() << "Lese Zeile:" << QString::fromStdString(zeile);
 
             stringstream gelesene_zeile(zeile);
             string wert;
             vector<QString> werte;
 
-            // Zeile in einzelne Werte parsen, getrennt durch Kommas
+            // Parsen der gelesenen Zeilen am Komma
             while (getline(gelesene_zeile, wert, ',')) {
                 werte.push_back(QString::fromStdString(wert));
-                // qDebug() << "Parsed value:" << QString::fromStdString(wert);
             }
 
-            // Überprüfen, ob es mindestens 11 Werte gibt
+            // Vollständigkeitscheck
             if (werte.size() >= 11) {
                 try {
                     // Validierung der einzelnen Felder
