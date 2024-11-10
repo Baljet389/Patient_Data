@@ -97,18 +97,69 @@ void io_data::CSVeinlesen(QString pfad) {
                 continue; // Header-Zeile überspringen
             }
 
-            QString zeileQString = QString::fromUtf8(zeile.c_str());
-            qDebug() << "QString: " << zeileQString;
-
             stringstream gelesene_zeile(zeile);
             string wert;
             vector<QString> werte;
-
+/*
             // Parsen der gelesenen Zeilen am Komma
             while (getline(gelesene_zeile, wert, ',')) {
                 werte.push_back(QString::fromStdString(wert));
             }
+            */
 
+            QString zeileQString = QString::fromUtf8(zeile.c_str());
+            qDebug() << "QString: " << zeileQString;
+
+            // Parsen der gelesenen Zeile am Komma mit QString
+            QStringList werteListe = zeileQString.split(',');  // geänderte Variablenbezeichnung
+
+            // Vollständigkeitscheck
+            if (werteListe.size() >= 11) {
+                try {
+                    // Validierung der einzelnen Felder
+                    if (!regex_match(werteListe[0].toStdString(), zahlenRegex)) {
+                        throw invalid_argument("Ungültige ID: nur Zahlen erlaubt");
+                    }
+                    if (!regex_match(werteListe[1].toStdString(), nameRegex)) {
+                        throw invalid_argument("Ungültiger Vorname: nur Buchstaben und Trennstrich erlaubt");
+                    }
+                    if (!regex_match(werteListe[2].toStdString(), nameRegex)) {
+                        throw invalid_argument("Ungültiger Nachname: nur Buchstaben und Trennstrich erlaubt");
+                    }
+                    if (!regex_match(werteListe[3].toStdString(), datumRegex)) {
+                        throw invalid_argument("Ungültiges Geburtsdatum: Format DD.MM.YYYY erwartet");
+                    }
+                    if (!regex_match(werteListe[4].toStdString(), geschlechtRegex)) {
+                        throw invalid_argument("Ungültiges Geschlecht: Ein Buchstabe m/w/d erwartet");
+                    }
+                    if (!regex_match(werteListe[8].toStdString(), datumRegex)) {
+                        throw invalid_argument("Ungültiges Eintrittsdatum: Format DD.MM.YYYY erwartet");
+                    }
+
+                    // Wenn alle Tests bestanden sind, Patient erstellen
+                    io_data patient(
+                        stoi(werteListe[0].toStdString()), // ID
+                        werteListe[1],                     // Vorname
+                        werteListe[2],                     // Nachname
+                        werteListe[3],                     // Geburtsdatum
+                        werteListe[4],                     // Geschlecht
+                        werteListe[5],                     // Adresse
+                        werteListe[6],                     // Telefonnummer
+                        werteListe[7],                     // E-Mail
+                        werteListe[8],                     // Eintrittsdatum
+                        werteListe[9],                     // Diagnose
+                        werteListe[10]                     // Behandlung
+                        );
+
+                    qDebug() << "Patient valide:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
+
+                    // Patient in Datenbank speichern
+                    database.insertPatient(patient);
+
+                } catch (const invalid_argument &e) {
+                    qDebug() << "Ungültige Daten in Zeile, überspringe. Fehler:" << e.what();
+                }
+            /*
             // Vollständigkeitscheck
             if (werte.size() >= 11) {
                 try {
@@ -154,7 +205,7 @@ void io_data::CSVeinlesen(QString pfad) {
 
                 } catch (const invalid_argument &e) {
                     qDebug() << "Ungültige Daten in Zeile, überspringe. Fehler:" << e.what();
-                }
+                }*/
             } else {
                 qDebug() << "Unvollständige Zeile, erwartet 11 Werte, erhalten:" << werte.size();
             }
