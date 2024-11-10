@@ -1,19 +1,16 @@
 #include "mainwindow.h"
 
 #include <QApplication>
-#include <QFile>
-#include <QTextStream>
 #include <fstream>
 #include <vector>
 
-// Includes für Funktoinen zum Einlesen und Ausgeben der Daten:
+// Includes für Funktionen zum Einlesen und Ausgeben der Daten:
 #include "io_data.h"
 #include "database.h"
 #include <string>
 #include <sstream>
 #include <QString>
 #include <regex> // Musterabgleich zum CSV einlesen Daten verifizieren
-#include <QRegularExpression> // Q Musterabgleich
 
 using namespace std;
 
@@ -76,73 +73,76 @@ void io_data::CSVeinlesen(QString pfad) {
     try {
         qDebug() << "io_data::CSVeinlesen()";
 
-        QFile datei(pfad); // QFile verwenden für UTF-8
-        if (!datei.open(QIODevice::ReadOnly | QIODevice::Text)) {
+        ifstream datei(pfad.toStdString()); // Datei öffnen
+        if (!datei.is_open()) {
             throw runtime_error("Datei konnte nicht geöffnet werden");
         }
         qDebug() << "Datei geöffnet:" << pfad;
 
-        QTextStream in(&datei); // Kein Setzen des Codecs nötig, UTF-8 ist der Standard
-        //in.setCodec("UTF-8"); // Entfernen, da es nicht mehr nötig ist
-
-        QString zeile;
+        string zeile;
         bool skipUeberschrift = true; // Überschrift beim Einlesen überspringen
 
-        // QRegularExpression für Validierungen
-        QRegularExpression zahlenRegex("^[0-9]+$");                                // Nur Zahlen
-        QRegularExpression nameRegex("^[a-zA-ZäöüÄÖÜß]+(-[a-zA-ZäöüÄÖÜß]+)*$");    // Nur Buchstaben und Trennstrich
-        QRegularExpression datumRegex("^\\d{2}\\.\\d{2}\\.\\d{4}$");               // Format DD.MM.YYYY
-        QRegularExpression geschlechtRegex("^[mwMWdD]$");                          // Einzelbuchstabe (z. B. m/w/d)
+        // Regex für Validierungen
+        regex zahlenRegex("^[0-9]+$");                                  // Nur Zahlen
+        regex nameRegex("^[^0-9]*$");                                   // Erlaubt alles außer Zahlen
+        regex datumRegex("^\\d{2}\\.\\d{2}\\.\\d{4}$");                 // Format DD.MM.YYYY
+        regex geschlechtRegex("^[mwMWdD]$");                            // Einzelbuchstabe (z. B. m/w/d)
 
         Database database; // Instanz der Datenbankklasse
 
-        while (!in.atEnd()) {
-            zeile = in.readLine(); // Zeile einlesen
+        while (getline(datei, zeile)) { // Jede Zeile lesen
             if (skipUeberschrift) {
-                qDebug() << "Überspringe Überschrift:" << zeile;
+                qDebug() << "Überspringe Überschrift:" << QString::fromStdString(zeile);
                 skipUeberschrift = false;
                 continue; // Header-Zeile überspringen
             }
 
-            QStringList werte = zeile.split(',');
+            // Konvertiere die Zeile von std::string zu QString unter Verwendung von UTF-8
+            QString zeileQString = QString::fromUtf8(zeile.c_str());
+            //qDebug() << "QString: " << zeileQString;
+
+            // Parsen der gelesenen Zeile am Komma mit QString
+            QStringList werteListe = zeileQString.split(',');
 
             // Vollständigkeitscheck
-            if (werte.size() >= 11) {
+            if (werteListe.size() >= 11) {
                 try {
                     // Validierung der einzelnen Felder
-                    if (!zahlenRegex.match(werte[0]).hasMatch()) {
+                    if (!regex_match(werteListe[0].toStdString(), zahlenRegex)) {
                         throw invalid_argument("Ungültige ID: nur Zahlen erlaubt");
                     }
-                    if (!nameRegex.match(werte[1]).hasMatch()) {
+                    if (!regex_match(werteListe[1].toStdString(), nameRegex)) {
                         throw invalid_argument("Ungültiger Vorname: nur Buchstaben und Trennstrich erlaubt");
                     }
-                    if (!nameRegex.match(werte[2]).hasMatch()) {
+                    if (!regex_match(werteListe[2].toStdString(), nameRegex)) {
                         throw invalid_argument("Ungültiger Nachname: nur Buchstaben und Trennstrich erlaubt");
                     }
-                    if (!datumRegex.match(werte[3]).hasMatch()) {
+                    if (!regex_match(werteListe[3].toStdString(), datumRegex)) {
                         throw invalid_argument("Ungültiges Geburtsdatum: Format DD.MM.YYYY erwartet");
                     }
-                    if (!geschlechtRegex.match(werte[4]).hasMatch()) {
+                    if (!regex_match(werteListe[4].toStdString(), geschlechtRegex)) {
                         throw invalid_argument("Ungültiges Geschlecht: Ein Buchstabe m/w/d erwartet");
                     }
-                    if (!datumRegex.match(werte[8]).hasMatch()) {
+                    if (!regex_match(werteListe[8].toStdString(), datumRegex)) {
                         throw invalid_argument("Ungültiges Eintrittsdatum: Format DD.MM.YYYY erwartet");
                     }
 
                     // Wenn alle Tests bestanden sind, Patient erstellen
                     io_data patient(
-                        werte[0].toInt(),  // ID
-                        werte[1],          // Vorname
-                        werte[2],          // Nachname
-                        werte[3],          // Geburtsdatum
-                        werte[4],          // Geschlecht
-                        werte[5],          // Adresse
-                        werte[6],          // Telefonnummer
-                        werte[7],          // E-Mail
-                        werte[8],          // Eintrittsdatum
-                        werte[9],          // Diagnose
-                        werte[10]          // Behandlung
+                        stoi(werteListe[0].toStdString()), // ID
+                        werteListe[1],                     // Vorname
+                        werteListe[2],                     // Nachname
+                        werteListe[3],                     // Geburtsdatum
+                        werteListe[4],                     // Geschlecht
+                        werteListe[5],                     // Adresse
+                        werteListe[6],                     // Telefonnummer
+                        werteListe[7],                     // E-Mail
+                        werteListe[8],                     // Eintrittsdatum
+                        werteListe[9],                     // Diagnose
+                        werteListe[10]                     // Behandlung
                         );
+
+                    // qDebug() << "Patient valide:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
 
                     // Patient in Datenbank speichern
                     database.insertPatient(patient);
@@ -151,9 +151,15 @@ void io_data::CSVeinlesen(QString pfad) {
                     qDebug() << "Ungültige Daten in Zeile, überspringe. Fehler:" << e.what();
                 }
             } else {
-                qDebug() << "Unvollständige Zeile, erwartet 11 Werte, erhalten:" << werte.size();
+                qDebug() << "Unvollständige Zeile, erwartet 11 Werte, erhalten:" << werteListe.size();
             }
         }
+
+        qDebug() << "Datei fertig eingelesen";
+
+        // Aufräumen und Datei schließen
+        datei.close();
+        qDebug() << "Datei wieder geschlossen";
 
     } catch (const exception &e) {
         qDebug() << "Ein Fehler ist aufgetreten:" << e.what();
