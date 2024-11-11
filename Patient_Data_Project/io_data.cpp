@@ -11,6 +11,9 @@
 #include <sstream>
 #include <QString>
 #include <regex> // Musterabgleich zum CSV einlesen Daten verifizieren
+#include <QDate>
+#include <QDebug>
+
 
 using namespace std;
 
@@ -67,6 +70,19 @@ int io_data::returnAge(){
         alterFinal=alter;
         return alter;
 
+}
+
+QDate io_data::convertQStringToQDate(const QString& datumString) {
+    // Konvertiere den QString in ein QDate
+    QDate datum = QDate::fromString(datumString, "dd.MM.yyyy");
+
+    // Überprüfe, ob das Datum gültig ist
+    if (!datum.isValid()) {
+        qWarning() << "Ungültiges Datum im Format TT.MM.JJJJ erwartet:" << datumString;
+        return QDate();  // Gibt ein ungültiges QDate zurück, falls das Format fehlerhaft ist
+    }
+
+    return datum;
 }
 
 void io_data::CSVeinlesen(QString pfad,Database &database) {
