@@ -8,6 +8,7 @@
 #include "database.h"
 #include <QString>
 #include <QTableWidgetItem>
+#include <QMessageBox>
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -46,7 +47,9 @@ void MainWindow::on_suche_btn_clicked()
     }
     catch(std::runtime_error &e){
         qDebug(e.what());
-    }
+        QMessageBox::warning(this,"Datenbankabfrage fehlgeschlagen",e.what());
+        return;
+     }
 
     for(const io_data &i:PatientsFound){
         int currentRow = ui->data_table->rowCount();
