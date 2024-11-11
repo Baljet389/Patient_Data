@@ -172,25 +172,25 @@ void MainWindow::darkmode_on()
 
 void MainWindow::on_speicher_btn_clicked()
 {
-
+    qDebug() << "on_speicher_btn_clicked";
 }
 
 
 void MainWindow::on_pushButton_clicked()
 {
-
+    qDebug() << "on_pushButton_clicked";
 }
 
 
 void MainWindow::on_details_btn_clicked()
 {
-
+    qDebug() << "on_details_btn_clicked";
 }
 
 
 void MainWindow::on_bearbeiten_btn_clicked()
 {
-
+    qDebug() << "on_bearbeiten_btn_clicked";
 }
 
 
