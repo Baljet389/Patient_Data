@@ -4,6 +4,7 @@
 #include "database.h"
 #include "QString"
 #include "QMessageBox"
+#include "QDate"
 Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id)
     : QDialog(parent)
     , ui(new Ui::Datensatz_bearbeiten)
@@ -31,6 +32,16 @@ Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id)
                             PatientFound.at(0).diagnose,
                             PatientFound.at(0).behandlung);
     }
+    ui->Eingabe_Vorname->setText(loadPatient->vorname);
+    ui->Eingabe_Name->setText(loadPatient->nachname);
+    // ui->Eingabe_Geburtsdatum->setDate();
+    ui->Eingabe_Geschlecht->setCurrentText(loadPatient->geschlecht);
+    ui->Eingabe_Anschrift->setText(loadPatient->adresse);
+    ui->Eingabe_Telefonnummer->setText(loadPatient->tel_nummer);
+    ui->Eingabe_Email->setText(loadPatient->mail);
+    //ui->Eingabe_Aufnahmedatum->setDate();
+    ui->Eingabe_Diagnose->setText(loadPatient->diagnose);
+    ui->Eingabe_Behandlung->setText(loadPatient->behandlung);
 }
 
 Datensatz_bearbeiten::~Datensatz_bearbeiten()
