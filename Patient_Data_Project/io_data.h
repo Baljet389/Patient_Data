@@ -26,6 +26,6 @@ public:
     void CSVerstellen(QString pfad, Database &database);
     // Statische Funktion QString in QDate konvertieren
     // Statische Funktion QDate in QString konvertieren
-    QDate convertQStringToQDate(const QString& datumString);
+    // QDate convertQStringToQDate(const QString& datumString);
 };
 #endif // IO_DATA_H

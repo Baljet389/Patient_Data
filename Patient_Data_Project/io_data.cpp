@@ -71,7 +71,7 @@ int io_data::returnAge(){
         return alter;
 
 }
-
+/*
 QDate io_data::convertQStringToQDate(const QString& datumString) {
     // Konvertiere den QString in ein QDate
     QDate datum = QDate::fromString(datumString, "dd.MM.yyyy");
@@ -83,7 +83,7 @@ QDate io_data::convertQStringToQDate(const QString& datumString) {
     }
 
     return datum;
-}
+}*/
 
 void io_data::CSVeinlesen(QString pfad,Database &database) {
     try {
