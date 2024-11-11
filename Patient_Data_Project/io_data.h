@@ -24,5 +24,7 @@ public:
     void printData();
     void CSVeinlesen(QString pfad, Database &database);
     void CSVerstellen(QString pfad, Database &database);
+    // Statische Funktion QString in QDate konvertieren
+    // Statische Funktion QDate in QString konvertieren
 };
 #endif // IO_DATA_H

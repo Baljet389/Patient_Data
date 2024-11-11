@@ -34,7 +34,6 @@ MainWindow::~MainWindow()
 
 }
 
-
 void MainWindow::on_suche_btn_clicked()
 {
     ui->data_table->setRowCount(0);
@@ -80,3 +79,6 @@ void MainWindow::onSearchTextChanged(const QString &text) {
         ui->data_table->setRowCount(0);
     }
 }
+
+//void MainWindow::on_open_btn_clicked()
+//    connect(ui->open_btn, &QPushButton::clicked, this, &MainWindow::io_data.CSVeinlesen());
