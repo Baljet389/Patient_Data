@@ -29,6 +29,8 @@ private slots:
     void on_suche_txt_line_returnPressed();
     void onSearchTextChanged(const QString &text);
 
+    // Teständerung für CSV im/export
+
 private:
     Ui::MainWindow *ui;
 };
