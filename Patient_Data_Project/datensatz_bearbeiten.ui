@@ -6,232 +6,139 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>920</width>
-    <height>844</height>
+    <width>780</width>
+    <height>400</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Datensatz Bearbeiten</string>
   </property>
-  <layout class="QFormLayout" name="formLayout_2">
-   <item row="1" column="0">
-    <widget class="QDialogButtonBox" name="buttonBox">
-     <property name="orientation">
-      <enum>Qt::Orientation::Horizontal</enum>
-     </property>
-     <property name="standardButtons">
-      <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" colspan="2">
-    <widget class="QScrollArea" name="scrollArea">
-     <property name="widgetResizable">
-      <bool>true</bool>
-     </property>
-     <widget class="QWidget" name="Eingabefeld">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>896</width>
-        <height>784</height>
-       </rect>
-      </property>
+  <widget class="QScrollArea" name="scrollArea">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>781</width>
+     <height>401</height>
+    </rect>
+   </property>
+   <property name="widgetResizable">
+    <bool>true</bool>
+   </property>
+   <widget class="QWidget" name="Eingabefeld">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>-60</y>
+      <width>762</width>
+      <height>784</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="1" column="0">
       <widget class="QLabel" name="label_2_Name">
-       <property name="geometry">
-        <rect>
-         <x>11</x>
-         <y>11</y>
-         <width>40</width>
-         <height>20</height>
-        </rect>
-       </property>
        <property name="text">
         <string>Name</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_1_Vorname">
-       <property name="geometry">
-        <rect>
-         <x>11</x>
-         <y>86</y>
-         <width>59</width>
-         <height>20</height>
-        </rect>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="Eingabe_Name">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hier Nachnamen eingeben&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="0" colspan="2">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_1_Vorname">
        <property name="text">
         <string>Vorname</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_3_Geburtsdatum">
-       <property name="geometry">
-        <rect>
-         <x>11</x>
-         <y>161</y>
-         <width>94</width>
-         <height>20</height>
-        </rect>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="Eingabe_Vorname">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Hier Vornamen eingeben&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
+      </widget>
+     </item>
+     <item row="5" column="0" colspan="2">
+      <spacer name="verticalSpacer_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_3_Geburtsdatum">
        <property name="text">
         <string>Geburtsdatum</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_4_Geschlecht">
-       <property name="geometry">
-        <rect>
-         <x>11</x>
-         <y>236</y>
-         <width>71</width>
-         <height>20</height>
-        </rect>
+     </item>
+     <item row="6" column="1">
+      <widget class="QDateEdit" name="Eingabe_Geburtsdatum">
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
+      </widget>
+     </item>
+     <item row="7" column="0" colspan="2">
+      <spacer name="verticalSpacer_3">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_4_Geschlecht">
        <property name="text">
         <string>Geschlecht</string>
        </property>
       </widget>
-      <widget class="QLabel" name="label_5_Anschrift">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>360</y>
-         <width>58</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Anschrift</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_6_Telefonnummer">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>420</y>
-         <width>104</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Telefonnummer</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_7_EmailAdresse">
-       <property name="geometry">
-        <rect>
-         <x>20</x>
-         <y>480</y>
-         <width>99</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>E-Mail Adresse</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_8_Aufnahmedatum">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>600</y>
-         <width>111</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Aufnahmedatum</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_9_Behandlung">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>720</y>
-         <width>79</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Behandlung</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_9_Diagnose">
-       <property name="geometry">
-        <rect>
-         <x>10</x>
-         <y>660</y>
-         <width>63</width>
-         <height>20</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Diagnose</string>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="Eingabe_Diagnose">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>650</y>
-         <width>721</width>
-         <height>28</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="Line" name="line_1">
-       <property name="geometry">
-        <rect>
-         <x>11</x>
-         <y>546</y>
-         <width>874</width>
-         <height>16</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="Line" name="line_2">
-       <property name="geometry">
-        <rect>
-         <x>11</x>
-         <y>266</y>
-         <width>874</width>
-         <height>71</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Orientation::Horizontal</enum>
-       </property>
-      </widget>
-      <widget class="QDateEdit" name="Eingabe_Geburtsdatum">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>160</y>
-         <width>102</width>
-         <height>29</height>
-        </rect>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="Eingabe_Vorname">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>80</y>
-         <width>721</width>
-         <height>28</height>
-        </rect>
-       </property>
-      </widget>
+     </item>
+     <item row="8" column="1">
       <widget class="QComboBox" name="Eingabe_Geschlecht">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>230</y>
-         <width>47</width>
-         <height>28</height>
-        </rect>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;M = Männlich&lt;br/&gt;W = Weiblich&lt;br/&gt;D = Divers&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <item>
         <property name="text">
@@ -249,19 +156,46 @@
         </property>
        </item>
       </widget>
-      <widget class="QLineEdit" name="Eingabe_Anschrift">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>340</y>
-         <width>721</width>
-         <height>28</height>
-        </rect>
+     </item>
+     <item row="9" column="0" colspan="2">
+      <spacer name="verticalSpacer_4">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
        </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="10" column="0" colspan="2">
+      <widget class="Line" name="line_2">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="label_5_Anschrift">
+       <property name="text">
+        <string>Anschrift</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="1">
+      <widget class="QLineEdit" name="Eingabe_Anschrift">
        <property name="font">
         <font>
-         <italic>true</italic>
+         <italic>false</italic>
         </font>
+       </property>
+       <property name="toolTip">
+        <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;span style=&quot; font-style:normal;&quot;&gt;Hier Adresse eingeben&lt;/span&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
        <property name="text">
         <string/>
@@ -270,95 +204,230 @@
         <string>Straße Hausnummer, PLZ Ort</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="Eingabe_Telefonnummer">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>400</y>
-         <width>721</width>
-         <height>28</height>
-        </rect>
+     </item>
+     <item row="13" column="0">
+      <widget class="QLabel" name="label_6_Telefonnummer">
+       <property name="text">
+        <string>Telefonnummer</string>
        </property>
       </widget>
-      <widget class="QLineEdit" name="Eingabe_Email">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>460</y>
-         <width>721</width>
-         <height>28</height>
-        </rect>
-       </property>
+     </item>
+     <item row="13" column="1">
+      <widget class="QLineEdit" name="Eingabe_Telefonnummer">
        <property name="font">
         <font>
          <italic>true</italic>
+        </font>
+       </property>
+       <property name="placeholderText">
+        <string>Ländervorwahl im Format +XX eingeben</string>
+       </property>
+      </widget>
+     </item>
+     <item row="15" column="1">
+      <widget class="Line" name="line_1">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item row="16" column="0">
+      <widget class="QLabel" name="label_7_EmailAdresse">
+       <property name="text">
+        <string>E-Mail Adresse</string>
+       </property>
+      </widget>
+     </item>
+     <item row="16" column="1">
+      <widget class="QLineEdit" name="Eingabe_Email">
+       <property name="font">
+        <font>
+         <italic>false</italic>
         </font>
        </property>
        <property name="text">
         <string/>
        </property>
       </widget>
-      <widget class="QLineEdit" name="Eingabe_Name">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>10</y>
-         <width>721</width>
-         <height>28</height>
-        </rect>
-       </property>
+     </item>
+     <item row="19" column="0">
+      <widget class="QLabel" name="label_8_Aufnahmedatum">
        <property name="text">
-        <string/>
+        <string>Aufnahmedatum</string>
        </property>
       </widget>
+     </item>
+     <item row="21" column="0">
+      <widget class="QLabel" name="label_9_Diagnose">
+       <property name="text">
+        <string>Diagnose</string>
+       </property>
+      </widget>
+     </item>
+     <item row="23" column="0">
+      <widget class="QLabel" name="label_9_Behandlung">
+       <property name="text">
+        <string>Behandlung</string>
+       </property>
+      </widget>
+     </item>
+     <item row="23" column="1">
       <widget class="QLineEdit" name="Eingabe_Behandlung">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>710</y>
-         <width>721</width>
-         <height>28</height>
-        </rect>
+       <property name="placeholderText">
+        <string>Kurze Beschreibung der aktuellen gesundheitlichen Situation und des Vorgehens</string>
        </property>
       </widget>
-      <widget class="QDateEdit" name="Eingabe_Aufnahmedatum">
-       <property name="geometry">
-        <rect>
-         <x>150</x>
-         <y>590</y>
-         <width>110</width>
-         <height>29</height>
-        </rect>
+     </item>
+     <item row="25" column="1">
+      <widget class="QDialogButtonBox" name="buttonBox">
+       <property name="orientation">
+        <enum>Qt::Orientation::Horizontal</enum>
+       </property>
+       <property name="standardButtons">
+        <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Save</set>
+       </property>
+       <property name="centerButtons">
+        <bool>false</bool>
        </property>
       </widget>
-     </widget>
-    </widget>
-   </item>
-  </layout>
+     </item>
+     <item row="0" column="0" colspan="2">
+      <spacer name="verticalSpacer_11">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>10</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="21" column="1">
+      <widget class="QLineEdit" name="lineEdit_9_Diagnose"/>
+     </item>
+     <item row="19" column="1">
+      <widget class="QDateEdit" name="Eingabe_Aufnahmedatum"/>
+     </item>
+     <item row="20" column="0" colspan="2">
+      <spacer name="verticalSpacer_8">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="17" column="0" colspan="2">
+      <spacer name="verticalSpacer_7">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="14" column="0" colspan="2">
+      <spacer name="verticalSpacer_6">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="12" column="0" colspan="2">
+      <spacer name="verticalSpacer_5">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="22" column="0" colspan="2">
+      <spacer name="verticalSpacer_9">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item row="24" column="0" colspan="2">
+      <spacer name="verticalSpacer_10">
+       <property name="orientation">
+        <enum>Qt::Orientation::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::Policy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>0</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+    </layout>
+   </widget>
+  </widget>
  </widget>
  <tabstops>
-  <tabstop>Eingabe_Diagnose</tabstop>
-  <tabstop>Eingabe_Diagnose</tabstop>
+  <tabstop>Eingabe_Name</tabstop>
+  <tabstop>Eingabe_Vorname</tabstop>
+  <tabstop>Eingabe_Geburtsdatum</tabstop>
+  <tabstop>Eingabe_Geschlecht</tabstop>
+  <tabstop>Eingabe_Anschrift</tabstop>
+  <tabstop>Eingabe_Telefonnummer</tabstop>
+  <tabstop>Eingabe_Email</tabstop>
+  <tabstop>Eingabe_Aufnahmedatum</tabstop>
+  <tabstop>lineEdit_9_Diagnose</tabstop>
+  <tabstop>Eingabe_Behandlung</tabstop>
   <tabstop>scrollArea</tabstop>
  </tabstops>
  <resources/>
  <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>Datensatz_bearbeiten</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
   <connection>
    <sender>buttonBox</sender>
    <signal>rejected()</signal>
@@ -371,6 +440,22 @@
     </hint>
     <hint type="destinationlabel">
      <x>286</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>buttonBox</sender>
+   <signal>accepted()</signal>
+   <receiver>Datensatz_bearbeiten</receiver>
+   <slot>accept()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>248</x>
+     <y>254</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>157</x>
      <y>274</y>
     </hint>
    </hints>
