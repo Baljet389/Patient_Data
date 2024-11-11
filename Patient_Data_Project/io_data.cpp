@@ -84,6 +84,11 @@ QDate io_data::convertQStringToQDate(const QString datumString) {
     return datum;
 }
 
+QString io_data::convertQDateToQString(const QDate datum) {
+    // Konvertiere das QDate in einen QString im Format "dd.MM.yyyy" und gib es zurück
+    return datum.toString("dd.MM.yyyy");
+}
+
 void io_data::CSVeinlesen(QString pfad,Database &database) {
     try {
         qDebug() << "io_data::CSVeinlesen()";

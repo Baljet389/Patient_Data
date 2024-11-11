@@ -29,5 +29,6 @@ public:
     // Statische Funktion QDate in QString konvertieren
     // QDate convertQStringToQDate(const QString& datumString);
     static QDate convertQStringToQDate(const QString datumString);
+    static QString convertQDateToQString(const QDate datum);
 };
 #endif // IO_DATA_H
