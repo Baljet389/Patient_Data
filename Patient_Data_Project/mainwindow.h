@@ -29,6 +29,20 @@ private slots:
     void on_suche_txt_line_returnPressed();
     void onSearchTextChanged(const QString &text);
 
+    void on_radioButton_clicked();
+
+    void on_darkmode_btn_toggled(bool checked);
+    void lightmode_on();
+    void darkmode_on();
+
+    void on_speicher_btn_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_details_btn_clicked();
+
+    void on_bearbeiten_btn_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
