@@ -17,7 +17,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->speicher_btn->setToolTip("Datensatz speichern");
     ui->pushButton->setToolTip("Daten hinzufügen");
     ui->suche_btn->setToolTip("Suche eingegebenen Text");
-    ui->suche_txt_line->setToolTip("Gebe hiere den Nachnamen ein");
+    ui->suche_txt_line->setToolTip("Gebe hier den Nachnamen ein");
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
 
 

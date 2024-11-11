@@ -2,6 +2,7 @@
 #define DATENSATZ_BEARBEITEN_H
 
 #include <QDialog>
+#include <QVBoxLayout>
 
 namespace Ui {
 class Datensatz_bearbeiten;
