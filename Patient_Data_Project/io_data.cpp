@@ -71,8 +71,8 @@ int io_data::returnAge(){
         return alter;
 
 }
-/*
-QDate io_data::convertQStringToQDate(const QString& datumString) {
+
+QDate io_data::convertQStringToQDate(const QString datumString) {
     // Konvertiere den QString in ein QDate
     QDate datum = QDate::fromString(datumString, "dd.MM.yyyy");
 
@@ -81,9 +81,8 @@ QDate io_data::convertQStringToQDate(const QString& datumString) {
         qWarning() << "Ungültiges Datum im Format TT.MM.JJJJ erwartet:" << datumString;
         return QDate();  // Gibt ein ungültiges QDate zurück, falls das Format fehlerhaft ist
     }
-
     return datum;
-}*/
+}
 
 void io_data::CSVeinlesen(QString pfad,Database &database) {
     try {
