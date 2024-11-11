@@ -23,5 +23,6 @@ public:
     int returnAge();
     void printData();
     void CSVeinlesen(QString pfad, Database &database);
+    void CSVerstellen(QString pfad, Database &database);
 };
 #endif // IO_DATA_H
