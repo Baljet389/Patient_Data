@@ -5,19 +5,23 @@
 #include "QString"
 #include "QMessageBox"
 #include "QDate"
+#include <QAbstractButton>
+#include <QDialog>
+#include <QDialogButtonBox>
 Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id)
     : QDialog(parent)
     , ui(new Ui::Datensatz_bearbeiten)
 {
     ui->setupUi(this);
     try{
-    PatientFound=db.getPatientbyColumn("PatientID",QString::number(id));
+    PatientFound=database.getPatientbyColumn("PatientID",QString::number(id));
     }
     catch(std::runtime_error &e){
         QMessageBox::warning(this,"Warning",e.what());
     }
     if(PatientFound.size()==0){
         loadPatient=new io_data(-1,"","","","","","","","","","");
+        this->id=-1;
     }
     else{
     loadPatient =new io_data(PatientFound.at(0).ID,
@@ -31,6 +35,7 @@ Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id)
                             PatientFound.at(0).datum,
                             PatientFound.at(0).diagnose,
                             PatientFound.at(0).behandlung);
+        this->id=id;
     }
     ui->Eingabe_Vorname->setText(loadPatient->vorname);
     ui->Eingabe_Name->setText(loadPatient->nachname);
@@ -40,7 +45,7 @@ Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id)
     ui->Eingabe_Telefonnummer->setText(loadPatient->tel_nummer);
     ui->Eingabe_Email->setText(loadPatient->mail);
     //ui->Eingabe_Aufnahmedatum->setDate();
-    ui->Eingabe_Diagnose->setText(loadPatient->diagnose);
+    ui->lineEdit_9_Diagnose->setText(loadPatient->diagnose);
     ui->Eingabe_Behandlung->setText(loadPatient->behandlung);
 }
 
@@ -49,3 +54,32 @@ Datensatz_bearbeiten::~Datensatz_bearbeiten()
     delete ui;
     delete loadPatient;
 }
+
+void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
+{
+    QDialogButtonBox *buttonBox = qobject_cast<QDialogButtonBox*>(sender());
+    QDialogButtonBox::ButtonRole role = buttonBox->buttonRole(button);
+    switch(role){
+        case QDialogButtonBox::RejectRole:
+            return;
+        case QDialogButtonBox::AcceptRole:
+            loadPatient->vorname=ui->Eingabe_Vorname->text();
+            loadPatient->nachname=ui->Eingabe_Name->text();
+            //loadPatient->geburt=ui->Eingabe_Geburtsdatum->date();
+            loadPatient->geschlecht=ui->Eingabe_Geschlecht->currentText();
+            loadPatient->adresse=ui->Eingabe_Anschrift->text();
+            loadPatient->tel_nummer=ui->Eingabe_Telefonnummer->text();
+            loadPatient->mail=ui->Eingabe_Email->text();
+            //loadPatient->datum=ui->Eingabe_Aufnahmedatum->date();
+            loadPatient->diagnose=ui->lineEdit_9_Diagnose->text();
+            loadPatient->behandlung=ui->Eingabe_Behandlung->text();
+            if(id==-1){
+                //database.insertPatient(*loadPatient);
+            }
+            else{
+                //database.editPatient(*loadPatient);
+            }
+        }
+
+}
+

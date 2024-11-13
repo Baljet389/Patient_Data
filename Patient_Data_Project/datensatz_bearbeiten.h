@@ -4,7 +4,7 @@
 #include <QDialog>
 
 #include <QVBoxLayout>
-
+#include <QAbstractButton>
 #include "io_data.h"
 #include "database.h"
 
@@ -18,11 +18,15 @@ class Datensatz_bearbeiten : public QDialog
 
 public:
     io_data* loadPatient;
-    Database db;
+    Database database;
+    int id;
     std::vector<io_data> PatientFound;
     explicit Datensatz_bearbeiten(QWidget *parent = nullptr,int id=-1);
     ~Datensatz_bearbeiten();
 
+
+private slots:
+    void on_buttonBox_clicked(QAbstractButton *button);
 
 private:
     Ui::Datensatz_bearbeiten *ui;
