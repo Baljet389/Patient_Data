@@ -28,7 +28,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
 	user.h user.cpp
         logindialog.h logindialog.cpp logindialog.ui
         datensatz_bearbeiten.h datensatz_bearbeiten.cpp datensatz_bearbeiten.ui
-        #pictures.qrc
+        pictures.qrc
 
     )
 # Define target properties for Android with Qt 6 as:

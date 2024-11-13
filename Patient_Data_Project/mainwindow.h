@@ -56,6 +56,8 @@ private slots:
     void on_bearbeiten_btn_clicked();
 
 
+    void on_logout_btn_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
