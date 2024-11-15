@@ -73,13 +73,18 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
             //loadPatient->datum=ui->Eingabe_Aufnahmedatum->date();
             loadPatient->diagnose=ui->lineEdit_9_Diagnose->text();
             loadPatient->behandlung=ui->Eingabe_Behandlung->text();
+            try{
             if(id==-1){
                 //database.insertPatient(*loadPatient);
             }
             else{
                 //database.editPatient(*loadPatient);
             }
+            }
+            catch(std::runtime_error &e){
+                QMessageBox::warning(this,"Warning",e.what());
+                return;
+            }
         }
-
 }
 
