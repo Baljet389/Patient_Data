@@ -10,6 +10,7 @@ class Database
 public:
     QSqlDatabase db;
     Database();
+    ~Database();
     void createTable();
     std::vector<io_data> getPatientbyColumn(const QString& column,const QString& input);
     void insertPatient(const io_data& patient);

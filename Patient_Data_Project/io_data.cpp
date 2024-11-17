@@ -11,6 +11,9 @@
 #include <sstream>
 #include <QString>
 #include <regex> // Musterabgleich zum CSV einlesen Daten verifizieren
+#include <QDate>
+#include <QDebug>
+
 
 using namespace std;
 
@@ -67,6 +70,23 @@ int io_data::returnAge(){
         alterFinal=alter;
         return alter;
 
+}
+
+QDate io_data::convertQStringToQDate(const QString datumString) {
+    // Konvertiere den QString in ein QDate
+    QDate datum = QDate::fromString(datumString, "dd.MM.yyyy");
+
+    // Überprüfe, ob das Datum gültig ist
+    if (!datum.isValid()) {
+        qWarning() << "Ungültiges Datum im Format TT.MM.JJJJ erwartet:" << datumString;
+        return QDate();  // Gibt ein ungültiges QDate zurück, falls das Format fehlerhaft ist
+    }
+    return datum;
+}
+
+QString io_data::convertQDateToQString(const QDate datum) {
+    // Konvertiere das QDate in einen QString im Format "dd.MM.yyyy" und gib es zurück
+    return datum.toString("dd.MM.yyyy");
 }
 
 void io_data::CSVeinlesen(QString pfad,Database &database) {
@@ -161,5 +181,57 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
 
     } catch (const exception &e) {
         qDebug() << "Ein Fehler ist aufgetreten:" << e.what();
+    }
+}
+
+#include <fstream>
+#include <vector>
+#include <QStringList>
+
+void io_data::CSVerstellen(QString pfad, Database &database) {
+    try {
+        qDebug() << "io_data::CSVerstellen()";
+
+        // CSV-Datei zum Schreiben öffnen
+        ofstream datei(pfad.toStdString(), ios::out);
+        if (!datei.is_open()) {
+            throw runtime_error("Datei konnte nicht geöffnet werden");
+        }
+        qDebug() << "Datei zum Schreiben geöffnet:" << pfad;
+
+        // CSV-Header schreiben
+        datei << "PatientID,Vorname,Nachname,Geburtsdatum,Geschlecht,Adresse,Telefonnummer,Email,Aufnahmedatum,Diagnose,Behandlung\n";
+
+        // Alle Patienten aus der Datenbank abrufen
+        vector<io_data> patientenListe = database.getPatientbyColumn("1", "1"); // Dummy-Aufruf, um alle Patienten zu erhalten
+
+        // Patienten-Daten in CSV-Datei schreiben
+        for (const auto &patient : patientenListe) {
+            // Zeile im CSV-Format erstellen
+            QString csvZeile = QString("%1,%2,%3,%4,%5,%6,%7,%8,%9,%10,%11")
+                                   .arg(patient.ID)
+                                   .arg(patient.vorname)
+                                   .arg(patient.nachname)
+                                   .arg(patient.geburt)
+                                   .arg(patient.geschlecht)
+                                   .arg(patient.adresse)
+                                   .arg(patient.tel_nummer)
+                                   .arg(patient.mail)
+                                   .arg(patient.datum)
+                                   .arg(patient.diagnose)
+                                   .arg(patient.behandlung);
+
+            // Zeile in Datei schreiben
+            datei << csvZeile.toStdString() << "\n";
+        }
+
+        qDebug() << "Alle Patientendaten wurden in die CSV-Datei geschrieben";
+
+        // Datei schließen
+        datei.close();
+        qDebug() << "CSV-Datei geschlossen";
+
+    } catch (const exception &e) {
+        qDebug() << "Ein Fehler ist aufgetreten beim Erstellen der CSV-Datei:" << e.what();
     }
 }

@@ -17,9 +17,13 @@ Database::Database() {
     std::string filename="/PatientenDaten/PatientDataDatabase.db";
     db.setDatabaseName(QString::fromStdString(directory+filename));
     if(!db.open()){
-        qDebug() << "Error: Could not open the database!" << db.lastError().text();
+       throw std::runtime_error((db.lastError().text().toStdString()));
     }
 }
+Database::~Database(){
+    db.close();
+}
+
 void Database::createTable(){
     QSqlQuery query;
     QString create="CREATE TABLE IF NOT EXISTS Patienten("
@@ -48,10 +52,8 @@ vector<io_data> Database::getPatientbyColumn(const QString& column,const QString
 
     query.prepare(queryString);
     query.addBindValue(input);
-    bool successful=query.exec();
-
-    if(!successful){
-        throw std::runtime_error("Column does not exist, or database connection is not available");
+    if(!query.exec()){
+        throw std::runtime_error((query.lastError().text().toStdString()));
     }
     while(query.next()){
     io_data data(query.value(0).toInt(),query.value(1).toString(),query.value(2).toString(),query.value(3).toString(),
@@ -77,9 +79,8 @@ void Database::insertPatient(const io_data& patient){
     query.addBindValue(patient.datum);
     query.addBindValue(patient.diagnose);
     query.addBindValue(patient.behandlung);
-    bool success=query.exec();
-    if(!success){
-        throw std::runtime_error("Database connection is not available");
+    if(!query.exec()){
+        throw std::runtime_error((query.lastError().text().toStdString()));
     }
 }
 void Database::editPatient(const io_data &patient){
@@ -101,7 +102,7 @@ void Database::editPatient(const io_data &patient){
     query.addBindValue(patient.behandlung);
     query.addBindValue(patient.ID);
     if(!query.exec()){
-        throw std::runtime_error("Database connection is not available");
+        throw std::runtime_error((query.lastError().text().toStdString()));
     }
 
 }
