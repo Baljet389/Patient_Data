@@ -4,6 +4,7 @@
 #include <QMainWindow>
 #include "database.h"
 #include <QLineEdit>
+#include <QDebug>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -22,12 +23,40 @@ public:
     QStringList SpaltenNamen;
     std::vector<io_data> PatientsFound;
 
+    // Teständerung für CSV im/export
+    //QString pfad = open_btn.clicked()
+    //qDebug() << pfad;
+    //void io_data.CSVeinlesen(QString pfad, db);
+    //void io_data.CSVerstellen(QString pfad, &db);
+
 private slots:
 
     void on_suche_btn_clicked();
 
     void on_suche_txt_line_returnPressed();
     void onSearchTextChanged(const QString &text);
+
+
+    // Teständerung für CSV im/export
+    //void io_data.CSVeinlesen(QString pfad, db);
+    //void io_data.CSVerstellen(QString pfad, &db);
+
+    //void on_radioButton_clicked();
+
+    void on_darkmode_btn_toggled(bool checked);
+    void lightmode_on();
+    void darkmode_on();
+
+    void on_speicher_btn_clicked();
+
+    void on_pushButton_clicked();
+
+    void on_details_btn_clicked();
+
+    void on_bearbeiten_btn_clicked();
+
+
+    void on_open_btn_clicked();
 
 private:
     Ui::MainWindow *ui;

@@ -9,6 +9,9 @@
 #include <QString>
 #include <QTableWidgetItem>
 #include <QMessageBox>
+#include <QHeaderView>
+#include <QDebug>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -22,11 +25,18 @@ MainWindow::MainWindow(QWidget *parent)
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
 
 
+
     //verbindet Suchfeld mit der Funktion onsearchTextChanged
     connect(ui->suche_txt_line, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
     ui->data_table->setColumnCount(10);
     SpaltenNamen << "ID" << "Name" << "Vorname"<<"Geburtsdatum"<<"Geschlecht"<<"Adresse"<<"Telefonnummer"<<"Email"<<"Aufnahmedatum"<<"Diagnose"<<"Behandlung";
     ui->data_table->setHorizontalHeaderLabels(SpaltenNamen);
+    ui->data_table->horizontalHeader()->setStretchLastSection(true);
+
+
+    //Lightmode zu Beginn anschalten
+    lightmode_on();
+     connect(ui->darkmode_btn, &QRadioButton::toggled, this, &MainWindow::on_darkmode_btn_toggled);
 }
 
 MainWindow::~MainWindow()
@@ -34,7 +44,6 @@ MainWindow::~MainWindow()
     delete ui;
 
 }
-
 
 void MainWindow::on_suche_btn_clicked()
 {
@@ -83,3 +92,115 @@ void MainWindow::onSearchTextChanged(const QString &text) {
         ui->data_table->setRowCount(0);
     }
 }
+
+
+//void MainWindow::on_open_btn_clicked()
+//    connect(ui->open_btn, &QPushButton::clicked, this, &MainWindow::io_data.CSVeinlesen());
+
+
+
+void MainWindow::on_darkmode_btn_toggled(bool checked)
+{
+    if (checked)
+    {
+        darkmode_on();
+    }
+    else
+    {
+        lightmode_on();
+    }
+}
+
+void MainWindow::lightmode_on()
+{
+    QString lightStyle = R"(
+QString lightModeStyle = R"(
+    QMainWindow {
+        background-color: rgb(255, 255, 255);
+    }
+
+    QLabel {
+        color: #333333;
+        font-size: 14px;
+        font-family: Arial, sans-serif;
+    }
+
+    QPushButton {
+        background-color: #FFFFFF;
+        color: #333333;
+        border: 1px solid #CCCCCC;
+        border-radius: 8px;
+        padding: 8px 15px;
+        font-size: 14px;
+        font-weight: bold;
+    }
+
+    QPushButton:hover {
+        background-color: #E0E0E0;
+    }
+
+    QPushButton:pressed {
+        background-color: #CCCCCC;
+    }
+
+)";
+      this->setStyleSheet(lightStyle);
+
+
+}
+
+void MainWindow::darkmode_on()
+{
+    //Änderung des Designs mit Raw String
+    QString darkStyle = R"(
+        QMainWindow
+        {
+            background-color: #2E2E2E;
+            color: #FFFFFF;
+        }
+        QLabel, QRadioButton, QPushButton
+        {
+            color: #FFFFFF;
+        }
+        QPushButton
+        {
+            background-color: #555555;
+            border: 1px solid #AAAAAA;
+            border-radius: 5px;
+            padding: 5px;
+        }
+    )";
+    this->setStyleSheet(darkStyle);
+}
+
+void MainWindow::on_speicher_btn_clicked()
+{
+    qDebug() << "on_speicher_btn_clicked";
+}
+
+
+void MainWindow::on_pushButton_clicked()
+{
+    qDebug() << "on_pushButton_clicked";
+}
+
+
+void MainWindow::on_details_btn_clicked()
+{
+    qDebug() << "on_details_btn_clicked";
+}
+
+
+void MainWindow::on_bearbeiten_btn_clicked()
+{
+    qDebug() << "on_bearbeiten_btn_clicked";
+}
+
+
+
+void MainWindow::on_open_btn_clicked()
+{
+    // io_data
+    qDebug() << "on_open_btn_clicked";
+}
+
