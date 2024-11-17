@@ -20,6 +20,10 @@ Database::Database() {
        throw std::runtime_error((db.lastError().text().toStdString()));
     }
 }
+Database::~Database(){
+    db.close();
+}
+
 void Database::createTable(){
     QSqlQuery query;
     QString create="CREATE TABLE IF NOT EXISTS Patienten("

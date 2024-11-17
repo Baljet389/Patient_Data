@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/new/prefix1">
+        <file>bild_EPA.png</file>
+        <file>filter_icon.png</file>
+    </qresource>
+</RCC>

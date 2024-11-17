@@ -22,7 +22,7 @@ public:
     Database db;
     QStringList SpaltenNamen;
     std::vector<io_data> PatientsFound;
-
+    QString UserInputColumn;
     // Teständerung für CSV im/export
     //QString pfad = open_btn.clicked()
     //qDebug() << pfad;
@@ -57,6 +57,9 @@ private slots:
 
 
     void on_open_btn_clicked();
+    void on_logout_btn_clicked();
+
+    void on_filter_box_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;

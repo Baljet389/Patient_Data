@@ -18,10 +18,10 @@ class Datensatz_bearbeiten : public QDialog
 
 public:
     io_data* loadPatient;
-    Database database;
     int id;
+    Database* database;
     std::vector<io_data> PatientFound;
-    explicit Datensatz_bearbeiten(QWidget *parent = nullptr,int id=-1);
+    explicit Datensatz_bearbeiten(QWidget *parent = nullptr,int id=-1,Database* database=nullptr);
     ~Datensatz_bearbeiten();
 
 
