@@ -32,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
     //verbindet Suchfeld mit der Funktion onsearchTextChanged
     connect(ui->suche_txt_line, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
     ui->data_table->setColumnCount(10);
-    SpaltenNamen << "ID" << "Name" << "Vorname"<<"Geburtsdatum"<<"Geschlecht"<<"Adresse"<<"Telefonnummer"<<"Email"<<"Aufnahmedatum"<<"Diagnose"<<"Behandlung";
+    SpaltenNamen << "ID" << "Nachname" << "Vorname"<<"Geburtsdatum"<<"Geschlecht"<<"Adresse"<<"Telefonnummer"<<"Email"<<"Aufnahmedatum"<<"Diagnose"<<"Behandlung";
     ui->data_table->setHorizontalHeaderLabels(SpaltenNamen);
     ui->data_table->horizontalHeader()->setStretchLastSection(true);
     UserInputColumn="PatientID";
