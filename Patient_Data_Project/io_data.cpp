@@ -173,9 +173,11 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
 
                 } catch (const invalid_argument &e) {
                     qDebug() << "Ungültige Daten in Zeile, überspringe. Fehler:" << e.what();
+                    QMessageBox::warning(nullptr, "Speichern", "Keine Patientendaten in der Datenbank vorhanden.");
                 }
             } else {
                 qDebug() << "Unvollständige Zeile, erwartet 11 Werte, erhalten:" << werteListe.size();
+                QMessageBox::information(nullptr, "Speichern", "Die Patientendaten wurden erfolgreich in die CSV-Datei exportiert.");
             }
         }
 
