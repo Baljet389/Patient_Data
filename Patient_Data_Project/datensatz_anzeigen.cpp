@@ -12,3 +12,15 @@ datensatz_anzeigen::~datensatz_anzeigen()
 {
     delete ui;
 }
+
+void datensatz_anzeigen::on_pushButton_2_clicked()
+{
+    close();
+}
+
+
+void datensatz_anzeigen::on_pushButton_4_clicked()
+{
+    // Hier Aufruf des Fensters: "datensatz_bearbeiten", mit entsprechendem Datensatz
+}
+

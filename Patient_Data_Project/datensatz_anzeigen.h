@@ -15,6 +15,11 @@ public:
     explicit datensatz_anzeigen(QWidget *parent = nullptr);
     ~datensatz_anzeigen();
 
+private slots:
+    void on_pushButton_2_clicked();
+
+    void on_pushButton_4_clicked();
+
 private:
     Ui::datensatz_anzeigen *ui;
 };

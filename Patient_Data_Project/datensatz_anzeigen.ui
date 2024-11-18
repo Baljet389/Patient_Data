@@ -6,36 +6,20 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1080</width>
-    <height>570</height>
+    <width>820</width>
+    <height>440</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QDialogButtonBox" name="buttonBox">
-   <property name="geometry">
-    <rect>
-     <x>20</x>
-     <y>530</y>
-     <width>1041</width>
-     <height>32</height>
-    </rect>
-   </property>
-   <property name="orientation">
-    <enum>Qt::Orientation::Horizontal</enum>
-   </property>
-   <property name="standardButtons">
-    <set>QDialogButtonBox::StandardButton::Cancel|QDialogButtonBox::StandardButton::Ok</set>
-   </property>
-  </widget>
   <widget class="Line" name="line">
    <property name="geometry">
     <rect>
      <x>530</x>
      <y>10</y>
      <width>21</width>
-     <height>511</height>
+     <height>421</height>
     </rect>
    </property>
    <property name="orientation">
@@ -50,6 +34,9 @@
      <width>521</width>
      <height>421</height>
     </rect>
+   </property>
+   <property name="whatsThis">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Ausgewählter Datensatz&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
    <attribute name="horizontalHeaderCascadingSectionResizes">
     <bool>true</bool>
@@ -142,7 +129,7 @@
    </row>
    <row>
     <property name="text">
-     <string>Diagnose (ITF Code):</string>
+     <string>Diagnose (ICD-10-Code):</string>
     </property>
    </row>
    <row>
@@ -152,7 +139,7 @@
    </row>
    <column>
     <property name="text">
-     <string>Erfasste Daten:</string>
+     <string>Ausgewählter Datensatz:</string>
     </property>
     <property name="font">
      <font>
@@ -171,10 +158,16 @@
     <property name="text">
      <string/>
     </property>
+    <property name="flags">
+     <set>NoItemFlags</set>
+    </property>
    </item>
    <item row="1" column="0">
     <property name="text">
      <string>Rösch</string>
+    </property>
+    <property name="flags">
+     <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsUserCheckable|ItemIsEnabled</set>
     </property>
    </item>
    <item row="2" column="0">
@@ -196,6 +189,9 @@
     <property name="text">
      <string/>
     </property>
+    <property name="flags">
+     <set>NoItemFlags</set>
+    </property>
    </item>
    <item row="6" column="0">
     <property name="text">
@@ -204,7 +200,35 @@
    </item>
    <item row="7" column="0">
     <property name="text">
+     <string>015257027337</string>
+    </property>
+   </item>
+   <item row="8" column="0">
+    <property name="text">
+     <string>david.roesch98@web.de</string>
+    </property>
+   </item>
+   <item row="9" column="0">
+    <property name="text">
      <string/>
+    </property>
+    <property name="flags">
+     <set>NoItemFlags</set>
+    </property>
+   </item>
+   <item row="10" column="0">
+    <property name="text">
+     <string>18.11.2024</string>
+    </property>
+   </item>
+   <item row="11" column="0">
+    <property name="text">
+     <string>S83. 53</string>
+    </property>
+   </item>
+   <item row="12" column="0">
+    <property name="text">
+     <string>Bedingungsloses Grundeinkommen</string>
     </property>
    </item>
   </widget>
@@ -213,9 +237,22 @@
     <rect>
      <x>550</x>
      <y>50</y>
-     <width>521</width>
-     <height>121</height>
+     <width>261</width>
+     <height>341</height>
     </rect>
+   </property>
+   <property name="toolTip">
+    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Beschreibung der ICD-Diagnose&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+   </property>
+   <property name="html">
+    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
+&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
+p, li { white-space: pre-wrap; }
+hr { height: 1px; border-width: 0; }
+li.unchecked::marker { content: &quot;\2610&quot;; }
+li.checked::marker { content: &quot;\2612&quot;; }
+&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
+&lt;p style=&quot; margin-top:0px; margin-bottom:0px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;S83.&lt;/span&gt; &lt;span style=&quot; font-weight:700;&quot;&gt;53&lt;/span&gt; &lt;br /&gt;&lt;br /&gt;Verstauchung und Zerrung des Kniegelenkes: Riss des vorderen Kreuzbandes.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -234,97 +271,46 @@
     </font>
    </property>
    <property name="text">
-    <string>ITF-Code Details</string>
+    <string>ICD-10-Code Details</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
     <rect>
      <x>550</x>
-     <y>190</y>
+     <y>400</y>
      <width>521</width>
-     <height>21</height>
+     <height>41</height>
     </rect>
    </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Krankheitsverlauf</string>
-   </property>
-  </widget>
-  <widget class="QTextEdit" name="textEdit">
-   <property name="geometry">
-    <rect>
-     <x>550</x>
-     <y>220</y>
-     <width>521</width>
-     <height>251</height>
-    </rect>
-   </property>
-   <property name="html">
-    <string>&lt;!DOCTYPE HTML PUBLIC &quot;-//W3C//DTD HTML 4.0//EN&quot; &quot;http://www.w3.org/TR/REC-html40/strict.dtd&quot;&gt;
-&lt;html&gt;&lt;head&gt;&lt;meta name=&quot;qrichtext&quot; content=&quot;1&quot; /&gt;&lt;meta charset=&quot;utf-8&quot; /&gt;&lt;style type=&quot;text/css&quot;&gt;
-p, li { white-space: pre-wrap; }
-hr { height: 1px; border-width: 0; }
-li.unchecked::marker { content: &quot;\2610&quot;; }
-li.checked::marker { content: &quot;\2612&quot;; }
-&lt;/style&gt;&lt;/head&gt;&lt;body style=&quot; font-family:'Segoe UI'; font-size:9pt; font-weight:400; font-style:normal;&quot;&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Patient:&lt;/span&gt; Maria Schmidt&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Alter:&lt;/span&gt; 45 Jahre&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Beruf:&lt;/span&gt; Büroangestellte&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Krankheitsbild:&lt;/span&gt; Zunehmende Müdigkeit, Gelenkschmerzen, Fieber und Hautausschläge&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Anamnese:&lt;/span&gt; Bisher gesund, keine bekannten Vorerkrankungen&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h3 style=&quot; margin-top:14px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:large; font-weight:700;&quot;&gt;1. Arztbesuch&lt;/span&gt;&lt;/h3&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Datum:&lt;/span&gt; 12. März 2023&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Symptome:&lt;/span&gt; Müdigkeit, leichte Gelenkschmerzen in den Knien und Handgelenken, gelegentliche Kopfschmerzen.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Diagnose:&lt;/span&gt; Verdacht auf beginnende Grippe oder allgemeine Erschöpfung.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Behandlung:&lt;/span&gt; Empfohlene Ruhe und Flüssigkeitszufuhr, Einnahme von Ibuprofen bei Schmerzen.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Empfehlung:&lt;/span&gt; Falls die Symptome innerhalb von zwei Wochen nicht abklingen, erneuter Termin.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h3 style=&quot; margin-top:14px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:large; font-weight:700;&quot;&gt;2. Arztbesuch&lt;/span&gt;&lt;/h3&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Datum:&lt;/span&gt; 26. März 2023&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Symptome:&lt;/span&gt; Müdigkeit und Gelenkschmerzen bestehen weiterhin, gelegentliches leichtes Fieber (ca. 38°C), Hautausschlag am Rücken und den Oberarmen.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Untersuchungen:&lt;/span&gt; Blutbild, CRP-Wert, Rheumafaktoren und ANA (Antinukleäre Antikörper) zur Untersuchung möglicher Autoimmunreaktionen.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Ergebnisse:&lt;/span&gt; Leichte Erhöhung der Entzündungswerte (CRP), leicht positive ANA-Werte.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Verdachtsdiagnose:&lt;/span&gt; Möglicher Beginn einer Autoimmunerkrankung (z.B. Lupus erythematodes).&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Behandlung:&lt;/span&gt; Überweisung an einen Rheumatologen zur weiteren Abklärung.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h3 style=&quot; margin-top:14px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:large; font-weight:700;&quot;&gt;3. Fachärztliche Untersuchung beim Rheumatologen&lt;/span&gt;&lt;/h3&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Datum:&lt;/span&gt; 5. April 2023&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Symptome:&lt;/span&gt; Erschöpfung verschlimmert sich, vermehrter Ausschlag, Schmerzen nun auch in Ellenbogen und Schultern.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Untersuchungen:&lt;/span&gt; Spezifischere Blutuntersuchungen (u.a. Anti-dsDNA-Antikörper und Komplementwerte), Ultraschall der betroffenen Gelenke.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Ergebnisse:&lt;/span&gt; Anti-dsDNA positiv, erniedrigte Komplementwerte (C3 und C4), was auf eine Autoimmunreaktion hindeutet.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Diagnose:&lt;/span&gt; Systemischer Lupus erythematodes (SLE)&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Behandlung:&lt;/span&gt; Beginn einer Therapie mit Hydroxychloroquin (Plaquenil), Schmerztherapie mit niedrig dosiertem Kortison und Empfehlung zur regelmäßigen Kontrolle der Blutwerte.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Empfehlung:&lt;/span&gt; Ernährungsumstellung und körperliche Schonung, Reduktion von Stress.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h3 style=&quot; margin-top:14px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:large; font-weight:700;&quot;&gt;4. Kontrolltermin beim Rheumatologen&lt;/span&gt;&lt;/h3&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Datum:&lt;/span&gt; 10. Mai 2023&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Symptome:&lt;/span&gt; Gelenkschmerzen sind unter der Medikation zurückgegangen, jedoch weiterhin Müdigkeit und leichter Hautausschlag bei Sonneneinstrahlung.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Untersuchungen:&lt;/span&gt; Blutbildkontrolle, Überprüfung der Nieren- und Leberwerte, da diese oft bei SLE betroffen sind.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Ergebnisse:&lt;/span&gt; Entzündungswerte sind gesunken, Nieren- und Leberwerte im Normbereich.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Behandlung:&lt;/span&gt; Fortsetzung der Therapie mit Hydroxychloroquin, Reduktion des Kortisons. Einführung eines Sonnenschutzmittels für Hautausschlag-Prävention.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Empfehlung:&lt;/span&gt; Weitere regelmäßige Kontrolluntersuchungen alle drei Monate, Empfehlung zur Teilnahme an einer Selbsthilfegruppe für Betroffene.&lt;/p&gt;
-&lt;hr /&gt;
-&lt;h3 style=&quot; margin-top:14px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-size:large; font-weight:700;&quot;&gt;5. Nachkontrolle beim Hausarzt&lt;/span&gt;&lt;/h3&gt;
-&lt;p style=&quot; margin-top:12px; margin-bottom:12px; margin-left:0px; margin-right:0px; -qt-block-indent:0; text-indent:0px;&quot;&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Datum:&lt;/span&gt; 15. August 2023&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Symptome:&lt;/span&gt; Verbesserter Allgemeinzustand, Müdigkeit ist abgeklungen, Gelenkschmerzen selten. Leichter Hautausschlag bei intensivem Sonnenkontakt.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Untersuchungen:&lt;/span&gt; Kurze Nachbesprechung, Bestätigung der Medikation und Kontrolle der Nebenwirkungen.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Ergebnisse:&lt;/span&gt; Stabiler Zustand.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Behandlung:&lt;/span&gt; Medikamentöse Therapie wird fortgesetzt. Empfehlung zur Fortführung des bestehenden Lebensstils mit geringem Stress und regelmäßigem Sonnenschutz.&lt;br /&gt;&lt;span style=&quot; font-weight:700;&quot;&gt;Prognose:&lt;/span&gt; Gute Kontrolle der Symptome bei Einhaltung der Medikation und regelmäßiger ärztlicher Überwachung.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
+   <widget class="QPushButton" name="pushButton_2">
+    <property name="geometry">
+     <rect>
+      <x>180</x>
+      <y>0</y>
+      <width>83</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Schließen</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pushButton_4">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>0</y>
+      <width>151</width>
+      <height>29</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Datensatz bearbeiten</string>
+    </property>
+   </widget>
   </widget>
  </widget>
  <resources/>
- <connections>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>accepted()</signal>
-   <receiver>datensatz_anzeigen</receiver>
-   <slot>accept()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>248</x>
-     <y>254</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>157</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>buttonBox</sender>
-   <signal>rejected()</signal>
-   <receiver>datensatz_anzeigen</receiver>
-   <slot>reject()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>316</x>
-     <y>260</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>286</x>
-     <y>274</y>
-    </hint>
-   </hints>
-  </connection>
- </connections>
+ <connections/>
 </ui>
