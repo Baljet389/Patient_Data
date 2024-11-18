@@ -68,7 +68,6 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
 MainWindow::~MainWindow()
 {
     delete ui;
-
 }
 
 void MainWindow::on_suche_btn_clicked()
