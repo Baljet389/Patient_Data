@@ -17,9 +17,9 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr, Database* db=nullptr);
     ~MainWindow();
-    Database db;
+    Database* db;
     QStringList SpaltenNamen;
     std::vector<io_data> PatientsFound;
     QString UserInputColumn;

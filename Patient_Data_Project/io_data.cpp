@@ -14,6 +14,11 @@
 #include <QDate>
 #include <QDebug>
 
+#include <fstream>
+#include <vector>
+#include <QStringList>
+#include <QSqlQuery>
+#include <QSqlError>
 
 using namespace std;
 
@@ -184,10 +189,6 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
     }
 }
 
-#include <fstream>
-#include <vector>
-#include <QStringList>
-
 void io_data::CSVerstellen(QString pfad, Database &database) {
     try {
         qDebug() << "io_data::CSVerstellen()";
@@ -202,11 +203,33 @@ void io_data::CSVerstellen(QString pfad, Database &database) {
         // CSV-Header schreiben
         datei << "PatientID,Vorname,Nachname,Geburtsdatum,Geschlecht,Adresse,Telefonnummer,Email,Aufnahmedatum,Diagnose,Behandlung\n";
 
-        // Alle Patienten aus der Datenbank abrufen
-        vector<io_data> patientenListe = database.getPatientbyColumn("1", "1"); // Dummy-Aufruf, um alle Patienten zu erhalten
+        // Datenbankabfrage vorbereiten
+        QSqlQuery query;
+        QString queryString = QString("SELECT PatientID, Vorname, Nachname, Geburtsdatum,"
+                                      " Geschlecht, Adresse, Telefonnummer, Email, Aufnahmedatum,"
+                                      " Diagnose, Behandlung FROM Patienten");
 
-        // Patienten-Daten in CSV-Datei schreiben
-        for (const auto &patient : patientenListe) {
+        if (!query.exec(queryString)) {
+            throw std::runtime_error(query.lastError().text().toStdString());
+        }
+
+        // Patienten nacheinander auslesen
+        int patientCount = 0; // Zähler für gelesene Patienten
+        while (query.next()) {
+            io_data patient(
+                query.value(0).toInt(),     // PatientID
+                query.value(1).toString(),  // Vorname
+                query.value(2).toString(),  // Nachname
+                query.value(3).toString(),  // Geburtsdatum
+                query.value(4).toString(),  // Geschlecht
+                query.value(5).toString(),  // Adresse
+                query.value(6).toString(),  // Telefonnummer
+                query.value(7).toString(),  // Email
+                query.value(8).toString(),  // Aufnahmedatum
+                query.value(9).toString(),  // Diagnose
+                query.value(10).toString()  // Behandlung
+                );
+
             // Zeile im CSV-Format erstellen
             QString csvZeile = QString("%1,%2,%3,%4,%5,%6,%7,%8,%9,%10,%11")
                                    .arg(patient.ID)
@@ -223,15 +246,20 @@ void io_data::CSVerstellen(QString pfad, Database &database) {
 
             // Zeile in Datei schreiben
             datei << csvZeile.toStdString() << "\n";
+            patientCount++;
         }
 
-        qDebug() << "Alle Patientendaten wurden in die CSV-Datei geschrieben";
+        if (patientCount == 0) {
+            qDebug() << "Keine Patientendaten in der Datenbank vorhanden.";
+        } else {
+            qDebug() << "Alle Patientendaten wurden in die CSV-Datei geschrieben.";
+        }
 
         // Datei schließen
         datei.close();
         qDebug() << "CSV-Datei geschlossen";
 
-    } catch (const exception &e) {
+    } catch (const std::exception &e) {
         qDebug() << "Ein Fehler ist aufgetreten beim Erstellen der CSV-Datei:" << e.what();
     }
 }
