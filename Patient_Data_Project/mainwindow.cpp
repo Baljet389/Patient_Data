@@ -14,6 +14,8 @@
 #include <QDebug>
 #include <QMessageBox>
 #include "datensatz_bearbeiten.h"
+#include <QFileDialog>
+
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -374,6 +376,24 @@ void MainWindow::on_open_btn_clicked()
 {
     // io_data
     qDebug() << "on_open_btn_clicked";
+
+    // Dialog öffnen und den Dateipfad in einer QString-Variable speichern
+    QString dateipfad = QFileDialog::getOpenFileName(
+        this,
+        "Datei öffnen",         // Dialogtitel
+        QDir::homePath(),       // Startverzeichnis
+        "Alle Dateien (*.*);;Textdateien (*.txt);;Bilder (*.png *.jpg)" // Filter
+        );
+
+    // Überprüfen, ob ein Dateipfad ausgewählt wurde
+    if (!dateipfad.isEmpty()) {
+        qDebug() << "Ausgewählte Datei:" << dateipfad;
+
+        // Weiterverarbeitung der Datei
+        // z. B. die Datei in einer Textbox anzeigen oder laden
+    } else {
+        qDebug() << "Keine Datei ausgewählt.";
+    }
 }
 void MainWindow::on_logout_btn_clicked()
 {
