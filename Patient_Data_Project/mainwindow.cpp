@@ -28,8 +28,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->suche_txt_line->setToolTip("Gebe hier den Nachnamen ein");
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
 
-
-
     //verbindet Suchfeld mit der Funktion onsearchTextChanged
     connect(ui->suche_txt_line, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
     ui->data_table->setColumnCount(10);
@@ -388,9 +386,7 @@ void MainWindow::on_open_btn_clicked()
     // Überprüfen, ob ein Dateipfad ausgewählt wurde
     if (!dateipfad.isEmpty()) {
         qDebug() << "Ausgewählte Datei:" << dateipfad;
-
-        // Weiterverarbeitung der Datei
-        // z. B. die Datei in einer Textbox anzeigen oder laden
+        io_data::CSVeinlesen(dateipfad, db);
     } else {
         qDebug() << "Keine Datei ausgewählt.";
     }
