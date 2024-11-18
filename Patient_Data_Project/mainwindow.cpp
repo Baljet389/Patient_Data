@@ -14,7 +14,9 @@
 #include <QDebug>
 #include <QMessageBox>
 #include "datensatz_bearbeiten.h"
-MainWindow::MainWindow(QWidget *parent)
+#include <QFileDialog>
+
+MainWindow::MainWindow(QWidget *parent, Database *db)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
@@ -25,8 +27,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->suche_btn->setToolTip("Suche eingegebenen Text");
     ui->suche_txt_line->setToolTip("Gebe hier den Nachnamen ein");
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
-
-
+    this->db=db;
 
     //verbindet Suchfeld mit der Funktion onsearchTextChanged
     connect(ui->suche_txt_line, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
@@ -56,7 +57,7 @@ void MainWindow::on_suche_btn_clicked()
     QString UserInput=ui->suche_txt_line->text();
 
     try{
-    PatientsFound=db.getPatientbyColumn(UserInputColumn,UserInput);
+    PatientsFound=db->getPatientbyColumn(UserInputColumn,UserInput);
     }
     catch(std::runtime_error &e){
         qDebug(e.what());
@@ -346,12 +347,34 @@ QLineEdit::placeholder {
 void MainWindow::on_speicher_btn_clicked()
 {
     qDebug() << "on_speicher_btn_clicked";
+
+    // Dialog öffnen, um Speicherort und Dateinamen festzulegen
+    QString speicherpfad = QFileDialog::getSaveFileName(
+        this,
+        "Datei speichern",      // Dialogtitel
+        QDir::homePath() + "/Patientendaten.csv", // Standardverzeichnis und Vorschlag für Dateinamen
+        "CSV-Dateien (*.csv);;Alle Dateien (*.*)" // Filter für Dateitypen
+        );
+
+    // Überprüfen, ob der Benutzer einen gültigen Pfad ausgewählt hat
+    if (!speicherpfad.isEmpty()) {
+        qDebug() << "Speicherpfad:" << speicherpfad;
+
+        // Die Patientendaten in die Datei schreiben
+        io_data::CSVerstellen(speicherpfad, *db);
+
+        // Erfolgsmeldung anzeigen
+        QMessageBox::information(this, "Speichern", "Die Datei wurde erfolgreich gespeichert.");
+    } else {
+        qDebug() << "Speichern abgebrochen. Kein Speicherpfad ausgewählt.";
+        QMessageBox::warning(this, "Speichern", "Speichern abgebrochen. Bitte wählen Sie einen gültigen Speicherort.");
+    }
 }
 
 
 void MainWindow::on_pushButton_clicked()
 {
-    auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,&db);
+    auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
     datensatz_bearbeiten->show();
     qDebug() << "on_pushButton_clicked";
 }
@@ -374,6 +397,22 @@ void MainWindow::on_open_btn_clicked()
 {
     // io_data
     qDebug() << "on_open_btn_clicked";
+
+    // Dialog öffnen und den Dateipfad in einer QString-Variable speichern
+    QString dateipfad = QFileDialog::getOpenFileName(
+        this,
+        "Datei öffnen",         // Dialogtitel
+        QDir::homePath(),       // Startverzeichnis
+        "Alle Dateien (*.*);;Textdateien (*.txt);;Bilder (*.png *.jpg)" // Filter
+        );
+
+    // Überprüfen, ob ein Dateipfad ausgewählt wurde
+    if (!dateipfad.isEmpty()) {
+        qDebug() << "Ausgewählte Datei:" << dateipfad;
+        io_data::CSVeinlesen(dateipfad, *db);
+    } else {
+        qDebug() << "Keine Datei ausgewählt.";
+    }
 }
 void MainWindow::on_logout_btn_clicked()
 {
