@@ -346,6 +346,22 @@ QLineEdit::placeholder {
 void MainWindow::on_speicher_btn_clicked()
 {
     qDebug() << "on_speicher_btn_clicked";
+    // Dialog öffnen und den Dateipfad in einer QString-Variable speichern
+    QString dateipfad = QFileDialog::getOpenFileName(
+        this,
+        "Datei öffnen",         // Dialogtitel
+        QDir::homePath(),       // Startverzeichnis
+        "Alle Dateien (*.*);;Textdateien (*.txt);;Bilder (*.png *.jpg)" // Filter
+        );
+
+    // Überprüfen, ob ein Dateipfad ausgewählt wurde
+    if (!dateipfad.isEmpty()) {
+        qDebug() << "Ausgewählte Datei:" << dateipfad;
+        // CSV-Datei lesen und in die Datenbank laden
+        io_data::CSVeinlesen(dateipfad, db);
+    } else {
+        qDebug() << "Keine Datei ausgewählt.";
+    }
 }
 
 
