@@ -346,21 +346,27 @@ QLineEdit::placeholder {
 void MainWindow::on_speicher_btn_clicked()
 {
     qDebug() << "on_speicher_btn_clicked";
-    // Dialog öffnen und den Dateipfad in einer QString-Variable speichern
-    QString dateipfad = QFileDialog::getOpenFileName(
+
+    // Dialog öffnen, um Speicherort und Dateinamen festzulegen
+    QString speicherpfad = QFileDialog::getSaveFileName(
         this,
-        "Datei öffnen",         // Dialogtitel
-        QDir::homePath(),       // Startverzeichnis
-        "Alle Dateien (*.*);;Textdateien (*.txt);;Bilder (*.png *.jpg)" // Filter
+        "Datei speichern",      // Dialogtitel
+        QDir::homePath() + "/Patientendaten.csv", // Standardverzeichnis und Vorschlag für Dateinamen
+        "CSV-Dateien (*.csv);;Alle Dateien (*.*)" // Filter für Dateitypen
         );
 
-    // Überprüfen, ob ein Dateipfad ausgewählt wurde
-    if (!dateipfad.isEmpty()) {
-        qDebug() << "Ausgewählte Datei:" << dateipfad;
-        // CSV-Datei lesen und in die Datenbank laden
-        io_data::CSVeinlesen(dateipfad, db);
+    // Überprüfen, ob der Benutzer einen gültigen Pfad ausgewählt hat
+    if (!speicherpfad.isEmpty()) {
+        qDebug() << "Speicherpfad:" << speicherpfad;
+
+        // Die Patientendaten in die Datei schreiben
+        io_data::CSVerstellen(speicherpfad, db);
+
+        // Erfolgsmeldung anzeigen
+        QMessageBox::information(this, "Speichern", "Die Datei wurde erfolgreich gespeichert.");
     } else {
-        qDebug() << "Keine Datei ausgewählt.";
+        qDebug() << "Speichern abgebrochen. Kein Speicherpfad ausgewählt.";
+        QMessageBox::warning(this, "Speichern", "Speichern abgebrochen. Bitte wählen Sie einen gültigen Speicherort.");
     }
 }
 
