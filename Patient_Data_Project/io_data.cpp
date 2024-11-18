@@ -18,8 +18,7 @@
 #include <vector>
 #include <QStringList>
 #include <QSqlQuery>
-#include <QSqlError> // Für Fehlerbehandlung
-#include <QMessageBox> // Für Benutzerwarnungen und Meldungen
+#include <QSqlError>
 
 using namespace std;
 
@@ -173,11 +172,9 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
 
                 } catch (const invalid_argument &e) {
                     qDebug() << "Ungültige Daten in Zeile, überspringe. Fehler:" << e.what();
-                    QMessageBox::warning(nullptr, "Speichern", "Keine Patientendaten in der Datenbank vorhanden.");
                 }
             } else {
                 qDebug() << "Unvollständige Zeile, erwartet 11 Werte, erhalten:" << werteListe.size();
-                QMessageBox::information(nullptr, "Speichern", "Die Patientendaten wurden erfolgreich in die CSV-Datei exportiert.");
             }
         }
 
@@ -220,17 +217,17 @@ void io_data::CSVerstellen(QString pfad, Database &database) {
         int patientCount = 0; // Zähler für gelesene Patienten
         while (query.next()) {
             io_data patient(
-                query.value(0).toInt(),   // PatientID
-                query.value(1).toString(), // Vorname
-                query.value(2).toString(), // Nachname
-                query.value(3).toString(), // Geburtsdatum
-                query.value(4).toString(), // Geschlecht
-                query.value(5).toString(), // Adresse
-                query.value(6).toString(), // Telefonnummer
-                query.value(7).toString(), // Email
-                query.value(8).toString(), // Aufnahmedatum
-                query.value(9).toString(), // Diagnose
-                query.value(10).toString() // Behandlung
+                query.value(0).toInt(),     // PatientID
+                query.value(1).toString(),  // Vorname
+                query.value(2).toString(),  // Nachname
+                query.value(3).toString(),  // Geburtsdatum
+                query.value(4).toString(),  // Geschlecht
+                query.value(5).toString(),  // Adresse
+                query.value(6).toString(),  // Telefonnummer
+                query.value(7).toString(),  // Email
+                query.value(8).toString(),  // Aufnahmedatum
+                query.value(9).toString(),  // Diagnose
+                query.value(10).toString()  // Behandlung
                 );
 
             // Zeile im CSV-Format erstellen
