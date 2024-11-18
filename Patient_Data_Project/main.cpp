@@ -16,10 +16,10 @@ int main(int argc, char *argv[])
     w.show();
 
 
-    return a.exec();
-    }
-    else
-    {
+    // return a.exec();
+    // }
+    // else
+    // {
     return 0;
     }
 }
