@@ -14,7 +14,7 @@
 #include <QDebug>
 #include <QMessageBox>
 #include "datensatz_bearbeiten.h"
-MainWindow::MainWindow(QWidget *parent)
+MainWindow::MainWindow(QWidget *parent, Database *db)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
@@ -25,7 +25,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->suche_btn->setToolTip("Suche eingegebenen Text");
     ui->suche_txt_line->setToolTip("Gebe hier den Nachnamen ein");
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
-
+    this->db=db;
 
 
     //verbindet Suchfeld mit der Funktion onsearchTextChanged
@@ -56,7 +56,7 @@ void MainWindow::on_suche_btn_clicked()
     QString UserInput=ui->suche_txt_line->text();
 
     try{
-    PatientsFound=db.getPatientbyColumn(UserInputColumn,UserInput);
+    PatientsFound=db->getPatientbyColumn(UserInputColumn,UserInput);
     }
     catch(std::runtime_error &e){
         qDebug(e.what());
@@ -351,7 +351,7 @@ void MainWindow::on_speicher_btn_clicked()
 
 void MainWindow::on_pushButton_clicked()
 {
-    auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,&db);
+    auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
     datensatz_bearbeiten->show();
     qDebug() << "on_pushButton_clicked";
 }
