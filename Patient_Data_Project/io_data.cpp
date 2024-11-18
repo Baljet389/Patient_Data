@@ -202,11 +202,19 @@ void io_data::CSVerstellen(QString pfad, Database &database) {
         // CSV-Header schreiben
         datei << "PatientID,Vorname,Nachname,Geburtsdatum,Geschlecht,Adresse,Telefonnummer,Email,Aufnahmedatum,Diagnose,Behandlung\n";
 
-        // Alle Patienten aus der Datenbank abrufen
-        vector<io_data> patientenListe = database.getPatientbyColumn("1", "1"); // Dummy-Aufruf, um alle Patienten zu erhalten
+        // Abrufen aller Patienten aus der Datenbank
+        std::vector<io_data> patientenListe = database.getPatientbyColumn("1", "1"); // Universeller Abruf
+
+        // Prüfen, ob Patienten gefunden wurden
+        if (patientenListe.empty()) {
+            qDebug() << "Keine Patientendaten in der Datenbank vorhanden.";
+            datei.close();
+            return;
+        }
+
 
         // Patienten-Daten in CSV-Datei schreiben
-        for (const auto &patient : patientenListe) {
+        for (const auto& patient : patientenListe) {
             // Zeile im CSV-Format erstellen
             QString csvZeile = QString("%1,%2,%3,%4,%5,%6,%7,%8,%9,%10,%11")
                                    .arg(patient.ID)
