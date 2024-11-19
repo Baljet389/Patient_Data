@@ -45,8 +45,8 @@ MainWindow::MainWindow(QWidget *parent)
     // startet Timer
     timer->start(1000);
 
-
-
+    //deaktiviert Schreibfunktion in data_table
+    ui->data_table->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
 
     //verbindet Suchfeld mit der Funktion onsearchTextChanged
@@ -194,6 +194,11 @@ QHeaderView::section {
     font-weight: bold;
 }
 
+QTableWidget::item:selected {
+    background-color: #4A90E2;
+    color: #FFFFFF;
+}
+
 QComboBox {
     background-color: #FFFFFF;
     color: #333333;
@@ -266,13 +271,13 @@ void MainWindow::darkmode_on()
     //Änderung des Designs mit Raw String
     QString darkStyle = R"(
 QWidget {
-    background-color: #2E2E2E; /* Dunkler Hintergrund */
-    color: #E0E0E0; /* Helle Schrift für besseren Kontrast */
+    background-color: #2E2E2E;
+    color: #E0E0E0;
 }
 
 QPushButton {
     background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #4A6A87, stop:1 #3A556D);
-    color: #E0E0E0; /* Helle Schriftfarbe */
+    color: #E0E0E0;
     border: 1px solid #3A556D;
     border-radius: 6px;
     padding: 5px 12px;
@@ -284,19 +289,19 @@ QPushButton:hover {
 }
 
 QPushButton:pressed {
-    background-color: #3E4F60; /* Etwas dunklerer Farbton */
+    background-color: #3E4F60;
 }
 
 QLineEdit {
-    background-color: #3C3C3C; /* Dunkler Hintergrund */
-    color: #E0E0E0; /* Helle Schrift */
+    background-color: #3C3C3C;
+    color: #E0E0E0;
     border: 1px solid #5A5A5A;
     border-radius: 4px;
     padding: 5px;
 }
 
 QLineEdit:focus {
-    border-color: #7294AA; /* Akzentfarbe */
+    border-color: #7294AA;
 }
 
 QTableWidget {
@@ -304,11 +309,11 @@ QTableWidget {
     color: #E0E0E0;
     border: 1px solid #5A5A5A;
     gridline-color: #5A5A5A;
-    selection-background-color: #4A6A87; /* Akzentfarbe für Auswahl */
+    selection-background-color: #4A6A87;
 }
 
 QHeaderView::section {
-    background-color: #4A4A4A; /* Dunklerer Bereich */
+    background-color: #4A4A4A;
     color: #E0E0E0;
     padding: 8px;
     border: 1px solid #5A5A5A;
@@ -330,7 +335,7 @@ QComboBox::drop-down {
 
 QComboBox QAbstractItemView {
     background-color: #2E2E2E;
-    selection-background-color: #4A6A87; /* Akzentfarbe für Auswahl */
+    selection-background-color: #4A6A87;
     color: #E0E0E0;
 }
 
@@ -348,7 +353,7 @@ QRadioButton::indicator {
 }
 
 QRadioButton::indicator:checked {
-    background-color: #7294AA; /* Akzentfarbe */
+    background-color: #7294AA;
 }
 
 QCheckBox {
@@ -364,11 +369,11 @@ QCheckBox::indicator {
 }
 
 QCheckBox::indicator:checked {
-    background-color: #7294AA; /* Akzentfarbe */
+    background-color: #7294AA;
 }
 
 QLabel {
-    color: #E0E0E0; /* Helle Schrift */
+    color: #E0E0E0;
     font-weight: bold;
 }
 
