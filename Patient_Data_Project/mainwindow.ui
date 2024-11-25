@@ -591,7 +591,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>1129</width>
-     <height>18</height>
+     <height>21</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -694,5 +694,38 @@ QPushButton:pressed {
   </action>
  </widget>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>actionDaten_einlesen</sender>
+   <signal>triggered()</signal>
+   <receiver>open_btn</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>564</x>
+     <y>10</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>949</x>
+     <y>297</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>actionDaten_speicher</sender>
+   <signal>triggered()</signal>
+   <receiver>speicher_btn</receiver>
+   <slot>click()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>-1</x>
+     <y>-1</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>949</x>
+     <y>226</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
 </ui>
