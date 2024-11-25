@@ -231,17 +231,18 @@ void io_data::CSVerstellen(QString pfad, Database &database) {
 
             // Zeile im CSV-Format erstellen
             QString csvZeile = QString("%1,%2,%3,%4,%5,%6,%7,%8,%9,%10,%11")
-                                   .arg(patient.ID)
-                                   .arg(patient.vorname)
-                                   .arg(patient.nachname)
-                                   .arg(patient.geburt)
-                                   .arg(patient.geschlecht)
-                                   .arg(patient.adresse)
-                                   .arg(patient.tel_nummer)
-                                   .arg(patient.mail)
-                                   .arg(patient.datum)
-                                   .arg(patient.diagnose)
-                                   .arg(patient.behandlung);
+                                   .arg(QString::number(patient.ID),
+                                        patient.vorname,
+                                        patient.nachname,
+                                        patient.geburt,
+                                        patient.geschlecht,
+                                        patient.adresse,
+                                        patient.tel_nummer,
+                                        patient.mail,
+                                        patient.datum,
+                                        patient.diagnose,
+                                        patient.behandlung);
+
 
             // Zeile in Datei schreiben
             datei << csvZeile.toStdString() << "\n";
