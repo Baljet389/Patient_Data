@@ -42,26 +42,17 @@ private slots:
     void on_data_table_itemClicked(QTableWidgetItem *item);
     void on_data_table_rowSelected(const QModelIndex &current, const QModelIndex &previous);
 
-    // Teständerung für CSV im/export
-    //void io_data.CSVeinlesen(QString pfad, db);
-    //void io_data.CSVerstellen(QString pfad, &db);
-
     //void on_radioButton_clicked();
 
     void on_darkmode_btn_toggled(bool checked);
     void lightmode_on();
     void darkmode_on();
 
-    void on_speicher_btn_clicked();
-
-    void on_pushButton_clicked();
-
-    void on_details_btn_clicked();
-
-    void on_bearbeiten_btn_clicked();
-
-
     void on_open_btn_clicked();
+    void on_speicher_btn_clicked();
+    void on_pushButton_clicked();
+    void on_details_btn_clicked();
+    void on_bearbeiten_btn_clicked();
     void on_logout_btn_clicked();
 
     void on_filter_box_currentIndexChanged(int index);
