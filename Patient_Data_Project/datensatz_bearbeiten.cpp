@@ -1,5 +1,7 @@
 #include "datensatz_bearbeiten.h"
 #include "ui_datensatz_bearbeiten.h"
+#include "ui_mainwindow.h"
+#include "mainwindow.h"
 #include "io_data.h"
 #include "database.h"
 #include "QString"

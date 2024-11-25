@@ -53,235 +53,39 @@
       <property name="verticalSpacing">
        <number>1</number>
       </property>
-      <item row="6" column="7" colspan="2">
-       <widget class="QPushButton" name="bearbeiten_btn">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>16777215</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="sizeIncrement">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="styleSheet">
-         <string notr="true">/*QPushButton {
-	background-color: rgb(191, 191, 191);
-    border: 2px solid;
-    border-radius: 10px;
-    padding: 5px;          
-}
-QPushButton:hover {
-    background-color: #a0c4ff; 
-}
-QPushButton:pressed {
-    background-color: darkgray;
-    border: 2px solid black;
-}</string>
-        </property>
-        <property name="text">
-         <string>Bearbeiten</string>
-        </property>
-        <property name="iconSize">
-         <size>
-          <width>12</width>
-          <height>12</height>
-         </size>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QFrame" name="suche_frame">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
-        <property name="minimumSize">
-         <size>
-          <width>398</width>
-          <height>100</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>270</width>
-          <height>102</height>
-         </size>
-        </property>
-        <property name="sizeIncrement">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="mouseTracking">
-         <bool>false</bool>
-        </property>
+      <item row="1" column="2" rowspan="2" colspan="2">
+       <widget class="QComboBox" name="filter_box">
         <property name="focusPolicy">
-         <enum>Qt::FocusPolicy::NoFocus</enum>
+         <enum>Qt::FocusPolicy::WheelFocus</enum>
         </property>
-        <property name="styleSheet">
-         <string notr="true">/*QFrame {
-	background-color: rgb(0, 167, 81);
-    border: 2px solid ;
-	 border-color: rgb(0, 0, 0);
-    border-radius: 10px;          
-    border-radius: 10px;          
-}
-QLabel{
-border: none;
-}
-*/
-</string>
+        <property name="placeholderText">
+         <string/>
         </property>
-        <property name="frameShape">
-         <enum>QFrame::Shape::StyledPanel</enum>
-        </property>
-        <property name="frameShadow">
-         <enum>QFrame::Shadow::Raised</enum>
-        </property>
-        <widget class="QPushButton" name="suche_btn">
-         <property name="geometry">
-          <rect>
-           <x>340</x>
-           <y>30</y>
-           <width>33</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">/*QPushButton {
-    background-color: rgb(255, 255, 255);
-    border: 2px solid;
-	 border-color: rgb(201, 201, 201);
-    border-radius: 10px;
-    padding: 5px;          
-}
-QPushButton:hover {
-    background-color: #a0c4ff; 
-}
-QPushButton:pressed {
-    background-color: darkgray;
-    border: 2px solid black;
-}*/</string>
-         </property>
+        <item>
          <property name="text">
-          <string/>
+          <string>- Bitte auswählen -</string>
          </property>
          <property name="icon">
-          <iconset theme="edit-find"/>
+          <iconset>
+           <normaloff>:/filter.png</normaloff>
+           <normalon>:/new/prefix1/filter_icon.png</normalon>:/filter.png</iconset>
          </property>
-         <property name="iconSize">
-          <size>
-           <width>15</width>
-           <height>15</height>
-          </size>
-         </property>
-        </widget>
-        <widget class="QLineEdit" name="suche_txt_line">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>16</x>
-           <y>30</y>
-           <width>314</width>
-           <height>31</height>
-          </rect>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="focusPolicy">
-          <enum>Qt::FocusPolicy::TabFocus</enum>
-         </property>
-         <property name="autoFillBackground">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true"/>
-         </property>
-         <property name="frame">
-          <bool>true</bool>
-         </property>
-         <property name="dragEnabled">
-          <bool>true</bool>
-         </property>
-         <property name="placeholderText">
-          <string>Nachname suchen</string>
-         </property>
-         <property name="cursorMoveStyle">
-          <enum>Qt::CursorMoveStyle::VisualMoveStyle</enum>
-         </property>
-         <property name="clearButtonEnabled">
-          <bool>true</bool>
-         </property>
-        </widget>
-        <widget class="QLabel" name="suche_label">
-         <property name="enabled">
-          <bool>true</bool>
-         </property>
-         <property name="geometry">
-          <rect>
-           <x>40</x>
-           <y>10</y>
-           <width>314</width>
-           <height>16</height>
-          </rect>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="minimumSize">
-          <size>
-           <width>20</width>
-           <height>10</height>
-          </size>
-         </property>
-         <property name="sizeIncrement">
-          <size>
-           <width>0</width>
-           <height>0</height>
-          </size>
-         </property>
-         <property name="font">
-          <font>
-           <pointsize>14</pointsize>
-           <bold>true</bold>
-           <strikeout>false</strikeout>
-          </font>
-         </property>
+        </item>
+        <item>
          <property name="text">
-          <string>Patientendaten suchen:</string>
+          <string>ID</string>
          </property>
-        </widget>
+        </item>
+        <item>
+         <property name="text">
+          <string>Vorname</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Nachname</string>
+         </property>
+        </item>
        </widget>
       </item>
       <item row="0" column="8">
@@ -324,6 +128,42 @@ QPushButton:pressed {
         </property>
         <property name="flat">
          <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1" rowspan="3" colspan="3">
+       <widget class="QTableWidget" name="data_table">
+        <property name="minimumSize">
+         <size>
+          <width>800</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="gridStyle">
+         <enum>Qt::PenStyle::SolidLine</enum>
+        </property>
+        <property name="sortingEnabled">
+         <bool>false</bool>
+        </property>
+        <column>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="font">
+          <font>
+           <family>Yu Gothic UI</family>
+          </font>
+         </property>
+        </column>
+       </widget>
+      </item>
+      <item row="4" column="5" colspan="4">
+       <widget class="QTextEdit" name="details_textedit">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -454,13 +294,207 @@ QPushButton:pressed {
         </layout>
        </widget>
       </item>
-      <item row="4" column="5" colspan="4">
-       <widget class="QTextEdit" name="details_textedit">
-        <property name="styleSheet">
-         <string notr="true"/>
+      <item row="0" column="7">
+       <widget class="QLabel" name="date_time_lbl">
+        <property name="text">
+         <string/>
         </property>
-        <property name="readOnly">
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QFrame" name="suche_frame">
+        <property name="enabled">
          <bool>true</bool>
+        </property>
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>398</width>
+          <height>100</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>270</width>
+          <height>102</height>
+         </size>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="mouseTracking">
+         <bool>false</bool>
+        </property>
+        <property name="focusPolicy">
+         <enum>Qt::FocusPolicy::NoFocus</enum>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">QLabel{
+border: none;
+}
+
+</string>
+        </property>
+        <property name="frameShape">
+         <enum>QFrame::Shape::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Shadow::Raised</enum>
+        </property>
+        <widget class="QPushButton" name="suche_btn">
+         <property name="geometry">
+          <rect>
+           <x>340</x>
+           <y>30</y>
+           <width>33</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">/*QPushButton {
+    background-color: rgb(255, 255, 255);
+    border: 2px solid;
+	 border-color: rgb(201, 201, 201);
+    border-radius: 10px;
+    padding: 5px;          
+}
+QPushButton:hover {
+    background-color: #a0c4ff; 
+}
+QPushButton:pressed {
+    background-color: darkgray;
+    border: 2px solid black;
+}*/</string>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="icon">
+          <iconset theme="edit-find"/>
+         </property>
+         <property name="iconSize">
+          <size>
+           <width>15</width>
+           <height>15</height>
+          </size>
+         </property>
+        </widget>
+        <widget class="QLineEdit" name="suche_txt_line">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>16</x>
+           <y>30</y>
+           <width>314</width>
+           <height>31</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="focusPolicy">
+          <enum>Qt::FocusPolicy::TabFocus</enum>
+         </property>
+         <property name="autoFillBackground">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true"/>
+         </property>
+         <property name="frame">
+          <bool>true</bool>
+         </property>
+         <property name="dragEnabled">
+          <bool>true</bool>
+         </property>
+         <property name="placeholderText">
+          <string>Suchen</string>
+         </property>
+         <property name="cursorMoveStyle">
+          <enum>Qt::CursorMoveStyle::VisualMoveStyle</enum>
+         </property>
+         <property name="clearButtonEnabled">
+          <bool>true</bool>
+         </property>
+        </widget>
+        <widget class="QLabel" name="suche_label">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="geometry">
+          <rect>
+           <x>40</x>
+           <y>10</y>
+           <width>314</width>
+           <height>16</height>
+          </rect>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>20</width>
+           <height>10</height>
+          </size>
+         </property>
+         <property name="sizeIncrement">
+          <size>
+           <width>0</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>14</pointsize>
+           <bold>true</bold>
+           <strikeout>false</strikeout>
+          </font>
+         </property>
+         <property name="text">
+          <string>Patientendaten suchen:</string>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item row="0" column="7">
+       <widget class="QLabel" name="date_time_lbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::HLine</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>false</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
         </property>
        </widget>
       </item>
@@ -477,78 +511,73 @@ QPushButton:pressed {
         </property>
        </spacer>
       </item>
-      <item row="3" column="1" rowspan="4" colspan="3">
-       <widget class="QTableWidget" name="data_table">
-        <property name="minimumSize">
+      <item row="4" column="5" colspan="4">
+       <widget class="QTextEdit" name="textEdit">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="7" colspan="2">
+       <widget class="QPushButton" name="bearbeiten_btn">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="maximumSize">
          <size>
-          <width>800</width>
+          <width>16777215</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>0</width>
           <height>0</height>
          </size>
         </property>
-        <property name="gridStyle">
-         <enum>Qt::PenStyle::SolidLine</enum>
+        <property name="styleSheet">
+         <string notr="true">/*QPushButton {
+	background-color: rgb(191, 191, 191);
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 5px;          
+}
+QPushButton:hover {
+    background-color: #a0c4ff; 
+}
+QPushButton:pressed {
+    background-color: darkgray;
+    border: 2px solid black;
+}</string>
         </property>
-        <property name="sortingEnabled">
-         <bool>false</bool>
+        <property name="text">
+         <string>Bearbeiten</string>
         </property>
-        <column>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="font">
-          <font>
-           <family>Yu Gothic UI</family>
-          </font>
-         </property>
-        </column>
+        <property name="iconSize">
+         <size>
+          <width>12</width>
+          <height>12</height>
+         </size>
+        </property>
        </widget>
       </item>
-      <item row="0" column="7">
-       <widget class="QLabel" name="date_time_lbl">
+      <item row="0" column="6">
+       <widget class="QRadioButton" name="darkmode_btn">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
         <property name="text">
          <string/>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
        </widget>
       </item>
-      <item row="1" column="2" rowspan="2" colspan="2">
-       <widget class="QComboBox" name="filter_box">
-        <property name="focusPolicy">
-         <enum>Qt::FocusPolicy::WheelFocus</enum>
-        </property>
-        <property name="placeholderText">
-         <string/>
-        </property>
-        <item>
-         <property name="text">
-          <string>- Bitte auswählen -</string>
-         </property>
-         <property name="icon">
-          <iconset>
-           <normaloff>:/filter.png</normaloff>
-           <normalon>:/new/prefix1/filter_icon.png</normalon>:/filter.png</iconset>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>ID</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Vorname</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Nachname</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="6" column="5" colspan="2">
+      <item row="5" column="5" colspan="2">
        <widget class="QPushButton" name="details_btn">
         <property name="styleSheet">
          <string notr="true">/*QPushButton {
@@ -571,15 +600,18 @@ QPushButton:pressed {
         </property>
        </widget>
       </item>
-      <item row="0" column="6">
-       <widget class="QRadioButton" name="darkmode_btn">
-        <property name="styleSheet">
-         <string notr="true"/>
+      <item row="3" column="8">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
         </property>
-        <property name="text">
-         <string/>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
         </property>
-       </widget>
+       </spacer>
       </item>
      </layout>
     </item>
@@ -591,7 +623,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>1129</width>
-     <height>21</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="styleSheet">
