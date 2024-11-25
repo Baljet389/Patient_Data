@@ -106,6 +106,20 @@ void Database::editPatient(const io_data &patient){
     }
 
 }
+std::vector<QString> Database::getICD_CODE_Information(const QString &icd_code){
+    QSqlQuery query;
+    std::vector<QString> result;
+    query.prepare("SELECT * FROM icd_codes_kurz WHERE Code=?");
+    query.addBindValue(icd_code);
+    if(!query.exec()){
+        throw std::runtime_error((query.lastError().text().toStdString()));
+    }
+    while(query.next()){
+        result.push_back(std::move(query.value(0).toString()));
+        result.push_back(std::move(query.value(2).toString()));
+    }
+    return result;
+}
 
 
 

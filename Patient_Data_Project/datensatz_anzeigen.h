@@ -2,6 +2,8 @@
 #define DATENSATZ_ANZEIGEN_H
 
 #include <QDialog>
+#include "io_data.h"
+#include "database.h"
 
 namespace Ui {
 class datensatz_anzeigen;
@@ -12,7 +14,8 @@ class datensatz_anzeigen : public QDialog
     Q_OBJECT
 
 public:
-    explicit datensatz_anzeigen(QWidget *parent = nullptr);
+    io_data *selectPatient;
+    explicit datensatz_anzeigen(QWidget *parent = nullptr, io_data *selectPatient=nullptr);
     ~datensatz_anzeigen();
 
 private slots:
