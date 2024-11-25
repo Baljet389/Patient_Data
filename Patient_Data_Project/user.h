@@ -1,6 +1,5 @@
 #ifndef USER_H
 #define USER_H
-//#include <string>         //Better use Qstring instead of string because of QT!
 #include <QString>
 
 //libs for Database
@@ -11,12 +10,15 @@
 class user
 {
 public:
-    int UID;                //User ID, not to be confused with patient-ID(io_data)
+    int UID;                //User ID, not to be confused with patient-ID (from io_data)
     QString username;
-    // user();
+    QSqlDatabase db;
+
     user(int UID, QString name);
-    bool checkPW(QString pw_login);             //compares login PW-Hash with DB PW-Hash
-    private : QString encrypt_pw(QString password, QString salt); //with Hashing
+    public : bool checkPW(QString pw_login);                                 //compares login PW-Hash with DB PW-Hash
+    private : QString salt_generator();                             //seed with extra parameter or this->username?
+    private : QString encrypt_pw(QString password, QString salt);   //Hash function with SHA256
+    private : void insertUserDB(QString username, QString password);
 };
 
 #endif // USER_H
