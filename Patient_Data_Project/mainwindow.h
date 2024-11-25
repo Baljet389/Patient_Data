@@ -2,9 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTableWidgetItem>
 #include "database.h"
 #include <QLineEdit>
 #include <QDebug>
+#include <QDateTime>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -17,12 +19,13 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr);
+    MainWindow(QWidget *parent = nullptr, Database* db=nullptr);
     ~MainWindow();
-    Database db;
+    Database* db;
     QStringList SpaltenNamen;
     std::vector<io_data> PatientsFound;
     QString UserInputColumn;
+    bool checked;
     // Teständerung für CSV im/export
     //QString pfad = open_btn.clicked()
     //qDebug() << pfad;
@@ -36,10 +39,9 @@ private slots:
     void on_suche_txt_line_returnPressed();
     void onSearchTextChanged(const QString &text);
 
-
-    // Teständerung für CSV im/export
-    //void io_data.CSVeinlesen(QString pfad, db);
-    //void io_data.CSVerstellen(QString pfad, &db);
+    //Details Ausgabe bei Auswahl einer Zelle bzw. Zeile in TextEdit
+    void on_data_table_itemClicked(QTableWidgetItem *item);
+    void on_data_table_rowSelected(const QModelIndex &current, const QModelIndex &previous);
 
     //void on_radioButton_clicked();
 
@@ -47,21 +49,19 @@ private slots:
     void lightmode_on();
     void darkmode_on();
 
-    void on_speicher_btn_clicked();
-
-    void on_pushButton_clicked();
-
-    void on_details_btn_clicked();
-
-    void on_bearbeiten_btn_clicked();
-
-
     void on_open_btn_clicked();
+    void on_speicher_btn_clicked();
+    void on_pushButton_clicked();
+    void on_details_btn_clicked();
+    void on_bearbeiten_btn_clicked();
     void on_logout_btn_clicked();
 
     void on_filter_box_currentIndexChanged(int index);
 
 private:
     Ui::MainWindow *ui;
+
+    QString date;
+    QString time;
 };
 #endif // MAINWINDOW_H

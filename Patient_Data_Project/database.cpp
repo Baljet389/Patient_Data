@@ -46,12 +46,9 @@ void Database::createTable(){
 vector<io_data> Database::getPatientbyColumn(const QString& column,const QString& input){
     vector<io_data> PatientList;
     QSqlQuery query;
-    QString queryString = QString("SELECT PatientID, Vorname, Nachname, Geburtsdatum,"
-                                  " Geschlecht, Adresse, Telefonnummer, Email, Aufnahmedatum,"
-                                  " Diagnose, Behandlung FROM Patienten WHERE %1 = ?").arg(column);
-
+    QString queryString = QString("SELECT * FROM Patienten WHERE %1 LIKE ?").arg(column);
     query.prepare(queryString);
-    query.addBindValue(input);
+    query.addBindValue(input+"%");
     if(!query.exec()){
         throw std::runtime_error((query.lastError().text().toStdString()));
     }
@@ -105,6 +102,20 @@ void Database::editPatient(const io_data &patient){
         throw std::runtime_error((query.lastError().text().toStdString()));
     }
 
+}
+std::vector<QString> Database::getICD_CODE_Information(const QString &icd_code){
+    QSqlQuery query;
+    std::vector<QString> result;
+    query.prepare("SELECT * FROM icd_codes_kurz WHERE Code=?");
+    query.addBindValue(icd_code);
+    if(!query.exec()){
+        throw std::runtime_error((query.lastError().text().toStdString()));
+    }
+    while(query.next()){
+        result.push_back(std::move(query.value(0).toString()));
+        result.push_back(std::move(query.value(2).toString()));
+    }
+    return result;
 }
 
 

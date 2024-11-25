@@ -29,6 +29,8 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         logindialog.h logindialog.cpp logindialog.ui
         datensatz_bearbeiten.h datensatz_bearbeiten.cpp datensatz_bearbeiten.ui
         pictures.qrc
+        datensatz_anzeigen.h datensatz_anzeigen.cpp datensatz_anzeigen.ui
+        nutzer_anlegen.h nutzer_anlegen.cpp nutzer_anlegen.ui
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET Patient_Data_Project APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
