@@ -509,9 +509,9 @@ void MainWindow::on_bearbeiten_btn_clicked()
         return;
     }
 
-    auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
+    auto datensatz_bearbeiten = new Datensatz_bearbeiten(nullptr, selectedID, db);
     datensatz_bearbeiten->show();
-    datensatz_bearbeiten->setWindowTitle("Datensatz hinzufügen");
+    datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");
     qDebug() << "on_pushButton_clicked";
 }
 
