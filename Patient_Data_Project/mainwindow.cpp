@@ -12,7 +12,7 @@
 #include <QMessageBox>
 #include <QHeaderView>
 #include <QDebug>
-#include <QMessageBox>
+#include <QTimer>
 #include "datensatz_bearbeiten.h"
 #include <QFileDialog>
 
@@ -20,14 +20,37 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
-    this->setWindowTitle("Mainwindow");
     ui->setupUi(this);
+    this->setWindowTitle("Elektronische Patientenakte");
     ui->speicher_btn->setToolTip("Datensatz speichern");
-    ui->pushButton->setToolTip("Daten hinzufügen");
+    ui->pushButton->setToolTip("Datensatz hinzufügen");
     ui->suche_btn->setToolTip("Suche eingegebenen Text");
-    ui->suche_txt_line->setToolTip("Gebe hier den Nachnamen ein");
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
     this->db=db;
+
+    //fügt Datum und realtime ins QTLineEdit
+    QTimer *timer = new QTimer(this);
+
+    //Timer und LineEdit wird verbunden
+    connect(timer, &QTimer::timeout, this, [&]() {
+        // Datum und Uhrzeit berechnen
+        date = QDate::currentDate().toString("dd.MM.yyyy");
+        time = QTime::currentTime().toString("hh:mm:ss");
+
+        ui->date_time_lbl->setText(date + "\n" + time);
+    });
+
+    //Datum und Zeit werden am Anfang initialisiert
+    QString initialDate = QDate::currentDate().toString("dd.MM.yyyy");
+    QString initialTime = QTime::currentTime().toString("hh:mm:ss");
+    ui->date_time_lbl->setText(initialDate + "\n" + initialTime);
+
+    // startet Timer
+    timer->start(1000);
+
+    //deaktiviert Schreibfunktion in data_table
+    ui->data_table->setEditTriggers(QAbstractItemView::NoEditTriggers);
+
 
     //verbindet Suchfeld mit der Funktion onsearchTextChanged
     connect(ui->suche_txt_line, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
@@ -43,6 +66,7 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
 
     //logoutbutton connect
      connect(ui->logout_btn, &QPushButton::clicked, this, &MainWindow::on_logout_btn_clicked);
+     ui->logout_btn->setToolTip("Logout");
 }
 
 MainWindow::~MainWindow()
@@ -119,6 +143,8 @@ void MainWindow::on_darkmode_btn_toggled(bool checked)
 //Funktion für die Einstellung der Widgets im Lightmode
 void MainWindow::lightmode_on()
 {
+    //ändert Text des Labels
+    ui->darkmode_btn->setText("Darkmode");
     QString lightStyle = R"(
 
 QWidget {
@@ -169,6 +195,11 @@ QHeaderView::section {
     padding: 8px;
     border: 1px solid #DDDDDD;
     font-weight: bold;
+}
+
+QTableWidget::item:selected {
+    background-color: #4A90E2;
+    color: #FFFFFF;
 }
 
 QComboBox {
@@ -237,110 +268,119 @@ QLabel {
 //Funktion für die Einstellung der Widgets im Darkmode
 void MainWindow::darkmode_on()
 {
+
+//ändert Text des Labels
+    ui->darkmode_btn->setText("Lightmode");
     //Änderung des Designs mit Raw String
     QString darkStyle = R"(
-QMainWindow {
+QWidget {
     background-color: #2E2E2E;
+    color: #E0E0E0;
 }
 
 QPushButton {
-    background-color: #4A4A4A;
-    color: #FFFFFF;
-    border-radius: 5px;
-    border: 1px solid #666666;
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #4A6A87, stop:1 #3A556D);
+    color: #E0E0E0;
+    border: 1px solid #3A556D;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-weight: bold;
 }
+
 QPushButton:hover {
-    background-color: #666666;
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #3A556D, stop:1 #2E3E4F);
 }
+
 QPushButton:pressed {
-    background-color: #2B2B2B;
-}
-
-QRadioButton {
-    color: #FFFFFF;
-}
-QRadioButton::indicator {
-    border: 2px solid #666666;
-    background-color: #2E2E2E;
-}
-QRadioButton::indicator:checked {
-    background-color: #007ACC;
-}
-
-QTextEdit {
-    background-color: #333333;
-    color: #FFFFFF;
-    border: 1px solid #555555;
-    border-radius: 5px;
-}
-
-QTableWidget {
-    background-color: #444444;
-    color: #FFFFFF;
-}
-QTableWidget::item {
-    background-color: #444444;
-}
-QTableWidget::item:alternate {
-    background-color: #555555;
-}
-QTableWidget::item:selected {
-    background-color: #007ACC;
-}
-
-QComboBox {
-    background-color: #444444;
-    color: #FFFFFF;
-    border: 1px solid #555555;
-    border-radius: 5px;
-}
-
-QComboBox::drop-down {
-    background-color: #333333;
-    border: none;
-}
-
-QComboBox::item {
-    background-color: #444444;
-    color: #FFFFFF;
-}
-
-QComboBox::item:selected {
-    background-color: #007ACC;
-    color: #FFFFFF;
-}
-
-QComboBox::item:hover {
-    background-color: #555555;
-}
-
-
-QLabel {
-    color: #FFFFFF;
+    background-color: #3E4F60;
 }
 
 QLineEdit {
-    background-color: #333333;
-    color: #FFFFFF;
-    border: 1px solid #555555;
-    border-radius: 5px;
-}
-QLineEdit {
-    background-color: #333333;
-    color: #FFFFFF;
-    border: 1px solid #555555;
-    border-radius: 5px;
+    background-color: #3C3C3C;
+    color: #E0E0E0;
+    border: 1px solid #5A5A5A;
+    border-radius: 4px;
+    padding: 5px;
 }
 
 QLineEdit:focus {
-    border: 1px solid #007ACC;
+    border-color: #7294AA;
 }
 
-QLineEdit::placeholder {
-    color: #AAAAAA;
+QTableWidget {
+    background-color: #3C3C3C;
+    color: #E0E0E0;
+    border: 1px solid #5A5A5A;
+    gridline-color: #5A5A5A;
+    selection-background-color: #4A6A87;
 }
 
-    )";
+QHeaderView::section {
+    background-color: #4A4A4A;
+    color: #E0E0E0;
+    padding: 8px;
+    border: 1px solid #5A5A5A;
+    font-weight: bold;
+}
+
+QComboBox {
+    background-color: #3C3C3C;
+    color: #E0E0E0;
+    border: 1px solid #5A5A5A;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+QComboBox::drop-down {
+    background-color: #3C3C3C;
+    border: 1px solid #5A5A5A;
+}
+
+QComboBox QAbstractItemView {
+    background-color: #2E2E2E;
+    selection-background-color: #4A6A87;
+    color: #E0E0E0;
+}
+
+QRadioButton {
+    background-color: transparent;
+    color: #E0E0E0;
+}
+
+QRadioButton::indicator {
+    border: 2px solid #5A5A5A;
+    border-radius: 8px;
+    width: 15px;
+    height: 15px;
+    background-color: #3C3C3C;
+}
+
+QRadioButton::indicator:checked {
+    background-color: #7294AA;
+}
+
+QCheckBox {
+    background-color: transparent;
+    color: #E0E0E0;
+}
+
+QCheckBox::indicator {
+    border: 2px solid #5A5A5A;
+    width: 15px;
+    height: 15px;
+    background-color: #3C3C3C;
+}
+
+QCheckBox::indicator:checked {
+    background-color: #7294AA;
+}
+
+QLabel {
+    color: #E0E0E0;
+    font-weight: bold;
+}
+
+    // )";
     this->setStyleSheet(darkStyle);
 }
 
@@ -376,6 +416,7 @@ void MainWindow::on_pushButton_clicked()
 {
     auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
     datensatz_bearbeiten->show();
+    datensatz_bearbeiten->setWindowTitle("Datensatz hinzufügen");
     qDebug() << "on_pushButton_clicked";
 }
 
@@ -418,11 +459,13 @@ void MainWindow::on_logout_btn_clicked()
 {
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Bestätigung", "Möchten Sie sich wirklich abmelden?",
-                                  QMessageBox::Yes | QMessageBox::No);
+    QMessageBox::Yes | QMessageBox::No);
 
     if (reply == QMessageBox::Yes) {
         qDebug("Benutzer hat sich abgemeldet.");
-        close();
+        auto l=new LoginDialog;
+        l->show();
+
     }
 }
 

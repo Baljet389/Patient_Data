@@ -5,6 +5,7 @@
 #include "database.h"
 #include <QLineEdit>
 #include <QDebug>
+#include <QDateTime>
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -63,5 +64,8 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+
+    QString date;
+    QString time;
 };
 #endif // MAINWINDOW_H
