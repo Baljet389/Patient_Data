@@ -127,6 +127,12 @@ void MainWindow::on_data_table_itemClicked(QTableWidgetItem *item)
 {
     // Holen der aktuellen Zeile, die angeklickt wurde
     int row = item->row();
+    QTableWidgetItem *idItem = ui->data_table->item(row, 0); // Erste Spalte: ID
+
+    if (idItem) {
+        selectedID = idItem->text().toInt(); // Speichere die ID
+        qDebug() << "Selected ID:" << selectedID;
+    }
 
     // Initialisierung eines QString für die Ausgabe
     QString zeilenDetails;
@@ -152,6 +158,15 @@ void MainWindow::on_data_table_rowSelected(const QModelIndex &current, const QMo
 
     // Holen Sie die ausgewählte Zeile
     int row = current.row();
+
+    // ID verwalten für Bearbeitenbutton
+    QTableWidgetItem *idItem = ui->data_table->item(row, 0); // Erste Spalte: ID
+
+    if (idItem) {
+        selectedID = idItem->text().toInt(); // Speichere die ID
+        qDebug() << "Selected ID:" << selectedID;
+    }
+
 
     // Details aus der Zeile extrahieren
     QString zeilenDetails;
@@ -471,7 +486,6 @@ void MainWindow::on_speicher_btn_clicked()
     }
 }
 
-
 void MainWindow::on_pushButton_clicked()
 {
     auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
@@ -480,16 +494,25 @@ void MainWindow::on_pushButton_clicked()
     qDebug() << "on_pushButton_clicked";
 }
 
-
 void MainWindow::on_details_btn_clicked()
 {
     qDebug() << "on_details_btn_clicked";
 }
 
-
 void MainWindow::on_bearbeiten_btn_clicked()
 {
     qDebug() << "on_bearbeiten_btn_clicked";
+
+    // Fehlerausgabe bei keiner Auswahl
+    if (selectedID == -1) {
+        QMessageBox::warning(this, "Fehler", "Bitte wählen Sie zuerst einen Datensatz aus.");
+        return;
+    }
+
+    auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
+    datensatz_bearbeiten->show();
+    datensatz_bearbeiten->setWindowTitle("Datensatz hinzufügen");
+    qDebug() << "on_pushButton_clicked";
 }
 
 void MainWindow::on_logout_btn_clicked()
@@ -505,7 +528,6 @@ void MainWindow::on_logout_btn_clicked()
 
     }
 }
-
 
 void MainWindow::on_filter_box_currentIndexChanged(int index)
 {
