@@ -24,6 +24,7 @@ public:
     QStringList SpaltenNamen;
     std::vector<io_data> PatientsFound;
     QString UserInputColumn;
+    bool checked;
     // Teständerung für CSV im/export
     //QString pfad = open_btn.clicked()
     //qDebug() << pfad;

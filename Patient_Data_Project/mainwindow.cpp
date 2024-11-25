@@ -129,6 +129,7 @@ void MainWindow::onSearchTextChanged(const QString &text) {
 
 void MainWindow::on_darkmode_btn_toggled(bool checked)
 {
+    this->checked=checked;
     if (checked)
     {
         darkmode_on();
