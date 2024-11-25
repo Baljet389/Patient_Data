@@ -525,7 +525,6 @@ void MainWindow::on_logout_btn_clicked()
         qDebug("Benutzer hat sich abgemeldet.");
         auto l=new LoginDialog;
         l->show();
-
     }
 }
 
