@@ -76,8 +76,8 @@ int io_data::returnAge(){
         return alter;
 }
 
+// Konvertiere den QString in ein QDate
 QDate io_data::convertQStringToQDate(const QString datumString) {
-    // Konvertiere den QString in ein QDate
     QDate datum = QDate::fromString(datumString, "dd.MM.yyyy");
 
     // Überprüfe, ob das Datum gültig ist
@@ -88,16 +88,16 @@ QDate io_data::convertQStringToQDate(const QString datumString) {
     return datum;
 }
 
+// Konvertiere das QDate in einen QString im Format "dd.MM.yyyy" und gib es zurück
 QString io_data::convertQDateToQString(const QDate datum) {
-    // Konvertiere das QDate in einen QString im Format "dd.MM.yyyy" und gib es zurück
     return datum.toString("dd.MM.yyyy");
 }
 
 void io_data::CSVeinlesen(QString pfad,Database &database) {
+    // qDebug() << "io_data::CSVeinlesen()";
     try {
-        qDebug() << "io_data::CSVeinlesen()";
-
-        ifstream datei(pfad.toStdString()); // Datei öffnen
+        // CSV-Datei zum einlesen öffnen
+        ifstream datei(pfad.toStdString());
         if (!datei.is_open()) {
             throw runtime_error("Datei konnte nicht geöffnet werden");
         }
@@ -110,23 +110,23 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
         regex zahlenRegex("^[0-9]+$");                                  // Nur Zahlen
         regex nameRegex("^[^0-9]*$");                                   // Erlaubt alles außer Zahlen
         regex datumRegex("^\\d{2}\\.\\d{2}\\.\\d{4}$");                 // Format DD.MM.YYYY
-        regex geschlechtRegex("^[mwMWdD]$");                            // Einzelbuchstabe (z. B. m/w/d)
+        regex geschlechtRegex("^[mwMWdD]$");                            // Nur Einzelbuchstaben für Geschlecht
 
-        while (getline(datei, zeile)) { // Jede Zeile lesen
+        while (getline(datei, zeile)) { // Alle Zeilen lesen
             if (skipUeberschrift) {
                 qDebug() << "Überspringe Überschrift:" << QString::fromStdString(zeile);
                 skipUeberschrift = false;
                 continue; // Header-Zeile überspringen
             }
 
-            // Konvertiere die Zeile von std::string zu QString unter Verwendung von UTF-8
+            // Konvertiere Zeile von std::string zu QString aus UTF-8
             QString zeileQString = QString::fromUtf8(zeile.c_str());
             //qDebug() << "QString: " << zeileQString;
 
-            // Parsen der gelesenen Zeile am Komma mit QString
+            // Parse Zeile am Komma mit QString
             QStringList werteListe = zeileQString.split(',');
 
-            // Vollständigkeitscheck
+            // Prüfe, ob Daten valide
             if (werteListe.size() >= 11) {
                 try {
                     // Validierung der einzelnen Felder
@@ -149,7 +149,7 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
                         throw invalid_argument("Ungültiges Eintrittsdatum: Format DD.MM.YYYY erwartet");
                     }
 
-                    // Wenn alle Tests bestanden sind, Patient erstellen
+                    // Wenn valide, dann Patient erstellen
                     io_data patient(
                         stoi(werteListe[0].toStdString()), // ID
                         werteListe[1],                     // Vorname
@@ -177,11 +177,11 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
             }
         }
 
-        qDebug() << "Datei fertig eingelesen";
+        // qDebug() << "Datei fertig eingelesen";
 
         // Aufräumen und Datei schließen
         datei.close();
-        qDebug() << "Datei wieder geschlossen";
+        // qDebug() << "Datei wieder geschlossen";
 
     } catch (const exception &e) {
         qDebug() << "Ein Fehler ist aufgetreten:" << e.what();
@@ -190,14 +190,14 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
 
 void io_data::CSVerstellen(QString pfad, Database &database) {
     try {
-        qDebug() << "io_data::CSVerstellen()";
+        // qDebug() << "io_data::CSVerstellen()";
 
         // CSV-Datei zum Schreiben öffnen
         ofstream datei(pfad.toStdString(), ios::out);
         if (!datei.is_open()) {
             throw runtime_error("Datei konnte nicht geöffnet werden");
         }
-        qDebug() << "Datei zum Schreiben geöffnet:" << pfad;
+        // qDebug() << "Datei zum Schreiben geöffnet:" << pfad;
 
         // CSV-Header schreiben
         datei << "PatientID,Vorname,Nachname,Geburtsdatum,Geschlecht,Adresse,Telefonnummer,Email,Aufnahmedatum,Diagnose,Behandlung\n";
