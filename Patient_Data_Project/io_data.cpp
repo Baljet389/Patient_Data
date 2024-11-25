@@ -74,7 +74,6 @@ int io_data::returnAge(){
             }
         alterFinal=alter;
         return alter;
-
 }
 
 QDate io_data::convertQStringToQDate(const QString datumString) {
