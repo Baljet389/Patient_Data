@@ -79,7 +79,7 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
                 database->insertPatient(*loadPatient);
             }
             else{
-                //database->editPatient(*loadPatient);
+                database->editPatient(*loadPatient);
             }
             }
             catch(std::runtime_error &e){

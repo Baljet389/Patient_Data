@@ -29,9 +29,9 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>-60</y>
-      <width>762</width>
-      <height>784</height>
+      <y>-311</y>
+      <width>765</width>
+      <height>710</height>
      </rect>
     </property>
     <layout class="QFormLayout" name="formLayout">
