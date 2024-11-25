@@ -423,7 +423,6 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_details_btn_clicked()
 {
     qDebug() << "on_details_btn_clicked";
-
 }
 
 
