@@ -6,15 +6,6 @@ user::user(int UID, QString username) { //set standard UID=0!, is UID needed?
     this->UID=UID;
     this->username=username;
 
-    qDebug()<<"Establish DB Connection for User Table";
-    db=QSqlDatabase::addDatabase("QSQLITE");
-    std::string file=__FILE__;
-    std::string directory {file.substr(0, file.rfind("/"))};
-    std::string filename="/PatientenDaten/PatientDataDatabase.db";
-    db.setDatabaseName(QString::fromStdString(directory+filename));
-    if(!db.open()){
-        qDebug() << "Error: Could not open the database!" << db.lastError().text();
-    }
     //insertUserDB("admin","1234");
     //qDebug()<<salt_generator();
 }

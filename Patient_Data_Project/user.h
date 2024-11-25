@@ -12,7 +12,6 @@ class user
 public:
     int UID;                //User ID, not to be confused with patient-ID (from io_data)
     QString username;
-    QSqlDatabase db;
 
     user(int UID, QString name);
     public : bool checkPW(QString pw_login);                                 //compares login PW-Hash with DB PW-Hash

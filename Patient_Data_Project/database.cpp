@@ -20,6 +20,7 @@ Database::Database() {
         qDebug() << "Error: Could not open the database!" << db.lastError().text();
     }
 }
+
 void Database::createTable(){
     QSqlQuery query;
     QString create="CREATE TABLE IF NOT EXISTS Patienten("
@@ -103,6 +104,14 @@ void Database::editPatient(const io_data &patient){
     if(!query.exec()){
         throw std::runtime_error("Database connection is not available");
     }
+
+}
+
+void findUser(){
+    qDebug()<<"TestDBClass";
+}
+
+void insertUser(){
 
 }
 

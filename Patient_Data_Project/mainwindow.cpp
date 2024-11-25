@@ -20,7 +20,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->suche_txt_line->setToolTip("Gebe hiere den Nachnamen ein");
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
 
-
     //verbindet Suchfeld mit der Funktion onsearchTextChanged
     connect(ui->suche_txt_line, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
     ui->data_table->setColumnCount(10);
