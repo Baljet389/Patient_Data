@@ -455,7 +455,7 @@ QPushButton:pressed {
        </widget>
       </item>
       <item row="4" column="5" colspan="4">
-       <widget class="QTextEdit" name="textEdit">
+       <widget class="QTextEdit" name="details_textedit">
         <property name="styleSheet">
          <string notr="true"/>
         </property>
@@ -702,8 +702,8 @@ QPushButton:pressed {
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>564</x>
-     <y>10</y>
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
      <x>949</x>

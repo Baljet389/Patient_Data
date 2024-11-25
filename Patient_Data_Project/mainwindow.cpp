@@ -36,7 +36,6 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
         // Datum und Uhrzeit berechnen
         date = QDate::currentDate().toString("dd.MM.yyyy");
         time = QTime::currentTime().toString("hh:mm:ss");
-
         ui->date_time_lbl->setText(date + "\n" + time);
     });
 
@@ -51,7 +50,6 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
     //deaktiviert Schreibfunktion in data_table
     ui->data_table->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-
     //verbindet Suchfeld mit der Funktion onsearchTextChanged
     connect(ui->suche_txt_line, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
     ui->data_table->setColumnCount(10);
@@ -59,6 +57,11 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
     ui->data_table->setHorizontalHeaderLabels(SpaltenNamen);
     ui->data_table->horizontalHeader()->setStretchLastSection(true);
     UserInputColumn="PatientID";
+
+    //data_table Zelle clicked -> Ausgabe in TextEdit Feld
+    connect(ui->data_table, &QTableWidget::itemClicked, this, &MainWindow::on_data_table_itemClicked);
+    //data_table Zeile clicked -> Ausgabe in TextEdit Feld
+    connect(ui->data_table->selectionModel(), &QItemSelectionModel::currentRowChanged, this, &MainWindow::on_data_table_rowSelected);
 
     //Lightmode ist zu Beginn
     lightmode_on();
@@ -102,7 +105,6 @@ void MainWindow::on_suche_btn_clicked()
         ui->data_table->setItem(currentRow, 8, new QTableWidgetItem(i.datum));
         ui->data_table->setItem(currentRow, 9, new QTableWidgetItem(i.diagnose));
         ui->data_table->setItem(currentRow, 10, new QTableWidgetItem(i.behandlung));
-
     }
     qDebug("Daten der gesuchten Person sind in der Tabelle zu sehen");
 }
@@ -121,11 +123,47 @@ void MainWindow::onSearchTextChanged(const QString &text) {
     }
 }
 
+void MainWindow::on_data_table_itemClicked(QTableWidgetItem *item)
+{
+    // Holen der aktuellen Zeile, die angeklickt wurde
+    int row = item->row();
 
-//void MainWindow::on_open_btn_clicked()
-//    connect(ui->open_btn, &QPushButton::clicked, this, &MainWindow::io_data.CSVeinlesen());
+    // Initialisierung eines QString für die Ausgabe
+    QString zeilenDetails;
 
+    // Iteriere durch die Spalten der angeklickten Zeile
+    for (int col = 0; col < ui->data_table->columnCount(); ++col) {
+        QTableWidgetItem *cellItem = ui->data_table->item(row, col);
+        if (cellItem) {
+            // Füge Spaltennamen und Zellinhalt hinzu
+            zeilenDetails += SpaltenNamen[col] + ": " + cellItem->text() + "\n";
+        }
+    }
 
+    // Setze den Text im QTextEdit-Widget
+    ui->details_textedit->setPlainText(zeilenDetails);
+}
+
+void MainWindow::on_data_table_rowSelected(const QModelIndex &current, const QModelIndex &previous) {
+    // Prüfen, ob ein gültiger Index ausgewählt wurde
+    if (!current.isValid()) {
+        return;
+    }
+
+    // Holen Sie die ausgewählte Zeile
+    int row = current.row();
+
+    // Details aus der Zeile extrahieren
+    QString zeilenDetails;
+    for (int col = 0; col < ui->data_table->columnCount(); ++col) {
+        QString header = ui->data_table->horizontalHeaderItem(col)->text();
+        QString value = ui->data_table->item(row, col) ? ui->data_table->item(row, col)->text() : "N/A";
+        zeilenDetails += header + ": " + value + "\n";
+    }
+
+    // Setzen der Details in das TextEdit-Widget
+    ui->details_textedit->setPlainText(zeilenDetails);
+}
 
 void MainWindow::on_darkmode_btn_toggled(bool checked)
 {
@@ -384,26 +422,48 @@ QLabel {
     this->setStyleSheet(darkStyle);
 }
 
+void MainWindow::on_open_btn_clicked()
+{
+    // io_data
+    qDebug() << "on_open_btn_clicked";
+
+    // Fenster öffnen und den Dateipfad in einer QString-Variable speichern
+    QString dateipfad = QFileDialog::getOpenFileName(
+        this,
+        "Datei öffnen",         // Fenstertitel
+        QDir::homePath(),       // Startverzeichnis
+        "Alle Dateien (*.*);;Textdateien (*.txt);;Bilder (*.png *.jpg)" // Filter
+        );
+
+    // Überprüfen, ob Dateipfad ausgewählt wurde
+    if (!dateipfad.isEmpty()) {
+        qDebug() << "Ausgewählte Datei:" << dateipfad;
+        io_data::CSVeinlesen(dateipfad, *db);
+    } else {
+        qDebug() << "Keine Datei ausgewählt.";
+    }
+}
+
 void MainWindow::on_speicher_btn_clicked()
 {
     qDebug() << "on_speicher_btn_clicked";
 
-    // Dialog öffnen, um Speicherort und Dateinamen festzulegen
+    // Fenster öffnen, um Speicherort und Dateinamen festzulegen
     QString speicherpfad = QFileDialog::getSaveFileName(
         this,
-        "Datei speichern",      // Dialogtitel
+        "Datei speichern",      // Fenstertitel
         QDir::homePath() + "/Patientendaten.csv", // Standardverzeichnis und Vorschlag für Dateinamen
         "CSV-Dateien (*.csv);;Alle Dateien (*.*)" // Filter für Dateitypen
         );
 
-    // Überprüfen, ob der Benutzer einen gültigen Pfad ausgewählt hat
+    // Überprüfen, Pfad gültig
     if (!speicherpfad.isEmpty()) {
         qDebug() << "Speicherpfad:" << speicherpfad;
 
-        // Die Patientendaten in die Datei schreiben
+        // Patientendaten in Datei schreiben
         io_data::CSVerstellen(speicherpfad, *db);
 
-        // Erfolgsmeldung anzeigen
+        // Erfolgsmeldung ausgeben
         QMessageBox::information(this, "Speichern", "Die Datei wurde erfolgreich gespeichert.");
     } else {
         qDebug() << "Speichern abgebrochen. Kein Speicherpfad ausgewählt.";
@@ -432,29 +492,6 @@ void MainWindow::on_bearbeiten_btn_clicked()
     qDebug() << "on_bearbeiten_btn_clicked";
 }
 
-
-
-void MainWindow::on_open_btn_clicked()
-{
-    // io_data
-    qDebug() << "on_open_btn_clicked";
-
-    // Dialog öffnen und den Dateipfad in einer QString-Variable speichern
-    QString dateipfad = QFileDialog::getOpenFileName(
-        this,
-        "Datei öffnen",         // Dialogtitel
-        QDir::homePath(),       // Startverzeichnis
-        "Alle Dateien (*.*);;Textdateien (*.txt);;Bilder (*.png *.jpg)" // Filter
-        );
-
-    // Überprüfen, ob ein Dateipfad ausgewählt wurde
-    if (!dateipfad.isEmpty()) {
-        qDebug() << "Ausgewählte Datei:" << dateipfad;
-        io_data::CSVeinlesen(dateipfad, *db);
-    } else {
-        qDebug() << "Keine Datei ausgewählt.";
-    }
-}
 void MainWindow::on_logout_btn_clicked()
 {
     QMessageBox::StandardButton reply;
