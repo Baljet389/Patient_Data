@@ -36,7 +36,6 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
         // Datum und Uhrzeit berechnen
         date = QDate::currentDate().toString("dd.MM.yyyy");
         time = QTime::currentTime().toString("hh:mm:ss");
-
         ui->date_time_lbl->setText(date + "\n" + time);
     });
 
@@ -59,6 +58,9 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
     ui->data_table->setHorizontalHeaderLabels(SpaltenNamen);
     ui->data_table->horizontalHeader()->setStretchLastSection(true);
     UserInputColumn="PatientID";
+
+    //data_table clicked Ausgabe in TextEdit Feld
+    connect(ui->data_table, &QTableWidget::itemClicked, this, &MainWindow::on_data_table_itemClicked);
 
     //Lightmode ist zu Beginn
     lightmode_on();
@@ -102,7 +104,6 @@ void MainWindow::on_suche_btn_clicked()
         ui->data_table->setItem(currentRow, 8, new QTableWidgetItem(i.datum));
         ui->data_table->setItem(currentRow, 9, new QTableWidgetItem(i.diagnose));
         ui->data_table->setItem(currentRow, 10, new QTableWidgetItem(i.behandlung));
-
     }
     qDebug("Daten der gesuchten Person sind in der Tabelle zu sehen");
 }
@@ -121,10 +122,26 @@ void MainWindow::onSearchTextChanged(const QString &text) {
     }
 }
 
+void MainWindow::on_data_table_itemClicked(QTableWidgetItem *item)
+{
+    // Holen der aktuellen Zeile, die angeklickt wurde
+    int row = item->row();
 
-//void MainWindow::on_open_btn_clicked()
-//    connect(ui->open_btn, &QPushButton::clicked, this, &MainWindow::io_data.CSVeinlesen());
+    // Initialisierung eines QString für die Ausgabe
+    QString zeilenDetails;
 
+    // Iteriere durch die Spalten der angeklickten Zeile
+    for (int col = 0; col < ui->data_table->columnCount(); ++col) {
+        QTableWidgetItem *cellItem = ui->data_table->item(row, col);
+        if (cellItem) {
+            // Füge Spaltennamen und Zellinhalt hinzu
+            zeilenDetails += SpaltenNamen[col] + ": " + cellItem->text() + "\n";
+        }
+    }
+
+    // Setze den Text im QTextEdit-Widget
+    ui->details_textedit->setPlainText(zeilenDetails);
+}
 
 
 void MainWindow::on_darkmode_btn_toggled(bool checked)

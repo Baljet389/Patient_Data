@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QTableWidgetItem>
 #include "database.h"
 #include <QLineEdit>
 #include <QDebug>
@@ -36,6 +37,7 @@ private slots:
 
     void on_suche_txt_line_returnPressed();
     void onSearchTextChanged(const QString &text);
+    void on_data_table_itemClicked(QTableWidgetItem *item);
 
 
     // Teständerung für CSV im/export

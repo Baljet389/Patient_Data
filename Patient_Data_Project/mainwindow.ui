@@ -455,7 +455,7 @@ QPushButton:pressed {
        </widget>
       </item>
       <item row="4" column="5" colspan="4">
-       <widget class="QTextEdit" name="textEdit">
+       <widget class="QTextEdit" name="details_textedit">
         <property name="styleSheet">
          <string notr="true"/>
         </property>
