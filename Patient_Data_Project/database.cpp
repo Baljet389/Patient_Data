@@ -46,12 +46,9 @@ void Database::createTable(){
 vector<io_data> Database::getPatientbyColumn(const QString& column,const QString& input){
     vector<io_data> PatientList;
     QSqlQuery query;
-    QString queryString = QString("SELECT PatientID, Vorname, Nachname, Geburtsdatum,"
-                                  " Geschlecht, Adresse, Telefonnummer, Email, Aufnahmedatum,"
-                                  " Diagnose, Behandlung FROM Patienten WHERE %1 = ?").arg(column);
-
+    QString queryString = QString("SELECT * FROM Patienten WHERE %1 LIKE ?").arg(column);
     query.prepare(queryString);
-    query.addBindValue(input);
+    query.addBindValue(input+"%");
     if(!query.exec()){
         throw std::runtime_error((query.lastError().text().toStdString()));
     }
