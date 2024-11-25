@@ -53,6 +53,59 @@
       <property name="verticalSpacing">
        <number>1</number>
       </property>
+      <item row="4" column="5" colspan="4">
+       <widget class="QTextEdit" name="textEdit">
+        <property name="styleSheet">
+         <string notr="true"/>
+        </property>
+        <property name="readOnly">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="8">
+       <widget class="QPushButton" name="logout_btn">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
+        <property name="minimumSize">
+         <size>
+          <width>0</width>
+          <height>25</height>
+         </size>
+        </property>
+        <property name="maximumSize">
+         <size>
+          <width>29</width>
+          <height>16777215</height>
+         </size>
+        </property>
+        <property name="sizeIncrement">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="baseSize">
+         <size>
+          <width>0</width>
+          <height>0</height>
+         </size>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset theme="QIcon::ThemeIcon::SystemLogOut"/>
+        </property>
+        <property name="flat">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
       <item row="6" column="7" colspan="2">
        <widget class="QPushButton" name="bearbeiten_btn">
         <property name="sizePolicy">
@@ -99,6 +152,58 @@ QPushButton:pressed {
         </property>
        </widget>
       </item>
+      <item row="6" column="5" colspan="2">
+       <widget class="QPushButton" name="details_btn">
+        <property name="styleSheet">
+         <string notr="true">/*QPushButton {
+	background-color: rgb(191, 191, 191);
+    border: 2px solid;
+    border-radius: 10px;
+    padding: 5px;          
+}
+QPushButton:hover {
+    background-color: #a0c4ff; 
+}
+QPushButton:pressed {
+    background-color: darkgray;
+    border: 2px solid black;
+}
+</string>
+        </property>
+        <property name="text">
+         <string>Details</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="7">
+       <widget class="QLabel" name="date_time_lbl">
+        <property name="frameShape">
+         <enum>QFrame::Shape::HLine</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="scaledContents">
+         <bool>false</bool>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignmentFlag::AlignCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="8">
+       <spacer name="verticalSpacer">
+        <property name="orientation">
+         <enum>Qt::Orientation::Vertical</enum>
+        </property>
+        <property name="sizeHint" stdset="0">
+         <size>
+          <width>20</width>
+          <height>40</height>
+         </size>
+        </property>
+       </spacer>
+      </item>
       <item row="1" column="1">
        <widget class="QFrame" name="suche_frame">
         <property name="enabled">
@@ -135,17 +240,10 @@ QPushButton:pressed {
          <enum>Qt::FocusPolicy::NoFocus</enum>
         </property>
         <property name="styleSheet">
-         <string notr="true">/*QFrame {
-	background-color: rgb(0, 167, 81);
-    border: 2px solid ;
-	 border-color: rgb(0, 0, 0);
-    border-radius: 10px;          
-    border-radius: 10px;          
-}
-QLabel{
+         <string notr="true">QLabel{
 border: none;
 }
-*/
+
 </string>
         </property>
         <property name="frameShape">
@@ -232,7 +330,7 @@ QPushButton:pressed {
           <bool>true</bool>
          </property>
          <property name="placeholderText">
-          <string>Nachname suchen</string>
+          <string>Suchen</string>
          </property>
          <property name="cursorMoveStyle">
           <enum>Qt::CursorMoveStyle::VisualMoveStyle</enum>
@@ -284,47 +382,30 @@ QPushButton:pressed {
         </widget>
        </widget>
       </item>
-      <item row="0" column="8">
-       <widget class="QPushButton" name="logout_btn">
-        <property name="sizePolicy">
-         <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
-          <horstretch>0</horstretch>
-          <verstretch>0</verstretch>
-         </sizepolicy>
-        </property>
+      <item row="3" column="1" rowspan="4" colspan="3">
+       <widget class="QTableWidget" name="data_table">
         <property name="minimumSize">
          <size>
-          <width>0</width>
-          <height>25</height>
-         </size>
-        </property>
-        <property name="maximumSize">
-         <size>
-          <width>29</width>
-          <height>16777215</height>
-         </size>
-        </property>
-        <property name="sizeIncrement">
-         <size>
-          <width>0</width>
+          <width>800</width>
           <height>0</height>
          </size>
         </property>
-        <property name="baseSize">
-         <size>
-          <width>0</width>
-          <height>0</height>
-         </size>
+        <property name="gridStyle">
+         <enum>Qt::PenStyle::SolidLine</enum>
         </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset theme="QIcon::ThemeIcon::SystemLogOut"/>
-        </property>
-        <property name="flat">
+        <property name="sortingEnabled">
          <bool>false</bool>
         </property>
+        <column>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="font">
+          <font>
+           <family>Yu Gothic UI</family>
+          </font>
+         </property>
+        </column>
        </widget>
       </item>
       <item row="3" column="5" colspan="3">
@@ -454,65 +535,6 @@ QPushButton:pressed {
         </layout>
        </widget>
       </item>
-      <item row="4" column="5" colspan="4">
-       <widget class="QTextEdit" name="textEdit">
-        <property name="styleSheet">
-         <string notr="true"/>
-        </property>
-        <property name="readOnly">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="8">
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Orientation::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>40</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item row="3" column="1" rowspan="4" colspan="3">
-       <widget class="QTableWidget" name="data_table">
-        <property name="minimumSize">
-         <size>
-          <width>800</width>
-          <height>0</height>
-         </size>
-        </property>
-        <property name="gridStyle">
-         <enum>Qt::PenStyle::SolidLine</enum>
-        </property>
-        <property name="sortingEnabled">
-         <bool>false</bool>
-        </property>
-        <column>
-         <property name="text">
-          <string/>
-         </property>
-         <property name="font">
-          <font>
-           <family>Yu Gothic UI</family>
-          </font>
-         </property>
-        </column>
-       </widget>
-      </item>
-      <item row="0" column="7">
-       <widget class="QLabel" name="date_time_lbl">
-        <property name="text">
-         <string/>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignRight|Qt::AlignmentFlag::AlignTrailing|Qt::AlignmentFlag::AlignVCenter</set>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="2" rowspan="2" colspan="2">
        <widget class="QComboBox" name="filter_box">
         <property name="focusPolicy">
@@ -548,29 +570,6 @@ QPushButton:pressed {
         </item>
        </widget>
       </item>
-      <item row="6" column="5" colspan="2">
-       <widget class="QPushButton" name="details_btn">
-        <property name="styleSheet">
-         <string notr="true">/*QPushButton {
-	background-color: rgb(191, 191, 191);
-    border: 2px solid;
-    border-radius: 10px;
-    padding: 5px;          
-}
-QPushButton:hover {
-    background-color: #a0c4ff; 
-}
-QPushButton:pressed {
-    background-color: darkgray;
-    border: 2px solid black;
-}
-</string>
-        </property>
-        <property name="text">
-         <string>Details</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="6">
        <widget class="QRadioButton" name="darkmode_btn">
         <property name="styleSheet">
@@ -591,7 +590,7 @@ QPushButton:pressed {
      <x>0</x>
      <y>0</y>
      <width>1129</width>
-     <height>21</height>
+     <height>18</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -702,8 +701,8 @@ QPushButton:pressed {
    <slot>click()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>564</x>
-     <y>10</y>
+     <x>-1</x>
+     <y>-1</y>
     </hint>
     <hint type="destinationlabel">
      <x>949</x>

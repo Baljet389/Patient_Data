@@ -23,7 +23,6 @@ void LoginDialog::on_login_btn_clicked()
 
     if (username == "" && password == "") {
         loggedIn = true;
-        // QMessageBox::information(this, "Login erfolgreich", "'Ok' um zum Mainwindow zu gelangen");
         accept();
     }
     else {

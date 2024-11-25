@@ -21,10 +21,13 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //Überschrift des Mainwindows umbenenen
     this->setWindowTitle("Elektronische Patientenakte");
-    ui->speicher_btn->setToolTip("Datensatz speichern");
+    //Text anzeigen beim Hovern
+    ui->speicher_btn->setToolTip("Daten als CSV speichern");
     ui->pushButton->setToolTip("Datensatz hinzufügen");
     ui->suche_btn->setToolTip("Suche eingegebenen Text");
+    ui->open_btn->setToolTip("Daten aus CSV einlesen");
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
     this->db=db;
 
@@ -160,6 +163,7 @@ QPushButton {
     font-weight: bold;
 }
 
+
 QPushButton:hover {
     background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #AFCDE7, stop:1 #91BEDC);
 }
@@ -176,6 +180,56 @@ QLineEdit {
     padding: 5px;
 }
 
+QMenuBar {
+    background-color: #F8F9FA;
+    color: #333333;
+    border: none;
+}
+
+QMenuBar::item {
+    background: transparent;
+    padding: 4px 10px;
+}
+
+QMenuBar::item:selected {
+    background: #D1E3F4;
+    border-radius: 4px;
+}
+
+QMenuBar::item:pressed {
+    background: #AFCDE7;
+    border-radius: 4px;
+}
+
+QMenu {
+    background-color: #FFFFFF;
+    color: #333333;
+    border: 1px solid #DDDDDD;
+    padding: 5px;
+}
+
+QMenu::item {
+    background: transparent;
+    padding: 5px 20px;
+    color: #333333;
+}
+
+QMenu::item:selected {
+    background: #D1E3F4;
+    color: #333333;
+    border-radius: 4px;
+}
+
+QMenu::item:disabled {
+    color: #B0B0B0;
+}
+
+QMenu::separator {
+    height: 1px;
+    background: #DDDDDD;
+    margin: 5px 10px;
+}
+
 QLineEdit:focus {
     border-color: #91BEDC;
 }
@@ -183,7 +237,7 @@ QLineEdit:focus {
 QTableWidget {
     background-color: #FFFFFF;
     color: #333333;
-    border: 1px solid #DDDDDD;
+    border: none;
     gridline-color: #DDDDDD;
     selection-background-color: #D1E3F4;
 }
@@ -199,6 +253,11 @@ QHeaderView::section {
 QTableWidget::item:selected {
     background-color: #4A90E2;
     color: #FFFFFF;
+}
+
+QTableCornerButton::section {
+    background-color: #F8F9FA;
+    border: none;
 }
 
 QComboBox {
@@ -306,10 +365,60 @@ QLineEdit:focus {
     border-color: #7294AA;
 }
 
+QMenuBar {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: none;
+}
+
+QMenuBar::item {
+    background: transparent;
+    padding: 4px 10px;
+}
+
+QMenuBar::item:selected {
+    background: #3c3c3c;
+    border-radius: 4px;
+}
+
+QMenuBar::item:pressed {
+    background: #5c5c5c;
+    border-radius: 4px;
+}
+
+QMenu {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 1px solid #3c3c3c;
+    padding: 5px;
+}
+
+QMenu::item {
+    background: transparent;
+    padding: 5px 20px;
+    color: #ffffff;
+}
+
+QMenu::item:selected {
+    background: #3c3c3c;
+    color: #ffffff;
+    border-radius: 4px;
+}
+
+QMenu::item:disabled {
+    color: #777777;
+}
+
+QMenu::separator {
+    height: 1px;
+    background: #444444;
+    margin: 5px 10px;
+}
+
 QTableWidget {
     background-color: #3C3C3C;
     color: #E0E0E0;
-    border: 1px solid #5A5A5A;
+    border: none;
     gridline-color: #5A5A5A;
     selection-background-color: #4A6A87;
 }
@@ -320,6 +429,11 @@ QHeaderView::section {
     padding: 8px;
     border: 1px solid #5A5A5A;
     font-weight: bold;
+}
+
+QTableCornerButton::section {
+    background-color: #2E2E2E;
+    border: none;
 }
 
 QComboBox {
@@ -381,6 +495,19 @@ QLabel {
 
     // )";
     this->setStyleSheet(darkStyle);
+}
+
+void MainWindow::on_logout_btn_clicked()
+{
+    QMessageBox::StandardButton reply;
+    reply = QMessageBox::question(this, "Bestätigung", "Möchten Sie sich wirklich abmelden?",
+    QMessageBox::Yes | QMessageBox::No);
+
+    if (reply == QMessageBox::Yes) {
+        qDebug("Benutzer hat sich erfolgreich abgemeldet.");
+
+        qApp->exit(1);
+    }
 }
 
 void MainWindow::on_speicher_btn_clicked()
@@ -454,20 +581,6 @@ void MainWindow::on_open_btn_clicked()
         qDebug() << "Keine Datei ausgewählt.";
     }
 }
-void MainWindow::on_logout_btn_clicked()
-{
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Bestätigung", "Möchten Sie sich wirklich abmelden?",
-    QMessageBox::Yes | QMessageBox::No);
-
-    if (reply == QMessageBox::Yes) {
-        qDebug("Benutzer hat sich abgemeldet.");
-        auto l=new LoginDialog;
-        l->show();
-
-    }
-}
-
 
 void MainWindow::on_filter_box_currentIndexChanged(int index)
 {
