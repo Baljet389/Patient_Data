@@ -37,8 +37,10 @@ private slots:
 
     void on_suche_txt_line_returnPressed();
     void onSearchTextChanged(const QString &text);
-    void on_data_table_itemClicked(QTableWidgetItem *item);
 
+    //Details Ausgabe bei Auswahl einer Zelle bzw. Zeile in TextEdit
+    void on_data_table_itemClicked(QTableWidgetItem *item);
+    void on_data_table_rowSelected(const QModelIndex &current, const QModelIndex &previous);
 
     // Teständerung für CSV im/export
     //void io_data.CSVeinlesen(QString pfad, db);

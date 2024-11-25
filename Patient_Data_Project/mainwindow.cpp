@@ -59,8 +59,10 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
     ui->data_table->horizontalHeader()->setStretchLastSection(true);
     UserInputColumn="PatientID";
 
-    //data_table clicked Ausgabe in TextEdit Feld
+    //data_table Zelle clicked -> Ausgabe in TextEdit Feld
     connect(ui->data_table, &QTableWidget::itemClicked, this, &MainWindow::on_data_table_itemClicked);
+    //data_table Zeile clicked -> Ausgabe in TextEdit Feld
+    connect(ui->data_table->selectionModel(), &QItemSelectionModel::currentRowChanged, this, &MainWindow::on_data_table_rowSelected);
 
     //Lightmode ist zu Beginn
     lightmode_on();
@@ -143,6 +145,26 @@ void MainWindow::on_data_table_itemClicked(QTableWidgetItem *item)
     ui->details_textedit->setPlainText(zeilenDetails);
 }
 
+void MainWindow::on_data_table_rowSelected(const QModelIndex &current, const QModelIndex &previous) {
+    // Prüfen, ob ein gültiger Index ausgewählt wurde
+    if (!current.isValid()) {
+        return;
+    }
+
+    // Holen Sie die ausgewählte Zeile
+    int row = current.row();
+
+    // Details aus der Zeile extrahieren
+    QString zeilenDetails;
+    for (int col = 0; col < ui->data_table->columnCount(); ++col) {
+        QString header = ui->data_table->horizontalHeaderItem(col)->text();
+        QString value = ui->data_table->item(row, col) ? ui->data_table->item(row, col)->text() : "N/A";
+        zeilenDetails += header + ": " + value + "\n";
+    }
+
+    // Setzen der Details in das TextEdit-Widget
+    ui->details_textedit->setPlainText(zeilenDetails);
+}
 
 void MainWindow::on_darkmode_btn_toggled(bool checked)
 {
