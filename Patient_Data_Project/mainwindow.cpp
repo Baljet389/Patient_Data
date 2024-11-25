@@ -50,7 +50,6 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
     //deaktiviert Schreibfunktion in data_table
     ui->data_table->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
-
     //verbindet Suchfeld mit der Funktion onsearchTextChanged
     connect(ui->suche_txt_line, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
     ui->data_table->setColumnCount(10);
@@ -427,15 +426,15 @@ void MainWindow::on_open_btn_clicked()
     // io_data
     qDebug() << "on_open_btn_clicked";
 
-    // Dialog öffnen und den Dateipfad in einer QString-Variable speichern
+    // Fenster öffnen und den Dateipfad in einer QString-Variable speichern
     QString dateipfad = QFileDialog::getOpenFileName(
         this,
-        "Datei öffnen",         // Dialogtitel
+        "Datei öffnen",         // Fenstertitel
         QDir::homePath(),       // Startverzeichnis
         "Alle Dateien (*.*);;Textdateien (*.txt);;Bilder (*.png *.jpg)" // Filter
         );
 
-    // Überprüfen, ob ein Dateipfad ausgewählt wurde
+    // Überprüfen, ob Dateipfad ausgewählt wurde
     if (!dateipfad.isEmpty()) {
         qDebug() << "Ausgewählte Datei:" << dateipfad;
         io_data::CSVeinlesen(dateipfad, *db);
@@ -448,22 +447,22 @@ void MainWindow::on_speicher_btn_clicked()
 {
     qDebug() << "on_speicher_btn_clicked";
 
-    // Dialog öffnen, um Speicherort und Dateinamen festzulegen
+    // Fenster öffnen, um Speicherort und Dateinamen festzulegen
     QString speicherpfad = QFileDialog::getSaveFileName(
         this,
-        "Datei speichern",      // Dialogtitel
+        "Datei speichern",      // Fenstertitel
         QDir::homePath() + "/Patientendaten.csv", // Standardverzeichnis und Vorschlag für Dateinamen
         "CSV-Dateien (*.csv);;Alle Dateien (*.*)" // Filter für Dateitypen
         );
 
-    // Überprüfen, ob der Benutzer einen gültigen Pfad ausgewählt hat
+    // Überprüfen, Pfad gültig
     if (!speicherpfad.isEmpty()) {
         qDebug() << "Speicherpfad:" << speicherpfad;
 
-        // Die Patientendaten in die Datei schreiben
+        // Patientendaten in Datei schreiben
         io_data::CSVerstellen(speicherpfad, *db);
 
-        // Erfolgsmeldung anzeigen
+        // Erfolgsmeldung ausgeben
         QMessageBox::information(this, "Speichern", "Die Datei wurde erfolgreich gespeichert.");
     } else {
         qDebug() << "Speichern abgebrochen. Kein Speicherpfad ausgewählt.";
