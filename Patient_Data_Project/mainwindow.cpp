@@ -51,8 +51,10 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
     //deaktiviert Schreibfunktion in data_table
     ui->data_table->setEditTriggers(QAbstractItemView::NoEditTriggers);
 
+    //verbinde detailsausgabe mit data_table
+    connect(ui->data_table, &QTableWidget::itemClicked, this, &MainWindow::on_details_btn_clicked);
 
-    //verbindet Suchfeld mit der Funktion onsearchTextChanged
+    //verbinde Suchfeld mit der Funktion onsearchTextChanged
     connect(ui->suche_txt_line, &QLineEdit::textChanged, this, &MainWindow::onSearchTextChanged);
     ui->data_table->setColumnCount(10);
     SpaltenNamen << "ID" << "Nachname" << "Vorname"<<"Geburtsdatum"<<"Geschlecht"<<"Adresse"<<"Telefonnummer"<<"Email"<<"Aufnahmedatum"<<"Diagnose"<<"Behandlung";
@@ -423,6 +425,23 @@ void MainWindow::on_pushButton_clicked()
 void MainWindow::on_details_btn_clicked()
 {
     qDebug() << "on_details_btn_clicked";
+    // Aktuell ausgewählte Zeile abrufen
+    int selectedRow = ui->data_table->currentRow();
+    if (selectedRow < 0) {
+        QMessageBox::warning(this, "Keine Auswahl", "Bitte wählen Sie eine Zeile aus, um Details anzuzeigen.");
+        return;
+    }
+
+    // TextEdit-Inhalt vorbereiten
+    QString detailsText;
+    for (int col = 0; col < ui->data_table->columnCount(); ++col) {
+        QString columnName = ui->data_table->horizontalHeaderItem(col)->text();
+        QString cellData = ui->data_table->item(selectedRow, col) ? ui->data_table->item(selectedRow, col)->text() : "";
+        detailsText += QString("%1: %2\n").arg(columnName, cellData);
+    }
+
+    // Details in die TextEdit-Box einfügen
+    ui->details_textedit->setPlainText(detailsText);
 }
 
 
