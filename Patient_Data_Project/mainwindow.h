@@ -63,5 +63,6 @@ private:
 
     QString date;
     QString time;
+    int selectedID = -1;
 };
 #endif // MAINWINDOW_H
