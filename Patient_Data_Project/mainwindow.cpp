@@ -150,7 +150,7 @@ void MainWindow::on_data_table_itemClicked(QTableWidgetItem *item)
     }
 
     // Setze den Text im QTextEdit-Widget
-    ui->details_textedit->setPlainText(zeilenDetails);
+    ui->textEdit->setPlainText(zeilenDetails);
 }
 
 void MainWindow::on_data_table_rowSelected(const QModelIndex &current, const QModelIndex &previous) {
@@ -180,7 +180,7 @@ void MainWindow::on_data_table_rowSelected(const QModelIndex &current, const QMo
     }
 
     // Setzen der Details in das TextEdit-Widget
-    ui->details_textedit->setPlainText(zeilenDetails);
+    ui->textEdit->setPlainText(zeilenDetails);
 }
 
 void MainWindow::on_darkmode_btn_toggled(bool checked)

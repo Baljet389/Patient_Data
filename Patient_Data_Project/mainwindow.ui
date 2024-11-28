@@ -482,24 +482,8 @@ QPushButton:pressed {
         </widget>
        </widget>
       </item>
-      <item row="0" column="7">
-       <widget class="QLabel" name="date_time_lbl">
-        <property name="frameShape">
-         <enum>QFrame::Shape::HLine</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="scaledContents">
-         <bool>false</bool>
-        </property>
-        <property name="alignment">
-         <set>Qt::AlignmentFlag::AlignCenter</set>
-        </property>
-       </widget>
-      </item>
       <item row="3" column="8">
-       <spacer name="verticalSpacer">
+       <spacer name="verticalSpacer_2">
         <property name="orientation">
          <enum>Qt::Orientation::Vertical</enum>
         </property>

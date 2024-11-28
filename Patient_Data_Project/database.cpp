@@ -8,14 +8,10 @@
 #include <QString>
 #include <vector>
 #include "io_data.h"
-
 using namespace std;
 Database::Database() {
     db=QSqlDatabase::addDatabase("QSQLITE");
-    std::string file=__FILE__;
-    std::string directory {file.substr(0, file.rfind("/"))};
-    std::string filename="/PatientenDaten/PatientDataDatabase.db";
-    db.setDatabaseName(QString::fromStdString(directory+filename));
+    db.setDatabaseName("PatientDataDatabase.db");
     if(!db.open()){
        throw std::runtime_error((db.lastError().text().toStdString()));
     }
@@ -46,9 +42,18 @@ void Database::createTable(){
 vector<io_data> Database::getPatientbyColumn(const QString& column,const QString& input){
     vector<io_data> PatientList;
     QSqlQuery query;
-    QString queryString = QString("SELECT * FROM Patienten WHERE %1 LIKE ?").arg(column);
-    query.prepare(queryString);
-    query.addBindValue(input+"%");
+    QString queryString;
+        if(column!="PatientID"){
+            queryString= QString("SELECT * FROM Patienten WHERE %1 LIKE ?").arg(column);
+            query.prepare(queryString);
+            query.addBindValue(input+"%");
+        }
+        else{
+            queryString= "SELECT * FROM Patienten WHERE PatientID = ?";
+            query.prepare(queryString);
+            query.addBindValue(input);
+        }
+
     if(!query.exec()){
         throw std::runtime_error((query.lastError().text().toStdString()));
     }
@@ -82,11 +87,9 @@ void Database::insertPatient(const io_data& patient){
 }
 void Database::editPatient(const io_data &patient){
     QSqlQuery query;
-    query.prepare("UPDATE Patienten"
-                  "SET Vorname=?,Nachname=?,Geburtsdatum=?,"
-                  "Geschlecht=?,Adresse=?,Telefonnummer=?,Email=?,"
-                  "Aufnahmedatum=?,Diagnose=?,Behandlung=?"
-                  "WHERE PatientID=?");
+    query.prepare("UPDATE Patienten SET Vorname=?, Nachname=?,Geburtsdatum=?"
+                  "Geschlecht=?,Adresse=?,Telefonnummer=?,Email=?,Aufnahmedatum=?"
+                  ",Diagnose=?,Behandlung=? WHERE PatientID=?");
     query.addBindValue(patient.vorname);
     query.addBindValue(patient.nachname);
     query.addBindValue(patient.geburt);
@@ -98,6 +101,7 @@ void Database::editPatient(const io_data &patient){
     query.addBindValue(patient.diagnose);
     query.addBindValue(patient.behandlung);
     query.addBindValue(patient.ID);
+
     if(!query.exec()){
         throw std::runtime_error((query.lastError().text().toStdString()));
     }
