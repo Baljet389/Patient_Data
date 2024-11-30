@@ -7,11 +7,17 @@ user::user(int UID, QString username) { //set standard UID=0!, is UID needed?
     this->username=username;
 
     //insertUserDB("admin","1234");
-    //qDebug()<<salt_generator();
+    //qDebug()<<"Debug: salt_generator()"<<salt_generator();
 }
 
-bool user::checkPW(QString input_pw) //works, qDebugs are comments
+bool user::checkPW(QString input_pw) //works, qDebugs are comments, add extra function vector<query.value> searchUser(QString username)
 {   //compares entered PW-Hash with DB PW-Hash
+
+    if(input_pw.length()>=21){
+        qDebug()<<"Entered Password too long! Exceeds limit of 20 chars.";
+        return false;
+    }
+
     QString DB_salt;
     QString DB_pw="";
 
@@ -50,13 +56,13 @@ bool user::checkPW(QString input_pw) //works, qDebugs are comments
     return false;
 }
 
-QString user::salt_generator(){     //unfinished
+QString user::salt_generator(){     //works, add random function
     QString seed=username;
     //QString salt="12randomSalt";
     QString salt="";
 
     qDebug()<<"username="<<username;
-    for(int i=0; i<12; i++){
+    for(int i=0; i<12 && i<username.length(); i++){
         qDebug()<<"username["<<i<<"]"<<username[i];
         salt+=username[i];
     }
@@ -87,22 +93,37 @@ QString user::encrypt_pw(QString password, QString salt){ //not DAU safe ->max p
     return hashed.toHex();                             //convert Encrypted QByteArray hash to Hex
 }
 
-void user::insertUserDB(QString username, QString password){ //not DAU safe? max length!
+void user::insertUserDB(QString username, QString password){ //not DAU safe? max length!, //multiple Username error
+    //return type QString -->GUI?
+    //or as int and intern
 
-    //Write to database
-    QSqlQuery query;
-    query.prepare("INSERT INTO Users(Login_Name,PW_Hashed, Salt)"
-                  "VALUES(?,?,?)");
+    if(username.length()>=33){
+        qDebug()<<"New Username too long. Exceeds 32 chars limit.";
+    }else if(password.length()>=21){
+        qDebug()<<"New Password too long. Exceeds 20 chars limit.";
+    }
 
-    //QString salt=salt_generator();
-    QString salt="salt";
-    query.addBindValue(username);
-    query.addBindValue(encrypt_pw(password, salt));
-    query.addBindValue(salt);
+    bool vergeben = false;
+    /*|| searchfor user with username*/
 
-    bool success=query.exec();
-    if(!success){
-        throw std::runtime_error("Database connection is not available");
+    if(vergeben){
+        qDebug()<<"Username already taken.";
+    }else{
+        //Write to database
+        QSqlQuery query;
+        query.prepare("INSERT INTO Users(Login_Name,PW_Hashed, Salt)"
+                      "VALUES(?,?,?)");
+
+        //QString salt=salt_generator();
+        QString salt="salt";
+        query.addBindValue(username);
+        query.addBindValue(encrypt_pw(password, salt));
+        query.addBindValue(salt);
+
+        bool success=query.exec();
+        if(!success){
+            throw std::runtime_error("Database connection is not available");
+        }
     }
 }
 
