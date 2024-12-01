@@ -15,6 +15,7 @@
 #include <QTimer>
 #include "datensatz_bearbeiten.h"
 #include <QFileDialog>
+#include "datensatz_anzeigen.h"
 
 MainWindow::MainWindow(QWidget *parent, Database *db)
     : QMainWindow(parent)
@@ -622,6 +623,13 @@ void MainWindow::on_pushButton_clicked()
 
 void MainWindow::on_details_btn_clicked()
 {
+    if (selectedID == -1) {
+        QMessageBox::warning(this, "Fehler", "Bitte wählen Sie zuerst einen Datensatz aus.");
+        return;
+    }
+
+    auto anzeigen=new datensatz_anzeigen(nullptr,db,selectedID);
+    anzeigen->show();
     qDebug() << "on_details_btn_clicked";
 }
 

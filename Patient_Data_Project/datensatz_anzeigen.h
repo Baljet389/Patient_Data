@@ -14,8 +14,7 @@ class datensatz_anzeigen : public QDialog
     Q_OBJECT
 
 public:
-    io_data *selectPatient;
-    explicit datensatz_anzeigen(QWidget *parent = nullptr, io_data *selectPatient=nullptr);
+    explicit datensatz_anzeigen(QWidget *parent = nullptr, Database* db=nullptr,int selectID=-1);
     ~datensatz_anzeigen();
 
 private slots:
