@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    //Überschrift des Mainwindows umbenenen
+    //Überschrift des Mainwindows umbenennen
     this->setWindowTitle("Elektronische Patientenakte");
     //Text anzeigen beim Hovern
     ui->speicher_btn->setToolTip("Daten als CSV speichern");
@@ -66,13 +66,15 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
     //data_table Zeile clicked -> Ausgabe in TextEdit Feld
     connect(ui->data_table->selectionModel(), &QItemSelectionModel::currentRowChanged, this, &MainWindow::on_data_table_rowSelected);
 
-    //Lightmode ist zu Beginn
+    //Lightmode ist zu Beginn an
     lightmode_on();
      connect(ui->darkmode_btn, &QRadioButton::toggled, this, &MainWindow::on_darkmode_btn_toggled);
 
     //logoutbutton connect
      connect(ui->logout_btn, &QPushButton::clicked, this, &MainWindow::on_logout_btn_clicked);
      ui->logout_btn->setToolTip("Logout");
+
+
 }
 
 MainWindow::~MainWindow()
@@ -371,6 +373,11 @@ QLabel {
     font-weight: bold;
 }
 
+QTextEdit {
+    line-height: 1.5;
+    margin: 10px;
+}
+
 )";
     this->setStyleSheet(lightStyle);
 
@@ -547,6 +554,11 @@ QLabel {
     font-weight: bold;
 }
 
+QTextEdit {
+    line-height: 1.5;
+    margin: 10px;
+}
+
     // )";
     this->setStyleSheet(darkStyle);
 }
@@ -572,18 +584,6 @@ void MainWindow::on_open_btn_clicked()
         qDebug() << "Keine Datei ausgewählt.";
     }
 }
-/*void MainWindow::on_logout_btn_clicked()
-{
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Bestätigung", "Möchten Sie sich wirklich abmelden?",
-    QMessageBox::Yes | QMessageBox::No);
-
-    if (reply == QMessageBox::Yes) {
-        qDebug("Benutzer hat sich erfolgreich abgemeldet.");
-
-        qApp->exit(1);
-    }
-}*/
 
 void MainWindow::on_speicher_btn_clicked()
 {
@@ -645,12 +645,13 @@ void MainWindow::on_logout_btn_clicked()
 {
     QMessageBox::StandardButton reply;
     reply = QMessageBox::question(this, "Bestätigung", "Möchten Sie sich wirklich abmelden?",
-    QMessageBox::Yes | QMessageBox::No);
+                                  QMessageBox::Yes | QMessageBox::No);
 
-    if (reply == QMessageBox::Yes) {
-        qDebug("Benutzer hat sich abgemeldet.");
-        auto l=new LoginDialog;
-        l->show();
+    if (reply == QMessageBox::Yes)
+    {
+        qDebug("Benutzer hat sich erfolgreich abgemeldet.");
+
+        qApp->exit(1);
     }
 }
 

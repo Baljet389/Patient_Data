@@ -14,7 +14,9 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">background-color: #2C2C2C;</string>
+   <string notr="true">
+background-color: #2C2C2C;
+</string>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -49,7 +51,8 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color: rgb(255, 255, 255);
+</string>
         </property>
         <property name="text">
          <string>Login</string>
@@ -62,7 +65,8 @@
       <item row="2" column="1" colspan="3">
        <widget class="QLineEdit" name="name_edit">
         <property name="styleSheet">
-         <string notr="true">QLineEdit {
+         <string notr="true">
+QLineEdit {
     background-color: #ffffff; 
     border: 2px solid;
 	 border-color: rgb(201, 201, 201);
@@ -83,7 +87,8 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color: rgb(255, 255, 255);
+</string>
         </property>
         <property name="text">
          <string>Username:</string>
@@ -106,7 +111,8 @@
       <item row="3" column="1" colspan="3">
        <widget class="QLineEdit" name="passw_edit">
         <property name="styleSheet">
-         <string notr="true">QLineEdit {
+         <string notr="true">
+QLineEdit {
     background-color: #ffffff; 
     border: 2px solid;
 	 border-color: rgb(201, 201, 201);
@@ -136,7 +142,8 @@
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">QPushButton {
+         <string notr="true">
+QPushButton {
     background-color: rgb(255, 255, 255);
     border: 2px solid;
 	 border-color: rgb(201, 201, 201);
@@ -164,7 +171,8 @@ QPushButton:pressed {
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);</string>
+         <string notr="true">color: rgb(255, 255, 255);
+</string>
         </property>
         <property name="text">
          <string>Password:</string>
