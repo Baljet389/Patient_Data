@@ -16,9 +16,9 @@ public:
 
     user(int UID, QString name);
     public : bool checkPW(QString pw_login);                                 //compares login PW-Hash with DB PW-Hash
-    private : QString salt_generator();                             //seed with extra parameter or this->username?
+    private : QString salt_generator(QString username);                             //seed with extra parameter or this->username?
     private : QString encrypt_pw(QString password, QString salt);   //Hash function with SHA256
-    public : void insertUserDB(QString username, QString password);
+    public : QString insertUserDB(QString username, QString password);
 };
 
 #endif // USER_H

@@ -6,18 +6,20 @@ user::user(int UID, QString username) { //set standard UID=0!, is UID needed?
     this->UID=UID;
     this->username=username;
 
-    //insertUserDB("admin","1234");
+    //insertUserDB("admin2","1234");
+
     //qDebug()<<"Debug: salt_generator()"<<salt_generator();
 }
 
-bool user::checkPW(QString input_pw) //works, qDebugs are comments, add extra function vector<query.value> searchUser(QString username)
-{   //compares entered PW-Hash with DB PW-Hash
+bool user::checkPW(QString input_pw){ //add extra function vector<query.value> searchUser(QString username)
+    //works, qDebugs are comments
 
     if(input_pw.length()>=21){
         qDebug()<<"Entered Password too long! Exceeds limit of 20 chars.";
         return false;
     }
 
+    //compares entered PW-Hash with DB PW-Hash
     QString DB_salt;
     QString DB_pw="";
 
@@ -45,6 +47,7 @@ bool user::checkPW(QString input_pw) //works, qDebugs are comments, add extra fu
                 " DB_SALT=        "<<DB_salt<<Qt::endl;
         }else{
             qDebug()<<"No user found with this->username="<<this->username;
+            qDebug()<<Qt::endl;
         }
 
     }
@@ -56,7 +59,7 @@ bool user::checkPW(QString input_pw) //works, qDebugs are comments, add extra fu
     return false;
 }
 
-QString user::salt_generator(){     //works, add random function
+QString user::salt_generator(QString username){     //works, add random function
     QString seed=username;
     //QString salt="12randomSalt";
     QString salt="";
@@ -93,29 +96,67 @@ QString user::encrypt_pw(QString password, QString salt){ //not DAU safe ->max p
     return hashed.toHex();                             //convert Encrypted QByteArray hash to Hex
 }
 
-void user::insertUserDB(QString username, QString password){ //not DAU safe? max length!, //multiple Username error
+QString user::insertUserDB(QString username, QString password){ //not DAU safe? max length!, //multiple Username error
     //return type QString -->GUI?
     //or as int and intern
 
+    QString error="";
     if(username.length()>=33){
-        qDebug()<<"New Username too long. Exceeds 32 chars limit.";
+        error="New Username too long. Exceeds 32 chars limit.";
+        qDebug()<<error;
+        return error;
     }else if(password.length()>=21){
-        qDebug()<<"New Password too long. Exceeds 20 chars limit.";
+        error="New Password too long. Exceeds 20 chars limit.";
+        qDebug()<<error;
+        return error;
     }
 
-    bool vergeben = false;
+    bool vergeben = false; //default true!
+
     /*|| searchfor user with username*/
+    {
+        QSqlQuery query;
+        QString queryString = QString("SELECT Login_Name, Count(*) AS c "
+                                      "FROM Users WHERE %1 = '%2'").arg("Login_Name").arg(username);
+        qDebug()<<queryString;  //show QUERY to check for correct SQL Syntax
+        query.prepare(queryString);
+        bool successful=query.exec();
+
+        if(!successful){
+            throw std::runtime_error("Column does not exist, or database connection is not available");
+        }
+        if(query.next()){
+            QString temp_uName = query.value(0).toString();
+            int c = query.value(1).toInt();
+            qDebug()<<" Login_Name="<<temp_uName<<Qt::endl<<
+                " c="<<c<<Qt::endl;
+
+            if(c==0){
+                vergeben=false;
+            }else{
+                vergeben=true;
+            }
+
+        }else{
+            error="DB Query Error.";
+            qDebug()<<error;
+            return error;
+        }
+
+    }
 
     if(vergeben){
-        qDebug()<<"Username already taken.";
+        error="Username "+username+" already taken.";
+        qDebug()<<error;
+        return error;
     }else{
+        qDebug()<<"Username "<<username<<" is available.";
         //Write to database
         QSqlQuery query;
         query.prepare("INSERT INTO Users(Login_Name,PW_Hashed, Salt)"
                       "VALUES(?,?,?)");
 
-        //QString salt=salt_generator();
-        QString salt="salt";
+        QString salt=salt_generator(username);
         query.addBindValue(username);
         query.addBindValue(encrypt_pw(password, salt));
         query.addBindValue(salt);
@@ -124,6 +165,8 @@ void user::insertUserDB(QString username, QString password){ //not DAU safe? max
         if(!success){
             throw std::runtime_error("Database connection is not available");
         }
+        error="Neuer Benutzer erfolgreich angelegt."; //var name error may be confusing
+        return error;
     }
 }
 
