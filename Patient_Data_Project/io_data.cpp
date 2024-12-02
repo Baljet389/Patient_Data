@@ -242,8 +242,6 @@ void io_data::CSVerstellen(QString pfad, Database &database) {
                                         patient.datum,
                                         patient.diagnose,
                                         patient.behandlung);
-
-
             // Zeile in Datei schreiben
             datei << csvZeile.toStdString() << "\n";
             patientCount++;
