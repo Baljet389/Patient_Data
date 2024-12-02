@@ -82,6 +82,7 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
             }
             else{
                 database->editPatient(*loadPatient);
+                // #ALEX_TODO: Anzeige in Tabelle aktualisieren
             }
             }
             catch(std::runtime_error &e){
