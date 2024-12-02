@@ -682,3 +682,8 @@ void MainWindow::on_filter_box_currentIndexChanged(int index)
     }
 }
 
+void MainWindow::on_data_table_itemChanged(QTableWidgetItem *item)
+{
+    on_data_table_itemClicked(item);
+}
+

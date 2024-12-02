@@ -42,6 +42,7 @@ private slots:
     //Details Ausgabe bei Auswahl einer Zelle bzw. Zeile in TextEdit
     void on_data_table_itemClicked(QTableWidgetItem *item);
     void on_data_table_rowSelected(const QModelIndex &current, const QModelIndex &previous);
+    void on_data_table_itemChanged(QTableWidgetItem *item);
 
     //void on_radioButton_clicked();
 
@@ -57,6 +58,7 @@ private slots:
     void on_logout_btn_clicked();
 
     void on_filter_box_currentIndexChanged(int index);
+
 
 private:
     Ui::MainWindow *ui;

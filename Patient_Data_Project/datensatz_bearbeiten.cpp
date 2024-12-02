@@ -84,6 +84,7 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
                 database->editPatient(*loadPatient);
             }
              mainwindow->on_suche_btn_clicked();
+            //TODO Detailsfenster aktualisieren
             }
             catch(std::runtime_error &e){
                 QMessageBox::warning(this,"Warning",e.what());
