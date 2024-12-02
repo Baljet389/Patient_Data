@@ -32,9 +32,9 @@ public:
     //void io_data.CSVeinlesen(QString pfad, db);
     //void io_data.CSVerstellen(QString pfad, &db);
 
-private slots:
-
     void on_suche_btn_clicked();
+
+private slots:
 
     void on_suche_txt_line_returnPressed();
     void onSearchTextChanged(const QString &text);

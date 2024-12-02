@@ -83,7 +83,7 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
             else{
                 database->editPatient(*loadPatient);
             }
-            // #ALEX_TODO: Anzeige in Tabelle aktualisieren
+             mainwindow->on_suche_btn_clicked();
             }
             catch(std::runtime_error &e){
                 QMessageBox::warning(this,"Warning",e.what());

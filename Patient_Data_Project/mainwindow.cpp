@@ -645,6 +645,7 @@ void MainWindow::on_bearbeiten_btn_clicked()
 
     auto datensatz_bearbeiten = new Datensatz_bearbeiten(nullptr, selectedID, db);
     datensatz_bearbeiten->show();
+    datensatz_bearbeiten->mainwindow=this;
     datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");
     qDebug() << "on_pushButton_clicked";
 }
