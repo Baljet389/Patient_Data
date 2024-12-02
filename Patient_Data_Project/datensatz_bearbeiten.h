@@ -7,7 +7,7 @@
 #include <QAbstractButton>
 #include "io_data.h"
 #include "database.h"
-
+#include "mainwindow.h"
 namespace Ui {
 class Datensatz_bearbeiten;
 }
@@ -20,6 +20,7 @@ public:
     io_data* loadPatient;
     int id;
     Database* database;
+    MainWindow* mainwindow;
     std::vector<io_data> PatientFound;
     explicit Datensatz_bearbeiten(QWidget *parent = nullptr,int id=-1,Database* database=nullptr);
     ~Datensatz_bearbeiten();

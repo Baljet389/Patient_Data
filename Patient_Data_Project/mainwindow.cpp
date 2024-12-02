@@ -645,6 +645,7 @@ void MainWindow::on_bearbeiten_btn_clicked()
 
     auto datensatz_bearbeiten = new Datensatz_bearbeiten(nullptr, selectedID, db);
     datensatz_bearbeiten->show();
+    datensatz_bearbeiten->mainwindow=this;
     datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");
     qDebug() << "on_pushButton_clicked";
 }
@@ -679,5 +680,10 @@ void MainWindow::on_filter_box_currentIndexChanged(int index)
         UserInputColumn="Nachname";
         break;
     }
+}
+
+void MainWindow::on_data_table_itemChanged(QTableWidgetItem *item)
+{
+    on_data_table_itemClicked(item);
 }
 
