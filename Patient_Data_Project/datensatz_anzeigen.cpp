@@ -4,11 +4,14 @@
 #include "database.h"
 #include "QTableWidgetItem"
 #include "QMessageBox"
+#include "datensatz_bearbeiten.h"
 datensatz_anzeigen::datensatz_anzeigen(QWidget *parent, Database* db,int selectID)
     : QDialog(parent)
     , ui(new Ui::datensatz_anzeigen)
 {
     ui->setupUi(this);
+    this->db=db;
+    this->selectID=selectID;
     io_data selectPatient=db->getPatientbyColumn("PatientID",QString::number(selectID)).at(0);
     ui->tableWidget->setItem(0,1, new QTableWidgetItem(selectPatient.nachname));
     ui->tableWidget->setItem(1,1,new QTableWidgetItem(selectPatient.vorname));
@@ -43,6 +46,8 @@ void datensatz_anzeigen::on_pushButton_2_clicked()
 
 void datensatz_anzeigen::on_pushButton_4_clicked()
 {
+    auto datensatz=new Datensatz_bearbeiten(nullptr,selectID,db);
+    datensatz->show();
     // Hier Aufruf des Fensters: "datensatz_bearbeiten", mit entsprechendem Datensatz
 }
 

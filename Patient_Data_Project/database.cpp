@@ -88,7 +88,7 @@ void Database::insertPatient(const io_data& patient){
 void Database::editPatient(const io_data &patient){
     QSqlQuery query;
     query.prepare("UPDATE Patienten SET Vorname=?, Nachname=?,Geburtsdatum=?"
-                  "Geschlecht=?,Adresse=?,Telefonnummer=?,Email=?,Aufnahmedatum=?"
+                  ",Geschlecht=?,Adresse=?,Telefonnummer=?,Email=?,Aufnahmedatum=?"
                   ",Diagnose=?,Behandlung=? WHERE PatientID=?");
     query.addBindValue(patient.vorname);
     query.addBindValue(patient.nachname);
