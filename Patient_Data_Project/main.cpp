@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
             MainWindow w(nullptr, &database);
             w.showMaximized();
 
+
             // Ereignisschleife für MainWindow
             if (a.exec() != 0) {
                 // Bei Beenden des Mainwindows auf Abmeldung prüfen
@@ -26,4 +27,6 @@ int main(int argc, char *argv[])
     }
     return 0;
 }
+
+
 
