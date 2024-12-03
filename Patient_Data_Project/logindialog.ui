@@ -14,9 +14,10 @@
    <string>Dialog</string>
   </property>
   <property name="styleSheet">
-   <string notr="true">
-background-color: #2C2C2C;
-</string>
+   <string notr="true">QDialog {
+    background-color: #2E2E2E;
+    color: #E0E0E0;
+}</string>
   </property>
   <widget class="QWidget" name="layoutWidget">
    <property name="geometry">
@@ -51,8 +52,9 @@ background-color: #2C2C2C;
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);
-</string>
+         <string notr="true">QLabel {
+    color: #E0E0E0;
+    font-weight: bold;}</string>
         </property>
         <property name="text">
          <string>Login</string>
@@ -65,13 +67,16 @@ background-color: #2C2C2C;
       <item row="2" column="1" colspan="3">
        <widget class="QLineEdit" name="name_edit">
         <property name="styleSheet">
-         <string notr="true">
-QLineEdit {
-    background-color: #ffffff; 
-    border: 2px solid;
-	 border-color: rgb(201, 201, 201);
-    border-radius: 10px;
-    padding: 4px;
+         <string notr="true">QLineEdit {
+    background-color: #3C3C3C;
+    color: #E0E0E0;
+    border: 1px solid #5A5A5A;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+QLineEdit:focus {
+    border-color: #7294AA;
 }</string>
         </property>
         <property name="placeholderText">
@@ -84,11 +89,13 @@ QLineEdit {
         <property name="font">
          <font>
           <pointsize>15</pointsize>
+          <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);
-</string>
+         <string notr="true">QLabel {
+    color: #E0E0E0;
+    font-weight: bold;}</string>
         </property>
         <property name="text">
          <string>Username:</string>
@@ -111,13 +118,16 @@ QLineEdit {
       <item row="3" column="1" colspan="3">
        <widget class="QLineEdit" name="passw_edit">
         <property name="styleSheet">
-         <string notr="true">
-QLineEdit {
-    background-color: #ffffff; 
-    border: 2px solid;
-	 border-color: rgb(201, 201, 201);
-    border-radius: 10px;
-    padding: 4px;
+         <string notr="true">QLineEdit {
+    background-color: #3C3C3C;
+    color: #E0E0E0;
+    border: 1px solid #5A5A5A;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+QLineEdit:focus {
+    border-color: #7294AA;
 }</string>
         </property>
         <property name="echoMode">
@@ -139,23 +149,25 @@ QLineEdit {
         <property name="font">
          <font>
           <pointsize>10</pointsize>
+          <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">
-QPushButton {
-    background-color: rgb(255, 255, 255);
-    border: 2px solid;
-	 border-color: rgb(201, 201, 201);
-    border-radius: 10px;
-    padding: 5px;          
+         <string notr="true">QPushButton {
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #4A6A87, stop:1 #3A556D);
+    color: #E0E0E0;
+    border: 1px solid #3A556D;
+    border-radius: 6px;
+    padding: 5px 12px;
+    font-weight: bold;
 }
+
 QPushButton:hover {
-    background-color: #a0c4ff; 
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #3A556D, stop:1 #2E3E4F);
 }
+
 QPushButton:pressed {
-    background-color: darkgray;
-    border: 2px solid black;
+    background-color: #3E4F60;
 }</string>
         </property>
         <property name="text">
@@ -168,11 +180,13 @@ QPushButton:pressed {
         <property name="font">
          <font>
           <pointsize>15</pointsize>
+          <bold>true</bold>
          </font>
         </property>
         <property name="styleSheet">
-         <string notr="true">color: rgb(255, 255, 255);
-</string>
+         <string notr="true">QLabel {
+    color: #E0E0E0;
+    font-weight: bold;}</string>
         </property>
         <property name="text">
          <string>Password:</string>

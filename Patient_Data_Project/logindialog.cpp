@@ -2,6 +2,7 @@
 #include "ui_logindialog.h"
 #include <QMessageBox>
 #include "user.h"
+#include <QDebug>
 
 LoginDialog::LoginDialog(QWidget *parent)
     : QDialog(parent)
@@ -11,6 +12,8 @@ LoginDialog::LoginDialog(QWidget *parent)
     this->setWindowTitle("Login");
     ui->name_edit->setFocus();
     design();
+
+
 }
 
 LoginDialog::~LoginDialog()
@@ -40,10 +43,10 @@ void LoginDialog::on_login_btn_clicked()
 void LoginDialog::design()
 {
     QString design = R"(
-QWidget {
+QDialog {
     background-color: #2E2E2E;
     color: #E0E0E0;
-
+}
 
 QPushButton {
     background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #4A6A87, stop:1 #3A556D);
@@ -78,10 +81,7 @@ QLabel {
     color: #E0E0E0;
     font-weight: bold;
 }
-
-     )";
-
-    this->setStyleSheet(design);
+    // )";
+this->setStyleSheet(design);
 
 }
-

@@ -60,6 +60,9 @@ private slots:
     void on_filter_box_currentIndexChanged(int index);
 
 
+    void on_add_user_btn_clicked();
+
+
 private:
     Ui::MainWindow *ui;
 
