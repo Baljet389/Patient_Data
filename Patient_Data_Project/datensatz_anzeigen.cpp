@@ -30,6 +30,7 @@ datensatz_anzeigen::datensatz_anzeigen(QWidget *parent, Database* db,int selectI
     for(const QString &res:result){
     ui->textBrowser->append(res);
     }
+    ui->textBrowser->append("Alter: "+QString::number(selectPatient.returnAge()));
 }
 
 datensatz_anzeigen::~datensatz_anzeigen()

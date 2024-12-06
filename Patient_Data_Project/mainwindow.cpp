@@ -643,12 +643,16 @@ void MainWindow::on_bearbeiten_btn_clicked()
         QMessageBox::warning(this, "Fehler", "Bitte wählen Sie zuerst einen Datensatz aus.");
         return;
     }
-
+    try{
     auto datensatz_bearbeiten = new Datensatz_bearbeiten(nullptr, selectedID, db);
     datensatz_bearbeiten->show();
     datensatz_bearbeiten->mainwindow=this;
     datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");
     qDebug() << "on_pushButton_clicked";
+    }
+    catch(std::runtime_error &e){
+        QMessageBox::warning(this, "Fehler", e.what());
+    }
 }
 
 void MainWindow::on_logout_btn_clicked()
