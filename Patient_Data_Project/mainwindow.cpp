@@ -16,7 +16,7 @@
 #include "datensatz_bearbeiten.h"
 #include <QFileDialog>
 #include "datensatz_anzeigen.h"
-
+#include "nutzer_anlegen.h"
 MainWindow::MainWindow(QWidget *parent, Database *db)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -628,9 +628,13 @@ void MainWindow::on_details_btn_clicked()
         QMessageBox::warning(this, "Fehler", "Bitte wählen Sie zuerst einen Datensatz aus.");
         return;
     }
-
+    try{
     auto anzeigen=new datensatz_anzeigen(nullptr,db,selectedID);
     anzeigen->show();
+    }
+    catch(std::runtime_error &e){
+        QMessageBox::warning(this, "Fehler", e.what());
+    }
     qDebug() << "on_details_btn_clicked";
 }
 
@@ -696,5 +700,17 @@ void MainWindow::on_data_table_itemChanged(QTableWidgetItem *item)
 void MainWindow::on_add_user_btn_clicked()
 {
 
+}
+
+
+void MainWindow::on_add_user_btn_pressed()
+{
+    try{
+        auto nutzer=new nutzer_anlegen();
+        nutzer->show();
+    }
+    catch(std::runtime_error &e){
+        QMessageBox::warning(this, "Fehler", e.what());
+    }
 }
 

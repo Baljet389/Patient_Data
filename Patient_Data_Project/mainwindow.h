@@ -63,6 +63,8 @@ private slots:
     void on_add_user_btn_clicked();
 
 
+    void on_add_user_btn_pressed();
+
 private:
     Ui::MainWindow *ui;
 
