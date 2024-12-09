@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
     this->db=db;
     this->akt_user=akt_user;
+    berechtigung=akt_user->permission;
     //fügt Datum und realtime ins QTLineEdit
     QTimer *timer = new QTimer(this);
 
@@ -622,10 +623,19 @@ void MainWindow::on_speicher_btn_clicked()
 
 void MainWindow::on_pushButton_clicked()
 {
+    if(akt_user->permission==3){
+        QMessageBox::warning(this,"Fehler","Sie haben nur eine Leseberechtigung");
+        return;
+    }
+    try{
     auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
     datensatz_bearbeiten->show();
     datensatz_bearbeiten->setWindowTitle("Datensatz hinzufügen");
     qDebug() << "on_pushButton_clicked";
+    }
+    catch(std::runtime_error &e){
+        QMessageBox::warning(this,"Fehler",e.what());
+    }
 }
 
 void MainWindow::on_details_btn_clicked()
