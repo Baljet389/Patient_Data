@@ -59,7 +59,6 @@ private slots:
 
     void on_filter_box_currentIndexChanged(int index);
 
-
 private:
     Ui::MainWindow *ui;
 
