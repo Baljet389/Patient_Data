@@ -49,8 +49,13 @@ void nutzer_anlegen::on_pushButton_clicked()
 
     user temp_user(0,username);
 
-    QMessageBox::information(this, "Benutzer hinzufügen",  temp_user.insertUserDB(username, password, p));
+    QString success = temp_user.insertUserDB(username, password, p);
+    if(success == "Neuer Benutzer erfolgreich angelegt."){
+        QMessageBox::information(this, "Benutzer hinzufügen",  success);
+        close();
+    }else{
+        QMessageBox::information(this, "Fehler", success);
+    }
 
-    close();
 }
 
