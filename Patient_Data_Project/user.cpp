@@ -5,7 +5,7 @@ using namespace std;
 user::user(int UID, QString username) { //set standard UID=0!, is UID needed?
     this->UID=UID;
     this->username=username;
-
+    this->permission=3; //3 ist leseberechtigung
     //insertUserDB("admin2","1234");
     //qDebug()<<"Debug: salt_generator()"<<salt_generator();
 
@@ -17,7 +17,7 @@ user::user(int UID, QString username) { //set standard UID=0!, is UID needed?
 
 int user::checkPW(QString input_pw){
     //return values exlained:
-    //0 == error/wrong PW, 1==admin/root, 2==arzt, 3==normal user, ...
+    //0 == error/wrong PW, 1==admin/root, 2==arzt(lesen+schreiben), 3==normal user(nur lesen), ...
 
     //add extra function vector<query.value> searchUser(QString username)
     //consider qDebugs as comments
