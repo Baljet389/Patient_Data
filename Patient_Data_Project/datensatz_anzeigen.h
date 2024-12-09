@@ -4,7 +4,7 @@
 #include <QDialog>
 #include "io_data.h"
 #include "database.h"
-
+#include "mainwindow.h"
 namespace Ui {
 class datensatz_anzeigen;
 }
@@ -15,6 +15,7 @@ class datensatz_anzeigen : public QDialog
 
 public:
     Database *db;
+    MainWindow *mw;
     int selectID;
     explicit datensatz_anzeigen(QWidget *parent = nullptr, Database* db=nullptr,int selectID=-1);
     ~datensatz_anzeigen();

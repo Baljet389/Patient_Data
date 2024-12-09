@@ -567,6 +567,10 @@ QTextEdit {
 
 void MainWindow::on_open_btn_clicked()
 {
+    if(berechtigung==3){
+        QMessageBox::warning(this,"Fehler","Sie haben nur eine Leseberechtigung. ");
+        return;
+    }
     // io_data
     qDebug() << "on_open_btn_clicked";
 
@@ -631,6 +635,7 @@ void MainWindow::on_details_btn_clicked()
     try{
     auto anzeigen=new datensatz_anzeigen(nullptr,db,selectedID);
     anzeigen->show();
+    anzeigen->mw=this;
     }
     catch(std::runtime_error &e){
         QMessageBox::warning(this, "Fehler", e.what());
@@ -641,7 +646,8 @@ void MainWindow::on_details_btn_clicked()
 void MainWindow::on_bearbeiten_btn_clicked()
 {
     if(berechtigung==3){
-        QMessageBox::warning(this,"Fehler: ","Sie sind nur leseberechtigt");
+        QMessageBox::warning(this,"Fehler: ","Sie haben nur eine Leseberechtigung.");
+        return;
     }
     qDebug() << "on_bearbeiten_btn_clicked";
 
@@ -708,6 +714,10 @@ void MainWindow::on_add_user_btn_clicked()
 
 void MainWindow::on_add_user_btn_pressed()
 {
+    if(berechtigung==3||berechtigung==2){
+        QMessageBox::warning(this,"Fehler","Sie haben keine Admin-Rechte.");
+        return;
+    }
     try{
         auto nutzer=new nutzer_anlegen();
         nutzer->show();

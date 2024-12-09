@@ -5,6 +5,7 @@
 #include "QTableWidgetItem"
 #include "QMessageBox"
 #include "datensatz_bearbeiten.h"
+#include "mainwindow.h"
 datensatz_anzeigen::datensatz_anzeigen(QWidget *parent, Database* db,int selectID)
     : QDialog(parent)
     , ui(new Ui::datensatz_anzeigen)
@@ -49,6 +50,7 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
 {
     auto datensatz=new Datensatz_bearbeiten(nullptr,selectID,db);
     datensatz->show();
+    datensatz->mainwindow=mw;
     // Hier Aufruf des Fensters: "datensatz_bearbeiten", mit entsprechendem Datensatz
 }
 
