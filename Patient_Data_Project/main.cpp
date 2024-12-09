@@ -8,16 +8,25 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
 
     Database database;
-    LoginDialog l;
-    if (l.exec() == QDialog::Accepted) {
-    MainWindow w(nullptr,&database);
-    w.showMaximized();
-    w.show();
-     return a.exec();
+    while (true) {
+        LoginDialog l;
+        if (l.exec() == QDialog::Accepted) {
+            MainWindow w(nullptr, &database);
+            w.showMaximized();
+
+
+            // Ereignisschleife für MainWindow
+            if (a.exec() != 0) {
+                // Bei Beenden des Mainwindows auf Abmeldung prüfen
+                continue; // Zurück zur Login-Schleife
+            }
+        } else {
+            qDebug() << "Login abgebrochen. Anwendung beendet.";
+            break;
+        }
     }
-    else
-    {
     return 0;
-    }
 }
+
+
 

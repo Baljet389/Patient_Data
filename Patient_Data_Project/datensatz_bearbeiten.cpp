@@ -1,5 +1,7 @@
 #include "datensatz_bearbeiten.h"
 #include "ui_datensatz_bearbeiten.h"
+#include "ui_mainwindow.h"
+#include "mainwindow.h"
 #include "io_data.h"
 #include "database.h"
 #include "QString"
@@ -79,8 +81,9 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
                 database->insertPatient(*loadPatient);
             }
             else{
-                //database->editPatient(*loadPatient);
+                database->editPatient(*loadPatient);
             }
+             //mainwindow->on_suche_btn_clicked();
             }
             catch(std::runtime_error &e){
                 QMessageBox::warning(this,"Warning",e.what());

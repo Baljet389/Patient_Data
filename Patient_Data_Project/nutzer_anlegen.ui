@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLineEdit" name="lineEdit">
+  <widget class="QLineEdit" name="Eingabe_Benutzername">
    <property name="geometry">
     <rect>
      <x>250</x>
@@ -32,7 +32,7 @@
     <string>Maximal 32 Zeichen</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="Name">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -51,7 +51,7 @@
     <string>Benutzername</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_2">
+  <widget class="QLabel" name="Profil">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -70,7 +70,7 @@
     <string>Nutzerprofil</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_3">
+  <widget class="QLabel" name="Passwort">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -89,7 +89,7 @@
     <string>Passwort</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_3">
+  <widget class="QLineEdit" name="Eingabe_Passwort">
    <property name="geometry">
     <rect>
      <x>250</x>
@@ -105,7 +105,7 @@
     <string>maximal 20 Zeichen</string>
    </property>
   </widget>
-  <widget class="QLabel" name="label_4">
+  <widget class="QLabel" name="Passwort_WDH">
    <property name="geometry">
     <rect>
      <x>40</x>
@@ -124,7 +124,7 @@
     <string>Passwort wiederholen</string>
    </property>
   </widget>
-  <widget class="QLineEdit" name="lineEdit_4">
+  <widget class="QLineEdit" name="Eingabe_Passwort_WDH">
    <property name="geometry">
     <rect>
      <x>250</x>
@@ -137,7 +137,7 @@
     <number>20</number>
    </property>
   </widget>
-  <widget class="QLabel" name="label_5">
+  <widget class="QLabel" name="Ueberschrift">
    <property name="geometry">
     <rect>
      <x>160</x>
@@ -162,7 +162,7 @@
     <set>Qt::AlignmentFlag::AlignCenter</set>
    </property>
   </widget>
-  <widget class="QComboBox" name="comboBox">
+  <widget class="QComboBox" name="Eingabe_Nutzerprofil">
    <property name="geometry">
     <rect>
      <x>250</x>
@@ -187,7 +187,7 @@
     </property>
    </item>
   </widget>
-  <widget class="QPushButton" name="pushButton">
+  <widget class="QPushButton" name="Button_abbrechen">
    <property name="geometry">
     <rect>
      <x>450</x>
@@ -200,7 +200,7 @@
     <string>Abbrechen</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="pushButton_2">
+  <widget class="QPushButton" name="Button_Benutzer_anlegen">
    <property name="geometry">
     <rect>
      <x>248</x>
@@ -215,12 +215,12 @@
   </widget>
  </widget>
  <tabstops>
-  <tabstop>lineEdit</tabstop>
-  <tabstop>comboBox</tabstop>
-  <tabstop>lineEdit_3</tabstop>
-  <tabstop>lineEdit_4</tabstop>
-  <tabstop>pushButton_2</tabstop>
-  <tabstop>pushButton</tabstop>
+  <tabstop>Eingabe_Benutzername</tabstop>
+  <tabstop>Eingabe_Nutzerprofil</tabstop>
+  <tabstop>Eingabe_Passwort</tabstop>
+  <tabstop>Eingabe_Passwort_WDH</tabstop>
+  <tabstop>Button_Benutzer_anlegen</tabstop>
+  <tabstop>Button_abbrechen</tabstop>
  </tabstops>
  <resources/>
  <connections/>

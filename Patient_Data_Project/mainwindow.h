@@ -32,9 +32,9 @@ public:
     //void io_data.CSVeinlesen(QString pfad, db);
     //void io_data.CSVerstellen(QString pfad, &db);
 
-private slots:
-
     void on_suche_btn_clicked();
+
+private slots:
 
     void on_suche_txt_line_returnPressed();
     void onSearchTextChanged(const QString &text);
@@ -42,6 +42,7 @@ private slots:
     //Details Ausgabe bei Auswahl einer Zelle bzw. Zeile in TextEdit
     void on_data_table_itemClicked(QTableWidgetItem *item);
     void on_data_table_rowSelected(const QModelIndex &current, const QModelIndex &previous);
+    void on_data_table_itemChanged(QTableWidgetItem *item);
 
     //void on_radioButton_clicked();
 
@@ -58,10 +59,17 @@ private slots:
 
     void on_filter_box_currentIndexChanged(int index);
 
+
+    void on_add_user_btn_clicked();
+
+
+    void on_add_user_btn_pressed();
+
 private:
     Ui::MainWindow *ui;
 
     QString date;
     QString time;
+    int selectedID = -1;
 };
 #endif // MAINWINDOW_H

@@ -15,16 +15,20 @@
 #include <QTimer>
 #include "datensatz_bearbeiten.h"
 #include <QFileDialog>
-
+#include "datensatz_anzeigen.h"
+#include "nutzer_anlegen.h"
 MainWindow::MainWindow(QWidget *parent, Database *db)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    //Überschrift des Mainwindows umbenennen
     this->setWindowTitle("Elektronische Patientenakte");
-    ui->speicher_btn->setToolTip("Datensatz speichern");
+    //Text anzeigen beim Hovern
+    ui->speicher_btn->setToolTip("Daten als CSV speichern");
     ui->pushButton->setToolTip("Datensatz hinzufügen");
     ui->suche_btn->setToolTip("Suche eingegebenen Text");
+    ui->open_btn->setToolTip("Daten aus CSV einlesen");
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
     this->db=db;
 
@@ -63,13 +67,16 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
     //data_table Zeile clicked -> Ausgabe in TextEdit Feld
     connect(ui->data_table->selectionModel(), &QItemSelectionModel::currentRowChanged, this, &MainWindow::on_data_table_rowSelected);
 
-    //Lightmode ist zu Beginn
+    //Lightmode ist zu Beginn an
     lightmode_on();
      connect(ui->darkmode_btn, &QRadioButton::toggled, this, &MainWindow::on_darkmode_btn_toggled);
 
     //logoutbutton connect
      connect(ui->logout_btn, &QPushButton::clicked, this, &MainWindow::on_logout_btn_clicked);
      ui->logout_btn->setToolTip("Logout");
+
+     connect(ui->suche_btn, &QPushButton::clicked, this, &MainWindow::on_suche_btn_clicked);
+
 }
 
 MainWindow::~MainWindow()
@@ -127,6 +134,12 @@ void MainWindow::on_data_table_itemClicked(QTableWidgetItem *item)
 {
     // Holen der aktuellen Zeile, die angeklickt wurde
     int row = item->row();
+    QTableWidgetItem *idItem = ui->data_table->item(row, 0); // Erste Spalte: ID
+
+    if (idItem) {
+        selectedID = idItem->text().toInt(); // Speichere die ID
+        qDebug() << "Selected ID:" << selectedID;
+    }
 
     // Initialisierung eines QString für die Ausgabe
     QString zeilenDetails;
@@ -141,7 +154,7 @@ void MainWindow::on_data_table_itemClicked(QTableWidgetItem *item)
     }
 
     // Setze den Text im QTextEdit-Widget
-    ui->details_textedit->setPlainText(zeilenDetails);
+    ui->textEdit->setPlainText(zeilenDetails);
 }
 
 void MainWindow::on_data_table_rowSelected(const QModelIndex &current, const QModelIndex &previous) {
@@ -153,6 +166,15 @@ void MainWindow::on_data_table_rowSelected(const QModelIndex &current, const QMo
     // Holen Sie die ausgewählte Zeile
     int row = current.row();
 
+    // ID verwalten für Bearbeitenbutton
+    QTableWidgetItem *idItem = ui->data_table->item(row, 0); // Erste Spalte: ID
+
+    if (idItem) {
+        selectedID = idItem->text().toInt(); // Speichere die ID
+        qDebug() << "Selected ID:" << selectedID;
+    }
+
+
     // Details aus der Zeile extrahieren
     QString zeilenDetails;
     for (int col = 0; col < ui->data_table->columnCount(); ++col) {
@@ -162,7 +184,7 @@ void MainWindow::on_data_table_rowSelected(const QModelIndex &current, const QMo
     }
 
     // Setzen der Details in das TextEdit-Widget
-    ui->details_textedit->setPlainText(zeilenDetails);
+    ui->textEdit->setPlainText(zeilenDetails);
 }
 
 void MainWindow::on_darkmode_btn_toggled(bool checked)
@@ -186,116 +208,177 @@ void MainWindow::lightmode_on()
     QString lightStyle = R"(
 
 QWidget {
-    background-color: #F8F9FA;
-    color: #333333;
+    background-color: rgba(248, 249, 250, 1);
+    color: rgba(51, 51, 51, 1);
 }
 
 QPushButton {
     background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #D1E3F4, stop:1 #AFCDE7);
-    color: #333333;
-    border: 1px solid #AFCDE7;
+    color: rgba(51, 51, 51, 1);
+    border: 1px solid rgba(175, 205, 231, 1);
     border-radius: 6px;
     padding: 5px 12px;
     font-weight: bold;
 }
+
 
 QPushButton:hover {
     background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #AFCDE7, stop:1 #91BEDC);
 }
 
 QPushButton:pressed {
-    background-color: #A2C2D9;
+    background-color: rgba(162, 194, 217, 1);
 }
 
 QLineEdit {
-    background-color: #FFFFFF;
-    color: #333333;
-    border: 1px solid #B0B0B0;
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(51, 51, 51, 1);
+    border: 1px solid rgba(176, 176, 176, 1);
     border-radius: 4px;
     padding: 5px;
 }
 
+QMenuBar {
+    background-color: rgba(248, 249, 250, 1);
+    color: rgba(51, 51, 51, 1);
+    border: none;
+}
+
+QMenuBar::item {
+    background: transparent;
+    padding: 4px 10px;
+}
+
+QMenuBar::item:selected {
+    background: rgba(209, 227, 244, 1);
+    border-radius: 4px;
+}
+
+QMenuBar::item:pressed {
+    background: rgba(175, 205, 231, 1);
+    border-radius: 4px;
+}
+
+QMenu {
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(51, 51, 51, 1);
+    border: 1px solid rgba(221, 221, 221, 1);
+    padding: 5px;
+}
+
+QMenu::item {
+    background: transparent;
+    padding: 5px 20px;
+    color: rgba(51, 51, 51, 1);
+}
+
+QMenu::item:selected {
+    background: rgba(209, 227, 244, 1);
+    color: rgba(51, 51, 51, 1);
+    border-radius: 4px;
+}
+
+QMenu::item:disabled {
+    color: rgba(176, 176, 176, 1);
+}
+
+QMenu::separator {
+    height: 1px;
+    background: rgba(221, 221, 221, 1);
+    margin: 5px 10px;
+}
+
 QLineEdit:focus {
-    border-color: #91BEDC;
+    border-color: rgba(145, 190, 220, 1);
 }
 
 QTableWidget {
-    background-color: #FFFFFF;
-    color: #333333;
-    border: 1px solid #DDDDDD;
-    gridline-color: #DDDDDD;
-    selection-background-color: #D1E3F4;
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(51, 51, 51, 1);
+    border: none;
+    gridline-color: rgba(221, 221, 221, 1);
+    selection-background-color: rgba(209, 227, 244, 1);
 }
 
 QHeaderView::section {
-    background-color: #E8EEF5;
-    color: #333333;
+    background-color: rgba(232, 238, 245, 1);
+    color: rgba(51, 51, 51, 1);
     padding: 8px;
-    border: 1px solid #DDDDDD;
+    border: 1px solid rgba(221, 221, 221, 1);
     font-weight: bold;
 }
 
 QTableWidget::item:selected {
-    background-color: #4A90E2;
-    color: #FFFFFF;
+    background-color: rgba(74, 144, 226, 1);
+    color: rgba(255, 255, 255, 1);
+}
+
+QTableCornerButton::section {
+    background-color: rgba(248, 249, 250, 1);
+    border: none;
 }
 
 QComboBox {
-    background-color: #FFFFFF;
-    color: #333333;
-    border: 1px solid #B0B0B0;
+    background-color: rgba(255, 255, 255, 1);
+    color: rgba(51, 51, 51, 1);
+    border: 1px solid rgba(176, 176, 176, 1);
     border-radius: 5px;
     padding: 5px;
 }
 
 QComboBox::drop-down {
-    background-color: #FFFFFF;
-    border: 1px solid #B0B0B0;
+    background-color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(176, 176, 176, 1);
 }
 
 QComboBox QAbstractItemView {
-    background-color: #F8F9FA;
-    selection-background-color: #D1E3F4;
-    color: #333333;
+    background-color: rgba(248, 249, 250, 1);
+    selection-background-color: rgba(209, 227, 244, 1);
+    color: rgba(51, 51, 51, 1);
 }
 
 QRadioButton {
     background-color: transparent;
-    color: #333333;
+    color: rgba(51, 51, 51, 1);
 }
 
 QRadioButton::indicator {
-    border: 2px solid #B0B0B0;
+    border: 2px solid rgba(176, 176, 176, 1);
     border-radius: 8px;
     width: 15px;
     height: 15px;
-    background-color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 1);
 }
 
 QRadioButton::indicator:checked {
-    background-color: #91BEDC;
+    background-color: rgba(145, 190, 220, 1);
 }
 
 QCheckBox {
     background-color: transparent;
-    color: #333333;
+    color: rgba(51, 51, 51, 1);
 }
 
 QCheckBox::indicator {
-    border: 2px solid #B0B0B0;
+    border: 2px solid rgba(176, 176, 176, 1);
     width: 15px;
     height: 15px;
-    background-color: #FFFFFF;
+    background-color: rgba(255, 255, 255, 1);
 }
 
 QCheckBox::indicator:checked {
-    background-color: #91BEDC;
+    background-color: rgba(145, 190, 220, 1);
 }
 
 QLabel {
-    color: #333333;
+    color: rgba(51, 51, 51, 1);
     font-weight: bold;
 }
+/*
+QTextEdit {
+    line-height: 1.5;
+    margin: 10px;
+}*/
 
 )";
     this->setStyleSheet(lightStyle);
@@ -345,10 +428,60 @@ QLineEdit:focus {
     border-color: #7294AA;
 }
 
+QMenuBar {
+    background-color: #1e1e1e;
+    color: #ffffff;
+    border: none;
+}
+
+QMenuBar::item {
+    background: transparent;
+    padding: 4px 10px;
+}
+
+QMenuBar::item:selected {
+    background: #3c3c3c;
+    border-radius: 4px;
+}
+
+QMenuBar::item:pressed {
+    background: #5c5c5c;
+    border-radius: 4px;
+}
+
+QMenu {
+    background-color: #2a2a2a;
+    color: #ffffff;
+    border: 1px solid #3c3c3c;
+    padding: 5px;
+}
+
+QMenu::item {
+    background: transparent;
+    padding: 5px 20px;
+    color: #ffffff;
+}
+
+QMenu::item:selected {
+    background: #3c3c3c;
+    color: #ffffff;
+    border-radius: 4px;
+}
+
+QMenu::item:disabled {
+    color: #777777;
+}
+
+QMenu::separator {
+    height: 1px;
+    background: #444444;
+    margin: 5px 10px;
+}
+
 QTableWidget {
     background-color: #3C3C3C;
     color: #E0E0E0;
-    border: 1px solid #5A5A5A;
+    border: none;
     gridline-color: #5A5A5A;
     selection-background-color: #4A6A87;
 }
@@ -359,6 +492,11 @@ QHeaderView::section {
     padding: 8px;
     border: 1px solid #5A5A5A;
     font-weight: bold;
+}
+
+QTableCornerButton::section {
+    background-color: #2E2E2E;
+    border: none;
 }
 
 QComboBox {
@@ -416,6 +554,11 @@ QCheckBox::indicator:checked {
 QLabel {
     color: #E0E0E0;
     font-weight: bold;
+}
+
+QTextEdit {
+    line-height: 1.5;
+    margin: 10px;
 }
 
     // )";
@@ -471,7 +614,6 @@ void MainWindow::on_speicher_btn_clicked()
     }
 }
 
-
 void MainWindow::on_pushButton_clicked()
 {
     auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
@@ -480,16 +622,41 @@ void MainWindow::on_pushButton_clicked()
     qDebug() << "on_pushButton_clicked";
 }
 
-
 void MainWindow::on_details_btn_clicked()
 {
+    if (selectedID == -1) {
+        QMessageBox::warning(this, "Fehler", "Bitte wählen Sie zuerst einen Datensatz aus.");
+        return;
+    }
+    try{
+    auto anzeigen=new datensatz_anzeigen(nullptr,db,selectedID);
+    anzeigen->show();
+    }
+    catch(std::runtime_error &e){
+        QMessageBox::warning(this, "Fehler", e.what());
+    }
     qDebug() << "on_details_btn_clicked";
 }
-
 
 void MainWindow::on_bearbeiten_btn_clicked()
 {
     qDebug() << "on_bearbeiten_btn_clicked";
+
+    // Fehlerausgabe bei keiner Auswahl
+    if (selectedID == -1) {
+        QMessageBox::warning(this, "Fehler", "Bitte wählen Sie zuerst einen Datensatz aus.");
+        return;
+    }
+    try{
+    auto datensatz_bearbeiten = new Datensatz_bearbeiten(nullptr, selectedID, db);
+    datensatz_bearbeiten->show();
+    datensatz_bearbeiten->mainwindow=this;
+    datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");
+    qDebug() << "on_pushButton_clicked";
+    }
+    catch(std::runtime_error &e){
+        QMessageBox::warning(this, "Fehler", e.what());
+    }
 }
 
 void MainWindow::on_logout_btn_clicked()
@@ -498,11 +665,11 @@ void MainWindow::on_logout_btn_clicked()
     reply = QMessageBox::question(this, "Bestätigung", "Möchten Sie sich wirklich abmelden?",
     QMessageBox::Yes | QMessageBox::No);
 
-    if (reply == QMessageBox::Yes) {
-        qDebug("Benutzer hat sich abgemeldet.");
-        auto l=new LoginDialog;
-        l->show();
+    if (reply == QMessageBox::Yes)
+    {
+        qDebug("Benutzer hat sich erfolgreich abgemeldet.");
 
+        qApp->exit(1);
     }
 }
 
@@ -522,6 +689,28 @@ void MainWindow::on_filter_box_currentIndexChanged(int index)
     case(3):
         UserInputColumn="Nachname";
         break;
+    }
+}
+
+void MainWindow::on_data_table_itemChanged(QTableWidgetItem *item)
+{
+    on_data_table_itemClicked(item);
+}
+
+void MainWindow::on_add_user_btn_clicked()
+{
+
+}
+
+
+void MainWindow::on_add_user_btn_pressed()
+{
+    try{
+        auto nutzer=new nutzer_anlegen();
+        nutzer->show();
+    }
+    catch(std::runtime_error &e){
+        QMessageBox::warning(this, "Fehler", e.what());
     }
 }
 
