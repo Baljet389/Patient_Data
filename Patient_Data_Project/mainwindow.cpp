@@ -640,6 +640,9 @@ void MainWindow::on_details_btn_clicked()
 
 void MainWindow::on_bearbeiten_btn_clicked()
 {
+    if(berechtigung==3){
+        QMessageBox::warning(this,"Fehler: ","Sie sind nur leseberechtigt");
+    }
     qDebug() << "on_bearbeiten_btn_clicked";
 
     // Fehlerausgabe bei keiner Auswahl

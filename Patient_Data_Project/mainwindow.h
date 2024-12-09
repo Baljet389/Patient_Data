@@ -26,6 +26,7 @@ public:
     std::vector<io_data> PatientsFound;
     QString UserInputColumn;
     bool checked;
+    int berechtigung;//1=admin; 2=Schreibberechtigung; 3=Leseberechtigung
     // Teständerung für CSV im/export
     //QString pfad = open_btn.clicked()
     //qDebug() << pfad;
