@@ -17,7 +17,8 @@
 #include <QFileDialog>
 #include "datensatz_anzeigen.h"
 #include "nutzer_anlegen.h"
-MainWindow::MainWindow(QWidget *parent, Database *db)
+#include "user.h"
+MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
@@ -31,7 +32,7 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
     ui->open_btn->setToolTip("Daten aus CSV einlesen");
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
     this->db=db;
-
+    this->akt_user=akt_user;
     //fügt Datum und realtime ins QTLineEdit
     QTimer *timer = new QTimer(this);
 
@@ -82,6 +83,7 @@ MainWindow::MainWindow(QWidget *parent, Database *db)
 MainWindow::~MainWindow()
 {
     delete ui;
+    delete akt_user;
 }
 
 void MainWindow::on_suche_btn_clicked()
@@ -567,6 +569,10 @@ QTextEdit {
 
 void MainWindow::on_open_btn_clicked()
 {
+    if(berechtigung==3){
+        QMessageBox::warning(this,"Fehler","Sie haben nur eine Leseberechtigung. ");
+        return;
+    }
     // io_data
     qDebug() << "on_open_btn_clicked";
 
@@ -631,6 +637,8 @@ void MainWindow::on_details_btn_clicked()
     try{
     auto anzeigen=new datensatz_anzeigen(nullptr,db,selectedID);
     anzeigen->show();
+    anzeigen->mw=this;
+    anzeigen->akt_user=this->akt_user;
     }
     catch(std::runtime_error &e){
         QMessageBox::warning(this, "Fehler", e.what());
@@ -641,7 +649,8 @@ void MainWindow::on_details_btn_clicked()
 void MainWindow::on_bearbeiten_btn_clicked()
 {
     if(berechtigung==3){
-        QMessageBox::warning(this,"Fehler: ","Sie sind nur leseberechtigt");
+        QMessageBox::warning(this,"Fehler: ","Sie haben nur eine Leseberechtigung.");
+        return;
     }
     qDebug() << "on_bearbeiten_btn_clicked";
 
@@ -708,6 +717,10 @@ void MainWindow::on_add_user_btn_clicked()
 
 void MainWindow::on_add_user_btn_pressed()
 {
+    if(berechtigung==3||berechtigung==2){
+        QMessageBox::warning(this,"Fehler","Sie haben keine Admin-Rechte.");
+        return;
+    }
     try{
         auto nutzer=new nutzer_anlegen();
         nutzer->show();

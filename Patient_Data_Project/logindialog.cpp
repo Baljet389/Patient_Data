@@ -27,8 +27,8 @@ void LoginDialog::on_login_btn_clicked()
     QString username = ui->name_edit->text();
     QString password = ui->passw_edit->text();
 
-    user temp_user(0,username);
-    if(temp_user.checkPW(password)){
+    akt_user=new user(0,username);
+    if(akt_user->checkPW(password)){
         loggedIn = true;
         // QMessageBox::information(this, "Login erfolgreich", "'Ok' um zum Mainwindow zu gelangen");
         qDebug()<<"Login successful";

@@ -5,6 +5,8 @@
 #include "QTableWidgetItem"
 #include "QMessageBox"
 #include "datensatz_bearbeiten.h"
+#include "mainwindow.h"
+#include "user.h"
 datensatz_anzeigen::datensatz_anzeigen(QWidget *parent, Database* db,int selectID)
     : QDialog(parent)
     , ui(new Ui::datensatz_anzeigen)
@@ -46,9 +48,15 @@ void datensatz_anzeigen::on_pushButton_2_clicked()
 
 
 void datensatz_anzeigen::on_pushButton_4_clicked()
-{
+{/*
+    if(akt_user->berechtigung==3){
+        QMessageBox::warning(this,"Fehler","Sie haben nur eine Leseberechtigung");
+        return;
+    }
+*/
     auto datensatz=new Datensatz_bearbeiten(nullptr,selectID,db);
     datensatz->show();
+    datensatz->mainwindow=mw;
     // Hier Aufruf des Fensters: "datensatz_bearbeiten", mit entsprechendem Datensatz
 }
 

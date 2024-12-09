@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
     while (true) {
         LoginDialog l;
         if (l.exec() == QDialog::Accepted) {
-            MainWindow w(nullptr, &database);
+            MainWindow w(nullptr, &database,l.akt_user);
             w.showMaximized();
 
 
