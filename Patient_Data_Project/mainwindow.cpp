@@ -33,7 +33,13 @@ MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
     this->db=db;
     this->akt_user=akt_user;
+    if(akt_user!=nullptr){
     berechtigung=akt_user->permission;
+    }
+    else{
+        berechtigung=3;
+    }
+    akt_mode=lightmode_on();
     //fügt Datum und realtime ins QTLineEdit
     QTimer *timer = new QTimer(this);
 
@@ -63,14 +69,13 @@ MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     ui->data_table->setHorizontalHeaderLabels(SpaltenNamen);
     ui->data_table->horizontalHeader()->setStretchLastSection(true);
     UserInputColumn="PatientID";
-
+    darkmode=false;
     //data_table Zelle clicked -> Ausgabe in TextEdit Feld
     connect(ui->data_table, &QTableWidget::itemClicked, this, &MainWindow::on_data_table_itemClicked);
     //data_table Zeile clicked -> Ausgabe in TextEdit Feld
     connect(ui->data_table->selectionModel(), &QItemSelectionModel::currentRowChanged, this, &MainWindow::on_data_table_rowSelected);
 
     //Lightmode ist zu Beginn an
-    lightmode_on();
      connect(ui->darkmode_btn, &QRadioButton::toggled, this, &MainWindow::on_darkmode_btn_toggled);
 
     //logoutbutton connect
@@ -192,19 +197,29 @@ void MainWindow::on_data_table_rowSelected(const QModelIndex &current, const QMo
 
 void MainWindow::on_darkmode_btn_toggled(bool checked)
 {
+    darkmode=checked;
     this->checked=checked;
+    QString akt_style;
     if (checked)
     {
-        darkmode_on();
+    akt_style=darkmode_on();
     }
     else
     {
-        lightmode_on();
+    akt_style=lightmode_on();
+
+    }
+    this->akt_mode=akt_style;
+    const auto topLevelWidgets = QApplication::topLevelWidgets();
+    for (QWidget* widget : topLevelWidgets) {
+        if(widget->isVisible() && widget!=this){
+            widget->setStyleSheet(akt_style);
+        }
     }
 }
 
 //Funktion für die Einstellung der Widgets im Lightmode
-void MainWindow::lightmode_on()
+QString MainWindow::lightmode_on()
 {
     //ändert Text des Labels
     ui->darkmode_btn->setText("Darkmode");
@@ -385,12 +400,11 @@ QTextEdit {
 
 )";
     this->setStyleSheet(lightStyle);
-
-
+    return lightStyle;
 }
 
 //Funktion für die Einstellung der Widgets im Darkmode
-void MainWindow::darkmode_on()
+QString MainWindow::darkmode_on()
 {
 
 //ändert Text des Labels
@@ -566,6 +580,7 @@ QTextEdit {
 
     // )";
     this->setStyleSheet(darkStyle);
+    return darkStyle;
 }
 
 void MainWindow::on_open_btn_clicked()
@@ -631,6 +646,8 @@ void MainWindow::on_pushButton_clicked()
     auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
     datensatz_bearbeiten->show();
     datensatz_bearbeiten->setWindowTitle("Datensatz hinzufügen");
+    datensatz_bearbeiten->mainwindow=this;
+    datensatz_bearbeiten->setMode();
     qDebug() << "on_pushButton_clicked";
     }
     catch(std::runtime_error &e){
@@ -649,6 +666,7 @@ void MainWindow::on_details_btn_clicked()
     anzeigen->show();
     anzeigen->mw=this;
     anzeigen->akt_user=this->akt_user;
+    anzeigen->setMode();
     }
     catch(std::runtime_error &e){
         QMessageBox::warning(this, "Fehler", e.what());
@@ -674,6 +692,7 @@ void MainWindow::on_bearbeiten_btn_clicked()
     datensatz_bearbeiten->show();
     datensatz_bearbeiten->mainwindow=this;
     datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");
+    datensatz_bearbeiten->setMode();
     qDebug() << "on_pushButton_clicked";
     }
     catch(std::runtime_error &e){
@@ -734,6 +753,8 @@ void MainWindow::on_add_user_btn_pressed()
     try{
         auto nutzer=new nutzer_anlegen();
         nutzer->show();
+        nutzer->mainwindow=this;
+        nutzer->setMode();
     }
     catch(std::runtime_error &e){
         QMessageBox::warning(this, "Fehler", e.what());

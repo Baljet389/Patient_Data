@@ -93,4 +93,8 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
             }
         }
 }
-
+void Datensatz_bearbeiten::setMode(){
+    if(mainwindow!=nullptr){
+    this->setStyleSheet(mainwindow->akt_mode);
+    }
+    }

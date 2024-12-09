@@ -58,4 +58,8 @@ void nutzer_anlegen::on_pushButton_clicked()
     }
 
 }
-
+void nutzer_anlegen::setMode(){
+    if(mainwindow!=nullptr){
+        this->setStyleSheet(mainwindow->akt_mode);
+    }
+}

@@ -21,7 +21,7 @@ public:
     int selectID;
     explicit datensatz_anzeigen(QWidget *parent = nullptr, Database* db=nullptr,int selectID=-1);
     ~datensatz_anzeigen();
-
+    void setMode();
 private slots:
     void on_pushButton_2_clicked();
 

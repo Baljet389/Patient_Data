@@ -2,7 +2,7 @@
 #define NUTZER_ANLEGEN_H
 
 #include <QDialog>
-
+#include "mainwindow.h"
 namespace Ui {
 class nutzer_anlegen;
 }
@@ -14,7 +14,8 @@ class nutzer_anlegen : public QDialog
 public:
     explicit nutzer_anlegen(QWidget *parent = nullptr);
     ~nutzer_anlegen();
-
+    MainWindow *mainwindow;
+    void setMode();
 private slots:
     void on_pushButton_2_clicked();
 

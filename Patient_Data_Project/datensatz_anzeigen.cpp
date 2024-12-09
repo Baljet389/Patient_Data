@@ -51,7 +51,7 @@ void datensatz_anzeigen::on_pushButton_2_clicked()
 
 void datensatz_anzeigen::on_pushButton_4_clicked()
 {
-    if(akt_user->permission==3){
+    if(akt_user==nullptr&&akt_user->permission==3){
         QMessageBox::warning(this,"Fehler","Sie haben nur eine Leseberechtigung");
         return;
     }
@@ -59,6 +59,11 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
     auto datensatz=new Datensatz_bearbeiten(nullptr,selectID,db);
     datensatz->show();
     datensatz->mainwindow=mw;
+    datensatz->setMode();
     // Hier Aufruf des Fensters: "datensatz_bearbeiten", mit entsprechendem Datensatz
 }
-
+void datensatz_anzeigen::setMode(){
+    if(mw!=nullptr){
+    this->setStyleSheet(mw->akt_mode);
+}
+}

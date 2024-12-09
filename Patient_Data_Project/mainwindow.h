@@ -28,6 +28,8 @@ public:
     QString UserInputColumn;
     bool checked;
     int berechtigung;//1=admin; 2=Schreibberechtigung; 3=Leseberechtigung
+    bool darkmode;
+    QString akt_mode;
     // Teständerung für CSV im/export
     //QString pfad = open_btn.clicked()
     //qDebug() << pfad;
@@ -49,8 +51,8 @@ private slots:
     //void on_radioButton_clicked();
 
     void on_darkmode_btn_toggled(bool checked);
-    void lightmode_on();
-    void darkmode_on();
+    QString lightmode_on();
+    QString darkmode_on();
 
     void on_open_btn_clicked();
     void on_speicher_btn_clicked();
