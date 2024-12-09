@@ -7,7 +7,7 @@
 #include <QLineEdit>
 #include <QDebug>
 #include <QDateTime>
-
+#include "user.h"
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -19,9 +19,10 @@ class MainWindow : public QMainWindow
     Q_OBJECT
 
 public:
-    MainWindow(QWidget *parent = nullptr, Database* db=nullptr);
+    MainWindow(QWidget *parent = nullptr, Database* db=nullptr,user *akt_user=nullptr);
     ~MainWindow();
     Database* db;
+    user *akt_user;
     QStringList SpaltenNamen;
     std::vector<io_data> PatientsFound;
     QString UserInputColumn;
