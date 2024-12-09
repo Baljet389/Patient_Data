@@ -33,6 +33,8 @@ datensatz_anzeigen::datensatz_anzeigen(QWidget *parent, Database* db,int selectI
     ui->textBrowser->append(res);
     }
     ui->textBrowser->append("Alter: "+QString::number(selectPatient.returnAge()));
+    ui->tableWidget->setEditTriggers(QAbstractItemView::NoEditTriggers);
+    ui->textBrowser->setEnabled(false);
 }
 
 datensatz_anzeigen::~datensatz_anzeigen()
