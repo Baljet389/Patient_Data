@@ -24,7 +24,6 @@ public:
     std::vector<io_data> PatientFound;
     explicit Datensatz_bearbeiten(QWidget *parent = nullptr,int id=-1,Database* database=nullptr);
     ~Datensatz_bearbeiten();
-    void setMode();
 
 private slots:
     void on_buttonBox_clicked(QAbstractButton *button);

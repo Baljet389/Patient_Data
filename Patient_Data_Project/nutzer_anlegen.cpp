@@ -2,7 +2,6 @@
 #include "ui_nutzer_anlegen.h"
 #include "user.h"
 #include "QMessageBox"
-#include "mainwindow.h"
 
 nutzer_anlegen::nutzer_anlegen(QWidget *parent)
     : QDialog(parent)
@@ -58,8 +57,4 @@ void nutzer_anlegen::on_pushButton_clicked()
     }
 
 }
-void nutzer_anlegen::setMode(){
-    if(mainwindow!=nullptr){
-        this->setStyleSheet(mainwindow->akt_mode);
-    }
-}
+

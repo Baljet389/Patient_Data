@@ -647,7 +647,7 @@ void MainWindow::on_pushButton_clicked()
     datensatz_bearbeiten->show();
     datensatz_bearbeiten->setWindowTitle("Datensatz hinzufügen");
     datensatz_bearbeiten->mainwindow=this;
-    datensatz_bearbeiten->setMode();
+    datensatz_bearbeiten->setStyleSheet(akt_mode);
     qDebug() << "on_pushButton_clicked";
     }
     catch(std::runtime_error &e){
@@ -666,7 +666,7 @@ void MainWindow::on_details_btn_clicked()
     anzeigen->show();
     anzeigen->mw=this;
     anzeigen->akt_user=this->akt_user;
-    anzeigen->setMode();
+    anzeigen->setStyleSheet(akt_mode);
     }
     catch(std::runtime_error &e){
         QMessageBox::warning(this, "Fehler", e.what());
@@ -692,7 +692,7 @@ void MainWindow::on_bearbeiten_btn_clicked()
     datensatz_bearbeiten->show();
     datensatz_bearbeiten->mainwindow=this;
     datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");
-    datensatz_bearbeiten->setMode();
+    datensatz_bearbeiten->setStyleSheet(akt_mode);
     qDebug() << "on_pushButton_clicked";
     }
     catch(std::runtime_error &e){
@@ -753,8 +753,7 @@ void MainWindow::on_add_user_btn_pressed()
     try{
         auto nutzer=new nutzer_anlegen();
         nutzer->show();
-        nutzer->mainwindow=this;
-        nutzer->setMode();
+        nutzer->setStyleSheet(akt_mode);
     }
     catch(std::runtime_error &e){
         QMessageBox::warning(this, "Fehler", e.what());
