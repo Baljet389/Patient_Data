@@ -199,21 +199,19 @@ void MainWindow::on_darkmode_btn_toggled(bool checked)
 {
     darkmode=checked;
     this->checked=checked;
-    QString akt_style;
     if (checked)
     {
-    akt_style=darkmode_on();
+    akt_mode=darkmode_on();
     }
     else
     {
-    akt_style=lightmode_on();
+    akt_mode=lightmode_on();
 
     }
-    this->akt_mode=akt_style;
     const auto topLevelWidgets = QApplication::topLevelWidgets();
     for (QWidget* widget : topLevelWidgets) {
         if(widget->isVisible() && widget!=this){
-            widget->setStyleSheet(akt_style);
+            widget->setStyleSheet(akt_mode);
         }
     }
 }
