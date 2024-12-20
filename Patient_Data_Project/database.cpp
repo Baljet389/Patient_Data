@@ -12,9 +12,7 @@ using namespace std;
 Database::Database() {
     db=QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("PatientDataDatabase.db");
-    if(!db.open()){
-       throw std::runtime_error((db.lastError().text().toStdString()));
-    }
+    db.open();
 }
 Database::~Database(){
     db.close();

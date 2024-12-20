@@ -26,7 +26,7 @@ void LoginDialog::on_login_btn_clicked()
 {
     QString username = ui->name_edit->text();
     QString password = ui->passw_edit->text();
-
+    try{
     akt_user=new user(0,username);
     akt_user->permission=akt_user->checkPW(password);
     if(akt_user->permission!=0){
@@ -38,6 +38,10 @@ void LoginDialog::on_login_btn_clicked()
     else {
         loggedIn = false;
         QMessageBox::warning(this, "Login fehlgeschlagen", "Ungültiger Benutzername oder Passwort.");
+    }
+    }
+    catch(std::runtime_error &e){
+        QMessageBox::warning(this,"Fehler",e.what());
     }
 }
 
