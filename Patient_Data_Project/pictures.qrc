@@ -1,6 +1,7 @@
 <RCC>
     <qresource prefix="/new/prefix1">
         <file>filter_icon.png</file>
-        <file>bild_EPA_small.png</file>
+        <file>auge.png</file>
+        <file>auge_zu.png</file>
     </qresource>
 </RCC>

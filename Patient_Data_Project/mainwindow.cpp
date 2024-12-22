@@ -23,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+
     //Überschrift des Mainwindows umbenennen
     this->setWindowTitle("Elektronische Patientenakte");
     //Text anzeigen beim Hovern
@@ -30,7 +31,10 @@ MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     ui->pushButton->setToolTip("Datensatz hinzufügen");
     ui->suche_btn->setToolTip("Suche eingegebenen Text");
     ui->open_btn->setToolTip("Daten aus CSV einlesen");
+    ui->add_user_btn->setToolTip("Neuen Benutzer anlegen");
+    //setzt Fokus auf Suchzeile
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
+
     this->db=db;
     this->akt_user=akt_user;
     if(akt_user!=nullptr){
@@ -56,7 +60,7 @@ MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     QString initialTime = QTime::currentTime().toString("hh:mm:ss");
     ui->date_time_lbl->setText(initialDate + "\n" + initialTime);
 
-    // startet Timer
+    // startet Timer für Uhrzeit
     timer->start(1000);
 
     //deaktiviert Schreibfunktion in data_table
@@ -76,6 +80,23 @@ MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     connect(ui->data_table->selectionModel(), &QItemSelectionModel::currentRowChanged, this, &MainWindow::on_data_table_rowSelected);
 
     //Lightmode ist zu Beginn an
+    ui->logout_btn->setStyleSheet(
+        "QPushButton {"
+        "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #F5A09B, stop:1 #E68A84);"
+        "    color: #2E2E2E;"
+        "    border: 1px solid #E68A84;"
+        "    border-radius: 6px;"
+        "    padding: 5px 12px;"
+        "    font-weight: bold;"
+        "}"
+        "QPushButton:hover {"
+        "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #E68A84, stop:1 #D4736C);"
+        "}"
+        "QPushButton:pressed {"
+        "    background-color: #C95D55;"
+        "}"
+        );
+
      connect(ui->darkmode_btn, &QRadioButton::toggled, this, &MainWindow::on_darkmode_btn_toggled);
 
     //logoutbutton connect
@@ -201,10 +222,42 @@ void MainWindow::on_darkmode_btn_toggled(bool checked)
     this->checked=checked;
     if (checked)
     {
+        ui->logout_btn->setStyleSheet(
+            "QPushButton {"
+            "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #872828, stop:1 #6D3A3A);"
+            "    color: #E0E0E0;"
+            "    border: 1px solid #6D3A3A;"
+            "    border-radius: 6px;"
+            "    padding: 5px 12px;"
+            "    font-weight: bold;"
+            "}"
+            "QPushButton:hover {"
+            "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #6D3A3A, stop:1 #4F2E2E);"
+            "}"
+            "QPushButton:pressed {"
+            "    background-color: #603E3E;"
+            "}"
+            );
     akt_mode=darkmode_on();
     }
     else
     {
+        ui->logout_btn->setStyleSheet(
+            "QPushButton {"
+            "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #F5A09B, stop:1 #E68A84);"
+            "    color: #2E2E2E;"
+            "    border: 1px solid #E68A84;"
+            "    border-radius: 6px;"
+            "    padding: 5px 12px;"
+            "    font-weight: bold;"
+            "}"
+            "QPushButton:hover {"
+            "    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #E68A84, stop:1 #D4736C);"
+            "}"
+            "QPushButton:pressed {"
+            "    background-color: #C95D55;"
+            "}"
+            );
     akt_mode=lightmode_on();
 
     }
@@ -239,7 +292,7 @@ QPushButton {
 
 
 QPushButton:hover {
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #AFCDE7, stop:1 #91BEDC);
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(175, 205, 231, 1), stop:1 rgba(145, 190, 220, 1));
 }
 
 QPushButton:pressed {
@@ -410,42 +463,42 @@ QString MainWindow::darkmode_on()
     //Änderung des Designs mit Raw String
     QString darkStyle = R"(
 QWidget {
-    background-color: #2E2E2E;
-    color: #E0E0E0;
+    background-color: rgba(46, 46, 46, 1);
+    color: rgba(224, 224, 224, 1);
 }
 
 QPushButton {
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #4A6A87, stop:1 #3A556D);
-    color: #E0E0E0;
-    border: 1px solid #3A556D;
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(74, 106, 135, 1), stop:1 rgba(58, 85, 109, 1));
+    color: rgba(224, 224, 224, 1);
+    border: 1px solid rgba(58, 85, 109, 1);
     border-radius: 6px;
     padding: 5px 12px;
     font-weight: bold;
 }
 
 QPushButton:hover {
-    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 #3A556D, stop:1 #2E3E4F);
+    background-color: qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0 rgba(58, 85, 109, 1), stop:1 rgba(46, 62, 79, 1));
 }
 
 QPushButton:pressed {
-    background-color: #3E4F60;
+    background-color: rgba(62, 79, 96, 1);
 }
 
 QLineEdit {
-    background-color: #3C3C3C;
-    color: #E0E0E0;
-    border: 1px solid #5A5A5A;
+    background-color: rgba(60, 60, 60, 1);
+    color: rgba(224, 224, 224, 1);
+    border: 1px solid rgba(90, 90, 90, 1);
     border-radius: 4px;
     padding: 5px;
 }
 
 QLineEdit:focus {
-    border-color: #7294AA;
+    border-color: rgba(114, 148, 170, 1);
 }
 
 QMenuBar {
-    background-color: #1e1e1e;
-    color: #ffffff;
+    background-color: rgba(30, 30, 30, 1);
+    color: rgba(255, 255, 255, 1);
     border: none;
 }
 
@@ -455,119 +508,119 @@ QMenuBar::item {
 }
 
 QMenuBar::item:selected {
-    background: #3c3c3c;
+    background: rgba(60, 60, 60, 1);
     border-radius: 4px;
 }
 
 QMenuBar::item:pressed {
-    background: #5c5c5c;
+    background: rgba(92, 92, 92, 1);
     border-radius: 4px;
 }
 
 QMenu {
-    background-color: #2a2a2a;
-    color: #ffffff;
-    border: 1px solid #3c3c3c;
+    background-color: rgba(42, 42, 42, 1);
+    color: rgba(255, 255, 255, 1);
+    border: 1px solid rgba(60, 60, 60, 1);
     padding: 5px;
 }
 
 QMenu::item {
     background: transparent;
     padding: 5px 20px;
-    color: #ffffff;
+    color: rgba(255, 255, 255, 1);
 }
 
 QMenu::item:selected {
-    background: #3c3c3c;
-    color: #ffffff;
+    background: rgba(60, 60, 60, 1);
+    color: rgba(255, 255, 255, 1);
     border-radius: 4px;
 }
 
 QMenu::item:disabled {
-    color: #777777;
+    color: rgba(119, 119, 119, 1);
 }
 
 QMenu::separator {
     height: 1px;
-    background: #444444;
+    background: rgba(68, 68, 68, 1);
     margin: 5px 10px;
 }
 
 QTableWidget {
-    background-color: #3C3C3C;
-    color: #E0E0E0;
+    background-color: rgba(60, 60, 60, 1);
+    color: rgba(224, 224, 224, 1);
     border: none;
-    gridline-color: #5A5A5A;
-    selection-background-color: #4A6A87;
+    gridline-color: rgba(90, 90, 90, 1);
+    selection-background-color: rgba(74, 106, 135, 1);
 }
 
 QHeaderView::section {
-    background-color: #4A4A4A;
-    color: #E0E0E0;
+    background-color: rgba(74, 74, 74, 1);
+    color: rgba(224, 224, 224, 1);
     padding: 8px;
-    border: 1px solid #5A5A5A;
+    border: 1px solid rgba(90, 90, 90, 1);
     font-weight: bold;
 }
 
 QTableCornerButton::section {
-    background-color: #2E2E2E;
+    background-color: rgba(46, 46, 46, 1);
     border: none;
 }
 
 QComboBox {
-    background-color: #3C3C3C;
-    color: #E0E0E0;
-    border: 1px solid #5A5A5A;
+    background-color: rgba(60, 60, 60, 1);
+    color: rgba(224, 224, 224, 1);
+    border: 1px solid rgba(90, 90, 90, 1);
     border-radius: 5px;
     padding: 5px;
 }
 
 QComboBox::drop-down {
-    background-color: #3C3C3C;
-    border: 1px solid #5A5A5A;
+    background-color: rgba(60, 60, 60, 1);
+    border: 1px solid rgba(90, 90, 90, 1);
 }
 
 QComboBox QAbstractItemView {
-    background-color: #2E2E2E;
-    selection-background-color: #4A6A87;
-    color: #E0E0E0;
+    background-color: rgba(46, 46, 46, 1);
+    selection-background-color: rgba(74, 106, 135, 1);
+    color: rgba(224, 224, 224, 1);
 }
 
 QRadioButton {
     background-color: transparent;
-    color: #E0E0E0;
+    color: rgba(224, 224, 224, 1);
 }
 
 QRadioButton::indicator {
-    border: 2px solid #5A5A5A;
+    border: 2px solid rgba(90, 90, 90, 1);
     border-radius: 8px;
     width: 15px;
     height: 15px;
-    background-color: #3C3C3C;
+    background-color: rgba(60, 60, 60, 1);
 }
 
 QRadioButton::indicator:checked {
-    background-color: #7294AA;
+    background-color: rgba(114, 148, 170, 1);
 }
 
 QCheckBox {
     background-color: transparent;
-    color: #E0E0E0;
+    color: rgba(224, 224, 224, 1);
 }
 
 QCheckBox::indicator {
-    border: 2px solid #5A5A5A;
+    border: 2px solid rgba(90, 90, 90, 1);
     width: 15px;
     height: 15px;
-    background-color: #3C3C3C;
+    background-color: rgba(60, 60, 60, 1);
 }
 
 QCheckBox::indicator:checked {
-    background-color: #7294AA;
+    background-color: rgba(114, 148, 170, 1);
 }
 
 QLabel {
-    color: #E0E0E0;
+    color: rgba(224, 224, 224, 1);
     font-weight: bold;
 }
 
@@ -575,6 +628,7 @@ QTextEdit {
     line-height: 1.5;
     margin: 10px;
 }
+
 
     // )";
     this->setStyleSheet(darkStyle);
@@ -700,16 +754,7 @@ void MainWindow::on_bearbeiten_btn_clicked()
 
 void MainWindow::on_logout_btn_clicked()
 {
-    QMessageBox::StandardButton reply;
-    reply = QMessageBox::question(this, "Bestätigung", "Möchten Sie sich wirklich abmelden?",
-    QMessageBox::Yes | QMessageBox::No);
-
-    if (reply == QMessageBox::Yes)
-    {
-        qDebug("Benutzer hat sich erfolgreich abgemeldet.");
-
-        qApp->exit(1);
-    }
+  qApp->exit(1);
 }
 
 

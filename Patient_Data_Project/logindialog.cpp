@@ -13,6 +13,10 @@ LoginDialog::LoginDialog(QWidget *parent)
     ui->name_edit->setFocus();
     design();
 
+    QIcon icon(":/new/prefix1/auge.png");
+    ui->auge_btn->setIcon(icon);
+    ui->auge_btn->setIconSize(QSize(20, 20));
+    ui->auge_btn->setToolTip("Passwort anzeigen");
 
 }
 
@@ -90,3 +94,29 @@ QLabel {
 this->setStyleSheet(design);
 
 }
+
+
+
+//Funktion zum Anzeigen/Verdecken des Passworts mithilfe eines Buttons
+void LoginDialog::on_auge_btn_clicked()
+{
+    if (ui->passw_edit->echoMode() == QLineEdit::Password)
+    {
+
+        ui->passw_edit->setEchoMode(QLineEdit::Normal);
+        QIcon icon(":/new/prefix1/auge_zu.png");
+        ui->auge_btn->setIcon(icon);
+        ui->auge_btn->setIconSize(QSize(20, 20));
+        ui->auge_btn->setToolTip("Passwort verdecken");
+
+
+    } else
+    {
+        ui->passw_edit->setEchoMode(QLineEdit::Password);
+        QIcon icon(":/new/prefix1/auge.png");
+        ui->auge_btn->setIcon(icon);
+        ui->auge_btn->setIconSize(QSize(20, 20));
+        ui->auge_btn->setToolTip("Passwort anzeigen");
+    }
+}
+
