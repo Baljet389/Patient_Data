@@ -16,12 +16,8 @@ Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id, Database* dat
 {
     ui->setupUi(this);
     this->database=database;
-    try{
     PatientFound=database->getPatientbyColumn("PatientID",QString::number(id));
-    }
-    catch(std::runtime_error &e){
-        QMessageBox::warning(this,"Warning",e.what());
-    }
+    //patient wird dynamisch erstellt
     if(PatientFound.size()==0){
         loadPatient=new io_data(-1,"","","","","","","","","","");
         this->id=-1;
@@ -40,6 +36,7 @@ Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id, Database* dat
                             PatientFound.at(0).behandlung);
         this->id=id;
     }
+    //UI File wird ausgefüllt
     ui->Eingabe_Vorname->setText(loadPatient->vorname);
     ui->Eingabe_Name->setText(loadPatient->nachname);
     ui->Eingabe_Geburtsdatum->setDate(io_data::convertQStringToQDate(loadPatient->geburt));
@@ -55,11 +52,13 @@ Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id, Database* dat
 Datensatz_bearbeiten::~Datensatz_bearbeiten()
 {
     delete ui;
+    //Patient wir wieder gelöscht
     delete loadPatient;
 }
 
 void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
 {
+    //Info aus UI- File wird wieder in Patienten Objekt geladen
     QDialogButtonBox *buttonBox = qobject_cast<QDialogButtonBox*>(sender());
     QDialogButtonBox::ButtonRole role = buttonBox->buttonRole(button);
     switch(role){
@@ -76,7 +75,7 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
             loadPatient->datum=io_data::convertQDateToQString(ui->Eingabe_Aufnahmedatum->date());
             loadPatient->diagnose=ui->lineEdit_9_Diagnose->text();
             loadPatient->behandlung=ui->Eingabe_Behandlung->text();
-            try{
+            //Datenbankanfragen werden ausgeführt
             if(id==-1){
                 database->insertPatient(*loadPatient);
             }
@@ -86,11 +85,7 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
             if(mainwindow!=nullptr){
              mainwindow->on_suche_btn_clicked();
             }
-            }
-            catch(std::runtime_error &e){
-                QMessageBox::warning(this,"Warning",e.what());
-                return;
-            }
+
         }
 }
 

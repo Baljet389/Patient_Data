@@ -96,7 +96,7 @@ void MainWindow::on_suche_btn_clicked()
 {
     ui->data_table->setRowCount(0);
     QString UserInput=ui->suche_txt_line->text();
-
+    //Datenbankanfrage wird ausgeführt
     try{
     PatientsFound=db->getPatientbyColumn(UserInputColumn,UserInput);
     }
@@ -105,7 +105,7 @@ void MainWindow::on_suche_btn_clicked()
         QMessageBox::warning(this,"Datenbankabfrage fehlgeschlagen",e.what());
         return;
      }
-
+    //Tabelle wird mit Patienten gefüllt
     for(const io_data &i:PatientsFound){
         int currentRow = ui->data_table->rowCount();
         ui->data_table->insertRow(currentRow);
@@ -208,6 +208,7 @@ void MainWindow::on_darkmode_btn_toggled(bool checked)
     akt_mode=lightmode_on();
 
     }
+    //Iterieren und Setzten des aktuellen modus in allen offenen Fenstern
     const auto topLevelWidgets = QApplication::topLevelWidgets();
     for (QWidget* widget : topLevelWidgets) {
         if(widget->isVisible() && widget!=this){
@@ -663,7 +664,6 @@ void MainWindow::on_details_btn_clicked()
     auto anzeigen=new datensatz_anzeigen(nullptr,db,selectedID);
     anzeigen->show();
     anzeigen->mw=this;
-    anzeigen->akt_user=this->akt_user;
     anzeigen->setStyleSheet(akt_mode);
     }
     catch(std::runtime_error &e){
@@ -715,6 +715,7 @@ void MainWindow::on_logout_btn_clicked()
 
 void MainWindow::on_filter_box_currentIndexChanged(int index)
 {
+    //Nach zu suchender Spalte wird verändert
     switch(index){
     case(0):
         UserInputColumn="PatientID";
@@ -744,6 +745,7 @@ void MainWindow::on_add_user_btn_clicked()
 
 void MainWindow::on_add_user_btn_pressed()
 {
+
     if(berechtigung==3||berechtigung==2){
         QMessageBox::warning(this,"Fehler","Sie haben keine Admin-Rechte.");
         return;

@@ -12,10 +12,10 @@ datensatz_anzeigen::datensatz_anzeigen(QWidget *parent, Database* db,int selectI
     , ui(new Ui::datensatz_anzeigen)
 {
     ui->setupUi(this);
-    this->db=db;
+    this->db=db;//Attribute werden gesetzt
     this->selectID=selectID;
     io_data selectPatient=db->getPatientbyColumn("PatientID",QString::number(selectID)).at(0);
-    ui->tableWidget->setItem(0,1, new QTableWidgetItem(selectPatient.nachname));
+    ui->tableWidget->setItem(0,1, new QTableWidgetItem(selectPatient.nachname));//Ui-File wird ausgefüllt
     ui->tableWidget->setItem(1,1,new QTableWidgetItem(selectPatient.vorname));
 
     ui->tableWidget->setItem(2,1,new QTableWidgetItem(selectPatient.geburt));
@@ -26,7 +26,7 @@ datensatz_anzeigen::datensatz_anzeigen(QWidget *parent, Database* db,int selectI
     ui->tableWidget->setItem(9,1,new QTableWidgetItem(selectPatient.datum));
     ui->tableWidget->setItem(10,1,new QTableWidgetItem(selectPatient.diagnose));
     ui->tableWidget->setItem(11,1,new QTableWidgetItem(selectPatient.behandlung));
-
+    //ICD-Code Informationen und Alter werden hinzugefügt
     std::vector<QString> result=Database::getICD_CODE_Information(selectPatient.diagnose);
     ui->textBrowser->append("ICD-Code: "+selectPatient.diagnose);
     for(const QString &res:result){
@@ -51,7 +51,8 @@ void datensatz_anzeigen::on_pushButton_2_clicked()
 
 void datensatz_anzeigen::on_pushButton_4_clicked()
 {
-    if(akt_user!=nullptr && akt_user->permission==3){
+    //Berechtigung wird überprüft
+    if(mw->akt_user!=nullptr && mw->akt_user->permission==3){
         QMessageBox::warning(this,"Fehler","Sie haben nur eine Leseberechtigung");
         return;
     }

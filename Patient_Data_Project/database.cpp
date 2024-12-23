@@ -9,16 +9,16 @@
 #include <vector>
 #include "io_data.h"
 using namespace std;
-Database::Database() {
+Database::Database() {//Datenbank wird geöffnet
     db=QSqlDatabase::addDatabase("QSQLITE");
     db.setDatabaseName("PatientDataDatabase.db");
     db.open();
 }
-Database::~Database(){
+Database::~Database(){//Datenbank wird geschlossen
     db.close();
 }
 
-void Database::createTable(){
+void Database::createTable(){//Neue Tabelle mit dem Namen Patienten wird hinzugefügt
     QSqlQuery query;
     QString create="CREATE TABLE IF NOT EXISTS Patienten("
     "PatientID INTEGER PRIMARY KEY AUTOINCREMENT,"
@@ -37,7 +37,7 @@ void Database::createTable(){
         qDebug() << "Error: Could not create the database!" << db.lastError().text();
     }
 }
-vector<io_data> Database::getPatientbyColumn(const QString& column,const QString& input){
+vector<io_data> Database::getPatientbyColumn(const QString& column,const QString& input){//Liste mit gefundenen Patienten wird zurückgegeben
     vector<io_data> PatientList;
     QSqlQuery query;
     QString queryString;
@@ -64,7 +64,7 @@ vector<io_data> Database::getPatientbyColumn(const QString& column,const QString
     }
     return PatientList;
 }
-void Database::insertPatient(const io_data& patient){
+void Database::insertPatient(const io_data& patient){//Neuer Patient wird hinzugefügt
     QSqlQuery query;
     query.prepare("INSERT INTO Patienten(Vorname,Nachname,Geburtsdatum,Geschlecht"
                   ",Adresse,Telefonnummer,Email,Aufnahmedatum,Diagnose,Behandlung)"
@@ -83,7 +83,7 @@ void Database::insertPatient(const io_data& patient){
         throw std::runtime_error((query.lastError().text().toStdString()));
     }
 }
-void Database::editPatient(const io_data &patient){
+void Database::editPatient(const io_data &patient){//Patient wird bearbeitet
     QSqlQuery query;
     query.prepare("UPDATE Patienten SET Vorname=?, Nachname=?,Geburtsdatum=?"
                   ",Geschlecht=?,Adresse=?,Telefonnummer=?,Email=?,Aufnahmedatum=?"
@@ -105,7 +105,7 @@ void Database::editPatient(const io_data &patient){
     }
 
 }
-std::vector<QString> Database::getICD_CODE_Information(const QString &icd_code){
+std::vector<QString> Database::getICD_CODE_Information(const QString &icd_code){//ICD Code Informationen werden zurückgegeben
     QSqlQuery query;
     std::vector<QString> result;
     query.prepare("SELECT * FROM icd_codes_kurz WHERE Code=?");
