@@ -21,6 +21,9 @@ private slots:
     void on_login_btn_clicked();
     void design();
 
+
+    void on_auge_btn_clicked();
+
 private:
     Ui::LoginDialog *ui;
     bool loggedIn;
