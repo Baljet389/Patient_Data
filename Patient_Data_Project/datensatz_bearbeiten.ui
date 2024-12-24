@@ -10,6 +10,12 @@
     <height>400</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Expanding" vsizetype="Expanding">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Datensatz Bearbeiten</string>
   </property>
@@ -29,14 +35,26 @@
     <property name="geometry">
      <rect>
       <x>0</x>
-      <y>-311</y>
+      <y>0</y>
       <width>765</width>
       <height>710</height>
      </rect>
     </property>
+    <property name="sizePolicy">
+     <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+      <horstretch>0</horstretch>
+      <verstretch>0</verstretch>
+     </sizepolicy>
+    </property>
     <layout class="QFormLayout" name="formLayout">
      <item row="1" column="0">
       <widget class="QLabel" name="label_2_Name">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Name</string>
        </property>
@@ -70,6 +88,12 @@
      </item>
      <item row="4" column="0">
       <widget class="QLabel" name="label_1_Vorname">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Vorname</string>
        </property>
@@ -100,6 +124,12 @@
      </item>
      <item row="6" column="0">
       <widget class="QLabel" name="label_3_Geburtsdatum">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Geburtsdatum</string>
        </property>
@@ -107,6 +137,12 @@
      </item>
      <item row="6" column="1">
       <widget class="QDateEdit" name="Eingabe_Geburtsdatum">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
@@ -130,6 +166,12 @@
      </item>
      <item row="8" column="0">
       <widget class="QLabel" name="label_4_Geschlecht">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Geschlecht</string>
        </property>
@@ -137,6 +179,12 @@
      </item>
      <item row="8" column="1">
       <widget class="QComboBox" name="Eingabe_Geschlecht">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="toolTip">
         <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;M = Männlich&lt;br/&gt;W = Weiblich&lt;br/&gt;D = Divers&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
        </property>
@@ -175,6 +223,12 @@
      </item>
      <item row="10" column="0" colspan="2">
       <widget class="Line" name="line_2">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="orientation">
         <enum>Qt::Orientation::Horizontal</enum>
        </property>
@@ -182,6 +236,12 @@
      </item>
      <item row="11" column="0">
       <widget class="QLabel" name="label_5_Anschrift">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Anschrift</string>
        </property>
@@ -207,6 +267,12 @@
      </item>
      <item row="13" column="0">
       <widget class="QLabel" name="label_6_Telefonnummer">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Telefonnummer</string>
        </property>
@@ -226,6 +292,12 @@
      </item>
      <item row="15" column="1">
       <widget class="Line" name="line_1">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="orientation">
         <enum>Qt::Orientation::Horizontal</enum>
        </property>
@@ -233,6 +305,12 @@
      </item>
      <item row="16" column="0">
       <widget class="QLabel" name="label_7_EmailAdresse">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>E-Mail Adresse</string>
        </property>
@@ -252,6 +330,12 @@
      </item>
      <item row="19" column="0">
       <widget class="QLabel" name="label_8_Aufnahmedatum">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Aufnahmedatum</string>
        </property>
@@ -259,6 +343,12 @@
      </item>
      <item row="21" column="0">
       <widget class="QLabel" name="label_9_Diagnose">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Diagnose</string>
        </property>
@@ -266,6 +356,12 @@
      </item>
      <item row="23" column="0">
       <widget class="QLabel" name="label_9_Behandlung">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
        <property name="text">
         <string>Behandlung</string>
        </property>
@@ -311,7 +407,14 @@
       <widget class="QLineEdit" name="lineEdit_9_Diagnose"/>
      </item>
      <item row="19" column="1">
-      <widget class="QDateEdit" name="Eingabe_Aufnahmedatum"/>
+      <widget class="QDateEdit" name="Eingabe_Aufnahmedatum">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+      </widget>
      </item>
      <item row="20" column="0" colspan="2">
       <spacer name="verticalSpacer_8">
