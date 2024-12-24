@@ -792,12 +792,6 @@ void MainWindow::on_data_table_itemChanged(QTableWidgetItem *item)
 void MainWindow::on_add_user_btn_clicked()
 {
 
-}
-
-
-void MainWindow::on_add_user_btn_pressed()
-{
-
     if(berechtigung==3||berechtigung==2){
         QMessageBox::warning(this,"Fehler","Sie haben keine Admin-Rechte.");
         return;
@@ -810,5 +804,11 @@ void MainWindow::on_add_user_btn_pressed()
     catch(std::runtime_error &e){
         QMessageBox::warning(this, "Fehler", e.what());
     }
+}
+
+
+void MainWindow::on_add_user_btn_pressed()
+{
+
 }
 
