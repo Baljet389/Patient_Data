@@ -127,6 +127,7 @@ void MainWindow::on_suche_btn_clicked()
         return;
      }
     //Tabelle wird mit Patienten gefüllt
+    ui->data_table->blockSignals(true);
     for(const io_data &i:PatientsFound){
         int currentRow = ui->data_table->rowCount();
         ui->data_table->insertRow(currentRow);
@@ -143,6 +144,12 @@ void MainWindow::on_suche_btn_clicked()
         ui->data_table->setItem(currentRow, 10, new QTableWidgetItem(i.behandlung));
     }
     qDebug("Daten der gesuchten Person sind in der Tabelle zu sehen");
+    ui->data_table->blockSignals(false);
+    if(ui->data_table->rowCount()==0){
+        return;
+    }
+    on_data_table_itemClicked(ui->data_table->item(0,0));
+
 }
 
 //Bei Betätigung der Enter-Taste
