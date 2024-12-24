@@ -10,6 +10,8 @@
 #include <QAbstractButton>
 #include <QDialog>
 #include <QDialogButtonBox>
+#include <QScrollBar>
+
 Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id, Database* database)
     : QDialog(parent)
     , ui(new Ui::Datensatz_bearbeiten)
@@ -89,3 +91,21 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
         }
 }
 
+void Datensatz_bearbeiten::resizeEvent(QResizeEvent* event)
+{
+    QDialog::resizeEvent(event); // Basisimplementierung aufrufen
+
+    // Breite des Scrollbars berechnen
+    int scrollBarWidth = ui->scrollArea->verticalScrollBar()->isVisible()
+                             ? ui->scrollArea->verticalScrollBar()->width()
+                             : 0;
+
+    // Neue Breite berechnen
+    int newWidth = ui->scrollArea->width();
+
+    // Mindestbreite des Inhalts setzen
+    ui->scrollArea->widget()->setMinimumWidth(newWidth - scrollBarWidth);
+
+    // Horizontalen Scrollbar verstecken
+    ui->scrollArea->horizontalScrollBar()->setVisible(false);
+}
