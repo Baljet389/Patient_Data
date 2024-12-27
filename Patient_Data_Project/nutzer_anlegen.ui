@@ -13,206 +13,172 @@
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <widget class="QLineEdit" name="Eingabe_Benutzername">
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>70</y>
-     <width>271</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="whatsThis">
-    <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-   </property>
-   <property name="maxLength">
-    <number>32</number>
-   </property>
-   <property name="placeholderText">
-    <string>Maximal 32 Zeichen</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Name">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>70</y>
-     <width>201</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Benutzername</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Profil">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>120</y>
-     <width>201</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Nutzerprofil</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Passwort">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>170</y>
-     <width>201</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Passwort</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="Eingabe_Passwort">
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>170</y>
-     <width>271</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="maxLength">
-    <number>20</number>
-   </property>
-   <property name="placeholderText">
-    <string>maximal 20 Zeichen</string>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Passwort_WDH">
-   <property name="geometry">
-    <rect>
-     <x>40</x>
-     <y>220</y>
-     <width>201</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="text">
-    <string>Passwort wiederholen</string>
-   </property>
-  </widget>
-  <widget class="QLineEdit" name="Eingabe_Passwort_WDH">
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>220</y>
-     <width>271</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <property name="maxLength">
-    <number>20</number>
-   </property>
-  </widget>
-  <widget class="QLabel" name="Ueberschrift">
-   <property name="geometry">
-    <rect>
-     <x>160</x>
-     <y>10</y>
-     <width>241</width>
-     <height>31</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>11</pointsize>
-     <bold>true</bold>
-    </font>
-   </property>
-   <property name="layoutDirection">
-    <enum>Qt::LayoutDirection::LeftToRight</enum>
-   </property>
-   <property name="text">
-    <string>Neuen Benutzer anlegen</string>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignmentFlag::AlignCenter</set>
-   </property>
-  </widget>
-  <widget class="QComboBox" name="Eingabe_Nutzerprofil">
-   <property name="geometry">
-    <rect>
-     <x>250</x>
-     <y>120</y>
-     <width>271</width>
-     <height>28</height>
-    </rect>
-   </property>
-   <item>
-    <property name="text">
-     <string>Administrator</string>
-    </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="1" column="0">
+    <widget class="QLabel" name="Name">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Benutzername</string>
+     </property>
+    </widget>
    </item>
-   <item>
-    <property name="text">
-     <string>Schreibberechtigt</string>
-    </property>
+   <item row="1" column="1" colspan="2">
+    <widget class="QLineEdit" name="Eingabe_Benutzername">
+     <property name="whatsThis">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="maxLength">
+      <number>32</number>
+     </property>
+     <property name="placeholderText">
+      <string>Maximal 32 Zeichen</string>
+     </property>
+    </widget>
    </item>
-   <item>
-    <property name="text">
-     <string>Leseberechtigt</string>
-    </property>
+   <item row="2" column="0">
+    <widget class="QLabel" name="Profil">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Nutzerprofil</string>
+     </property>
+    </widget>
    </item>
-  </widget>
-  <widget class="QPushButton" name="Button_abbrechen">
-   <property name="geometry">
-    <rect>
-     <x>450</x>
-     <y>270</y>
-     <width>91</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Abbrechen</string>
-   </property>
-  </widget>
-  <widget class="QPushButton" name="Button_Benutzer_anlegen">
-   <property name="geometry">
-    <rect>
-     <x>248</x>
-     <y>270</y>
-     <width>181</width>
-     <height>29</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Benutzer anlegen</string>
-   </property>
-  </widget>
+   <item row="2" column="1" colspan="2">
+    <widget class="QComboBox" name="Eingabe_Nutzerprofil">
+     <item>
+      <property name="text">
+       <string>Administrator</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Schreibberechtigt</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Leseberechtigt</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="Passwort">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Passwort</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="1" colspan="2">
+    <widget class="QLineEdit" name="Eingabe_Passwort">
+     <property name="maxLength">
+      <number>20</number>
+     </property>
+     <property name="placeholderText">
+      <string>maximal 20 Zeichen</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="Passwort_WDH">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Passwort wiederholen</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="1" colspan="2">
+    <widget class="QLineEdit" name="Eingabe_Passwort_WDH">
+     <property name="maxLength">
+      <number>20</number>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1">
+    <widget class="QPushButton" name="Button_Benutzer_anlegen">
+     <property name="text">
+      <string>Benutzer anlegen</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="QPushButton" name="Button_abbrechen">
+     <property name="text">
+      <string>Abbrechen</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="3">
+    <widget class="QLabel" name="Ueberschrift">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="layoutDirection">
+      <enum>Qt::LayoutDirection::LeftToRight</enum>
+     </property>
+     <property name="text">
+      <string>Neuen Benutzer anlegen</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignmentFlag::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <tabstops>
   <tabstop>Eingabe_Benutzername</tabstop>
