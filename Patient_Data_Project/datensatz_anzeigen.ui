@@ -14,7 +14,27 @@
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" rowspan="3">
+   <item row="2" column="2">
+    <widget class="QPushButton" name="pushButton_4">
+     <property name="text">
+      <string>Datensatz bearbeiten</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2">
+    <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>ICD-10-Code Details</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0" rowspan="5">
     <widget class="QTableWidget" name="tableWidget">
      <property name="minimumSize">
       <size>
@@ -220,26 +240,6 @@
      </item>
     </widget>
    </item>
-   <item row="0" column="1" rowspan="3">
-    <widget class="Line" name="line">
-     <property name="orientation">
-      <enum>Qt::Orientation::Vertical</enum>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="2">
-    <widget class="QLabel" name="label">
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>ICD-10-Code Details</string>
-     </property>
-    </widget>
-   </item>
    <item row="1" column="2">
     <widget class="QTextBrowser" name="textBrowser">
      <property name="toolTip">
@@ -257,34 +257,21 @@ li.checked::marker { content: &quot;\2612&quot;; }
      </property>
     </widget>
    </item>
-   <item row="2" column="2">
-    <widget class="QWidget" name="widget" native="true">
-     <widget class="QPushButton" name="pushButton_2">
-      <property name="geometry">
-       <rect>
-        <x>180</x>
-        <y>0</y>
-        <width>83</width>
-        <height>29</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Schließen</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_4">
-      <property name="geometry">
-       <rect>
-        <x>0</x>
-        <y>0</y>
-        <width>151</width>
-        <height>29</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Datensatz bearbeiten</string>
-      </property>
-     </widget>
+   <item row="0" column="1" rowspan="5">
+    <widget class="Line" name="line">
+     <property name="orientation">
+      <enum>Qt::Orientation::Vertical</enum>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2">
+    <widget class="QWidget" name="widget" native="true"/>
+   </item>
+   <item row="3" column="2">
+    <widget class="QPushButton" name="pushButton_2">
+     <property name="text">
+      <string>Schließen</string>
+     </property>
     </widget>
    </item>
   </layout>
