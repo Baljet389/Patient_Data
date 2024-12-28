@@ -30,6 +30,8 @@ protected:
 private slots:
     void on_buttonBox_clicked(QAbstractButton *button);
 
+    void on_Datensatz_bearbeiten_rejected();
+
 private:
     Ui::Datensatz_bearbeiten *ui;
 };
