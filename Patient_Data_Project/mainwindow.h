@@ -73,7 +73,7 @@ private slots:
     void on_details_btn_clicked();
     void on_bearbeiten_btn_clicked();
     void on_logout_btn_clicked();
-
+    void datensatz_bearbeiten_aufruf();
     void on_filter_box_currentIndexChanged(int index);
 
     void on_add_user_btn_clicked();

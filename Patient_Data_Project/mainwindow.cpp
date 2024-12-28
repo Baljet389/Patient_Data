@@ -692,21 +692,8 @@ void MainWindow::on_speicher_btn_clicked()
 
 void MainWindow::on_pushButton_clicked()
 {
-    if(akt_user->permission==3){
-        QMessageBox::warning(this,"Fehler","Sie haben nur eine Leseberechtigung");
-        return;
-    }
-    try{
-    auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
-    datensatz_bearbeiten->show();
-    datensatz_bearbeiten->setWindowTitle("Datensatz hinzufügen");
-    datensatz_bearbeiten->mainwindow=this;
-    datensatz_bearbeiten->setStyleSheet(akt_mode);
     qDebug() << "on_pushButton_clicked";
-    }
-    catch(std::runtime_error &e){
-        QMessageBox::warning(this,"Fehler",e.what());
-    }
+    MainWindow::datensatz_bearbeiten_aufruf();
 }
 
 void MainWindow::on_details_btn_clicked()
@@ -715,26 +702,33 @@ void MainWindow::on_details_btn_clicked()
         QMessageBox::warning(this, "Fehler", "Bitte wählen Sie zuerst einen Datensatz aus.");
         return;
     }
+    qDebug() << "on_details_btn_clicked";
     try{
     auto anzeigen=new datensatz_anzeigen(nullptr,db,selectedID);
     datensatz_anzeigen_fenster = anzeigen;
     anzeigen->show();
     anzeigen->mw=this;
     anzeigen->setStyleSheet(akt_mode);
+    qDebug() << "on_details_btn_clicked next disableWindow MainWindow";
+    MainWindow::disableWindow();
     }
     catch(std::runtime_error &e){
         QMessageBox::warning(this, "Fehler", e.what());
     }
-    qDebug() << "on_details_btn_clicked";
 }
 
 void MainWindow::on_bearbeiten_btn_clicked()
+{
+    qDebug() << "on_bearbeiten_btn_clicked";
+    MainWindow::datensatz_bearbeiten_aufruf();
+}
+
+void MainWindow::datensatz_bearbeiten_aufruf()
 {
     if(berechtigung==3){
         QMessageBox::warning(this,"Fehler: ","Sie haben nur eine Leseberechtigung.");
         return;
     }
-    qDebug() << "on_bearbeiten_btn_clicked";
 
     // Fehlerausgabe bei keiner Auswahl
     if (selectedID == -1) {
@@ -742,13 +736,14 @@ void MainWindow::on_bearbeiten_btn_clicked()
         return;
     }
     try{
-    auto datensatz_bearbeiten = new Datensatz_bearbeiten(nullptr, selectedID, db);
-    Datensatz_bearbeiten_fenster = datensatz_bearbeiten;
-    datensatz_bearbeiten->show();
-    datensatz_bearbeiten->mainwindow=this;
-    datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");
-    datensatz_bearbeiten->setStyleSheet(akt_mode);
-    qDebug() << "on_pushButton_clicked";
+        auto datensatz_bearbeiten = new Datensatz_bearbeiten(nullptr, selectedID, db);
+        Datensatz_bearbeiten_fenster = datensatz_bearbeiten;
+        datensatz_bearbeiten->show();
+        datensatz_bearbeiten->mainwindow=this;
+        datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");
+        datensatz_bearbeiten->setStyleSheet(akt_mode);
+        qDebug() << "disableWindow MainWindow";
+        MainWindow::disableWindow();
     }
     catch(std::runtime_error &e){
         QMessageBox::warning(this, "Fehler", e.what());
@@ -759,7 +754,6 @@ void MainWindow::on_logout_btn_clicked()
 {
   qApp->exit(1);
 }
-
 
 void MainWindow::on_filter_box_currentIndexChanged(int index)
 {
