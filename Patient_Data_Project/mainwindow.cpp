@@ -847,17 +847,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
      event->accept();
     qDebug() << "Das Fenster MainWindow wurde geschlossen.";
 
-     if (datensatz_anzeigen_fenster != nullptr)
-     {
-         datensatz_anzeigen_fenster->close();
-     }
-
-     if (Datensatz_bearbeiten_fenster != nullptr)
-     {
-         Datensatz_bearbeiten_fenster->close();
-     }
-
-     qDebug() << "MainWindow hat die beiden anderen Fenster auch geschlossen, falls offen.";
+     delete this;
 }
 
 MainWindow::~MainWindow()
