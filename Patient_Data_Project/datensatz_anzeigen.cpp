@@ -40,7 +40,7 @@ datensatz_anzeigen::datensatz_anzeigen(QWidget *parent, Database* db,int selectI
 
 void datensatz_anzeigen::on_pushButton_2_clicked()
 {
-    close();
+    delete this;
 }
 
 void datensatz_anzeigen::on_pushButton_4_clicked()
@@ -57,7 +57,8 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
     datensatz->mainwindow=mw;
     datensatz->setStyleSheet(mw->akt_mode);
     // Hier Aufruf des Fensters: "datensatz_bearbeiten", mit entsprechendem Datensatz
-    close(); // Aktuelles Fenster schießen
+    delete this;
+    //close(); // Aktuelles Fenster schießen
 }
 
 void datensatz_anzeigen::closeEvent(QCloseEvent *event)
