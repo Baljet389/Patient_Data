@@ -696,6 +696,15 @@ void MainWindow::on_pushButton_clicked()
         QMessageBox::warning(this,"Fehler","Sie haben nur eine Leseberechtigung");
         return;
     }
+
+    if(Datensatz_bearbeiten_fenster != nullptr)
+    {
+        qDebug() << "Bereits ein Fenster add Patient - Datensatz_bearbeiten offen!";
+        return;
+    }
+
+    qDebug() << "Fenster add Patient - Datensatz_bearbeiten wird erzeugt:";
+
     try{
     auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
     datensatz_bearbeiten->show();
@@ -735,6 +744,14 @@ void MainWindow::on_bearbeiten_btn_clicked()
         return;
     }
     qDebug() << "on_bearbeiten_btn_clicked";
+
+    if(Datensatz_bearbeiten_fenster != nullptr)
+    {
+        qDebug() << "Bereits ein Fenster Datensatz_bearbeiten offen!";
+        return;
+    }
+
+    qDebug() << "Fenster Datensatz_bearbeiten wird erzeugt:";
 
     // Fehlerausgabe bei keiner Auswahl
     if (selectedID == -1) {
