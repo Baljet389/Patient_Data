@@ -697,9 +697,9 @@ void MainWindow::on_pushButton_clicked()
         return;
     }
 
-    if(Datensatz_bearbeiten_fenster != nullptr)
+    if (Datensatz_bearbeiten_fenster != nullptr)
     {
-        qDebug() << "Bereits ein Fenster add Patient - Datensatz_bearbeiten offen!";
+        qDebug() << "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!";
         return;
     }
 
@@ -747,7 +747,7 @@ void MainWindow::on_bearbeiten_btn_clicked()
 
     if (Datensatz_bearbeiten_fenster != nullptr)
     {
-        qDebug() << "Bereits ein Fenster Datensatz_bearbeiten offen!";
+        qDebug() << "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!";
         return;
     }
 
