@@ -2,6 +2,7 @@
 #define DATENSATZ_ANZEIGEN_H
 
 #include <QDialog>
+#include <QCloseEvent>
 #include "io_data.h"
 #include "database.h"
 #include "mainwindow.h"
@@ -20,6 +21,10 @@ public:
     int selectID;
     explicit datensatz_anzeigen(QWidget *parent = nullptr, Database* db=nullptr,int selectID=-1);
     ~datensatz_anzeigen();
+
+protected:
+    void closeEvent(QCloseEvent *event) override;  // closeEvent überschreiben
+
 private slots:
     void on_pushButton_2_clicked();
 

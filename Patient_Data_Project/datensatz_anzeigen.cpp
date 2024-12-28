@@ -7,6 +7,7 @@
 #include "datensatz_bearbeiten.h"
 #include "mainwindow.h"
 #include "user.h"
+#include <QCloseEvent>
 datensatz_anzeigen::datensatz_anzeigen(QWidget *parent, Database* db,int selectID)
     : QDialog(parent)
     , ui(new Ui::datensatz_anzeigen)
@@ -37,17 +38,10 @@ datensatz_anzeigen::datensatz_anzeigen(QWidget *parent, Database* db,int selectI
     ui->textBrowser->setEnabled(false);
 }
 
-datensatz_anzeigen::~datensatz_anzeigen()
-{
-    delete ui;
-    qDebug() << "datensatz_anzeigen Fenster geschlossen";
-}
-
 void datensatz_anzeigen::on_pushButton_2_clicked()
 {
     close();
 }
-
 
 void datensatz_anzeigen::on_pushButton_4_clicked()
 {
@@ -63,5 +57,16 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
     datensatz->setStyleSheet(mw->akt_mode);
     // Hier Aufruf des Fensters: "datensatz_bearbeiten", mit entsprechendem Datensatz
     close(); // Aktuelles Fenster schießen
+}
+
+void datensatz_anzeigen::closeEvent(QCloseEvent *event)
+{
+    event->accept();
+    qDebug() << "Das Fenster datensatz_anzeigen wird geschlossen.";
+}
+    datensatz_anzeigen::~datensatz_anzeigen()
+{
+    delete ui;
+    qDebug() << "datensatz_anzeigen Fenster geschlossen";
 }
 
