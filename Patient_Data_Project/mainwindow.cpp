@@ -825,6 +825,19 @@ void MainWindow::enableWindow()
 
 MainWindow::~MainWindow()
 {
+    // Falls die Fenster noch existieren, schließen
+    if (anzeigenFenster != nullptr) {
+        anzeigenFenster->close();
+        delete anzeigenFenster;  // Speicher freigeben
+        anzeigenFenster = nullptr;  // Nullpointer machen
+    }
+
+    if (bearbeitenFenster != nullptr) {
+        bearbeitenFenster->close();
+        delete bearbeitenFenster;  // Speicher freigeben
+        bearbeitenFenster = nullptr;  // Nullpointer machen
+    }
+
     delete ui;
     delete akt_user;
     qDebug() << "MainWindow Destruktor";

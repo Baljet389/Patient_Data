@@ -41,6 +41,10 @@ public:
     void disableWindow();  // Fenster deaktivieren
     void enableWindow();   // Fenster reaktivieren
 
+    // Membervariablen Fenster
+    datensatz_anzeigen* anzeigenFenster = nullptr;  // Pointer to datensatz_anzeigen
+    Datensatz_bearbeiten* bearbeitenFenster = nullptr;  // Pointer to Datensatz_bearbeiten
+
 private slots:
 
     void on_suche_txt_line_returnPressed();

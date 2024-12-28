@@ -90,7 +90,7 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
 void Datensatz_bearbeiten::closeEvent(QCloseEvent *event)
 {
     // event->accept();
-    qDebug() << "Das Fenster Datensatz_bearbeiten wurde manuell geschlossen.";
+    qDebug() << "Das Fenster Datensatz_bearbeiten wurde geschlossen.";
 }
 
 Datensatz_bearbeiten::~Datensatz_bearbeiten()
