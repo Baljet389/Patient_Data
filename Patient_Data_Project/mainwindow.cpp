@@ -845,7 +845,7 @@ void MainWindow::enableWindow()     // Nicht mehr benutzt, da Fenster jetzt gege
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-     event->accept();
+
     qDebug() << "Das Fenster MainWindow wurde geschlossen.";
 
      delete this;
