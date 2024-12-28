@@ -42,8 +42,8 @@ public:
     void enableWindow();   // Fenster reaktivieren
 
     // Membervariablen Fenster
-    datensatz_anzeigen* anzeigenFenster = nullptr;  // Pointer to datensatz_anzeigen
-    Datensatz_bearbeiten* bearbeitenFenster = nullptr;  // Pointer to Datensatz_bearbeiten
+    datensatz_anzeigen* anzeigenFenster = nullptr;  // Nullptr fpr Fenster
+    Datensatz_bearbeiten* bearbeitenFenster = nullptr;  // Nullptr für Fenster
 
 private slots:
 

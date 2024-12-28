@@ -716,10 +716,10 @@ void MainWindow::on_details_btn_clicked()
         return;
     }
     try{
-    auto anzeigen=new datensatz_anzeigen(nullptr,db,selectedID);
-    anzeigen->show();
-    anzeigen->mw=this;
-    anzeigen->setStyleSheet(akt_mode);
+        auto anzeigenFenster = new datensatz_anzeigen(nullptr, db, selectedID);
+        anzeigenFenster->show();
+        anzeigenFenster->mw = this;
+        anzeigenFenster->setStyleSheet(akt_mode);
     }
     catch(std::runtime_error &e){
         QMessageBox::warning(this, "Fehler", e.what());
@@ -741,11 +741,11 @@ void MainWindow::on_bearbeiten_btn_clicked()
         return;
     }
     try{
-    auto datensatz_bearbeiten = new Datensatz_bearbeiten(nullptr, selectedID, db);
-    datensatz_bearbeiten->show();
-    datensatz_bearbeiten->mainwindow=this;
-    datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");
-    datensatz_bearbeiten->setStyleSheet(akt_mode);
+        auto bearbeitenFenster = new Datensatz_bearbeiten(nullptr, selectedID, db);
+        bearbeitenFenster->show();
+        bearbeitenFenster->mainwindow = this;
+        bearbeitenFenster->setWindowTitle("Datensatz bearbeiten");
+        bearbeitenFenster->setStyleSheet(akt_mode);
     qDebug() << "on_pushButton_clicked";
     }
     catch(std::runtime_error &e){
