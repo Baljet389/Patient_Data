@@ -30,6 +30,8 @@ private slots:
 
     void on_pushButton_4_clicked();
 
+    void on_datensatz_anzeigen_rejected();
+
 private:
     Ui::datensatz_anzeigen *ui;
 };
