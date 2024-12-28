@@ -14,6 +14,8 @@ Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id, Database* dat
     : QDialog(parent)
     , ui(new Ui::Datensatz_bearbeiten)
 {
+
+    mainwindow->Datensatz_bearbeiten_fenster=this;
     ui->setupUi(this);
     this->database=database;
     PatientFound=database->getPatientbyColumn("PatientID",QString::number(id));
