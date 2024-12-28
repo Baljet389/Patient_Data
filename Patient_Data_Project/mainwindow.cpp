@@ -832,22 +832,15 @@ void MainWindow::on_add_user_btn_pressed()
 
 }
 
-void MainWindow::disableWindow()
+void MainWindow::disableWindow()    // Nicht mehr benutzt, da Fenster jetzt gegeneinander verriegelt
 {
     this->setDisabled(true);  // Das gesamte Fenster wird deaktiviert
-    // Wenn du nur bestimmte Widgets deaktivieren möchtest, kannst du diese auch gezielt ansprechen:
-    // ui->button1->setDisabled(true);
-    // ui->button2->setDisabled(true);
-    // etc.
 }
 
-void MainWindow::enableWindow()
+void MainWindow::enableWindow()     // Nicht mehr benutzt, da Fenster jetzt gegeneinander verriegelt
 {
     this->setDisabled(false);  // Das gesamte Fenster wird wieder aktiviert
-    // Falls du bestimmte Widgets wieder aktivieren möchtest:
-    // ui->button1->setDisabled(false);
-    // ui->button2->setDisabled(false);
-    // etc.
+
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
