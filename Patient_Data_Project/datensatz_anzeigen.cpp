@@ -51,6 +51,12 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
         return;
     }
 
+    if (mw->Datensatz_bearbeiten_fenster != nullptr)
+    {
+        qDebug() << "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!";
+        return;
+    }
+
     auto datensatz=new Datensatz_bearbeiten(nullptr,selectID,db);
     datensatz->show();
     datensatz->mainwindow=mw;
