@@ -707,6 +707,7 @@ void MainWindow::on_pushButton_clicked()
 
     try{
     auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
+    Datensatz_bearbeiten_fenster = datensatz_bearbeiten;
     datensatz_bearbeiten->show();
     datensatz_bearbeiten->setWindowTitle("Datensatz hinzufügen");
     datensatz_bearbeiten->mainwindow=this;
@@ -724,6 +725,13 @@ void MainWindow::on_details_btn_clicked()
         QMessageBox::warning(this, "Fehler", "Bitte wählen Sie zuerst einen Datensatz aus.");
         return;
     }
+
+    if (datensatz_anzeigen_fenster != nullptr)
+    {
+        qDebug() << "Bereits ein Fenster datensatz_anzeigen_fenster offen!";
+        return;
+    }
+
     try{
     auto anzeigen=new datensatz_anzeigen(nullptr,db,selectedID);
     datensatz_anzeigen_fenster = anzeigen;
