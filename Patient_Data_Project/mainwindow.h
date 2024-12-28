@@ -10,6 +10,7 @@
 #include "user.h"
 
 class datensatz_anzeigen;
+class Datensatz_bearbeiten;
 
 QT_BEGIN_NAMESPACE
 namespace Ui {
@@ -43,6 +44,11 @@ public:
 
     void disableWindow();  // Fenster deaktivieren
     void enableWindow();   // Fenster reaktivieren
+    Datensatz_bearbeiten* Datensatz_bearbeiten_fenster = nullptr;
+    datensatz_anzeigen* datensatz_anzeigen_fenster = nullptr;
+
+protected:
+    void closeEvent(QCloseEvent *event) override;  // closeEvent überschreiben
 
 private slots:
 
@@ -79,8 +85,6 @@ private:
     QString date;
     QString time;
     int selectedID = -1;
-
-    datensatz_anzeigen* datensatz_anzeigen_fenster = nullptr;
 
 };
 #endif // MAINWINDOW_H

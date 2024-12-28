@@ -743,6 +743,7 @@ void MainWindow::on_bearbeiten_btn_clicked()
     }
     try{
     auto datensatz_bearbeiten = new Datensatz_bearbeiten(nullptr, selectedID, db);
+    Datensatz_bearbeiten_fenster = datensatz_bearbeiten;
     datensatz_bearbeiten->show();
     datensatz_bearbeiten->mainwindow=this;
     datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");
@@ -824,11 +825,34 @@ void MainWindow::enableWindow()
     // etc.
 }
 
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+     event->accept();
+    qDebug() << "Das Fenster MainWindow wurde geschlossen.";
+
+     if (datensatz_anzeigen_fenster != nullptr)
+     {
+         datensatz_anzeigen_fenster->close();
+     }
+
+     if (Datensatz_bearbeiten_fenster != nullptr)
+     {
+         Datensatz_bearbeiten_fenster->close();
+     }
+
+     qDebug() << "MainWindow hat die beiden anderen Fenster auch geschlossen, falls offen.";
+}
+
 MainWindow::~MainWindow()
 {
     if (datensatz_anzeigen_fenster != nullptr)
         {
              datensatz_anzeigen_fenster->close();
+        }
+
+    if (Datensatz_bearbeiten_fenster != nullptr)
+        {
+            Datensatz_bearbeiten_fenster->close();
         }
 
     delete ui;

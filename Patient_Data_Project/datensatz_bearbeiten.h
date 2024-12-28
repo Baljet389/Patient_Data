@@ -2,7 +2,6 @@
 #define DATENSATZ_BEARBEITEN_H
 
 #include <QDialog>
-
 #include <QVBoxLayout>
 #include <QAbstractButton>
 #include "io_data.h"
