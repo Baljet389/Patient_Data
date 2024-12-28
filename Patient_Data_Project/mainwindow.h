@@ -8,6 +8,10 @@
 #include <QDebug>
 #include <QDateTime>
 #include "user.h"
+
+#include "datensatz_bearbeiten.h"
+#include "datensatz_anzeigen.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -40,10 +44,6 @@ public:
 
     void disableWindow();  // Fenster deaktivieren
     void enableWindow();   // Fenster reaktivieren
-
-    // Membervariablen Fenster
-    datensatz_anzeigen* anzeigenFenster = nullptr;  // Nullptr fpr Fenster
-    Datensatz_bearbeiten* bearbeitenFenster = nullptr;  // Nullptr für Fenster
 
 private slots:
 
@@ -80,5 +80,10 @@ private:
     QString date;
     QString time;
     int selectedID = -1;
+
+    // Membervariablen Fenster
+    datensatz_anzeigen* anzeigenFenster = nullptr;  // Nullptr fpr Fenster
+    Datensatz_bearbeiten* bearbeitenFenster = nullptr;  // Nullptr für Fenster
+
 };
 #endif // MAINWINDOW_H

@@ -6,8 +6,7 @@
 #include <QVBoxLayout>
 #include <QAbstractButton>
 #include "io_data.h"
-#include "database.h"
-#include "mainwindow.h"
+
 namespace Ui {
 class Datensatz_bearbeiten;
 }
