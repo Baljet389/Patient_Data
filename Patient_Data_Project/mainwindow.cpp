@@ -803,20 +803,12 @@ void MainWindow::on_add_user_btn_pressed()
 
 void MainWindow::disableWindow()
 {
-    this->setDisabled(true);  // Das gesamte Fenster wird deaktiviert
-    // Wenn du nur bestimmte Widgets deaktivieren möchtest, kannst du diese auch gezielt ansprechen:
-    // ui->button1->setDisabled(true);
-    // ui->button2->setDisabled(true);
-    // etc.
+    this->setDisabled(true);  // Das gesamte Fenster deaktiviert
 }
 
 void MainWindow::enableWindow()
 {
-    this->setDisabled(false);  // Das gesamte Fenster wird wieder aktiviert
-    // Falls du bestimmte Widgets wieder aktivieren möchtest:
-    // ui->button1->setDisabled(false);
-    // ui->button2->setDisabled(false);
-    // etc.
+    this->setDisabled(false);  // Das gesamte Fenster aktiviert
 }
 
 void MainWindow::closeEvent(QCloseEvent *event)
@@ -824,17 +816,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
      event->accept();
     qDebug() << "Das Fenster MainWindow wurde geschlossen.";
 
-     if (datensatz_anzeigen_fenster != nullptr)
-     {
-         datensatz_anzeigen_fenster->close();
-     }
-
-     if (Datensatz_bearbeiten_fenster != nullptr)
-     {
-         Datensatz_bearbeiten_fenster->close();
-     }
-
-     qDebug() << "MainWindow hat die beiden anderen Fenster auch geschlossen, falls offen.";
+     delete this;
 }
 
 MainWindow::~MainWindow()

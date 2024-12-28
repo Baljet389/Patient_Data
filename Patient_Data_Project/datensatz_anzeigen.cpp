@@ -52,22 +52,26 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
     }
 
     auto datensatz=new Datensatz_bearbeiten(nullptr,selectID,db);
+    mw->Datensatz_bearbeiten_fenster=datensatz;
     datensatz->show();
     datensatz->mainwindow=mw;
     datensatz->setStyleSheet(mw->akt_mode);
-    // Hier Aufruf des Fensters: "datensatz_bearbeiten", mit entsprechendem Datensatz
     close(); // Aktuelles Fenster schießen
+    qDebug() << "disableWindow MainWindow";
+    mw->disableWindow();
 }
 
 void datensatz_anzeigen::closeEvent(QCloseEvent *event)
 {
     event->accept();
     qDebug() << "Das Fenster datensatz_anzeigen wurde geschlossen!";
+    delete this;
 }
     datensatz_anzeigen::~datensatz_anzeigen()
 {
     delete ui;
     mw->datensatz_anzeigen_fenster=nullptr;
+    mw->enableWindow();
     qDebug() << "datensatz_anzeigen Destruktor";
 }
 
