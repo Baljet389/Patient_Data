@@ -745,7 +745,7 @@ void MainWindow::on_bearbeiten_btn_clicked()
     }
     qDebug() << "on_bearbeiten_btn_clicked";
 
-    if(Datensatz_bearbeiten_fenster != nullptr)
+    if (Datensatz_bearbeiten_fenster != nullptr)
     {
         qDebug() << "Bereits ein Fenster Datensatz_bearbeiten offen!";
         return;

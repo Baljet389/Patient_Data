@@ -72,7 +72,6 @@ void datensatz_anzeigen::closeEvent(QCloseEvent *event)
     qDebug() << "datensatz_anzeigen Destruktor";
 }
 
-
 void datensatz_anzeigen::on_datensatz_anzeigen_rejected()
 {
     delete this;
