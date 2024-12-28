@@ -71,7 +71,8 @@ void datensatz_anzeigen::closeEvent(QCloseEvent *event)
     qDebug() << "Das Fenster datensatz_anzeigen wurde geschlossen!";
     delete this;
 }
-    datensatz_anzeigen::~datensatz_anzeigen()
+
+datensatz_anzeigen::~datensatz_anzeigen()
 {
     delete ui;
     mw->datensatz_anzeigen_fenster=nullptr;
@@ -88,4 +89,3 @@ void datensatz_anzeigen::on_datensatz_anzeigen_finished(int result)
 {
     delete this;
 }
-

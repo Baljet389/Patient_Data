@@ -113,4 +113,3 @@ void Datensatz_bearbeiten::on_Datensatz_bearbeiten_finished(int result)
 {
     delete this;
 }
-
