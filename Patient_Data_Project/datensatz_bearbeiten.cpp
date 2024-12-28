@@ -10,7 +10,7 @@
 #include <QAbstractButton>
 #include <QDialog>
 #include <QDialogButtonBox>
-Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id, Database* database)
+Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id = mainwindow->selectedID, Database* database)
     : QDialog(parent)
     , ui(new Ui::Datensatz_bearbeiten)
 {
