@@ -52,8 +52,9 @@ Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id, Database* dat
 Datensatz_bearbeiten::~Datensatz_bearbeiten()
 {
     delete ui;
-    //Patient wir wieder gelöscht
+    //Patient wird wieder gelöscht
     delete loadPatient;
+    qDebug() << "datensatz_bearbeiten Fenster geschlossen";
 }
 
 void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
