@@ -100,5 +100,6 @@ Datensatz_bearbeiten::~Datensatz_bearbeiten()
     //Patient wird wieder gelöscht
     delete loadPatient;
     mainwindow->Datensatz_bearbeiten_fenster=nullptr;
+    mainwindow->enableWindow();
     qDebug() << "Datensatz_bearbeiten Destruktor";
 }

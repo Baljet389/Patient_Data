@@ -69,6 +69,7 @@ void datensatz_anzeigen::closeEvent(QCloseEvent *event)
 {
     delete ui;
     mw->datensatz_anzeigen_fenster=nullptr;
+    mw->enableWindow();
     qDebug() << "datensatz_anzeigen Destruktor";
 }
 
