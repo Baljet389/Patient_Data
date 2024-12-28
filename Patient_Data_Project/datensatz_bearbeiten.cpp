@@ -76,11 +76,16 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
             loadPatient->diagnose=ui->lineEdit_9_Diagnose->text();
             loadPatient->behandlung=ui->Eingabe_Behandlung->text();
             //Datenbankanfragen werden ausgeführt
+            try{
             if(id==-1){
                 database->insertPatient(*loadPatient);
             }
             else{
                 database->editPatient(*loadPatient);
+            }
+            }
+            catch(std::runtime_error &e){
+                QMessageBox::warning(this,"Fehler",e.what());
             }
             if(mainwindow!=nullptr){
              mainwindow->on_suche_btn_clicked();
