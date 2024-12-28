@@ -717,6 +717,7 @@ void MainWindow::on_details_btn_clicked()
     }
     try{
     auto anzeigen=new datensatz_anzeigen(nullptr,db,selectedID);
+    datensatz_anzeigen_fenster = anzeigen;
     anzeigen->show();
     anzeigen->mw=this;
     anzeigen->setStyleSheet(akt_mode);
@@ -825,6 +826,11 @@ void MainWindow::enableWindow()
 
 MainWindow::~MainWindow()
 {
+    if (datensatz_anzeigen_fenster != nullptr)
+        {
+             datensatz_anzeigen_fenster->close();
+        }
+
     delete ui;
     delete akt_user;
     qDebug() << "MainWindow Destruktor";
