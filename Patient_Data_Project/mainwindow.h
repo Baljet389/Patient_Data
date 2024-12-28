@@ -50,6 +50,7 @@ public:
 
 protected:
     void closeEvent(QCloseEvent *event) override;  // closeEvent überschreiben
+    int selectedID = -1;
 
 private slots:
 
@@ -85,6 +86,5 @@ private:
 
     QString date;
     QString time;
-    int selectedID = -1;
 };
 #endif // MAINWINDOW_H
