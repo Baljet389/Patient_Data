@@ -28,7 +28,7 @@ MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     this->setWindowTitle("Elektronische Patientenakte");
     //Text anzeigen beim Hovern
     ui->speicher_btn->setToolTip("Daten als CSV speichern");
-    ui->pushButton->setToolTip("Datensatz hinzufügen");
+    ui->addButton->setToolTip("Datensatz hinzufügen");
     ui->suche_btn->setToolTip("Suche eingegebenen Text");
     ui->open_btn->setToolTip("Daten aus CSV einlesen");
     ui->add_user_btn->setToolTip("Neuen Benutzer anlegen");
@@ -690,41 +690,22 @@ void MainWindow::on_speicher_btn_clicked()
     }
 }
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_addButton_clicked() // ersetzt void MainWindow::on_pushButton_clicked()
 {
-    qDebug() << "on_pushButton_clicked";
+    qDebug() << "on_addButton_clicked";
+    {
+        if(akt_user->permission==3){
+            QMessageBox::warning(this,"Fehler","Sie haben nur eine Leseberechtigung");
+            return;
+        }
+        selectedID = -1;
     MainWindow::datensatz_bearbeiten_aufruf();
-}
-
-void MainWindow::on_details_btn_clicked()
-{
-    if (selectedID == -1) {
-        QMessageBox::warning(this, "Fehler", "Bitte wählen Sie zuerst einen Datensatz aus.");
-        return;
-    }
-    qDebug() << "on_details_btn_clicked";
-    try{
-    auto anzeigen=new datensatz_anzeigen(nullptr,db,selectedID);
-    datensatz_anzeigen_fenster = anzeigen;
-    anzeigen->show();
-    anzeigen->mw=this;
-    anzeigen->setStyleSheet(akt_mode);
-    qDebug() << "on_details_btn_clicked next disableWindow MainWindow";
-    MainWindow::disableWindow();
-    }
-    catch(std::runtime_error &e){
-        QMessageBox::warning(this, "Fehler", e.what());
-    }
 }
 
 void MainWindow::on_bearbeiten_btn_clicked()
 {
     qDebug() << "on_bearbeiten_btn_clicked";
-    MainWindow::datensatz_bearbeiten_aufruf();
-}
 
-void MainWindow::datensatz_bearbeiten_aufruf()
-{
     if(berechtigung==3){
         QMessageBox::warning(this,"Fehler: ","Sie haben nur eine Leseberechtigung.");
         return;
@@ -735,6 +716,11 @@ void MainWindow::datensatz_bearbeiten_aufruf()
         QMessageBox::warning(this, "Fehler", "Bitte wählen Sie zuerst einen Datensatz aus.");
         return;
     }
+    MainWindow::datensatz_bearbeiten_aufruf();
+}
+
+void MainWindow::datensatz_bearbeiten_aufruf()
+{
     try{
         auto datensatz_bearbeiten = new Datensatz_bearbeiten(nullptr, selectedID, db);
         Datensatz_bearbeiten_fenster = datensatz_bearbeiten;
@@ -743,6 +729,23 @@ void MainWindow::datensatz_bearbeiten_aufruf()
         datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");
         datensatz_bearbeiten->setStyleSheet(akt_mode);
         qDebug() << "disableWindow MainWindow";
+        MainWindow::disableWindow();
+    }
+    catch(std::runtime_error &e){
+        QMessageBox::warning(this, "Fehler", e.what());
+    }
+}
+
+void MainWindow::on_details_btn_clicked()
+{
+    qDebug() << "on_details_btn_clicked";
+    try{
+        auto anzeigen=new datensatz_anzeigen(nullptr,db,selectedID);
+        datensatz_anzeigen_fenster = anzeigen;
+        anzeigen->show();
+        anzeigen->mw=this;
+        anzeigen->setStyleSheet(akt_mode);
+        qDebug() << "on_details_btn_clicked next disableWindow MainWindow";
         MainWindow::disableWindow();
     }
     catch(std::runtime_error &e){
@@ -835,3 +838,4 @@ MainWindow::~MainWindow()
     delete akt_user;
     qDebug() << "MainWindow Destruktor";
 }
+

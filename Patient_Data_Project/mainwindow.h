@@ -69,7 +69,7 @@ private slots:
 
     void on_open_btn_clicked();
     void on_speicher_btn_clicked();
-    void on_pushButton_clicked();
+    void on_addButton_clicked();   // ersetzt void on_pushButton_clicked();
     void on_details_btn_clicked();
     void on_bearbeiten_btn_clicked();
     void on_logout_btn_clicked();
