@@ -25,6 +25,9 @@ public:
     explicit Datensatz_bearbeiten(QWidget *parent = nullptr,int id=-1,Database* database=nullptr);
     ~Datensatz_bearbeiten();
 
+protected:
+    void closeEvent(QCloseEvent *event) override;  // closeEvent überschreiben
+
 private slots:
     void on_buttonBox_clicked(QAbstractButton *button);
 

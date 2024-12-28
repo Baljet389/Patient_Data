@@ -62,11 +62,11 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
 void datensatz_anzeigen::closeEvent(QCloseEvent *event)
 {
     event->accept();
-    qDebug() << "Das Fenster datensatz_anzeigen wird geschlossen.";
+    qDebug() << "Das Fenster datensatz_anzeigen wurde manuell geschlossen!";
 }
     datensatz_anzeigen::~datensatz_anzeigen()
 {
     delete ui;
-    qDebug() << "datensatz_anzeigen Fenster geschlossen";
+    qDebug() << "datensatz_anzeigen Destruktor";
 }
 

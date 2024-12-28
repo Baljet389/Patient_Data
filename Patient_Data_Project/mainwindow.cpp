@@ -107,12 +107,6 @@ MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
 
 }
 
-MainWindow::~MainWindow()
-{
-    delete ui;
-    delete akt_user;
-}
-
 void MainWindow::on_suche_btn_clicked()
 {
     ui->data_table->setRowCount(0);
@@ -806,9 +800,32 @@ void MainWindow::on_add_user_btn_clicked()
     }
 }
 
-
 void MainWindow::on_add_user_btn_pressed()
 {
 
 }
 
+void MainWindow::disableWindow()
+{
+    this->setDisabled(true);  // Das gesamte Fenster wird deaktiviert
+    // Wenn du nur bestimmte Widgets deaktivieren möchtest, kannst du diese auch gezielt ansprechen:
+    // ui->button1->setDisabled(true);
+    // ui->button2->setDisabled(true);
+    // etc.
+}
+
+void MainWindow::enableWindow()
+{
+    this->setDisabled(false);  // Das gesamte Fenster wird wieder aktiviert
+    // Falls du bestimmte Widgets wieder aktivieren möchtest:
+    // ui->button1->setDisabled(false);
+    // ui->button2->setDisabled(false);
+    // etc.
+}
+
+MainWindow::~MainWindow()
+{
+    delete ui;
+    delete akt_user;
+    qDebug() << "MainWindow Destruktor";
+}

@@ -49,14 +49,6 @@ Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id, Database* dat
     ui->Eingabe_Behandlung->setText(loadPatient->behandlung);
 }
 
-Datensatz_bearbeiten::~Datensatz_bearbeiten()
-{
-    delete ui;
-    //Patient wird wieder gelöscht
-    delete loadPatient;
-    qDebug() << "datensatz_bearbeiten Fenster geschlossen";
-}
-
 void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
 {
     //Info aus UI- File wird wieder in Patienten Objekt geladen
@@ -95,3 +87,16 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
         }
 }
 
+void Datensatz_bearbeiten::closeEvent(QCloseEvent *event)
+{
+    // event->accept();
+    qDebug() << "Das Fenster Datensatz_bearbeiten wurde manuell geschlossen.";
+}
+
+Datensatz_bearbeiten::~Datensatz_bearbeiten()
+{
+    delete ui;
+    //Patient wird wieder gelöscht
+    delete loadPatient;
+    qDebug() << "Datensatz_bearbeiten Destruktor";
+}

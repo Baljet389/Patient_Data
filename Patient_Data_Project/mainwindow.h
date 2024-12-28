@@ -38,6 +38,9 @@ public:
 
     void on_suche_btn_clicked();
 
+    void disableWindow();  // Fenster deaktivieren
+    void enableWindow();   // Fenster reaktivieren
+
 private slots:
 
     void on_suche_txt_line_returnPressed();
@@ -63,9 +66,7 @@ private slots:
 
     void on_filter_box_currentIndexChanged(int index);
 
-
     void on_add_user_btn_clicked();
-
 
     void on_add_user_btn_pressed();
 
