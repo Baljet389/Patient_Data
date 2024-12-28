@@ -56,6 +56,7 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
     QDialogButtonBox::ButtonRole role = buttonBox->buttonRole(button);
     switch(role){
         case QDialogButtonBox::RejectRole:
+            delete this;
             return;
         case QDialogButtonBox::AcceptRole:
             loadPatient->vorname=ui->Eingabe_Vorname->text();
@@ -85,6 +86,7 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
             }
 
         }
+    delete this;
 }
 
 void Datensatz_bearbeiten::closeEvent(QCloseEvent *event)
