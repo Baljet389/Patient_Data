@@ -34,11 +34,6 @@ public:
     int berechtigung;//1=admin; 2=Schreibberechtigung; 3=Leseberechtigung
     bool darkmode;
     QString akt_mode;
-    // Teständerung für CSV im/export
-    //QString pfad = open_btn.clicked()
-    //qDebug() << pfad;
-    //void io_data.CSVeinlesen(QString pfad, db);
-    //void io_data.CSVerstellen(QString pfad, &db);
 
     void on_suche_btn_clicked();
 
