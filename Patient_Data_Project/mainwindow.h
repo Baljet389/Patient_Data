@@ -80,6 +80,8 @@ private slots:
 
     void on_add_user_btn_pressed();
 
+    void on_MainWindow_destroyed();
+
 private:
     Ui::MainWindow *ui;
 

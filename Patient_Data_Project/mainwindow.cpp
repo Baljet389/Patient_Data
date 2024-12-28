@@ -866,3 +866,9 @@ MainWindow::~MainWindow()
     delete akt_user;
     qDebug() << "MainWindow Destruktor";
 }
+
+void MainWindow::on_MainWindow_destroyed()
+{
+    delete this;
+}
+
