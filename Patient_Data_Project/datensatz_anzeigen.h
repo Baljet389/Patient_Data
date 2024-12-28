@@ -32,6 +32,8 @@ private slots:
 
     void on_datensatz_anzeigen_rejected();
 
+    void on_datensatz_anzeigen_finished(int result);
+
 private:
     Ui::datensatz_anzeigen *ui;
 };

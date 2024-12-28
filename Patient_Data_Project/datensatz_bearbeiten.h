@@ -32,6 +32,8 @@ private slots:
 
     void on_Datensatz_bearbeiten_rejected();
 
+    void on_Datensatz_bearbeiten_finished(int result);
+
 private:
     Ui::Datensatz_bearbeiten *ui;
 };

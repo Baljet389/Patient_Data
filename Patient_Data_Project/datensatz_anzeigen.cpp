@@ -83,3 +83,9 @@ void datensatz_anzeigen::on_datensatz_anzeigen_rejected()
     delete this;
 }
 
+
+void datensatz_anzeigen::on_datensatz_anzeigen_finished(int result)
+{
+    delete this;
+}
+
