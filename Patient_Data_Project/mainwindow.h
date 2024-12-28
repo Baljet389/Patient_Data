@@ -44,6 +44,7 @@ public:
 
     void disableWindow();  // Fenster deaktivieren
     void enableWindow();   // Fenster reaktivieren
+
     Datensatz_bearbeiten* Datensatz_bearbeiten_fenster = nullptr;
     datensatz_anzeigen* datensatz_anzeigen_fenster = nullptr;
 
@@ -85,6 +86,5 @@ private:
     QString date;
     QString time;
     int selectedID = -1;
-
 };
 #endif // MAINWINDOW_H
