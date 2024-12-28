@@ -8,6 +8,9 @@
 #include <QDebug>
 #include <QDateTime>
 #include "user.h"
+//#include "datensatz_bearbeiten.h"
+//#include "datensatz_anzeigen.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -76,5 +79,8 @@ private:
     QString date;
     QString time;
     int selectedID = -1;
+
+//    datensatz_anzeigen* datensatz_anzeigen_fenster = nullptr;
+
 };
 #endif // MAINWINDOW_H
