@@ -91,6 +91,7 @@ void Datensatz_bearbeiten::closeEvent(QCloseEvent *event)
 {
     // event->accept();
     qDebug() << "Das Fenster Datensatz_bearbeiten wurde geschlossen.";
+    delete this;
 }
 
 Datensatz_bearbeiten::~Datensatz_bearbeiten()
