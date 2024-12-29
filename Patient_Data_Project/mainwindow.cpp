@@ -900,22 +900,20 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
     try {
         qDebug() << "void MainWindow::closeEvent(QCloseEvent *event)";
+        closeAllFenster();
         const auto topLevelWidgets = QApplication::topLevelWidgets();
-                for (QWidget* widget : topLevelWidgets) {
+        for (QWidget* widget : topLevelWidgets) {
             if (widget != this) {
                 widget->close();
             }
         }
-
-        closeAllFenster();
+        event->accept(); // Accept the close event
 
     } catch (const std::exception& e) {
         qDebug() << "Fehler im closeEvent: " << e.what();
     } catch (...) {
         qDebug() << "Unbekannter Fehler im closeEvent";
     }
-
-    event->accept();
 }
 
     /*
@@ -1029,7 +1027,11 @@ void MainWindow::closeAllFenster()
 
 MainWindow::~MainWindow()
 {
+    qDebug() << "MainWindow::~MainWindow()";
     closeAllFenster();
+    delete ui;
+    delete akt_user;
+    qDebug() << "MainWindow::~MainWindow() fertig";
 }
 
 
@@ -1114,8 +1116,6 @@ MainWindow::~MainWindow()
             nutzer_anlegen_fenster->close();
         }
 
-    delete ui;
-    delete akt_user;
-    qDebug() << "MainWindow Destruktor fertig";
+
 }
 */

@@ -96,25 +96,29 @@ void Datensatz_bearbeiten::closeEvent(QCloseEvent *event)
 
 void Datensatz_bearbeiten::clearPointerInMainWindow()
 {
-    if (mainwindow) {
-        // Überprüfe, ob das Fenster der Hauptzeiger ist
-        if (mainwindow->Datensatz_bearbeiten_fenster == this) {
-            mainwindow->Datensatz_bearbeiten_fenster = nullptr;  // Setze den Pointer auf nullptr
-            qDebug() << "Datensatz_bearbeiten Destruktor, Fenster-Pointer in Datensatz_bearbeiten_fenster auf nullptr gesetzt";
+    try {
+        qDebug() << "void Datensatz_bearbeiten::clearPointerInMainWindow()";
+        if (mainwindow) {
+            // Überprüfe Zeiger
+            if (mainwindow->Datensatz_bearbeiten_fenster == this) {
+                mainwindow->Datensatz_bearbeiten_fenster = nullptr;  // Setze den Pointer auf nullptr
+                qDebug() << "Datensatz_bearbeiten Destruktor, Fenster-Pointer in Datensatz_bearbeiten_fenster auf nullptr gesetzt";
+            }
+            // Überprüfe Liste
+            else if (mainwindow->offeneFenster.contains(this)) {
+                mainwindow->offeneFenster.removeOne(this);  // Entferne aus der Liste
+                qDebug() << "Datensatz_bearbeiten Destruktor, Fenster aus offeneFenster Liste entfernt";
+            }
         }
-        // Überprüfe, ob das Fenster in der Liste der offenen Fenster enthalten ist
-        else if (mainwindow->offeneFenster.contains(this)) {
-            mainwindow->offeneFenster.removeOne(this);  // Entferne das Fenster aus der Liste
-            qDebug() << "Datensatz_bearbeiten Destruktor, Fenster aus offeneFenster Liste entfernt";
-        }
+    } catch (const std::exception& e) {
+        qDebug() << "Fehler in clearPointerInMainWindow: " << e.what();
+    } catch (...) {
+        qDebug() << "Unbekannter Fehler in clearPointerInMainWindow";
     }
 }
 
 Datensatz_bearbeiten::~Datensatz_bearbeiten()
 {
-    delete ui;
-    //Patient wird wieder gelöscht
-    delete loadPatient;
     // mainwindow->Datensatz_bearbeiten_fenster=nullptr;
 
     qDebug() << "Das Fenster Datensatz_bearbeiten Destruktor.";
@@ -143,17 +147,12 @@ Datensatz_bearbeiten::~Datensatz_bearbeiten()
         qDebug() << "Unbekannter Fehler im Destruktor von Datensatz_bearbeiten";
     }
 */
+    delete ui;
+    //Patient wird wieder gelöscht
+    delete loadPatient;
     qDebug() << "Datensatz_bearbeiten Destruktor fertig";
 }
 
-    /*
-    if (mainwindow)
-    {
-        mainwindow->offeneFenster.removeOne(this);
-        qDebug() << "Datensatz_bearbeiten Destruktor, Fenster entfernt.";
-    }
-    qDebug() << "Datensatz_bearbeiten Destruktor";
-*/
 
 void Datensatz_bearbeiten::on_Datensatz_bearbeiten_rejected()
 {
