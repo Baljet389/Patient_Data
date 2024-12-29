@@ -698,14 +698,21 @@ void MainWindow::on_pushButton_clicked()
         return;
     }
 
-    if (Datensatz_bearbeiten_fenster != nullptr)
+/*    if (Datensatz_bearbeiten_fenster != nullptr)
     {
         qDebug() << "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!";
         QMessageBox::warning(this, "Warnung", "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!");
         return;
+    }*/
+
+    } if (!offeneFenster.isEmpty())
+    {
+        qDebug() << "Bereits ein Fenster offen! - Aktion wird torzdem zugelassen";
+        QMessageBox::warning(this, "Info", "Bereits ein Fenster offen!");
+        // return;
     }
 
-    qDebug() << "Fenster add Patient - Datensatz_bearbeiten wird erzeugt:";
+    qDebug() << "Fenster add Patient wird erzeugt:";
 
     try{
     auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
@@ -756,10 +763,24 @@ void MainWindow::on_bearbeiten_btn_clicked()
     }
     qDebug() << "on_bearbeiten_btn_clicked";
 
+    /*
     if (Datensatz_bearbeiten_fenster != nullptr)
     {
         qDebug() << "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!";
         QMessageBox::warning(this, "Warnung", "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!");
+        return;
+    }*/
+
+    if (mw->offeneFenster.size() > 0)
+    {
+        QMessageBox::warning(this, "Warnung", "Es sind bereits bearbeiten Fenster offen!");
+        return;
+    }
+
+    if (!offeneFenster.isEmpty())
+    {
+        qDebug() << "Bereits ein Fenster Datensatz_bearbeiten offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster Datensatz_bearbeiten offen!");
         return;
     }
 
@@ -772,7 +793,8 @@ void MainWindow::on_bearbeiten_btn_clicked()
     }
     try{
     auto datensatz_bearbeiten = new Datensatz_bearbeiten(nullptr, selectedID, db);
-    Datensatz_bearbeiten_fenster = datensatz_bearbeiten;
+    offeneFenster.append(datensatz_bearbeiten);
+    // Datensatz_bearbeiten_fenster = datensatz_bearbeiten;
     datensatz_bearbeiten->show();
     datensatz_bearbeiten->mainwindow=this;
     datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");

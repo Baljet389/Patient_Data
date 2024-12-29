@@ -99,7 +99,12 @@ Datensatz_bearbeiten::~Datensatz_bearbeiten()
     delete ui;
     //Patient wird wieder gelöscht
     delete loadPatient;
-    mainwindow->Datensatz_bearbeiten_fenster=nullptr;
+    //mainwindow->Datensatz_bearbeiten_fenster=nullptr;
+    if (mainwindow)
+    {
+        mainwindow->offeneFenster.removeOne(this);
+        qDebug() << "Datensatz_bearbeiten Destruktor, Fenster entfernt.";
+    }
     qDebug() << "Datensatz_bearbeiten Destruktor";
 }
 

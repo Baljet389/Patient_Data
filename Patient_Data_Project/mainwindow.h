@@ -8,6 +8,7 @@
 #include <QDebug>
 #include <QDateTime>
 #include "user.h"
+#include <QList>
 
 class datensatz_anzeigen;
 class Datensatz_bearbeiten;
@@ -46,7 +47,8 @@ public:
     void disableWindow();  // Fenster deaktivieren
     void enableWindow();   // Fenster reaktivieren
 
-    Datensatz_bearbeiten* Datensatz_bearbeiten_fenster = nullptr;
+    // Datensatz_bearbeiten* Datensatz_bearbeiten_fenster = nullptr;
+    QList<Datensatz_bearbeiten*> offeneFenster;
     datensatz_anzeigen* datensatz_anzeigen_fenster = nullptr;
     nutzer_anlegen* nutzer_anlegen_fenster= nullptr;
 
