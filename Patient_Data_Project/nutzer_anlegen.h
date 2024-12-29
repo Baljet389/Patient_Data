@@ -18,6 +18,8 @@ private slots:
 
     void on_pushButton_clicked();
 
+    void on_nutzer_anlegen_rejected();
+
 private:
     Ui::nutzer_anlegen *ui;
     nutzer_anlegen **ptr_nutzer_anlegen_window;

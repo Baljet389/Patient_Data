@@ -63,3 +63,9 @@ nutzer_anlegen::~nutzer_anlegen()
         *ptr_nutzer_anlegen_window = nullptr;
     }
 }
+
+void nutzer_anlegen::on_nutzer_anlegen_rejected()
+{
+    delete this;
+}
+
