@@ -59,7 +59,7 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
     }
 
     auto datensatz=new Datensatz_bearbeiten(nullptr,selectID,db);
-    Datensatz_bearbeiten_fenster = datensatz;
+    mw->Datensatz_bearbeiten_fenster = datensatz;
     datensatz->show();
     datensatz->mainwindow=mw;
     datensatz->setStyleSheet(mw->akt_mode);
