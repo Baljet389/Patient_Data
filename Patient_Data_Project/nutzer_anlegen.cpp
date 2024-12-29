@@ -16,6 +16,7 @@ void nutzer_anlegen::on_pushButton_2_clicked()
 {
 
     close();
+    delete this;
 }
 
 
