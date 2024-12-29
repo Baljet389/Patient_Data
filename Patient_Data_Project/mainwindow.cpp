@@ -905,7 +905,9 @@ void MainWindow::closeEvent(QCloseEvent *event)
         }
     }
 
-    qDebug() << "Das Fenster MainWindow wurde geschlossen.";
+    qDebug() << "void MainWindow::closeEvent(QCloseEvent *event)";
+    closeAllFenster();
+    /*
     if (datensatz_anzeigen_fenster != nullptr)
     {
         datensatz_anzeigen_fenster->close();
@@ -933,6 +935,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
 
     event->accept(); // Accept the close event
+    */
 }
 
 void MainWindow::on_add_user_btn_pressed()
@@ -957,7 +960,6 @@ void MainWindow::on_MainWindow_destroyed()
     closeAllFenster();
     // delete this;
 }
-
 
 void MainWindow::closeAllFenster()
 {
