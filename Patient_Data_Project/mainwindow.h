@@ -36,18 +36,12 @@ public:
     int berechtigung;//1=admin; 2=Schreibberechtigung; 3=Leseberechtigung
     bool darkmode;
     QString akt_mode;
-    // Teständerung für CSV im/export
-    //QString pfad = open_btn.clicked()
-    //qDebug() << pfad;
-    //void io_data.CSVeinlesen(QString pfad, db);
-    //void io_data.CSVerstellen(QString pfad, &db);
 
     void on_suche_btn_clicked();
 
     void disableWindow();  // Fenster deaktivieren
     void enableWindow();   // Fenster reaktivieren
 
-    // Datensatz_bearbeiten* Datensatz_bearbeiten_fenster = nullptr;
     QList<Datensatz_bearbeiten*> offeneFenster;
     Datensatz_bearbeiten* Datensatz_bearbeiten_fenster = nullptr;
     datensatz_anzeigen* datensatz_anzeigen_fenster = nullptr;
