@@ -51,14 +51,12 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
         return;
     }
 
-    qDebug() << "TESTPOINT";
-    qDebug() << "Es sind " << mw->offeneFenster.size() << " bearbeiten/hinzufügen Fenster offen!";
-
-    if (mw->offeneFenster.size() > 5)
+    if (mw->offeneFenster.size() > 0)
     {
-        QMessageBox::warning(this, "Warnung", "Es sind bereits " + QString::number(mw->offeneFenster.size()) + " Fenster offen!");
+        QMessageBox::warning(this, "Warnung", "Es sind bereits bearbeiten Fenster offen!");
         return;
     }
+
 /*
     if (mw->Datensatz_bearbeiten_fenster != nullptr)
     {
