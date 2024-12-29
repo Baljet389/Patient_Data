@@ -51,9 +51,9 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
         return;
     }
 
-    if (mw->offeneFenster.size() > 0)
+    if (mw->offeneFenster.size() > 5)
     {
-        QMessageBox::warning(this, "Warnung", "Es sind bereits bearbeiten Fenster offen!");
+        QMessageBox::warning(this, "Warnung", "Es sind bereits Fenster offen!");
         return;
     }
 /*
