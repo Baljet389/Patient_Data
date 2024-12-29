@@ -83,10 +83,6 @@ private slots:
 
     void on_add_user_btn_clicked();
 
-<<<<<<< HEAD
-=======
-    void closeEvent(QCloseEvent *event);
->>>>>>> 76ccf736e846302d7d6b92ea55599bdf4f2fa619
     void on_add_user_btn_pressed();
 
     void on_MainWindow_destroyed();

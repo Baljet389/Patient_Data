@@ -18,10 +18,7 @@
 #include "datensatz_anzeigen.h"
 #include "nutzer_anlegen.h"
 #include "user.h"
-<<<<<<< HEAD
-=======
 #include <QCloseEvent>
->>>>>>> 76ccf736e846302d7d6b92ea55599bdf4f2fa619
 
 MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     : QMainWindow(parent)
@@ -111,16 +108,6 @@ MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
 
 }
 
-<<<<<<< HEAD
-=======
-MainWindow::~MainWindow()
-{
-    delete ui;
-    delete akt_user;
-
-}
-
->>>>>>> 76ccf736e846302d7d6b92ea55599bdf4f2fa619
 void MainWindow::on_suche_btn_clicked()
 {
     ui->data_table->setRowCount(0);
@@ -909,8 +896,6 @@ void MainWindow::on_add_user_btn_clicked()
     }
 }
 
-<<<<<<< HEAD
-=======
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     const auto topLevelWidgets = QApplication::topLevelWidgets();
@@ -919,27 +904,6 @@ void MainWindow::closeEvent(QCloseEvent *event)
             widget->close();
         }
     }
-    event->accept(); // Accept the close event
-}
->>>>>>> 76ccf736e846302d7d6b92ea55599bdf4f2fa619
-void MainWindow::on_add_user_btn_pressed()
-{
-
-}
-
-void MainWindow::disableWindow()    // Nicht mehr benutzt, da Fenster jetzt gegeneinander verriegelt
-{
-    this->setDisabled(true);  // Das gesamte Fenster wird deaktiviert
-}
-
-void MainWindow::enableWindow()     // Nicht mehr benutzt, da Fenster jetzt gegeneinander verriegelt
-{
-    this->setDisabled(false);  // Das gesamte Fenster wird wieder aktiviert
-
-}
-
-void MainWindow::closeEvent(QCloseEvent *event)
-{
 
     qDebug() << "Das Fenster MainWindow wurde geschlossen.";
     if (datensatz_anzeigen_fenster != nullptr)
@@ -967,7 +931,24 @@ void MainWindow::closeEvent(QCloseEvent *event)
     {
         nutzer_anlegen_fenster->close();
     }
-    // delete this;
+
+    event->accept(); // Accept the close event
+}
+
+void MainWindow::on_add_user_btn_pressed()
+{
+
+}
+
+void MainWindow::disableWindow()    // Nicht mehr benutzt, da Fenster jetzt gegeneinander verriegelt
+{
+    this->setDisabled(true);  // Das gesamte Fenster wird deaktiviert
+}
+
+void MainWindow::enableWindow()     // Nicht mehr benutzt, da Fenster jetzt gegeneinander verriegelt
+{
+    this->setDisabled(false);  // Das gesamte Fenster wird wieder aktiviert
+
 }
 
 MainWindow::~MainWindow()
