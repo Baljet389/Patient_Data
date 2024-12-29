@@ -54,6 +54,7 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
     if (mw->Datensatz_bearbeiten_fenster != nullptr)
     {
         qDebug() << "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!");
         return;
     }
 

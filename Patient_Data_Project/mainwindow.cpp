@@ -700,7 +700,7 @@ void MainWindow::on_pushButton_clicked()
     if (Datensatz_bearbeiten_fenster != nullptr)
     {
         qDebug() << "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!";
-        QMessageBox::warning(this, "Fehler", "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!");
+        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!");
         return;
     }
 
