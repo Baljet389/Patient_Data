@@ -208,21 +208,6 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
 
                      qDebug() << "Patient valide:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
 
-                     /*
-                    qDebug() << "Patientendaten:"
-                             << "ID:" << werteListe[0]
-                             << "Vorname:" << werteListe[1]
-                             << "Nachname:" << werteListe[2]
-                             << "Geburtsdatum:" << werteListe[3]
-                             << "Geschlecht:" << werteListe[4]
-                             << "Adresse:" << werteListe[5]
-                             << "Telefonnummer:" << werteListe[6]
-                             << "E-Mail:" << werteListe[7]
-                             << "Eintrittsdatum:" << werteListe[8]
-                             << "Diagnose:" << werteListe[9]
-                             << "Behandlung:" << werteListe[10];
-                     */
-                    // Patient in Datenbank speichern
                     database.insertPatient(patient);
                     qDebug() << "Datensatz inserted";
                 } catch (const invalid_argument &e) {
