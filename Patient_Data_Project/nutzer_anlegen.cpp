@@ -30,6 +30,7 @@ void nutzer_anlegen::on_pushButton_clicked()
 
     if(password!=password_wdh){
         QMessageBox::information(this, "Fehler", "Passwort stimmt nicht überein.");
+        delete this;
         return;
     }
 
@@ -49,6 +50,7 @@ void nutzer_anlegen::on_pushButton_clicked()
     if(success == "Neuer Benutzer erfolgreich angelegt."){
         QMessageBox::information(this, "Benutzer hinzufügen",  success);
         close();
+        delete this;
     }else{
         QMessageBox::information(this, "Fehler", success);
     }
@@ -65,6 +67,12 @@ nutzer_anlegen::~nutzer_anlegen()
 }
 
 void nutzer_anlegen::on_nutzer_anlegen_rejected()
+{
+    delete this;
+}
+
+
+void nutzer_anlegen::on_nutzer_anlegen_accepted()
 {
     delete this;
 }

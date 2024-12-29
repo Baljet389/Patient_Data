@@ -20,6 +20,8 @@ private slots:
 
     void on_nutzer_anlegen_rejected();
 
+    void on_nutzer_anlegen_accepted();
+
 private:
     Ui::nutzer_anlegen *ui;
     nutzer_anlegen **ptr_nutzer_anlegen_window;
