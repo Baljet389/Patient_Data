@@ -206,10 +206,11 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
                         werteListe[10]                     // Behandlung
                         );
 
-                     qDebug() << "Patient valide:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
+                    // qDebug() << "Patient valide:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
 
                     database.insertPatient(patient);
-                    qDebug() << "Datensatz inserted";
+                    qDebug() << "Patient inserted:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
+                    // qDebug() << "Datensatz inserted";
                 } catch (const invalid_argument &e) {
                     qDebug() << "Ungültige Daten in Zeile, überspringe. Fehler:" << e.what();
                 }
