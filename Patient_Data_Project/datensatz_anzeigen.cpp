@@ -51,9 +51,18 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
         return;
     }
 
+    /*
     if (mw->offeneFenster.size() > 0)
     {
         QMessageBox::warning(this, "Warnung", "Es sind bereits bearbeiten Fenster offen!");
+        return;
+    }
+*/
+
+    if (mw->Datensatz_bearbeiten_fenster != nullptr)
+    {
+        qDebug() << "Bereits ein zum bearbeiten eines Datensatzes offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein zum bearbeiten eines Datensatzes offen!");
         return;
     }
 

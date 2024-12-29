@@ -715,7 +715,7 @@ void MainWindow::on_pushButton_clicked()
 
     if (offeneFenster.size() > 4)
     {
-        QMessageBox::warning(this, "Warnung", "Es sind bereits " + QString::number(offeneFenster.size()) + " Fenster offen!");
+        QMessageBox::warning(this, "Warnung", "Es sind bereits " + QString::number(offeneFenster.size()) + " Datensatz hinzufügen Fenster offen!");
         return;
     }
 
@@ -782,24 +782,31 @@ void MainWindow::on_bearbeiten_btn_clicked()
 
     qDebug() << "TESTPOINT";
     qDebug() << "Es sind " << offeneFenster.size() << " bearbeiten und oder hinzufügen Fenster offen!";
-
+/*
     if (offeneFenster.size() > 5)
     {
         QMessageBox::warning(this, "Warnung", "Es sind bereits " + QString::number(offeneFenster.size()) + " Fenster offen!");
         return;
     }
-
+*/
     /*
     if (offeneFenster.size() > 0)
     {
         QMessageBox::warning(this, "Warnung", "Es sind bereits bearbeiten Fenster offen!");
         return;
     }*/
-
+/*
     if (!offeneFenster.isEmpty())
     {
         qDebug() << "Bereits ein Fenster Datensatz_bearbeiten offen!";
         QMessageBox::warning(this, "Warnung", "Bereits ein Fenster Datensatz_bearbeiten offen!");
+        return;
+    }*/
+
+    if (Datensatz_bearbeiten_fenster != nullptr)
+    {
+        qDebug() << "Bereits ein Fenster zur Bearbeitung eines Patienten offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster zur Bearbeitung eines Patienten offen!");
         return;
     }
 
@@ -927,7 +934,6 @@ MainWindow::~MainWindow()
                     }
                 }
         }
-
 
     if (nutzer_anlegen_fenster != nullptr)
         {

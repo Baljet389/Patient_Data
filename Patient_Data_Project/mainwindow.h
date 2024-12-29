@@ -49,6 +49,7 @@ public:
 
     // Datensatz_bearbeiten* Datensatz_bearbeiten_fenster = nullptr;
     QList<Datensatz_bearbeiten*> offeneFenster;
+    Datensatz_bearbeiten* Datensatz_bearbeiten_fenster = nullptr;
     datensatz_anzeigen* datensatz_anzeigen_fenster = nullptr;
     nutzer_anlegen* nutzer_anlegen_fenster= nullptr;
 
