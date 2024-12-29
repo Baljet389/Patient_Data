@@ -919,9 +919,15 @@ MainWindow::~MainWindow()
 
         if (offeneFenster.size() > 0)
         {
-            QMessageBox::warning(this, "Warnung", "Es sind bereits bearbeiten Fenster offen!");
-            return;
+            for(auto fenster : offeneFenster)
+                {
+                if (fenster != nullptr)
+                    {
+                        fenster->close();
+                    }
+                }
         }
+
 
     if (nutzer_anlegen_fenster != nullptr)
         {
