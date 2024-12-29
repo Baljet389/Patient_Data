@@ -56,17 +56,17 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
         QMessageBox::warning(this, "Warnung", "Es sind bereits bearbeiten Fenster offen!");
         return;
     }
-
+/*
     if (mw->Datensatz_bearbeiten_fenster != nullptr)
     {
         qDebug() << "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!";
         QMessageBox::warning(this, "Warnung", "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!");
         return;
-    }
+    }*/
 
     auto datensatz=new Datensatz_bearbeiten(nullptr,selectID,db);
     // mw->Datensatz_bearbeiten_fenster = datensatz;
-    mw->offeneFenster.append(datensatz_bearbeiten);
+    mw->offeneFenster.append(datensatz);
     datensatz->show();
     datensatz->mainwindow=mw;
     datensatz->setStyleSheet(mw->akt_mode);

@@ -705,7 +705,7 @@ void MainWindow::on_pushButton_clicked()
         return;
     }*/
 
-    } if (!offeneFenster.isEmpty())
+    if (!offeneFenster.isEmpty())
     {
         qDebug() << "Bereits ein Fenster offen! - Aktion wird torzdem zugelassen";
         QMessageBox::warning(this, "Info", "Bereits ein Fenster offen!");
@@ -716,7 +716,8 @@ void MainWindow::on_pushButton_clicked()
 
     try{
     auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
-    Datensatz_bearbeiten_fenster = datensatz_bearbeiten;
+    // Datensatz_bearbeiten_fenster = datensatz_bearbeiten;
+    offeneFenster.append(datensatz_bearbeiten);
     datensatz_bearbeiten->show();
     datensatz_bearbeiten->setWindowTitle("Datensatz hinzufügen");
     datensatz_bearbeiten->mainwindow=this;
@@ -771,7 +772,7 @@ void MainWindow::on_bearbeiten_btn_clicked()
         return;
     }*/
 
-    if (mw->offeneFenster.size() > 0)
+    if (offeneFenster.size() > 0)
     {
         QMessageBox::warning(this, "Warnung", "Es sind bereits bearbeiten Fenster offen!");
         return;
@@ -893,9 +894,15 @@ MainWindow::~MainWindow()
              datensatz_anzeigen_fenster->close();
         }
 
-    if (Datensatz_bearbeiten_fenster != nullptr)
+/*    if (Datensatz_bearbeiten_fenster != nullptr)
         {
             Datensatz_bearbeiten_fenster->close();
+        }*/
+
+        if (offeneFenster.size() > 0)
+        {
+            QMessageBox::warning(this, "Warnung", "Es sind bereits bearbeiten Fenster offen!");
+            return;
         }
 
     if (nutzer_anlegen_fenster != nullptr)
