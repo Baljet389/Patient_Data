@@ -3,24 +3,21 @@
 #include "user.h"
 #include "QMessageBox"
 
-nutzer_anlegen::nutzer_anlegen(QWidget *parent)
+nutzer_anlegen::nutzer_anlegen(QWidget *parent, nutzer_anlegen **ptr_nutzer_anlegen_window)
     : QDialog(parent)
     , ui(new Ui::nutzer_anlegen)
+    , ptr_nutzer_anlegen_window(ptr_nutzer_anlegen_window)
 {
     ui->setupUi(this);
     connect(ui->Button_Benutzer_anlegen, &QPushButton::clicked, this, &nutzer_anlegen::on_pushButton_clicked);
     connect(ui->Button_abbrechen, &QPushButton::clicked, this, &nutzer_anlegen::on_pushButton_2_clicked);
 }
 
-nutzer_anlegen::~nutzer_anlegen()
-{
-    delete ui;
-}
-
 void nutzer_anlegen::on_pushButton_2_clicked()
 {
 
     close();
+    delete this;
 }
 
 
@@ -33,6 +30,7 @@ void nutzer_anlegen::on_pushButton_clicked()
 
     if(password!=password_wdh){
         QMessageBox::information(this, "Fehler", "Passwort stimmt nicht überein.");
+        delete this;
         return;
     }
 
@@ -52,9 +50,41 @@ void nutzer_anlegen::on_pushButton_clicked()
     if(success == "Neuer Benutzer erfolgreich angelegt."){
         QMessageBox::information(this, "Benutzer hinzufügen",  success);
         close();
+        delete this;
     }else{
         QMessageBox::information(this, "Fehler", success);
     }
 
+}
+
+nutzer_anlegen::~nutzer_anlegen()
+{
+    delete ui;
+    if (ptr_nutzer_anlegen_window != nullptr)
+    {
+        *ptr_nutzer_anlegen_window = nullptr;
+    }
+}
+
+void nutzer_anlegen::on_nutzer_anlegen_rejected()
+{
+    qDebug() << "void nutzer_anlegen::on_nutzer_anlegen_rejected()";
+    if (ptr_nutzer_anlegen_window != nullptr)
+    {
+        *ptr_nutzer_anlegen_window = nullptr;
+    }
+    // delete this;
+}
+
+void nutzer_anlegen::on_nutzer_anlegen_accepted()
+{
+    qDebug() << "void nutzer_anlegen::on_nutzer_anlegen_accepted()";
+    // delete this;
+}
+
+void nutzer_anlegen::on_nutzer_anlegen_finished(int result)
+{
+    qDebug() << "void nutzer_anlegen::on_nutzer_anlegen_finished(int result)";
+    // delete this;
 }
 

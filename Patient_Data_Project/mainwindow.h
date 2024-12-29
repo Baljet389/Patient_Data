@@ -8,6 +8,12 @@
 #include <QDebug>
 #include <QDateTime>
 #include "user.h"
+#include <QList>
+
+class datensatz_anzeigen;
+class Datensatz_bearbeiten;
+class nutzer_anlegen;
+
 QT_BEGIN_NAMESPACE
 namespace Ui {
 class MainWindow;
@@ -38,6 +44,18 @@ public:
 
     void on_suche_btn_clicked();
 
+    void disableWindow();  // Fenster deaktivieren
+    void enableWindow();   // Fenster reaktivieren
+
+    // Datensatz_bearbeiten* Datensatz_bearbeiten_fenster = nullptr;
+    QList<Datensatz_bearbeiten*> offeneFenster;
+    Datensatz_bearbeiten* Datensatz_bearbeiten_fenster = nullptr;
+    datensatz_anzeigen* datensatz_anzeigen_fenster = nullptr;
+    nutzer_anlegen* nutzer_anlegen_fenster= nullptr;
+
+protected:
+    void closeEvent(QCloseEvent *event) override;  // closeEvent überschreiben
+
 private slots:
 
     void on_suche_txt_line_returnPressed();
@@ -63,11 +81,15 @@ private slots:
 
     void on_filter_box_currentIndexChanged(int index);
 
-
     void on_add_user_btn_clicked();
 
+<<<<<<< HEAD
     void closeEvent(QCloseEvent *event);
+=======
+>>>>>>> NewMainMerge
     void on_add_user_btn_pressed();
+
+    void on_MainWindow_destroyed();
 
 private:
     Ui::MainWindow *ui;

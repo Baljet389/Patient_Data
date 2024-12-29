@@ -18,7 +18,10 @@
 #include "datensatz_anzeigen.h"
 #include "nutzer_anlegen.h"
 #include "user.h"
+<<<<<<< HEAD
 #include <QCloseEvent>
+=======
+>>>>>>> NewMainMerge
 
 MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     : QMainWindow(parent)
@@ -108,6 +111,7 @@ MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
 
 }
 
+<<<<<<< HEAD
 MainWindow::~MainWindow()
 {
     delete ui;
@@ -115,6 +119,8 @@ MainWindow::~MainWindow()
 
 }
 
+=======
+>>>>>>> NewMainMerge
 void MainWindow::on_suche_btn_clicked()
 {
     ui->data_table->setRowCount(0);
@@ -704,8 +710,34 @@ void MainWindow::on_pushButton_clicked()
         QMessageBox::warning(this,"Fehler","Sie haben nur eine Leseberechtigung");
         return;
     }
+
+/*    if (Datensatz_bearbeiten_fenster != nullptr)
+    {
+        qDebug() << "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!");
+        return;
+    }*/
+
+    /*
+    if (!offeneFenster.isEmpty())
+    {
+        qDebug() << "Bereits ein Fenster offen! - Aktion wird torzdem zugelassen";
+        QMessageBox::warning(this, "Info", "Bereits ein Fenster offen!");
+        // return;
+    }*/
+
+    if (offeneFenster.size() > 4)
+    {
+        QMessageBox::warning(this, "Warnung", "Es sind bereits " + QString::number(offeneFenster.size()) + " Datensatz hinzufügen Fenster offen!");
+        return;
+    }
+
+    qDebug() << "Fenster add Patient wird erzeugt:";
+
     try{
     auto datensatz_bearbeiten=new Datensatz_bearbeiten(nullptr,-1,db);
+    // Datensatz_bearbeiten_fenster = datensatz_bearbeiten;
+    offeneFenster.append(datensatz_bearbeiten);
     datensatz_bearbeiten->show();
     datensatz_bearbeiten->setWindowTitle("Datensatz hinzufügen");
     datensatz_bearbeiten->mainwindow=this;
@@ -723,15 +755,24 @@ void MainWindow::on_details_btn_clicked()
         QMessageBox::warning(this, "Fehler", "Bitte wählen Sie zuerst einen Datensatz aus.");
         return;
     }
+
+    if (datensatz_anzeigen_fenster != nullptr)
+    {
+        qDebug() << "Bereits ein Fenster datensatz_anzeigen_fenster offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster datensatz_anzeigen_fenster offen!");
+        return;
+    }
+
     try{
     auto anzeigen=new datensatz_anzeigen(nullptr,db,selectedID);
+    datensatz_anzeigen_fenster = anzeigen;
     anzeigen->show();
     anzeigen->mw=this;
     anzeigen->setStyleSheet(akt_mode);
     anzeigen->setWindowTitle("Datensatz anzeigen");
     }
     catch(std::runtime_error &e){
-        QMessageBox::warning(this, "Fehler", e.what());
+        QMessageBox::warning(this, "Warnung", e.what());
     }
     qDebug() << "on_details_btn_clicked";
 }
@@ -744,6 +785,47 @@ void MainWindow::on_bearbeiten_btn_clicked()
     }
     qDebug() << "on_bearbeiten_btn_clicked";
 
+    /*
+    if (Datensatz_bearbeiten_fenster != nullptr)
+    {
+        qDebug() << "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!");
+        return;
+    }*/
+
+
+    qDebug() << "TESTPOINT";
+    qDebug() << "Es sind " << offeneFenster.size() << " bearbeiten und oder hinzufügen Fenster offen!";
+/*
+    if (offeneFenster.size() > 5)
+    {
+        QMessageBox::warning(this, "Warnung", "Es sind bereits " + QString::number(offeneFenster.size()) + " Fenster offen!");
+        return;
+    }
+*/
+    /*
+    if (offeneFenster.size() > 0)
+    {
+        QMessageBox::warning(this, "Warnung", "Es sind bereits bearbeiten Fenster offen!");
+        return;
+    }*/
+/*
+    if (!offeneFenster.isEmpty())
+    {
+        qDebug() << "Bereits ein Fenster Datensatz_bearbeiten offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster Datensatz_bearbeiten offen!");
+        return;
+    }*/
+
+    if (Datensatz_bearbeiten_fenster != nullptr)
+    {
+        qDebug() << "Bereits ein Fenster zur Bearbeitung eines Patienten offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster zur Bearbeitung eines Patienten offen!");
+        return;
+    }
+
+    qDebug() << "Fenster Datensatz_bearbeiten wird erzeugt:";
+
     // Fehlerausgabe bei keiner Auswahl
     if (selectedID == -1) {
         QMessageBox::warning(this, "Fehler", "Bitte wählen Sie zuerst einen Datensatz aus.");
@@ -751,6 +833,8 @@ void MainWindow::on_bearbeiten_btn_clicked()
     }
     try{
     auto datensatz_bearbeiten = new Datensatz_bearbeiten(nullptr, selectedID, db);
+    // offeneFenster.append(datensatz_bearbeiten);
+    Datensatz_bearbeiten_fenster = datensatz_bearbeiten;
     datensatz_bearbeiten->show();
     datensatz_bearbeiten->mainwindow=this;
     datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");
@@ -805,8 +889,17 @@ void MainWindow::on_add_user_btn_clicked()
         QMessageBox::warning(this,"Fehler","Sie haben keine Admin-Rechte.");
         return;
     }
+
+    if (nutzer_anlegen_fenster != nullptr)
+    {
+        qDebug() << "Bereits ein Fenster nutzer_anlegen_fenster offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster nutzer_anlegen_fenster offen!");
+        return;
+    }
+
     try{
-        auto nutzer=new nutzer_anlegen();
+        auto nutzer=new nutzer_anlegen(this, &nutzer_anlegen_fenster);
+        nutzer_anlegen_fenster = nutzer;
         nutzer->show();
         nutzer->setStyleSheet(akt_mode);
         nutzer->setWindowTitle("Nutzer hinzufügen");
@@ -816,6 +909,7 @@ void MainWindow::on_add_user_btn_clicked()
     }
 }
 
+<<<<<<< HEAD
 void MainWindow::closeEvent(QCloseEvent *event)
 {
     const auto topLevelWidgets = QApplication::topLevelWidgets();
@@ -826,8 +920,116 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
     event->accept(); // Accept the close event
 }
+=======
+>>>>>>> NewMainMerge
 void MainWindow::on_add_user_btn_pressed()
 {
 
+}
+
+void MainWindow::disableWindow()    // Nicht mehr benutzt, da Fenster jetzt gegeneinander verriegelt
+{
+    this->setDisabled(true);  // Das gesamte Fenster wird deaktiviert
+}
+
+void MainWindow::enableWindow()     // Nicht mehr benutzt, da Fenster jetzt gegeneinander verriegelt
+{
+    this->setDisabled(false);  // Das gesamte Fenster wird wieder aktiviert
+
+}
+
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+
+    qDebug() << "Das Fenster MainWindow wurde geschlossen.";
+    if (datensatz_anzeigen_fenster != nullptr)
+    {
+        datensatz_anzeigen_fenster->close();
+    }
+
+    if (Datensatz_bearbeiten_fenster != nullptr)
+    {
+        Datensatz_bearbeiten_fenster->close();
+    }
+
+    if (offeneFenster.size() > 0)
+    {
+        for(auto fenster : offeneFenster)
+        {
+            if (fenster != nullptr)
+            {
+                fenster->close();
+            }
+        }
+    }
+
+    if (nutzer_anlegen_fenster != nullptr)
+    {
+        nutzer_anlegen_fenster->close();
+    }
+    // delete this;
+}
+
+MainWindow::~MainWindow()
+{
+    if (datensatz_anzeigen_fenster != nullptr)
+        {
+             datensatz_anzeigen_fenster->close();
+        }
+
+    if (Datensatz_bearbeiten_fenster != nullptr)
+    {
+        Datensatz_bearbeiten_fenster->close();
+    }
+
+    if (offeneFenster.size() > 0)
+    {
+        for(auto fenster : offeneFenster)
+            {
+            if (fenster != nullptr)
+                {
+                    fenster->close();
+                }
+            }
+    }
+
+    if (nutzer_anlegen_fenster != nullptr)
+        {
+            nutzer_anlegen_fenster->close();
+        }
+
+    delete ui;
+    delete akt_user;
+    qDebug() << "MainWindow Destruktor";
+}
+
+void MainWindow::on_MainWindow_destroyed()
+{
+    if (datensatz_anzeigen_fenster != nullptr)
+    {
+        datensatz_anzeigen_fenster->close();
+    }
+
+    if (Datensatz_bearbeiten_fenster != nullptr)
+    {
+        Datensatz_bearbeiten_fenster->close();
+    }
+
+    if (offeneFenster.size() > 0)
+    {
+        for(auto fenster : offeneFenster)
+        {
+            if (fenster != nullptr)
+            {
+                fenster->close();
+            }
+        }
+    }
+
+    if (nutzer_anlegen_fenster != nullptr)
+    {
+        nutzer_anlegen_fenster->close();
+    }
+    // delete this;
 }
 

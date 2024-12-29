@@ -7,6 +7,7 @@
 #include "datensatz_bearbeiten.h"
 #include "mainwindow.h"
 #include "user.h"
+#include <QCloseEvent>
 datensatz_anzeigen::datensatz_anzeigen(QWidget *parent, Database* db,int selectID)
     : QDialog(parent)
     , ui(new Ui::datensatz_anzeigen)
@@ -37,17 +38,10 @@ datensatz_anzeigen::datensatz_anzeigen(QWidget *parent, Database* db,int selectI
     ui->textBrowser->setEnabled(false);
 }
 
-datensatz_anzeigen::~datensatz_anzeigen()
-{
-    delete ui;
-
-}
-
 void datensatz_anzeigen::on_pushButton_2_clicked()
 {
     close();
 }
-
 
 void datensatz_anzeigen::on_pushButton_4_clicked()
 {
@@ -57,11 +51,63 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
         return;
     }
 
+    /*
+    if (mw->offeneFenster.size() > 0)
+    {
+        QMessageBox::warning(this, "Warnung", "Es sind bereits bearbeiten Fenster offen!");
+        return;
+    }
+*/
+
+    if (mw->Datensatz_bearbeiten_fenster != nullptr)
+    {
+        qDebug() << "Bereits ein zum bearbeiten eines Datensatzes offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein zum bearbeiten eines Datensatzes offen!");
+        return;
+    }
+
+/*
+    if (mw->Datensatz_bearbeiten_fenster != nullptr)
+    {
+        qDebug() << "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!");
+        return;
+    }*/
+
     auto datensatz=new Datensatz_bearbeiten(nullptr,selectID,db);
+    mw->Datensatz_bearbeiten_fenster = datensatz;
+    //mw->offeneFenster.append(datensatz);
     datensatz->show();
     datensatz->mainwindow=mw;
     datensatz->setStyleSheet(mw->akt_mode);
+<<<<<<< HEAD
     datensatz->setWindowTitle("Datensatz bearbeiten");
     // Hier Aufruf des Fensters: "datensatz_bearbeiten", mit entsprechendem Datensatz
+=======
+    delete this;
+>>>>>>> NewMainMerge
 }
 
+void datensatz_anzeigen::closeEvent(QCloseEvent *event)
+{
+    // event->accept();
+    qDebug() << "Das Fenster datensatz_anzeigen wurde geschlossen!";
+    delete this;
+}
+
+datensatz_anzeigen::~datensatz_anzeigen()
+{
+    delete ui;
+    mw->datensatz_anzeigen_fenster=nullptr;
+    qDebug() << "datensatz_anzeigen Destruktor";
+}
+
+void datensatz_anzeigen::on_datensatz_anzeigen_rejected()
+{
+    delete this;
+}
+
+void datensatz_anzeigen::on_datensatz_anzeigen_finished(int result)
+{
+    delete this;
+}

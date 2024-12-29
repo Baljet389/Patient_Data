@@ -2,7 +2,6 @@
 #define DATENSATZ_BEARBEITEN_H
 
 #include <QDialog>
-
 #include <QVBoxLayout>
 #include <QAbstractButton>
 #include "io_data.h"
@@ -25,8 +24,15 @@ public:
     explicit Datensatz_bearbeiten(QWidget *parent = nullptr,int id=-1,Database* database=nullptr);
     ~Datensatz_bearbeiten();
 
+protected:
+    void closeEvent(QCloseEvent *event) override;  // closeEvent überschreiben
+
 private slots:
     void on_buttonBox_clicked(QAbstractButton *button);
+
+    void on_Datensatz_bearbeiten_rejected();
+
+    void on_Datensatz_bearbeiten_finished(int result);
 
 private:
     Ui::Datensatz_bearbeiten *ui;

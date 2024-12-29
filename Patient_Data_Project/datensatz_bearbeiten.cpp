@@ -49,13 +49,6 @@ Datensatz_bearbeiten::Datensatz_bearbeiten(QWidget *parent,int id, Database* dat
     ui->Eingabe_Behandlung->setText(loadPatient->behandlung);
 }
 
-Datensatz_bearbeiten::~Datensatz_bearbeiten()
-{
-    delete ui;
-    //Patient wir wieder gelöscht
-    delete loadPatient;
-}
-
 void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
 {
     //Info aus UI- File wird wieder in Patienten Objekt geladen
@@ -94,3 +87,50 @@ void Datensatz_bearbeiten::on_buttonBox_clicked(QAbstractButton *button)
         }
 }
 
+void Datensatz_bearbeiten::closeEvent(QCloseEvent *event)
+{
+    // event->accept();
+    qDebug() << "Das Fenster Datensatz_bearbeiten wurde geschlossen.";
+    delete this;
+}
+
+Datensatz_bearbeiten::~Datensatz_bearbeiten()
+{
+    delete ui;
+    //Patient wird wieder gelöscht
+    delete loadPatient;
+    // mainwindow->Datensatz_bearbeiten_fenster=nullptr;
+
+    if (mainwindow) {
+        if (mainwindow->Datensatz_bearbeiten_fenster == this) {
+            mainwindow->Datensatz_bearbeiten_fenster = nullptr;
+            qDebug() << "Datensatz_bearbeiten Destruktor, Fenster-Pointer nullptr";
+        } else if (mainwindow->offeneFenster.contains(this)) {
+            mainwindow->offeneFenster.removeOne(this);
+            qDebug() << "Datensatz_bearbeiten Destruktor, Fenster aus Liste entfernt";
+        }
+    }
+    qDebug() << "Datensatz_bearbeiten Destruktor";
+
+}
+
+    /*
+    if (mainwindow)
+    {
+        mainwindow->offeneFenster.removeOne(this);
+        qDebug() << "Datensatz_bearbeiten Destruktor, Fenster entfernt.";
+    }
+    qDebug() << "Datensatz_bearbeiten Destruktor";
+*/
+
+
+void Datensatz_bearbeiten::on_Datensatz_bearbeiten_rejected()
+{
+    delete this;
+}
+
+
+void Datensatz_bearbeiten::on_Datensatz_bearbeiten_finished(int result)
+{
+    delete this;
+}
