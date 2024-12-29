@@ -11,7 +11,7 @@ class nutzer_anlegen : public QDialog
     Q_OBJECT
 
 public:
-    explicit nutzer_anlegen(QWidget *parent = nullptr);
+    explicit nutzer_anlegen(QWidget *parent = nullptr, nutzer_anlegen **ptr_nutzer_anlegen_window = nullptr);
     ~nutzer_anlegen();
 private slots:
     void on_pushButton_2_clicked();

@@ -825,10 +825,11 @@ void MainWindow::on_add_user_btn_clicked()
     {
         qDebug() << "Bereits ein Fenster nutzer_anlegen_fenster offen!";
         QMessageBox::warning(this, "Warnung", "Bereits ein Fenster nutzer_anlegen_fenster offen!");
+        return;
     }
 
     try{
-        auto nutzer=new nutzer_anlegen();
+        auto nutzer=new nutzer_anlegen(this, &nutzer_anlegen_fenster);
         nutzer_anlegen_fenster = nutzer;
         nutzer->show();
         nutzer->setStyleSheet(akt_mode);
