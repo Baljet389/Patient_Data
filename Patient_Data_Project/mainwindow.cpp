@@ -953,20 +953,25 @@ void MainWindow::enableWindow()     // Nicht mehr benutzt, da Fenster jetzt gege
 
 MainWindow::~MainWindow()
 {
+    qDebug() << "MainWindow Destruktor";
     if (datensatz_anzeigen_fenster != nullptr)
         {
+            qDebug() << "MainWindow Destruktor - datensatz_anzeigen_fenster";
              datensatz_anzeigen_fenster->close();
         }
 
     if (Datensatz_bearbeiten_fenster != nullptr)
     {
+        qDebug() << "MainWindow Destruktor - Datensatz_bearbeiten_fenster";
         Datensatz_bearbeiten_fenster->close();
     }
 
     if (offeneFenster.size() > 0)
     {
+        qDebug() << "MainWindow Destruktor - offeneFenster";
         for(auto fenster : offeneFenster)
             {
+            qDebug() << "MainWindow Destruktor - for loop";
             if (fenster != nullptr)
                 {
                     fenster->close();
@@ -976,12 +981,13 @@ MainWindow::~MainWindow()
 
     if (nutzer_anlegen_fenster != nullptr)
         {
+         qDebug() << "MainWindow Destruktor - nutzer_anlegen_fenster";
             nutzer_anlegen_fenster->close();
         }
 
     delete ui;
     delete akt_user;
-    qDebug() << "MainWindow Destruktor";
+    qDebug() << "MainWindow Destruktor fertig";
 }
 
 void MainWindow::on_MainWindow_destroyed()

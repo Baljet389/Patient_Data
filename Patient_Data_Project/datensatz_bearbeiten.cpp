@@ -101,17 +101,25 @@ Datensatz_bearbeiten::~Datensatz_bearbeiten()
     delete loadPatient;
     // mainwindow->Datensatz_bearbeiten_fenster=nullptr;
 
-    if (mainwindow) {
-        if (mainwindow->Datensatz_bearbeiten_fenster == this) {
-            mainwindow->Datensatz_bearbeiten_fenster = nullptr;
-            qDebug() << "Datensatz_bearbeiten Destruktor, Fenster-Pointer nullptr";
-        } else if (mainwindow->offeneFenster.contains(this)) {
-            mainwindow->offeneFenster.removeOne(this);
-            qDebug() << "Datensatz_bearbeiten Destruktor, Fenster aus Liste entfernt";
-        }
-    }
-    qDebug() << "Datensatz_bearbeiten Destruktor";
+    qDebug() << "Das Fenster Datensatz_bearbeiten Destruktor.";
 
+    try {
+        if (mainwindow) {
+            if (mainwindow->Datensatz_bearbeiten_fenster == this) {
+                mainwindow->Datensatz_bearbeiten_fenster = nullptr;
+                qDebug() << "Datensatz_bearbeiten Destruktor, Fenster-Pointer nullptr";
+            } else if (mainwindow->offeneFenster.contains(this)) {
+                mainwindow->offeneFenster.removeOne(this);
+                qDebug() << "Datensatz_bearbeiten Destruktor, Fenster aus Liste entfernt";
+            }
+        }
+    } catch (const std::exception &e) {
+        qDebug() << "Fehler im Destruktor von Datensatz_bearbeiten: " << e.what();
+    } catch (...) {
+        qDebug() << "Unbekannter Fehler im Destruktor von Datensatz_bearbeiten";
+    }
+
+    qDebug() << "Datensatz_bearbeiten Destruktor";
 }
 
     /*
