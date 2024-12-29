@@ -68,17 +68,20 @@ nutzer_anlegen::~nutzer_anlegen()
 
 void nutzer_anlegen::on_nutzer_anlegen_rejected()
 {
+    qDebug() << "void nutzer_anlegen::on_nutzer_anlegen_rejected()";
     // delete this;
 }
 
 
 void nutzer_anlegen::on_nutzer_anlegen_accepted()
 {
+    qDebug() << "void nutzer_anlegen::on_nutzer_anlegen_accepted()";
     // delete this;
 }
 
 void nutzer_anlegen::on_nutzer_anlegen_finished(int result)
 {
+    qDebug() << "void nutzer_anlegen::on_nutzer_anlegen_finished(int result)";
     // delete this;
 }
 
