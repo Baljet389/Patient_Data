@@ -247,6 +247,7 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
         // Aufräumen und Datei schließen
         datei.close();
         // qDebug() << "Datei wieder geschlossen";
+        QMessageBox::information(nullptr, "CSV einlesen fertiggestellt", "Die Datei wurde erfolgreich gespeichert.");
 
     } catch (const exception &e) {
         qDebug() << "Ein Fehler ist aufgetreten:" << e.what();
