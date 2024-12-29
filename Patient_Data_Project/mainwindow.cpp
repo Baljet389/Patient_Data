@@ -770,39 +770,6 @@ void MainWindow::on_bearbeiten_btn_clicked()
         QMessageBox::warning(this,"Fehler: ","Sie haben nur eine Leseberechtigung.");
         return;
     }
-    qDebug() << "on_bearbeiten_btn_clicked";
-
-    /*
-    if (Datensatz_bearbeiten_fenster != nullptr)
-    {
-        qDebug() << "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!";
-        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!");
-        return;
-    }*/
-
-
-    qDebug() << "TESTPOINT";
-    qDebug() << "Es sind " << offeneFenster.size() << " bearbeiten und oder hinzufügen Fenster offen!";
-/*
-    if (offeneFenster.size() > 5)
-    {
-        QMessageBox::warning(this, "Warnung", "Es sind bereits " + QString::number(offeneFenster.size()) + " Fenster offen!");
-        return;
-    }
-*/
-    /*
-    if (offeneFenster.size() > 0)
-    {
-        QMessageBox::warning(this, "Warnung", "Es sind bereits bearbeiten Fenster offen!");
-        return;
-    }*/
-/*
-    if (!offeneFenster.isEmpty())
-    {
-        qDebug() << "Bereits ein Fenster Datensatz_bearbeiten offen!";
-        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster Datensatz_bearbeiten offen!");
-        return;
-    }*/
 
     if (Datensatz_bearbeiten_fenster != nullptr)
     {
@@ -835,6 +802,7 @@ void MainWindow::on_bearbeiten_btn_clicked()
 
 void MainWindow::on_logout_btn_clicked()
 {
+    closeAllFenster();
     const auto topLevelWidgets = QApplication::topLevelWidgets();
     for (QWidget* widget : topLevelWidgets) {
         if (widget != this) {
@@ -916,38 +884,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
     }
 }
 
-    /*
-    if (datensatz_anzeigen_fenster != nullptr)
-    {
-        datensatz_anzeigen_fenster->close();
-    }
-
-    if (Datensatz_bearbeiten_fenster != nullptr)
-    {
-        Datensatz_bearbeiten_fenster->close();
-    }
-
-    if (offeneFenster.size() > 0)
-    {
-        for(auto fenster : offeneFenster)
-        {
-            if (fenster != nullptr)
-            {
-                fenster->close();
-            }
-        }
-    }
-
-    if (nutzer_anlegen_fenster != nullptr)
-    {
-        nutzer_anlegen_fenster->close();
-    }
-
-    event->accept(); // Accept the close event
-    */
-
-
-void MainWindow::on_add_user_btn_pressed()
+ void MainWindow::on_add_user_btn_pressed()
 {
 
 }
@@ -1033,89 +970,3 @@ MainWindow::~MainWindow()
     delete akt_user;
     qDebug() << "MainWindow::~MainWindow() fertig";
 }
-
-
-/*
-MainWindow::~MainWindow()
-{
-    try {
-        if (datensatz_anzeigen_fenster != nullptr)
-        {
-            datensatz_anzeigen_fenster->close();
-        }
-    } catch (const std::exception& e) {
-        qDebug() << "Fehler beim Schließen von datensatz_anzeigen_fenster: " << e.what();
-    }
-
-    try {
-        if (Datensatz_bearbeiten_fenster != nullptr)
-        {
-            Datensatz_bearbeiten_fenster->close();
-        }
-    } catch (const std::exception& e) {
-        qDebug() << "Fehler beim Schließen von Datensatz_bearbeiten_fenster: " << e.what();
-    }
-
-    try {
-        if (offeneFenster.size() > 0)
-        {
-            for(auto fenster : offeneFenster)
-            {
-                if (fenster != nullptr)
-                {
-                    fenster->close();
-                }
-            }
-        }
-    } catch (const std::exception& e) {
-        qDebug() << "Fehler beim Schließen von offenen Fenstern: " << e.what();
-    }
-
-    try {
-        if (nutzer_anlegen_fenster != nullptr)
-        {
-            nutzer_anlegen_fenster->close();
-        }
-    } catch (const std::exception& e) {
-        qDebug() << "Fehler beim Schließen von nutzer_anlegen_fenster: " << e.what();
-    }
-
-}*/
-/*
-MainWindow::~MainWindow()
-{
-    qDebug() << "MainWindow Destruktor";
-    if (datensatz_anzeigen_fenster != nullptr)
-        {
-            qDebug() << "MainWindow Destruktor - datensatz_anzeigen_fenster";
-             datensatz_anzeigen_fenster->close();
-        }
-
-    if (Datensatz_bearbeiten_fenster != nullptr)
-    {
-        qDebug() << "MainWindow Destruktor - Datensatz_bearbeiten_fenster";
-        Datensatz_bearbeiten_fenster->close();
-    }
-
-    if (offeneFenster.size() > 0)
-    {
-        qDebug() << "MainWindow Destruktor - offeneFenster";
-        for(auto fenster : offeneFenster)
-            {
-            qDebug() << "MainWindow Destruktor - for loop";
-            if (fenster != nullptr)
-                {
-                    fenster->close();
-                }
-            }
-    }
-
-    if (nutzer_anlegen_fenster != nullptr)
-        {
-         qDebug() << "MainWindow Destruktor - nutzer_anlegen_fenster";
-            nutzer_anlegen_fenster->close();
-        }
-
-
-}
-*/
