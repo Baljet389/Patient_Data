@@ -728,6 +728,7 @@ void MainWindow::on_details_btn_clicked()
     anzeigen->show();
     anzeigen->mw=this;
     anzeigen->setStyleSheet(akt_mode);
+    anzeigen->setWindowTitle("Datensatz anzeigen");
     }
     catch(std::runtime_error &e){
         QMessageBox::warning(this, "Fehler", e.what());
@@ -808,6 +809,7 @@ void MainWindow::on_add_user_btn_clicked()
         auto nutzer=new nutzer_anlegen();
         nutzer->show();
         nutzer->setStyleSheet(akt_mode);
+        nutzer->setWindowTitle("Nutzer hinzufügen");
     }
     catch(std::runtime_error &e){
         QMessageBox::warning(this, "Fehler", e.what());
