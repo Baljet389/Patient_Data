@@ -150,36 +150,29 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
             return; // Abbruch
         }
 
+        // Thread erstellen
+        auto readerThread = new csvreaderthread(pfad, database);
 
-        // Thread erstellen und starten
-        csvreaderthread *readerThread = new csvreaderthread(pfad, database);
-
-        // Fortschritt aktualisieren
-        connect(readerThread, &csvreaderthread::progressUpdated, [](int progress, const QString &message) {
-            qDebug() << "Fortschritt:" << progress << "-" << message;
-        });
-
-        // Fehler behandeln
-        connect(readerThread, &csvreaderthread::errorOccurred, [](const QString &error) {
+        // Signale verbinden
+        QObject::connect(readerThread, &csvreaderthread::errorOccurred, [](const QString &error) {
             qDebug() << "Fehler:" << error;
             QMessageBox::warning(nullptr, "Fehler beim Einlesen", error);
         });
 
-        // Fertigstellung
-        connect(readerThread, &csvreaderthread::finished, [readerThread](const QString &message) {
-            qDebug() << message;
+        QObject::connect(readerThread, &csvreaderthread::finished, [](const QString &message) {
+            qDebug() << "Thread abgeschlossen:" << message;
             QMessageBox::information(nullptr, "Fertig", message);
-            readerThread->deleteLater(); // Thread aufräumen
         });
+
+        // Speicher freigeben, wenn Thread beendet ist
+        QObject::connect(readerThread, &csvreaderthread::finished, readerThread, &csvreaderthread::deleteLater);
 
         // Thread starten
         readerThread->start();
-        } catch (const std::exception &e) {
-            qDebug() << "Ein Fehler ist aufgetreten:" << e.what();
-        }
 
-    } catch (const exception &e) {
+    } catch (const std::exception &e) {
         qDebug() << "Ein Fehler ist aufgetreten:" << e.what();
+        QMessageBox::critical(nullptr, "Fehler", QString("Ein Fehler ist aufgetreten: %1").arg(e.what()));
     }
 }
 
@@ -263,7 +256,7 @@ while (getline(datei, zeile)) {
                 if (progress.wasCanceled()) {
                     qDebug() << "CSV Einlesen abgebrochen.";
                     break;
-                }*/
+
     }
 }
 
