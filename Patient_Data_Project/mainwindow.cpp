@@ -700,6 +700,7 @@ void MainWindow::on_pushButton_clicked()
     if (Datensatz_bearbeiten_fenster != nullptr)
     {
         qDebug() << "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!";
+        QMessageBox::warning(this, "Fehler", "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen");
         return;
     }
 
@@ -729,6 +730,7 @@ void MainWindow::on_details_btn_clicked()
     if (datensatz_anzeigen_fenster != nullptr)
     {
         qDebug() << "Bereits ein Fenster datensatz_anzeigen_fenster offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster datensatz_anzeigen_fenster offen");
         return;
     }
 
@@ -740,7 +742,7 @@ void MainWindow::on_details_btn_clicked()
     anzeigen->setStyleSheet(akt_mode);
     }
     catch(std::runtime_error &e){
-        QMessageBox::warning(this, "Fehler", e.what());
+        QMessageBox::warning(this, "Warnung", e.what());
     }
     qDebug() << "on_details_btn_clicked";
 }
@@ -756,6 +758,7 @@ void MainWindow::on_bearbeiten_btn_clicked()
     if (Datensatz_bearbeiten_fenster != nullptr)
     {
         qDebug() << "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster Datensatz_bearbeiten (oder addPatient) offen");
         return;
     }
 
