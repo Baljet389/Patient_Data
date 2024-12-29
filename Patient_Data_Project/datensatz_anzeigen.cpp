@@ -80,7 +80,12 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
     datensatz->show();
     datensatz->mainwindow=mw;
     datensatz->setStyleSheet(mw->akt_mode);
+<<<<<<< HEAD
     delete this;
+=======
+    datensatz->setWindowTitle("Datensatz bearbeiten");
+    // Hier Aufruf des Fensters: "datensatz_bearbeiten", mit entsprechendem Datensatz
+>>>>>>> 76ccf736e846302d7d6b92ea55599bdf4f2fa619
 }
 
 void datensatz_anzeigen::closeEvent(QCloseEvent *event)

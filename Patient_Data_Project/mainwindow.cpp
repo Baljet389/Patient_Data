@@ -18,6 +18,10 @@
 #include "datensatz_anzeigen.h"
 #include "nutzer_anlegen.h"
 #include "user.h"
+<<<<<<< HEAD
+=======
+#include <QCloseEvent>
+>>>>>>> 76ccf736e846302d7d6b92ea55599bdf4f2fa619
 
 MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     : QMainWindow(parent)
@@ -35,7 +39,6 @@ MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     ui->add_user_btn->setToolTip("Neuen Benutzer anlegen");
     //setzt Fokus auf Suchzeile
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
-
     this->db=db;
     this->akt_user=akt_user;
     if(akt_user!=nullptr){
@@ -108,6 +111,16 @@ MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
 
 }
 
+<<<<<<< HEAD
+=======
+MainWindow::~MainWindow()
+{
+    delete ui;
+    delete akt_user;
+
+}
+
+>>>>>>> 76ccf736e846302d7d6b92ea55599bdf4f2fa619
 void MainWindow::on_suche_btn_clicked()
 {
     ui->data_table->setRowCount(0);
@@ -756,6 +769,7 @@ void MainWindow::on_details_btn_clicked()
     anzeigen->show();
     anzeigen->mw=this;
     anzeigen->setStyleSheet(akt_mode);
+    anzeigen->setWindowTitle("Datensatz anzeigen");
     }
     catch(std::runtime_error &e){
         QMessageBox::warning(this, "Warnung", e.what());
@@ -834,7 +848,13 @@ void MainWindow::on_bearbeiten_btn_clicked()
 
 void MainWindow::on_logout_btn_clicked()
 {
-  qApp->exit(1);
+    const auto topLevelWidgets = QApplication::topLevelWidgets();
+    for (QWidget* widget : topLevelWidgets) {
+        if (widget != this) {
+            widget->close();
+        }
+    }
+    qApp->exit(1);
 }
 
 
@@ -882,12 +902,26 @@ void MainWindow::on_add_user_btn_clicked()
         nutzer_anlegen_fenster = nutzer;
         nutzer->show();
         nutzer->setStyleSheet(akt_mode);
+        nutzer->setWindowTitle("Nutzer hinzufügen");
     }
     catch(std::runtime_error &e){
         QMessageBox::warning(this, "Fehler", e.what());
     }
 }
 
+<<<<<<< HEAD
+=======
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    const auto topLevelWidgets = QApplication::topLevelWidgets();
+    for (QWidget* widget : topLevelWidgets) {
+        if (widget != this) {
+            widget->close();
+        }
+    }
+    event->accept(); // Accept the close event
+}
+>>>>>>> 76ccf736e846302d7d6b92ea55599bdf4f2fa619
 void MainWindow::on_add_user_btn_pressed()
 {
 
