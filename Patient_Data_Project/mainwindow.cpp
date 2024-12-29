@@ -763,7 +763,13 @@ void MainWindow::on_bearbeiten_btn_clicked()
 
 void MainWindow::on_logout_btn_clicked()
 {
-  qApp->exit(1);
+    const auto topLevelWidgets = QApplication::topLevelWidgets();
+    for (QWidget* widget : topLevelWidgets) {
+        if (widget != this) {
+            widget->close();
+        }
+    }
+    qApp->exit(1);
 }
 
 
