@@ -953,6 +953,52 @@ void MainWindow::enableWindow()     // Nicht mehr benutzt, da Fenster jetzt gege
 
 MainWindow::~MainWindow()
 {
+    try {
+        if (datensatz_anzeigen_fenster != nullptr)
+        {
+            datensatz_anzeigen_fenster->close();
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Fehler beim Schließen von datensatz_anzeigen_fenster: " << e.what();
+    }
+
+    try {
+        if (Datensatz_bearbeiten_fenster != nullptr)
+        {
+            Datensatz_bearbeiten_fenster->close();
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Fehler beim Schließen von Datensatz_bearbeiten_fenster: " << e.what();
+    }
+
+    try {
+        if (offeneFenster.size() > 0)
+        {
+            for(auto fenster : offeneFenster)
+            {
+                if (fenster != nullptr)
+                {
+                    fenster->close();
+                }
+            }
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Fehler beim Schließen von offenen Fenstern: " << e.what();
+    }
+
+    try {
+        if (nutzer_anlegen_fenster != nullptr)
+        {
+            nutzer_anlegen_fenster->close();
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Fehler beim Schließen von nutzer_anlegen_fenster: " << e.what();
+    }
+
+}
+/*
+MainWindow::~MainWindow()
+{
     qDebug() << "MainWindow Destruktor";
     if (datensatz_anzeigen_fenster != nullptr)
         {
@@ -989,6 +1035,10 @@ MainWindow::~MainWindow()
     delete akt_user;
     qDebug() << "MainWindow Destruktor fertig";
 }
+
+
+*/
+
 
 void MainWindow::on_MainWindow_destroyed()
 {
