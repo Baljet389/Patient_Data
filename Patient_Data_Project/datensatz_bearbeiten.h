@@ -34,6 +34,8 @@ private slots:
 
     void on_Datensatz_bearbeiten_finished(int result);
 
+    void clearPointerInMainWindow();  // Lösche Zeiger auf aktuelles Objekt
+
 private:
     Ui::Datensatz_bearbeiten *ui;
 };
