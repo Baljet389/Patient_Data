@@ -908,7 +908,26 @@ void MainWindow::closeEvent(QCloseEvent *event)
 {
 
     qDebug() << "Das Fenster MainWindow wurde geschlossen.";
+    if (datensatz_anzeigen_fenster != nullptr)
+    {
+        datensatz_anzeigen_fenster->close();
+    }
 
+    if (offeneFenster.size() > 0)
+    {
+        for(auto fenster : offeneFenster)
+        {
+            if (fenster != nullptr)
+            {
+                fenster->close();
+            }
+        }
+    }
+
+    if (nutzer_anlegen_fenster != nullptr)
+    {
+        nutzer_anlegen_fenster->close();
+    }
     // delete this;
 }
 
@@ -919,10 +938,10 @@ MainWindow::~MainWindow()
              datensatz_anzeigen_fenster->close();
         }
 
-/*    if (Datensatz_bearbeiten_fenster != nullptr)
-        {
-            Datensatz_bearbeiten_fenster->close();
-        }*/
+    if (Datensatz_bearbeiten_fenster != nullptr)
+    {
+        Datensatz_bearbeiten_fenster->close();
+    }
 
         if (offeneFenster.size() > 0)
         {
@@ -947,6 +966,31 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_MainWindow_destroyed()
 {
+    if (datensatz_anzeigen_fenster != nullptr)
+    {
+        datensatz_anzeigen_fenster->close();
+    }
+
+    if (Datensatz_bearbeiten_fenster != nullptr)
+    {
+        Datensatz_bearbeiten_fenster->close();
+    }
+
+    if (offeneFenster.size() > 0)
+    {
+        for(auto fenster : offeneFenster)
+        {
+            if (fenster != nullptr)
+            {
+                fenster->close();
+            }
+        }
+    }
+
+    if (nutzer_anlegen_fenster != nullptr)
+    {
+        nutzer_anlegen_fenster->close();
+    }
     // delete this;
 }
 
