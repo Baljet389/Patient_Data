@@ -69,9 +69,12 @@ nutzer_anlegen::~nutzer_anlegen()
 void nutzer_anlegen::on_nutzer_anlegen_rejected()
 {
     qDebug() << "void nutzer_anlegen::on_nutzer_anlegen_rejected()";
+    if (ptr_nutzer_anlegen_window != nullptr)
+    {
+        *ptr_nutzer_anlegen_window = nullptr;
+    }
     // delete this;
 }
-
 
 void nutzer_anlegen::on_nutzer_anlegen_accepted()
 {
