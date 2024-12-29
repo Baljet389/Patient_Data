@@ -951,6 +951,14 @@ void MainWindow::enableWindow()     // Nicht mehr benutzt, da Fenster jetzt gege
 
 }
 
+void MainWindow::on_MainWindow_destroyed()
+{
+    qDebug() << "void MainWindow::on_MainWindow_destroyed()";
+    closeAllFenster();
+    // delete this;
+}
+
+
 void MainWindow::closeAllFenster()
 {
     qDebug() << "void MainWindow::closeAllFenster()";
@@ -1097,15 +1105,4 @@ MainWindow::~MainWindow()
     delete akt_user;
     qDebug() << "MainWindow Destruktor fertig";
 }
-
-
 */
-
-
-void MainWindow::on_MainWindow_destroyed()
-{
-    qDebug() << "void MainWindow::on_MainWindow_destroyed()";
-    closeAllFenster();
-    // delete this;
-}
-
