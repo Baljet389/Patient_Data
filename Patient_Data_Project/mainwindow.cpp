@@ -898,15 +898,26 @@ void MainWindow::on_add_user_btn_clicked()
 
 void MainWindow::closeEvent(QCloseEvent *event)
 {
-    const auto topLevelWidgets = QApplication::topLevelWidgets();
-    for (QWidget* widget : topLevelWidgets) {
-        if (widget != this) {
-            widget->close();
+    try {
+        qDebug() << "void MainWindow::closeEvent(QCloseEvent *event)";
+        const auto topLevelWidgets = QApplication::topLevelWidgets();
+                for (QWidget* widget : topLevelWidgets) {
+            if (widget != this) {
+                widget->close();
+            }
         }
+
+        closeAllFenster();
+
+    } catch (const std::exception& e) {
+        qDebug() << "Fehler im closeEvent: " << e.what();
+    } catch (...) {
+        qDebug() << "Unbekannter Fehler im closeEvent";
     }
 
-    qDebug() << "void MainWindow::closeEvent(QCloseEvent *event)";
-    closeAllFenster();
+    event->accept();
+}
+
     /*
     if (datensatz_anzeigen_fenster != nullptr)
     {
@@ -936,7 +947,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
     event->accept(); // Accept the close event
     */
-}
+
 
 void MainWindow::on_add_user_btn_pressed()
 {
