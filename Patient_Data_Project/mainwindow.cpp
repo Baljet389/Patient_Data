@@ -18,6 +18,8 @@
 #include "datensatz_anzeigen.h"
 #include "nutzer_anlegen.h"
 #include "user.h"
+#include <QCloseEvent>
+
 MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
@@ -34,7 +36,6 @@ MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     ui->add_user_btn->setToolTip("Neuen Benutzer anlegen");
     //setzt Fokus auf Suchzeile
     ui->suche_txt_line->setFocusPolicy(Qt::StrongFocus);
-    this->setAttribute(Qt::WA_DeleteOnClose);
     this->db=db;
     this->akt_user=akt_user;
     if(akt_user!=nullptr){
@@ -111,12 +112,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
     delete akt_user;
-    const auto topLevelWidgets = QApplication::topLevelWidgets();
-    for (QWidget* widget : topLevelWidgets) {
-        if(widget->isVisible() && widget!=this){
-            widget->close();
-        }
-    }
+
 }
 
 void MainWindow::on_suche_btn_clicked()
@@ -812,7 +808,16 @@ void MainWindow::on_add_user_btn_clicked()
     }
 }
 
-
+void MainWindow::closeEvent(QCloseEvent *event)
+{
+    const auto topLevelWidgets = QApplication::topLevelWidgets();
+    for (QWidget* widget : topLevelWidgets) {
+        if (widget != this) {
+            widget->close();
+        }
+    }
+    event->accept(); // Accept the close event
+}
 void MainWindow::on_add_user_btn_pressed()
 {
 

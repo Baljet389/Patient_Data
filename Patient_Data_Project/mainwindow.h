@@ -66,7 +66,7 @@ private slots:
 
     void on_add_user_btn_clicked();
 
-
+    void closeEvent(QCloseEvent *event);
     void on_add_user_btn_pressed();
 
 private:
