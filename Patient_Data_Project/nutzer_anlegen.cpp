@@ -57,8 +57,8 @@ void nutzer_anlegen::on_pushButton_clicked()
 nutzer_anlegen::~nutzer_anlegen()
 {
     delete ui;
-    if (*ptr_nutzer_anlegen_window != nullptr)
+    if (ptr_nutzer_anlegen_window != nullptr)
     {
-        **ptr_nutzer_anlegen_window = nullptr;
+        *ptr_nutzer_anlegen_window = nullptr;
     }
 }

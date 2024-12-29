@@ -20,6 +20,7 @@ private slots:
 
 private:
     Ui::nutzer_anlegen *ui;
+    nutzer_anlegen **ptr_nutzer_anlegen_window; // Pointer zur Referenz auf den Pointer im Aufrufer
 };
 
 #endif // NUTZER_ANLEGEN_H
