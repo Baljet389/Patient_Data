@@ -6,6 +6,7 @@
 nutzer_anlegen::nutzer_anlegen(QWidget *parent, nutzer_anlegen **ptr_nutzer_anlegen_window)
     : QDialog(parent)
     , ui(new Ui::nutzer_anlegen)
+    , ptr_nutzer_anlegen_window(ptr_nutzer_anlegen_window)
 {
     ui->setupUi(this);
     connect(ui->Button_Benutzer_anlegen, &QPushButton::clicked, this, &nutzer_anlegen::on_pushButton_clicked);
