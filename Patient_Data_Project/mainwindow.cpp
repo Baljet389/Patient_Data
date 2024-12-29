@@ -819,8 +819,8 @@ void MainWindow::on_bearbeiten_btn_clicked()
     }
     try{
     auto datensatz_bearbeiten = new Datensatz_bearbeiten(nullptr, selectedID, db);
-    offeneFenster.append(datensatz_bearbeiten);
-    // Datensatz_bearbeiten_fenster = datensatz_bearbeiten;
+    // offeneFenster.append(datensatz_bearbeiten);
+    Datensatz_bearbeiten_fenster = datensatz_bearbeiten;
     datensatz_bearbeiten->show();
     datensatz_bearbeiten->mainwindow=this;
     datensatz_bearbeiten->setWindowTitle("Datensatz bearbeiten");

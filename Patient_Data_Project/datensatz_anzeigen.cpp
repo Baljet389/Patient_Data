@@ -75,8 +75,8 @@ void datensatz_anzeigen::on_pushButton_4_clicked()
     }*/
 
     auto datensatz=new Datensatz_bearbeiten(nullptr,selectID,db);
-    // mw->Datensatz_bearbeiten_fenster = datensatz;
-    mw->offeneFenster.append(datensatz);
+    mw->Datensatz_bearbeiten_fenster = datensatz;
+    //mw->offeneFenster.append(datensatz);
     datensatz->show();
     datensatz->mainwindow=mw;
     datensatz->setStyleSheet(mw->akt_mode);
