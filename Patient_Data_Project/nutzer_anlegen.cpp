@@ -68,12 +68,17 @@ nutzer_anlegen::~nutzer_anlegen()
 
 void nutzer_anlegen::on_nutzer_anlegen_rejected()
 {
-    delete this;
+    // delete this;
 }
 
 
 void nutzer_anlegen::on_nutzer_anlegen_accepted()
 {
-    delete this;
+    // delete this;
+}
+
+void nutzer_anlegen::on_nutzer_anlegen_finished(int result)
+{
+    // delete this;
 }
 
