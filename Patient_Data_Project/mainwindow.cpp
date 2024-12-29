@@ -951,6 +951,67 @@ void MainWindow::enableWindow()     // Nicht mehr benutzt, da Fenster jetzt gege
 
 }
 
+void MainWindow::closeAllFenster()
+{
+    try {
+        qDebug() << "Prüfe: datensatz_anzeigen_fenster != nullptr";
+        if (datensatz_anzeigen_fenster != nullptr)
+        {
+            qDebug() << "Schließe datensatz_anzeigen_fenster: " << datensatz_anzeigen_fenster;
+            datensatz_anzeigen_fenster->close();
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Fehler beim Schließen von datensatz_anzeigen_fenster: " << e.what();
+    }
+
+    try {
+        qDebug() << "Prüfe: Datensatz_bearbeiten_fenster != nullptr";
+        if (Datensatz_bearbeiten_fenster != nullptr)
+        {
+            qDebug() << "Schließe Datensatz_bearbeiten_fenster: " << Datensatz_bearbeiten_fenster;
+            Datensatz_bearbeiten_fenster->close();
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Fehler beim Schließen von Datensatz_bearbeiten_fenster: " << e.what();
+    }
+
+    try {
+        qDebug() << "Prüfe: offeneFenster.size() > 0";
+        if (offeneFenster.size() > 0)
+        {
+            qDebug() << "Schließe offeneFenster mit Größe: " << offeneFenster.size();
+            for(auto fenster : offeneFenster)
+            {
+                if (fenster != nullptr)
+                {
+                    qDebug() << "Schließe Fenster: " << fenster;
+                    fenster->close();
+                }
+            }
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Fehler beim Schließen von offenen Fenstern: " << e.what();
+    }
+
+    try {
+        qDebug() << "Prüfe: nutzer_anlegen_fenster != nullptr";
+        if (nutzer_anlegen_fenster != nullptr)
+        {
+            qDebug() << "Schließe nutzer_anlegen_fenster: " << nutzer_anlegen_fenster;
+            nutzer_anlegen_fenster->close();
+        }
+    } catch (const std::exception& e) {
+        qDebug() << "Fehler beim Schließen von nutzer_anlegen_fenster: " << e.what();
+    }
+}
+
+MainWindow::~MainWindow()
+{
+    closeAllFenster();
+}
+
+
+/*
 MainWindow::~MainWindow()
 {
     try {
@@ -995,7 +1056,7 @@ MainWindow::~MainWindow()
         qDebug() << "Fehler beim Schließen von nutzer_anlegen_fenster: " << e.what();
     }
 
-}
+}*/
 /*
 MainWindow::~MainWindow()
 {

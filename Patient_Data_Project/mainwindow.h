@@ -87,6 +87,8 @@ private slots:
 
     void on_MainWindow_destroyed();
 
+    void closeAllFenster();
+
 private:
     Ui::MainWindow *ui;
 
