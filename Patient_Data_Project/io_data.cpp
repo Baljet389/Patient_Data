@@ -24,6 +24,9 @@
 #include <QMessageBox>
 #include <QTimer>
 
+#include "csvreaderthread.h"
+#include <stdexcept>
+
 using namespace std;
 
 io_data::io_data(int ID,QString vorname,QString nachname,QString geburt,QString geschlecht,QString adresse,QString tel_nummer,QString mail,QString datum,QString diagnose,QString behandlung){
@@ -126,6 +129,10 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
             zeilenAnzahl++;
         }
 
+        datei.clear(); // Lösche  EOF-Status
+        datei.seekg(0); // zurücksetzen Lesezeiger von Datei
+        datei.close();
+
         int daten_lesen = QMessageBox::question(
             nullptr,
             "CSV einlesen",
@@ -140,105 +147,137 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
             qDebug() << "Benutzer hat 'Nein' gewählt.";
             QMessageBox::warning(nullptr, "Abbruch", "CSV einlesen abgebrochen");
 
-            return; // Aktion abbrechen
+            return; // Abbruch
         }
 
-        datei.clear(); // Lösche den EOF-Status
-        datei.seekg(0); // Setze den Lesezeiger an den Anfang der Datei
-/*
+
+        // Thread erstellen und starten
+        csvreaderthread *readerThread = new csvreaderthread(pfad, database);
+
+        // Fortschritt aktualisieren
+        connect(readerThread, &csvreaderthread::progressUpdated, [](int progress, const QString &message) {
+            qDebug() << "Fortschritt:" << progress << "-" << message;
+        });
+
+        // Fehler behandeln
+        connect(readerThread, &csvreaderthread::errorOccurred, [](const QString &error) {
+            qDebug() << "Fehler:" << error;
+            QMessageBox::warning(nullptr, "Fehler beim Einlesen", error);
+        });
+
+        // Fertigstellung
+        connect(readerThread, &csvreaderthread::finished, [readerThread](const QString &message) {
+            qDebug() << message;
+            QMessageBox::information(nullptr, "Fertig", message);
+            readerThread->deleteLater(); // Thread aufräumen
+        });
+
+        // Thread starten
+        readerThread->start();
+        } catch (const std::exception &e) {
+            qDebug() << "Ein Fehler ist aufgetreten:" << e.what();
+        }
+
+    } catch (const exception &e) {
+        qDebug() << "Ein Fehler ist aufgetreten:" << e.what();
+    }
+}
+
+/* // Umstellung auf Threading für einlesen
+
         // QProgressDialog initialisieren
         QProgressDialog progress("Bitte warten, CSV-Datei wird eingelesen...", "Abbrechen", 0, zeilenAnzahl, nullptr);
         progress.setWindowModality(Qt::WindowModal);
         progress.setValue(0);  // Startwert
         progress.show();
-*/
-        int zeilenGelesen = 0;
 
-        while (getline(datei, zeile)) {
-            if (skipUeberschrift) {
-                qDebug() << "Überspringe Überschrift:" << QString::fromStdString(zeile);
-                skipUeberschrift = false;
-                continue; // Header überspringen
+int zeilenGelesen = 0;
+
+while (getline(datei, zeile)) {
+    if (skipUeberschrift) {
+        qDebug() << "Überspringe Überschrift:" << QString::fromStdString(zeile);
+        skipUeberschrift = false;
+        continue; // Header überspringen
+    }
+
+    // Konvertiere Zeile von std::string zu QString aus UTF-8
+    QString zeileQString = QString::fromUtf8(zeile.c_str());
+    //qDebug() << "QString: " << zeileQString;
+
+    // Parse Zeile am Komma mit QString
+    QStringList werteListe = zeileQString.split(',');
+
+    // Prüfe, ob Daten valide
+    if (werteListe.size() >= 11) {
+        try {
+            // Validierung der einzelnen Felder
+            if (!regex_match(werteListe[0].toStdString(), zahlenRegex)) {
+                throw invalid_argument("Ungültige ID: nur Zahlen erlaubt");
+            }
+            if (!regex_match(werteListe[1].toStdString(), nameRegex)) {
+                throw invalid_argument("Ungültiger Vorname: nur Buchstaben und Trennstrich erlaubt");
+            }
+            if (!regex_match(werteListe[2].toStdString(), nameRegex)) {
+                throw invalid_argument("Ungültiger Nachname: nur Buchstaben und Trennstrich erlaubt");
+            }
+            if (!regex_match(werteListe[3].toStdString(), datumRegex)) {
+                throw invalid_argument("Ungültiges Geburtsdatum: Format DD.MM.YYYY erwartet");
+            }
+            if (!regex_match(werteListe[4].toStdString(), geschlechtRegex)) {
+                throw invalid_argument("Ungültiges Geschlecht: Ein Buchstabe m/w/d erwartet");
+            }
+            if (!regex_match(werteListe[8].toStdString(), datumRegex)) {
+                throw invalid_argument("Ungültiges Eintrittsdatum: Format DD.MM.YYYY erwartet");
             }
 
-            // Konvertiere Zeile von std::string zu QString aus UTF-8
-            QString zeileQString = QString::fromUtf8(zeile.c_str());
-            //qDebug() << "QString: " << zeileQString;
+            // Wenn valide, dann Patient erstellen
+            io_data patient(
+                stoi(werteListe[0].toStdString()), // ID
+                werteListe[1],                     // Vorname
+                werteListe[2],                     // Nachname
+                werteListe[3],                     // Geburtsdatum
+                werteListe[4],                     // Geschlecht
+                werteListe[5],                     // Adresse
+                werteListe[6],                     // Telefonnummer
+                werteListe[7],                     // E-Mail
+                werteListe[8],                     // Eintrittsdatum
+                werteListe[9],                     // Diagnose
+                werteListe[10]                     // Behandlung
+                );
 
-            // Parse Zeile am Komma mit QString
-            QStringList werteListe = zeileQString.split(',');
+            // qDebug() << "Patient valide:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
 
-            // Prüfe, ob Daten valide
-            if (werteListe.size() >= 11) {
-                try {
-                    // Validierung der einzelnen Felder
-                    if (!regex_match(werteListe[0].toStdString(), zahlenRegex)) {
-                        throw invalid_argument("Ungültige ID: nur Zahlen erlaubt");
-                    }
-                    if (!regex_match(werteListe[1].toStdString(), nameRegex)) {
-                        throw invalid_argument("Ungültiger Vorname: nur Buchstaben und Trennstrich erlaubt");
-                    }
-                    if (!regex_match(werteListe[2].toStdString(), nameRegex)) {
-                        throw invalid_argument("Ungültiger Nachname: nur Buchstaben und Trennstrich erlaubt");
-                    }
-                    if (!regex_match(werteListe[3].toStdString(), datumRegex)) {
-                        throw invalid_argument("Ungültiges Geburtsdatum: Format DD.MM.YYYY erwartet");
-                    }
-                    if (!regex_match(werteListe[4].toStdString(), geschlechtRegex)) {
-                        throw invalid_argument("Ungültiges Geschlecht: Ein Buchstabe m/w/d erwartet");
-                    }
-                    if (!regex_match(werteListe[8].toStdString(), datumRegex)) {
-                        throw invalid_argument("Ungültiges Eintrittsdatum: Format DD.MM.YYYY erwartet");
-                    }
+            database.insertPatient(patient);
+            qDebug() << "Patient inserted:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
+            // qDebug() << "Datensatz inserted";
+        } catch (const invalid_argument &e) {
+            qDebug() << "Ungültige Daten in Zeile, überspringe. Fehler:" << e.what();
+        }
+    } else {
+        qDebug() << "Unvollständige Zeile, erwartet 11 Werte, erhalten:" << werteListe.size();
 
-                    // Wenn valide, dann Patient erstellen
-                    io_data patient(
-                        stoi(werteListe[0].toStdString()), // ID
-                        werteListe[1],                     // Vorname
-                        werteListe[2],                     // Nachname
-                        werteListe[3],                     // Geburtsdatum
-                        werteListe[4],                     // Geschlecht
-                        werteListe[5],                     // Adresse
-                        werteListe[6],                     // Telefonnummer
-                        werteListe[7],                     // E-Mail
-                        werteListe[8],                     // Eintrittsdatum
-                        werteListe[9],                     // Diagnose
-                        werteListe[10]                     // Behandlung
-                        );
-
-                    // qDebug() << "Patient valide:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
-
-                    database.insertPatient(patient);
-                    qDebug() << "Patient inserted:" << QString::number(patient.ID) << patient.vorname << patient.nachname;
-                    // qDebug() << "Datensatz inserted";
-                } catch (const invalid_argument &e) {
-                    qDebug() << "Ungültige Daten in Zeile, überspringe. Fehler:" << e.what();
-                }
-            } else {
-                qDebug() << "Unvollständige Zeile, erwartet 11 Werte, erhalten:" << werteListe.size();
-
-                zeilenGelesen++;
-                /* progress.setValue(zeilenGelesen);  // Fortschritt aktualisieren
+        zeilenGelesen++;
+        /* progress.setValue(zeilenGelesen);  // Fortschritt aktualisieren
 
                 // Abbrechen prüfen
                 if (progress.wasCanceled()) {
                     qDebug() << "CSV Einlesen abgebrochen.";
                     break;
                 }*/
-            }
-        }
-
-        // qDebug() << "Datei fertig eingelesen";
-
-        // Aufräumen und Datei schließen
-        datei.close();
-        // qDebug() << "Datei wieder geschlossen";
-        QMessageBox::information(nullptr, "CSV einlesen fertiggestellt", "Die Datei wurde erfolgreich gespeichert.");
-
-    } catch (const exception &e) {
-        qDebug() << "Ein Fehler ist aufgetreten:" << e.what();
     }
 }
+
+// qDebug() << "Datei fertig eingelesen";
+
+// Aufräumen und Datei schließen
+datei.close();
+// qDebug() << "Datei wieder geschlossen";
+QMessageBox::information(nullptr, "CSV einlesen fertiggestellt", "Die Datei wurde erfolgreich gespeichert.");
+*/
+
+
+
+
 
 void io_data::CSVerstellen(QString pfad, Database &database) {
     try {
