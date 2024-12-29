@@ -953,6 +953,7 @@ void MainWindow::enableWindow()     // Nicht mehr benutzt, da Fenster jetzt gege
 
 void MainWindow::closeAllFenster()
 {
+    qDebug() << "void MainWindow::closeAllFenster()";
     try {
         qDebug() << "Prüfe: datensatz_anzeigen_fenster != nullptr";
         if (datensatz_anzeigen_fenster != nullptr)
