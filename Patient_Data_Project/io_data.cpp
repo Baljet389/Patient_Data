@@ -125,7 +125,22 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
             zeilenAnzahl++;
         }
 
-        QMessageBox::warning(nullptr, "Lesevorgang...", "Die CSV-Datei enthält " + QString::number(zeilenAnzahl) + " Zeilen.");
+        int daten_lesen = QMessageBox::question(
+            nullptr,
+            "CSV einlesen",
+            "Die CSV-Datei enthält " + QString::number(zeilenAnzahl) + " Zeilen!\nDiese werden jetzt der Datenbank hinzugefügt, bitte bestätigen.\nWarnung: Je nach Systemleistung kann dies einige Zeit in anspruch nehmen!",
+            QMessageBox::Yes | QMessageBox::No
+            );
+
+        if (daten_lesen == QMessageBox::Yes) {
+            qDebug() << "Benutzer hat 'Ja' gewählt.";
+            // Fortfahren
+        } else {
+            qDebug() << "Benutzer hat 'Nein' gewählt.";
+            QMessageBox::warning(nullptr, "Abbruch", "CSV einlesen abgebrochen");
+
+            return; // Aktion abbrechen
+        }
 
         datei.clear(); // Lösche den EOF-Status
         datei.seekg(0); // Setze den Lesezeiger an den Anfang der Datei
