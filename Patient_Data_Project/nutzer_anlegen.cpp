@@ -12,11 +12,6 @@ nutzer_anlegen::nutzer_anlegen(QWidget *parent)
     connect(ui->Button_abbrechen, &QPushButton::clicked, this, &nutzer_anlegen::on_pushButton_2_clicked);
 }
 
-nutzer_anlegen::~nutzer_anlegen()
-{
-    delete ui;
-}
-
 void nutzer_anlegen::on_pushButton_2_clicked()
 {
 
@@ -58,3 +53,7 @@ void nutzer_anlegen::on_pushButton_clicked()
 
 }
 
+nutzer_anlegen::~nutzer_anlegen()
+{
+    delete ui;
+}

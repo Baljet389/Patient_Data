@@ -820,8 +820,16 @@ void MainWindow::on_add_user_btn_clicked()
         QMessageBox::warning(this,"Fehler","Sie haben keine Admin-Rechte.");
         return;
     }
+
+    if (nutzer_anlegen_fenster != nullptr)
+    {
+        qDebug() << "Bereits ein Fenster nutzer_anlegen_fenster offen!";
+        QMessageBox::warning(this, "Warnung", "Bereits ein Fenster nutzer_anlegen_fenster offen!");
+    }
+
     try{
         auto nutzer=new nutzer_anlegen();
+        nutzer_anlegen_fenster = nutzer;
         nutzer->show();
         nutzer->setStyleSheet(akt_mode);
     }
@@ -864,6 +872,11 @@ MainWindow::~MainWindow()
     if (Datensatz_bearbeiten_fenster != nullptr)
         {
             Datensatz_bearbeiten_fenster->close();
+        }
+
+    if (nutzer_anlegen_fenster != nullptr)
+        {
+            nutzer_anlegen_fenster->close();
         }
 
     delete ui;
