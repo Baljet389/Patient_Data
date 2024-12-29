@@ -224,7 +224,7 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
                      */
                     // Patient in Datenbank speichern
                     database.insertPatient(patient);
-                    qDebug() << "Datei geöffnet:" << pfad;
+                    qDebug() << "Datensatz inserted" << pfad;
                 } catch (const invalid_argument &e) {
                     qDebug() << "Ungültige Daten in Zeile, überspringe. Fehler:" << e.what();
                 }
