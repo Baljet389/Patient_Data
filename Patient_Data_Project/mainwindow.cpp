@@ -18,6 +18,7 @@
 #include "datensatz_anzeigen.h"
 #include "nutzer_anlegen.h"
 #include "user.h"
+
 MainWindow::MainWindow(QWidget *parent, Database *db,user *akt_user)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)

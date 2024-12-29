@@ -20,6 +20,9 @@
 #include <QSqlQuery>
 #include <QSqlError>
 
+#include <QProgressDialog>
+#include <QMessageBox>
+
 using namespace std;
 
 io_data::io_data(int ID,QString vorname,QString nachname,QString geburt,QString geschlecht,QString adresse,QString tel_nummer,QString mail,QString datum,QString diagnose,QString behandlung){
@@ -112,11 +115,34 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
         regex datumRegex("^\\d{2}\\.\\d{2}\\.\\d{4}$");                 // Format DD.MM.YYYY
         regex geschlechtRegex("^[mwMWdD]$");                            // Nur Einzelbuchstaben für Geschlecht
 
-        while (getline(datei, zeile)) { // Alle Zeilen lesen
+        // Anzahl der Zeilen bestimmen
+        int zeilenAnzahl = 0;
+        while (getline(datei, zeile)) {
+            if (skipUeberschrift) {
+                skipUeberschrift = false;
+                continue; // Header überspringen
+            }
+            zeilenAnzahl++;
+        }
+
+        QMessageBox::warning(nullptr, "Lesevorgang...", "Die CSV-Datei enthält " + QString::number(zeilenAnzahl) + " Zeilen.");
+
+        datei.clear(); // Lösche den EOF-Status
+        datei.seekg(0); // Setze den Lesezeiger an den Anfang der Datei
+
+        // QProgressDialog initialisieren
+        QProgressDialog progress("CSV-Datei wird eingelesen...", "Abbrechen", 0, zeilenAnzahl, nullptr);
+        progress.setWindowModality(Qt::WindowModal);
+        progress.setValue(0);  // Startwert
+        progress.show();
+
+        int zeilenGelesen = 0;
+
+        while (getline(datei, zeile)) {
             if (skipUeberschrift) {
                 qDebug() << "Überspringe Überschrift:" << QString::fromStdString(zeile);
                 skipUeberschrift = false;
-                continue; // Header-Zeile überspringen
+                continue; // Header überspringen
             }
 
             // Konvertiere Zeile von std::string zu QString aus UTF-8
@@ -188,6 +214,15 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
                 }
             } else {
                 qDebug() << "Unvollständige Zeile, erwartet 11 Werte, erhalten:" << werteListe.size();
+
+                zeilenGelesen++;
+                progress.setValue(zeilenGelesen);  // Fortschritt aktualisieren
+
+                // Abbrechen prüfen
+                if (progress.wasCanceled()) {
+                    qDebug() << "CSV Einlesen abgebrochen.";
+                    break;
+                }
             }
         }
 
