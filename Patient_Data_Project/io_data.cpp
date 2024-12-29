@@ -22,6 +22,7 @@
 
 #include <QProgressDialog>
 #include <QMessageBox>
+#include <QTimer>
 
 using namespace std;
 
@@ -144,13 +145,13 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
 
         datei.clear(); // Lösche den EOF-Status
         datei.seekg(0); // Setze den Lesezeiger an den Anfang der Datei
-
+/*
         // QProgressDialog initialisieren
-        QProgressDialog progress("CSV-Datei wird eingelesen...", "Abbrechen", 0, zeilenAnzahl, nullptr);
+        QProgressDialog progress("Bitte warten, CSV-Datei wird eingelesen...", "Abbrechen", 0, zeilenAnzahl, nullptr);
         progress.setWindowModality(Qt::WindowModal);
         progress.setValue(0);  // Startwert
         progress.show();
-
+*/
         int zeilenGelesen = 0;
 
         while (getline(datei, zeile)) {
@@ -231,13 +232,13 @@ void io_data::CSVeinlesen(QString pfad,Database &database) {
                 qDebug() << "Unvollständige Zeile, erwartet 11 Werte, erhalten:" << werteListe.size();
 
                 zeilenGelesen++;
-                progress.setValue(zeilenGelesen);  // Fortschritt aktualisieren
+                /* progress.setValue(zeilenGelesen);  // Fortschritt aktualisieren
 
                 // Abbrechen prüfen
                 if (progress.wasCanceled()) {
                     qDebug() << "CSV Einlesen abgebrochen.";
                     break;
-                }
+                }*/
             }
         }
 
