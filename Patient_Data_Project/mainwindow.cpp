@@ -909,7 +909,7 @@ void MainWindow::closeEvent(QCloseEvent *event)
 
     qDebug() << "Das Fenster MainWindow wurde geschlossen.";
 
-     delete this;
+    // delete this;
 }
 
 MainWindow::~MainWindow()
@@ -947,6 +947,6 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_MainWindow_destroyed()
 {
-    delete this;
+    // delete this;
 }
 
