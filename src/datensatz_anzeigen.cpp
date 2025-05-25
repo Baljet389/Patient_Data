@@ -1,5 +1,5 @@
-#include "datensatz_anzeigen.h"
 #include "ui_datensatz_anzeigen.h"
+#include "datensatz_anzeigen.h"
 #include "io_data.h"
 #include "database.h"
 #include "QTableWidgetItem"

@@ -1,5 +1,5 @@
+#include "ui_mainwindow.h"
 #include "mainwindow.h"
-#include "./ui_mainwindow.h"
 #include "logindialog.h"
 #include <QApplication>
 #include <QPushButton>
